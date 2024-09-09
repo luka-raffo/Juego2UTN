@@ -47,10 +47,12 @@
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="include/Personaje.h" />
+		<Unit filename="include/menu.h" />
 		<Unit filename="main.cpp">
 			<Option target="Debug" />
 		</Unit>
 		<Unit filename="src/Personaje.cpp" />
+		<Unit filename="src/menu.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
