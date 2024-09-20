@@ -12,21 +12,21 @@ Menu::Menu(float width, float height) {
     menu[0].setFillColor(sf::Color::Red);
     menu[0].setString("Nuevo Juego");
     menu[0].setCharacterSize(130);
-    menu[0].setPosition(700, 250);
+    menu[0].setPosition(100,300);
+
 
     menu[1].setFont(font);
     menu[1].setFillColor(sf::Color::White);
     menu[1].setString("Creditos");
     menu[1].setCharacterSize(130);
-    menu[1].setPosition(700, 400);
+    menu[1].setPosition(100,500);
 
 
     menu[2].setFont(font);
     menu[2].setFillColor(sf::Color::White);
     menu[2].setString("Salir");
     menu[2].setCharacterSize(130);
-    menu[2].setPosition(700, 560);
-
+    menu[2].setPosition(120,700);
 
     selectedItemIndex = 0;
 }
@@ -52,5 +52,17 @@ void Menu::MoveDown() {
         menu[selectedItemIndex].setFillColor(sf::Color::White);
         selectedItemIndex++;
         menu[selectedItemIndex].setFillColor(sf::Color::Red);
+    }
+}
+
+// Función para manejar la entrada del ratón
+void Menu::HandleMouseInput(sf::Vector2i mousePos) {
+    for (int i = 0; i < 3; i++) {
+        sf::FloatRect textBounds = menu[i].getGlobalBounds();
+        if (textBounds.contains(static_cast<sf::Vector2f>(mousePos))) {
+            menu[selectedItemIndex].setFillColor(sf::Color::White);  // Desmarcar la opción anterior
+            selectedItemIndex = i;
+            menu[selectedItemIndex].setFillColor(sf::Color::Red);    // Marcar la nueva opción seleccionada
+        }
     }
 }

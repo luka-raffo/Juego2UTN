@@ -2,15 +2,53 @@
 #include <Personaje.h>
 #include <iostream>
 #include "menu.h"
+#include <ctime>
+#include <stdlib.h>
 using namespace std;
+void startGame() {
+    // Crear una ventana
+    sf::RenderWindow window(sf::VideoMode(1920, 1080), "WACHIN ROJO");
+
+    // Establecer el límite de FPS
+    window.setFramerateLimit(60);
+
+    // Crear un personaje
+    Personaje rojo;
+
+    // GameLoop
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+        // Actualizar el personaje
+        rojo.update();
+
+        // Dibujar todo
+        window.clear();
+        window.draw(rojo);
+        sf::Sprite Fondo;
+        sf::Texture tex;
+        tex.loadFromFile("include/Fondo.jpeg");
+        Fondo.setPosition(400,0);
+        Fondo.setTexture(tex);
+        window.draw(Fondo);
+        window.display();
+    }
+}
+
 int main()
 {
-     // Crear una ventana
- sf::RenderWindow window(sf::VideoMode(1920, 1080), "Menu de Pokemon");
+    srand ((unsigned)time(0));
+      // Crear una ventana
+    sf::RenderWindow window(sf::VideoMode(1920, 1080), "Menu de Pokemon");
 
     // Cargar imagen de fondo
     sf::Texture backgroundTexture;
-    if (!backgroundTexture.loadFromFile("include/background.jpg")) {
+    if (!backgroundTexture.loadFromFile("include/file.jpg")) {
+        std::cerr << "Error al cargar la imagen de fondo!" << std::endl;
         return -1;
     }
     sf::Sprite background(backgroundTexture);
@@ -34,10 +72,34 @@ int main()
                 if (event.key.code == sf::Keyboard::Return) {
                     int selected = menu.GetPressedItem();
                     if (selected == 0) {
-                        cout << "Nuevo Juego seleccionado" << endl;
+                        std::cout << "Nuevo Juego seleccionado" << std::endl;
+                        // Lógica para iniciar un nuevo juego
+                        window.close();  // Cierra el menú para comenzar el juego
+                       startGame();     // Llama a la función que inicia el juego
+                    } else if (selected == 1) {
+                        std::cout << "Creditos Juego seleccionado" << std::endl;
+
+                        // Lógica para cargar el juego
+                    } else if (selected == 2) {
+                        window.close();
+                    }
+                }
+            }
+
+            // Manejar la selección con el ratón
+            if (event.type == sf::Event::MouseMoved) {
+                sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+                menu.HandleMouseInput(mousePos);
+            }
+
+            if (event.type == sf::Event::MouseButtonPressed) {
+                if (event.mouseButton.button == sf::Mouse::Left) {
+                    int selected = menu.GetPressedItem();
+                    if (selected == 0) {
+                        std::cout << "Nuevo Juego seleccionado con ratón" << std::endl;
                         // Lógica para iniciar un nuevo juego
                     } else if (selected == 1) {
-                        cout << "Creditos" << endl;
+                        std::cout << "Creditos Juego seleccionado con ratón" << std::endl;
                         // Lógica para cargar el juego
                     } else if (selected == 2) {
                         window.close();
@@ -50,59 +112,13 @@ int main()
         window.clear();
         window.draw(background);
         menu.draw(window);
+        sf::Sprite titulo;
+        sf::Texture titulo_text;
+        titulo_text.loadFromFile("include/Titulo.jpeg");
+        titulo.setTexture(titulo_text);
+        titulo.setPosition(700,100);
+        window.draw(titulo);
         window.display();
+
     }
 return 0;}
-/*
-    //Ventana
-    sf::RenderWindow window(sf::VideoMode(1920, 1080), "Totemon");
-    //settearFPS
-    window.setFramerateLimit(60);
-
-
-    Personaje rojo;
-
-
-
-
-
-    //velocidad del Personaje
-
-
-
-    //GameLoop
-    while (window.isOpen())
-
-    {
-
-        //ReadInput
-        sf::Event event;
-
-        //Leer la cola de Mensajes
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-
-
-        //Update
-        rojo.update();
-
-
-        //Draw
-        window.draw(rojo);
-
-        //Display-Flip
-        window.display();
-
-        window.clear();
-    }
-
-
-    //Liberacion del Juego
-
-
-    return 0;
-}
-*/

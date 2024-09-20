@@ -36,11 +36,11 @@ void Personaje::update(){
         }
 
         if(_sprite.getPosition().x+_sprite.getGlobalBounds().width >1920){
-            _sprite.setPosition(800-_sprite.getGlobalBounds().width,_sprite.getPosition().y);
+            _sprite.setPosition(1920-_sprite.getGlobalBounds().width,_sprite.getPosition().y);
         }
 
         if(_sprite.getPosition().y+_sprite.getGlobalBounds().height >1080){
-            _sprite.setPosition(_sprite.getPosition().x,600-_sprite.getGlobalBounds().height);
+            _sprite.setPosition(_sprite.getPosition().x,1080-_sprite.getGlobalBounds().height);
         }
 }
 
