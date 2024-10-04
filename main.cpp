@@ -7,7 +7,7 @@
 using namespace std;
 void startGame() {
     // Crear una ventana
-    sf::RenderWindow window(sf::VideoMode(1920, 1080), "WACHIN ROJO");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "WACHIN ROJO",sf::Style::Fullscreen);
 
     // Establecer el límite de FPS
     window.setFramerateLimit(60);
