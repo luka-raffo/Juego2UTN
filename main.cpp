@@ -4,10 +4,11 @@
 #include "menu.h"
 #include <ctime>
 #include <stdlib.h>
+#include "escenario1.h"
 using namespace std;
 void startGame() {
     // Crear una ventana
-    sf::RenderWindow window(sf::VideoMode(800, 600), "WACHIN ROJO",sf::Style::Fullscreen);
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Inicia Juego",sf::Style::Fullscreen);
 
     // Establecer el límite de FPS
     window.setFramerateLimit(60);
@@ -25,16 +26,21 @@ void startGame() {
 
         // Actualizar el personaje
         rojo.update();
+        if(rojo.isCollision(bush())){
+            cout<<"colision"<<endl;
+        }
+
 
         // Dibujar todo
         window.clear();
-        window.draw(rojo);
         sf::Sprite Fondo;
         sf::Texture tex;
         tex.loadFromFile("include/Fondo.jpeg");
         Fondo.setPosition(400,0);
         Fondo.setTexture(tex);
         window.draw(Fondo);
+        window.draw(bush());
+        window.draw(rojo);
         window.display();
     }
 }

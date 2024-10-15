@@ -147,3 +147,7 @@ void Personaje::update(){
     void Personaje::draw(sf::RenderTarget& target, sf::RenderStates states)const {
     target.draw(_sprite, states);
     }
+
+    sf::FloatRect Personaje::getBounds()const{
+    return _sprite.getGlobalBounds();
+    }

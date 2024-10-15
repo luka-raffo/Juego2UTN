@@ -23,8 +23,8 @@ class Pelucin : public sf::Drawable
 {
     private:
 
-       float _vida=100;
-       float _danio=25;
+       float _vida=150;
+       float _danio=35;
        sf::Sprite _sprite;
        sf::Texture _texture;
     //std::rand()%700+100
@@ -38,8 +38,8 @@ class Balleton : public sf::Drawable
 {
     private:
 
-       float _vida=100;
-       float _danio=25;
+       float _vida=200;
+       float _danio=40;
        sf::Sprite _sprite;
        sf::Texture _texture;
     //std::rand()%700+100
@@ -53,8 +53,8 @@ class Velom : public sf::Drawable
 {
     private:
 
-       float _vida=100;
-       float _danio=25;
+       float _vida=190;
+       float _danio=70;
        sf::Sprite _sprite;
        sf::Texture _texture;
     //std::rand()%700+100
@@ -69,8 +69,8 @@ class Tukin : public sf::Drawable
 {
     private:
 
-       float _vida=100;
-       float _danio=25;
+       float _vida=200;
+       float _danio=60;
        sf::Sprite _sprite;
        sf::Texture _texture;
     //std::rand()%700+100
@@ -84,8 +84,8 @@ class Lechuza : public sf::Drawable
 {
     private:
 
-       float _vida=100;
-       float _danio=25;
+       float _vida=250;
+       float _danio=50;
        sf::Sprite _sprite;
        sf::Texture _texture;
     //std::rand()%700+100

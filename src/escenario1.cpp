@@ -16,13 +16,13 @@ escenario::escenario(){
         }
         _sprite.setTexture(_texture);
     }
-}
+
 bush::bush() {
-    if (!_texture.loadFromFile("Bush.png")) {
-        std::cerr << "Error al cargar la textura del arbusto" << std::endl;
-    }
+//Asignacion para la textura
+    _texture.loadFromFile("Include/Bush.jpeg");
+
+    //Asignacion de la textura del Personaje
     _sprite.setTexture(_texture);
-    _sprite.setPosition(300, 300); // Cambia según necesites
 }
 
 sf::FloatRect bush::getBounds() const {
@@ -32,3 +32,5 @@ sf::FloatRect bush::getBounds() const {
 void bush::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     target.draw(_sprite, states);
 }
+
+

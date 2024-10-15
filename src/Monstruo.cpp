@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 //hornero
+
 Hornerot:: Hornerot(){
 //Asignacion para la textura
     _texture.loadFromFile("include/hornero.jpg");

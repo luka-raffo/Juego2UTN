@@ -66,3 +66,4 @@ void Menu::HandleMouseInput(sf::Vector2i mousePos) {
         }
     }
 }
+

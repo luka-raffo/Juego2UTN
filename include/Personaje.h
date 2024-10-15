@@ -1,9 +1,10 @@
 #ifndef PERSONAJE_H
 #define PERSONAJE_H
 #include <SFML/Graphics.hpp>
+#include "Colisionable.h"
 
 
-class Personaje: public sf::Drawable
+class Personaje: public sf::Drawable, public Colisionable
 {
     float _velocity=3;
 
@@ -31,6 +32,7 @@ public:
     Personaje();
     void update();
     void draw(sf::RenderTarget& target, sf::RenderStates states)const override;
+    sf::FloatRect getBounds() const override;
 
 
 };
