@@ -29,10 +29,10 @@ Personaje::Personaje()
 
 
     // Inicializar los frames de reposo
-    idleDownRect = sf::IntRect(0, 0, 14, 20);
+    idleDownRect = sf::IntRect(0, 0, 15, 20);
     idleLeftRect = sf::IntRect(0, 40, 14, 20);
     idleRightRect = sf::IntRect(0, 60, 14, 20);
-    idleUpRect = sf::IntRect(0, 20, 14, 20);
+    idleUpRect = sf::IntRect(0, 20, 15, 20);
 
     _currentIdleRect = &idleDownRect; // Inicialmente en reposo mirando hacia abajo
     _sprite.setTextureRect(*_currentIdleRect);
