@@ -86,4 +86,22 @@ void bush6x4::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     target.draw(_sprite, states);
 }
 
+BattleBackground::BattleBackground(){
 
+//Asignacion para la textura
+    _texture.loadFromFile("Battle Backgrounds/With Textboxes/BattleBackground.Png");
+
+    //Asignacion de la textura del Personaje
+    _sprite.setTexture(_texture);
+
+    //reescalar ell fondo (porque es muy grande, igual hay q cambiarlo)
+    _sprite.setScale(5, 5);
+
+
+    _sprite.setPosition(0, 0);
+
+        if (!_texture.loadFromFile("Battle Backgrounds/With Textboxes/BattleBackground.png")) {
+            cerr << "Error cargando la textura" << endl;
+        }
+        _sprite.setTexture(_texture);
+    }

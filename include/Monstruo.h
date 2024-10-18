@@ -2,9 +2,9 @@
 #define MONSTRUO_H
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "Colisionable.h"
 
-class Hornerot: public sf::Drawable
-{
+class Hornerot :public sf::Drawable, public Colisionable{
     private:
 
        float _vida=100;
@@ -16,11 +16,17 @@ class Hornerot: public sf::Drawable
         Hornerot();
  void Sumarvida(float vida);
  void Sumarataque( float danio);
-
+ void setPosition(float x, float y) {
+        _sprite.setPosition(x, y);
+    };
+    const sf::Sprite& getSprite() const {
+        return _sprite;
+    }
+ virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+  sf::FloatRect getBounds() const override;
 };
 
-class Pelucin : public sf::Drawable
-{
+class Pelucin : public sf::Drawable,public Colisionable{
     private:
 
        float _vida=150;
@@ -32,10 +38,16 @@ class Pelucin : public sf::Drawable
         Pelucin();
  void Sumarvida(float vida);
  void Sumarataque( float danio);
-
+ void setPosition(float x, float y) {
+        _sprite.setPosition(x, y);
+    };
+    const sf::Sprite& getSprite() const {
+        return _sprite;
+    }
+ virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+  sf::FloatRect getBounds() const override;
 };
-class Balleton : public sf::Drawable
-{
+class Balleton : public sf::Drawable,public Colisionable {
     private:
 
        float _vida=200;
@@ -47,10 +59,16 @@ class Balleton : public sf::Drawable
         Balleton();
  void Sumarvida(float vida);
  void Sumarataque( float danio);
-
+ void setPosition(float x, float y) {
+        _sprite.setPosition(x, y);
+    };
+    const sf::Sprite& getSprite() const {
+        return _sprite;
+    }
+ virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+  sf::FloatRect getBounds() const override;
 };
-class Velom : public sf::Drawable
-{
+class Velom : public sf::Drawable,public Colisionable {
     private:
 
        float _vida=190;
@@ -62,11 +80,17 @@ class Velom : public sf::Drawable
         Velom();
  void Sumarvida(float vida);
  void Sumarataque( float danio);
-
+  void setPosition(float x, float y) {
+        _sprite.setPosition(x, y);
+    };
+    const sf::Sprite& getSprite() const {
+        return _sprite;
+    }
+ virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+  sf::FloatRect getBounds() const override;
 };
 
-class Tukin : public sf::Drawable
-{
+class Tukin : public sf::Drawable,public Colisionable{
     private:
 
        float _vida=200;
@@ -78,10 +102,16 @@ class Tukin : public sf::Drawable
         Tukin();
  void Sumarvida(float vida);
  void Sumarataque( float danio);
-
+ void setPosition(float x, float y) {
+        _sprite.setPosition(x, y);
+    };
+    const sf::Sprite& getSprite() const {
+        return _sprite;
+    }
+ virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+  sf::FloatRect getBounds() const override;
 };
-class Lechuza : public sf::Drawable
-{
+class Lechuza : public sf::Drawable,public Colisionable {
     private:
 
        float _vida=250;
@@ -93,9 +123,37 @@ class Lechuza : public sf::Drawable
         Lechuza();
  void Sumarvida(float vida);
  void Sumarataque( float danio);
-
+  void setPosition(float x, float y) {
+        _sprite.setPosition(x, y);
+    };
+    const sf::Sprite& getSprite() const {
+        return _sprite;
+    }
+ virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+  sf::FloatRect getBounds() const override;
 };
 
+class Bufalont : public sf::Drawable,public Colisionable {
+    private:
+
+       float _vida=250;
+       float _danio=50;
+       sf::Sprite _sprite;
+       sf::Texture _texture;
+    //std::rand()%700+100
+    public:
+        Bufalont();
+ void Sumarvida(float vida);
+ void Sumarataque( float danio);
+ void setPosition(float x, float y) {
+        _sprite.setPosition(x, y);
+    };
+    const sf::Sprite& getSprite() const {
+        return _sprite;
+    }
+ virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+  sf::FloatRect getBounds() const override;
+};
 
 
 #endif // MONSTRUO_H

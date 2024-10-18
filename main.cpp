@@ -1,18 +1,18 @@
 #include <SFML/Graphics.hpp>
-#include <Personaje.h>
+#include "Personaje.h"
 #include <iostream>
 #include "menu.h"
 #include <ctime>
 #include <stdlib.h>
 #include "escenario1.h"
+#include "Funciones.H"
 using namespace std;
 
 
 
-void startGame()
-{
+void startGame() {
     // Crear una ventana
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Inicia Juego"/*, sf::Style::Fullscreen*/);
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Inicia Juego");
 
     // Establecer el límite de FPS
     window.setFramerateLimit(60);
@@ -20,31 +20,27 @@ void startGame()
     // Crear un personaje
     Personaje rojo;
 
-    //crear bushes
-
-    //Lista de bush
+    // Crear lista de bush
     vector<bush6x4> listaBushes;
-
-    // Agregar objetos a la lista
     bush6x4 b1, b2, b3;
     b1.setPosition(150, 200);
     b2.setPosition(300, 400);
     b3.setPosition(450, 200);
-
-    //lleva los objetos atras de la Lista
     listaBushes.push_back(b1);
     listaBushes.push_back(b2);
     listaBushes.push_back(b3);
 
-    //crear fondo
+    // Crear fondo
     escenario Fondo;
 
-    // GameLoop
-    while (window.isOpen())
-    {
+    // Agregar un reloj para el cooldown de colisiones
+    sf::Clock collisionCooldown;
+    float cooldownTime = 2.0f;  // Cooldown de 2 segundos
+
+    // Game loop
+    while (window.isOpen()) {
         sf::Event event;
-        while (window.pollEvent(event))
-        {
+        while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
@@ -52,31 +48,35 @@ void startGame()
         // Actualizar el personaje
         rojo.update();
 
-        // Verificar colisiones con cada objeto en la lista
-        for (const bush6x4& b : listaBushes)
-        {
-            if (rojo.isCollision(b))
-            {
-                cout << "colision" << endl;
+        // Verificar si el cooldown ha pasado
+        if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime) {
+            int EventoPokemon = 0;
+            // Verificar colisiones con cada objeto en la lista
+            for (const bush6x4& b : listaBushes) {
+                if (rojo.isCollision(b)) {
+                    EventoPokemon = std::rand() % 2000;
+                    if (EventoPokemon <= 50) {
+                        escenarioPelea();
+                        // Reiniciar el reloj del cooldown al activar la pelea
+                        collisionCooldown.restart();
+                    }
+
+                    cout << "colision" << endl;
+                    break;  // Evitar múltiples colisiones en un mismo frame
+                }
             }
         }
-
 
         // Dibujar todo
         window.clear();
 
-
-        /************ Los window.draw se dibujan segun su orden creando Capas **************/
-
+        /************ Los window.draw se dibujan según su orden creando capas **************/
         window.draw(Fondo);
 
-
-        //Un for each para recorrer la lista y dibujar los bush
-        for (const bush6x4& b : listaBushes)
-        {
+        // Recorrer la lista y dibujar los bush
+        for (const bush6x4& b : listaBushes) {
             window.draw(b);
         }
-
 
         window.draw(rojo);
         window.display();
