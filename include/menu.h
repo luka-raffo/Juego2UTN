@@ -20,4 +20,5 @@ private:
     sf::Text menu[3];
 };
 
+
 #endif // MENU_H
