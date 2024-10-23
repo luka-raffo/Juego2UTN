@@ -4,6 +4,18 @@
 #include <iostream>
 #include "Colisionable.h"
 
+using namespace std;
+
+class Monstruo :public sf::Drawable, public Colisionable{
+    private:
+
+       float _vida=100;
+       float _danio=25;
+       sf::Sprite _sprite;
+       sf::Texture _texture;
+
+};
+
 class Hornerot :public sf::Drawable, public Colisionable{
     private:
 
@@ -25,6 +37,9 @@ class Hornerot :public sf::Drawable, public Colisionable{
  virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
   sf::FloatRect getBounds() const override;
 };
+
+
+
 
 class Pelucin : public sf::Drawable,public Colisionable{
     private:
@@ -68,8 +83,13 @@ class Balleton : public sf::Drawable,public Colisionable {
  virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
   sf::FloatRect getBounds() const override;
 };
+
+
+
 class Velom : public sf::Drawable,public Colisionable {
     private:
+
+       string nombre;
 
        float _vida=190;
        float _danio=70;
@@ -78,6 +98,8 @@ class Velom : public sf::Drawable,public Colisionable {
     //std::rand()%700+100
     public:
         Velom();
+        Velom(const string& nombre);
+
  void Sumarvida(float vida);
  void Sumarataque( float danio);
   void setPosition(float x, float y) {
@@ -86,9 +108,17 @@ class Velom : public sf::Drawable,public Colisionable {
     const sf::Sprite& getSprite() const {
         return _sprite;
     }
+
+    string getNombre() const;
+
+    bool operator==(const Velom& other) const;
+
  virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
   sf::FloatRect getBounds() const override;
 };
+
+
+
 
 class Tukin : public sf::Drawable,public Colisionable{
     private:
@@ -111,6 +141,10 @@ class Tukin : public sf::Drawable,public Colisionable{
  virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
   sf::FloatRect getBounds() const override;
 };
+
+
+
+
 class Lechuza : public sf::Drawable,public Colisionable {
     private:
 
@@ -132,6 +166,8 @@ class Lechuza : public sf::Drawable,public Colisionable {
  virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
   sf::FloatRect getBounds() const override;
 };
+
+
 
 class Bufalont : public sf::Drawable,public Colisionable {
     private:

@@ -2,6 +2,8 @@
 
 Personaje::Personaje()
 {
+    inventory inventario(100);
+
     //Asignacion para la textura
     _texture.loadFromFile("Characters/character 4.png");
 
@@ -36,6 +38,8 @@ Personaje::Personaje()
 
     _currentIdleRect = &idleDownRect; // Inicialmente en reposo mirando hacia abajo
     _sprite.setTextureRect(*_currentIdleRect);
+
+
 
 
 }

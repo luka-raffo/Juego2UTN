@@ -1,23 +1,24 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "escenario1.h"
+
 using namespace std;
 
 escenario::escenario(){
 
 //Asignacion para la textura
-    _texture.loadFromFile("Tileset/TileSetEscenario.PNG");
+    _texture.loadFromFile("Tileset/fondoJue.JPG");
 
     //Asignacion de la textura del Personaje
     _sprite.setTexture(_texture);
 
     //reescalar ell fondo (porque es muy grande, igual hay q cambiarlo)
-    _sprite.setScale(2, 2);
+
 
 
     _sprite.setPosition(0, 0);
 
-        if (!_texture.loadFromFile("Tileset/TileSetEscenario.PNG")) {
+        if (!_texture.loadFromFile("Tileset/fondoJue.JPG")) {
             cerr << "Error cargando la textura" << endl;
         }
         _sprite.setTexture(_texture);
@@ -94,7 +95,7 @@ BattleBackground::BattleBackground(){
     //Asignacion de la textura del Personaje
     _sprite.setTexture(_texture);
 
-    //reescalar ell fondo (porque es muy grande, igual hay q cambiarlo)
+    //reescalar el fondo (porque es muy grande, igual hay q cambiarlo)
     _sprite.setScale(5, 5);
 
 

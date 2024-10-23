@@ -1,14 +1,17 @@
 #include "Monstruo.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "inventory.h"
 // Hornerot
 Hornerot::Hornerot() {
     // Asignacion para la textura
-    if (!_texture.loadFromFile("include/hornero.jpg")) {
-        std::cerr << "Error al cargar hornero.jpg" << std::endl;
+    if (!_texture.loadFromFile("include/velom.PNG")) {
+        std::cerr << "Error al cargar velom.PNG" << std::endl;
     }
     // Asignacion de la textura del Personaje
     _sprite.setTexture(_texture);
+    _sprite.setPosition(0,0);
+    _sprite.setScale(2,2);
 }
 
 void Hornerot::Sumarvida(float vida) {
@@ -27,6 +30,7 @@ sf::FloatRect Hornerot::getBounds() const {
     return _sprite.getGlobalBounds();
 }
 
+
 // Pelucin
 Pelucin::Pelucin() {
     // Asignacion para la textura
@@ -35,6 +39,7 @@ Pelucin::Pelucin() {
     }
     // Asignacion de la textura del Personaje
     _sprite.setTexture(_texture);
+    _sprite.setScale(2,2);
 }
 
 void Pelucin::Sumarvida(float vida) {
@@ -53,6 +58,7 @@ sf::FloatRect Pelucin::getBounds() const {
     return _sprite.getGlobalBounds();
 }
 
+
 // Balleton
 Balleton::Balleton() {
     // Asignacion para la textura
@@ -61,6 +67,7 @@ Balleton::Balleton() {
     }
     // Asignacion de la textura del Personaje
     _sprite.setTexture(_texture);
+    _sprite.setScale(2,2);
 }
 
 void Balleton::Sumarvida(float vida) {
@@ -79,14 +86,21 @@ sf::FloatRect Balleton::getBounds() const {
     return _sprite.getGlobalBounds();
 }
 
+
 // Velom
-Velom::Velom() {
+Velom::Velom(const string& nombre) : nombre(nombre) {
+
+
+
     // Asignacion para la textura
     if (!_texture.loadFromFile("include/velom.PNG")) {
-        std::cerr << "Error al cargar velom.PNG" << std::endl;
+        cout << "Error al cargar velom.PNG" << endl;
     }
     // Asignacion de la textura del Personaje
     _sprite.setTexture(_texture);
+    _sprite.setScale(2,2);
+
+
 }
 
 void Velom::Sumarvida(float vida) {
@@ -105,6 +119,15 @@ sf::FloatRect Velom::getBounds() const {
     return _sprite.getGlobalBounds();
 }
 
+string Velom::getNombre() const{
+        return nombre;
+    }
+
+bool Velom::operator==(const Velom& other) const {
+        return nombre == other.nombre;
+    }
+
+
 // Tukin
 Tukin::Tukin() {
     // Asignacion para la textura
@@ -113,6 +136,7 @@ Tukin::Tukin() {
     }
     // Asignacion de la textura del Personaje
     _sprite.setTexture(_texture);
+    _sprite.setScale(2,2);
 }
 
 void Tukin::Sumarvida(float vida) {
@@ -139,6 +163,7 @@ Lechuza::Lechuza() {
     }
     // Asignacion de la textura del Personaje
     _sprite.setTexture(_texture);
+    _sprite.setScale(2,2);
 }
 
 void Lechuza::Sumarvida(float vida) {
@@ -165,6 +190,7 @@ Bufalont::Bufalont() {
     }
     // Asignacion de la textura del Personaje
     _sprite.setTexture(_texture);
+    _sprite.setScale(2,2);
 }
 
 void Bufalont::Sumarvida(float vida) {

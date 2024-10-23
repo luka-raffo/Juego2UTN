@@ -45,6 +45,7 @@
 		<Unit filename="include/Monstruo.h" />
 		<Unit filename="include/Personaje.h" />
 		<Unit filename="include/escenario1.h" />
+		<Unit filename="include/inventory.h" />
 		<Unit filename="include/menu.h" />
 		<Unit filename="main.cpp">
 			<Option target="Debug" />
@@ -54,6 +55,7 @@
 		<Unit filename="src/Monstruo.cpp" />
 		<Unit filename="src/Personaje.cpp" />
 		<Unit filename="src/escenario1.cpp" />
+		<Unit filename="src/inventory.cpp" />
 		<Unit filename="src/menu.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

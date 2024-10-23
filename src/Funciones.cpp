@@ -1,4 +1,6 @@
 #include "Funciones.h"
+#include "inventory.h"
+#include "Personaje.h"
 
 using namespace std;
 void escenarioPelea() {
@@ -8,11 +10,13 @@ void escenarioPelea() {
     // Establecer el límite de FPS
     window.setFramerateLimit(60);
 
+    inventory inventario(100);
+
     // Crear los monstruos
     Hornerot monstruo;
     Pelucin pelu;
     Tukin tuki;
-    Velom vel;
+    Velom vel("vilom");
     Lechuza lechu;
     Balleton ballena;
     Bufalont bufalo;
@@ -25,34 +29,50 @@ void escenarioPelea() {
     sf::Drawable* monstruoSeleccionado = nullptr;
 
     // Asignar monstruo según probabilidad
-    if (probabilidad < 20) {  // 20% de probabilidad para Hornerot
-        monstruo.setPosition(800, 200);
+    if (probabilidad < 0) {  // 20% de probabilidad para Hornerot
+        monstruo.setPosition(570, 160);
         monstruoSeleccionado = &monstruo;
+        cout<<"entro al if"<<endl;
     }
-    else if (probabilidad < 35) {  // 15% de probabilidad para Pelucin (20 + 15 = 35)
-        pelu.setPosition(800, 200);
+
+
+    /*else if (probabilidad < 35) {  // 15% de probabilidad para Pelucin (20 + 15 = 35)
+        pelu.setPosition(570, 160);
         monstruoSeleccionado = &pelu;
-    }
-    else if (probabilidad < 60) {  // 25% de probabilidad para Tukin (35 + 25 = 60)
-        tuki.setPosition(800, 200);
+    }*/
+
+
+    /*else if (probabilidad < 60) {  // 25% de probabilidad para Tukin (35 + 25 = 60)
+        tuki.setPosition(570, 160);
         monstruoSeleccionado = &tuki;
-    }
-    else if (probabilidad < 70) {  // 10% de probabilidad para Velom (60 + 10 = 70)
-        vel.setPosition(800, 200);
+    }*/
+
+
+    else if (probabilidad < 100) {  // 10% de probabilidad para Velom (60 + 10 = 70)
+        vel.setPosition(570, 160);
         monstruoSeleccionado = &vel;
+        cout<<"hola"<<endl;
+        inventario.agregarItem(vel);
+        inventario.mostrarInventario();
     }
-    else if (probabilidad < 80) {  // 10% de probabilidad para Lechuza (70 + 10 = 80)
-        lechu.setPosition(800, 200);
+
+
+    /*else if (probabilidad < 80) {  // 10% de probabilidad para Lechuza (70 + 10 = 80)
+        lechu.setPosition(570, 160);
         monstruoSeleccionado = &lechu;
-    }
-    else if (probabilidad < 90) {  // 10% de probabilidad para Balleton (80 + 10 = 90)
-        ballena.setPosition(800, 200);
+    }*/
+
+
+    /*else if (probabilidad < 90) {  // 10% de probabilidad para Balleton (80 + 10 = 90)
+        ballena.setPosition(570, 160);
         monstruoSeleccionado = &ballena;
-    }
-    else {  // 10% de probabilidad para Bufalont (90 a 99)
-        bufalo.setPosition(800, 200);
+    }*/
+
+
+    /*else {  // 10% de probabilidad para Bufalont (90 a 99)
+        bufalo.setPosition(570, 160);
         monstruoSeleccionado = &bufalo;
-    }
+    }*/
 
     // Bucle del juego
     while (window.isOpen()) {
@@ -76,7 +96,7 @@ void escenarioPelea() {
         // Dibujar el monstruo seleccionado
         if (monstruoSeleccionado != nullptr) {
             window.draw(*monstruoSeleccionado);
-        }
+        }else{cout<<"mamahuevo"<<endl;}
 
         // Mostrar lo dibujado
         window.display();

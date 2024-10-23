@@ -2,11 +2,13 @@
 #define PERSONAJE_H
 #include <SFML/Graphics.hpp>
 #include "Colisionable.h"
+#include "inventory.h"
 
 
 class Personaje: public sf::Drawable, public Colisionable
 {
     float _velocity=3;
+
 
     sf::Sprite _sprite;
     sf::Texture _texture;
@@ -34,6 +36,9 @@ public:
     void draw(sf::RenderTarget& target, sf::RenderStates states)const override;
     sf::FloatRect getBounds() const override;
 
+    void setPosition(float x, float y) {
+        _sprite.setPosition(x, y);
+    }
 
 };
 

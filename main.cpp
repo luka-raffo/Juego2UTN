@@ -20,11 +20,13 @@ void startGame() {
     // Crear un personaje
     Personaje rojo;
 
+    rojo.setPosition(400, 300);
+
     // Crear lista de bush
     vector<bush6x4> listaBushes;
     bush6x4 b1, b2, b3;
-    b1.setPosition(150, 200);
-    b2.setPosition(300, 400);
+    b1.setPosition(0, 0);
+    b2.setPosition(0, 64);
     b3.setPosition(450, 200);
     listaBushes.push_back(b1);
     listaBushes.push_back(b2);
