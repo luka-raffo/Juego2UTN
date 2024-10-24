@@ -3,7 +3,7 @@
 #include "Personaje.h"
 
 using namespace std;
-
+/*
 void escenarioPelea() {
         // Crear una ventana
     sf::RenderWindow window(sf::VideoMode(800, 600), "Inicia la pelea");
@@ -102,7 +102,7 @@ void escenarioPelea() {
         // Mostrar lo dibujado
         window.display();
     }
-}
+}*/
 /*
 void escenarioPelea() {
     // Crear una ventana
@@ -212,7 +212,137 @@ void escenarioPelea() {
         // Mostrar lo dibujado
         window.display();
     }
-}
-*/
+}*/
+void escenarioPelea() {
+    // Crear una ventana
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Inicia la pelea");
+    window.setFramerateLimit(60);
 
+    inventory inventario(100);
+
+    // Crear los monstruos
+    Hornerot monstruoJugador;  // Monstruo controlado por el jugador
+    Pelucin enemigo;           // Monstruo enemigo
+
+    // Posicionar monstruos
+    monstruoJugador.setPosition(100, 300);  // Jugador a la izquierda
+    enemigo.setPosition(570, 300);          // Enemigo a la derecha
+
+    // Dibujar el fondo
+    BattleBackground fondo;
+
+    // Variables de pelea
+    bool turnoJugador = true;  // Variable para alternar los turnos
+    bool capturable = false;   // Indica si el monstruo puede ser capturado
+    bool peleaActiva = true;
+    bool opcionSeleccionada = false;
+    int opcion = 0;
+
+    // Crear elementos del menú en pantalla
+    sf::Font font;
+    font.loadFromFile("include/Pokemon.ttf");
+
+    sf::Text menuTexto;
+    menuTexto.setFont(font);
+    menuTexto.setString("1) Atacar  2) Defender");
+    menuTexto.setCharacterSize(24);
+    menuTexto.setFillColor(sf::Color::White);
+    menuTexto.setPosition(50, 500);
+
+    // Agregar opción de captura cuando sea capturable
+    sf::Text capturaTexto;
+    capturaTexto.setFont(font);
+    capturaTexto.setString("3) Capturar");
+    capturaTexto.setCharacterSize(24);
+    capturaTexto.setFillColor(sf::Color::White);
+    capturaTexto.setPosition(400, 500);
+
+    // Bucle del juego
+    while (window.isOpen() && peleaActiva) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed)
+                window.close();
+
+            // Detectar opción de menú (teclas numéricas 1, 2, 3)
+            if (event.type == sf::Event::KeyPressed) {
+                if (event.key.code == sf::Keyboard::Num1 && turnoJugador) {
+                    opcion = 1;  // Atacar
+                    opcionSeleccionada = true;
+                } else if (event.key.code == sf::Keyboard::Num2 && turnoJugador) {
+                    opcion = 2;  // Defender
+                    opcionSeleccionada = true;
+                } else if (capturable && event.key.code == sf::Keyboard::Num3 && turnoJugador) {
+                    opcion = 3;  // Capturar
+                    opcionSeleccionada = true;
+                } else if (event.key.code == sf::Keyboard::Escape) {
+                    window.close();  // Salir
+                }
+            }
+        }
+
+        if (opcionSeleccionada && turnoJugador) {
+            // Lógica de pelea para el turno del jugador
+            if (opcion == 1) {  // Atacar
+                enemigo.Sumarvida(-monstruoJugador.getDanio());
+            } else if (opcion == 2) {  // Defender
+                float defensaTotal = monstruoJugador.getDefensa();
+                if (defensaTotal > enemigo.getDanio()) {
+                    // Bloquear ataque
+                } else {
+                    float danioRecibido = enemigo.getDanio() - defensaTotal;
+                    monstruoJugador.Sumarvida(-danioRecibido);
+                }
+            } else if (opcion == 3 && capturable) {  // Capturar
+                int probCaptura = rand() % 100;
+                if (probCaptura < 50) {
+                   // inventario.agregarItem(enemigo);  // Capturar exitoso
+                    peleaActiva = false;
+                }
+            }
+
+            opcionSeleccionada = false;  // Reiniciar opción
+            turnoJugador = false;  // Turno del enemigo
+
+            // Verificar si el enemigo es capturable
+            if (enemigo.getVida() <= enemigo.getVida() * 0.25) {
+                capturable = true;
+            }
+
+            // Comprobar si la pelea ha terminado
+            if (enemigo.getVida() <= 0) {
+                peleaActiva = false;
+            }
+        }
+
+        if (!turnoJugador && peleaActiva) {
+            // Turno del enemigo (ataque automático)
+            monstruoJugador.Sumarvida(-enemigo.getDanio());
+
+            // Comprobar si el jugador perdió
+            if (monstruoJugador.getVida() <= 0) {
+                peleaActiva = false;
+            }
+
+            turnoJugador = true;
+        }
+
+        // Limpiar la pantalla
+        window.clear();
+
+        // Dibujar el fondo y los monstruos
+        window.draw(fondo);
+        window.draw(monstruoJugador);
+        window.draw(enemigo);
+
+        // Dibujar el menú en pantalla
+        window.draw(menuTexto);
+        if (capturable) {
+            window.draw(capturaTexto);  // Mostrar la opción de captura si está disponible
+        }
+
+        // Mostrar lo dibujado
+        window.display();
+    }
+}
 

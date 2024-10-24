@@ -8,6 +8,12 @@ Monstruo::Monstruo() {
     _vida = rand() % 101 + 100;   // Vida aleatoria entre 100 y 200
     _danio = rand() % 51 + 20;    // Daño aleatorio entre 20 y 70
     _defensa = rand() % 21 + 10;  // Defensa aleatoria entre 10 y 30
+
+    // Es importante cargar una textura válida antes de asociarla al sprite
+    if (!_texture.loadFromFile("ruta/a/tu/textura.png")) {
+        std::cerr << "Error al cargar la textura" << std::endl;
+    }
+    _sprite.setTexture(_texture);  // Asociar la textura al sprite
 }
 
 // Constructor con parámetros
@@ -45,7 +51,8 @@ void Monstruo::setDefensa(float defensa) {
 
 Hornerot::Hornerot() : Monstruo() {
     // Asignacion para la textura
-    if (!_texture.loadFromFile("include/hornerot.PNG")) {
+
+    if (!_texture.loadFromFile("include/horneroo.JPG")) {
         std::cerr << "Error al cargar velom.PNG" << std::endl;
     }
     // Asignacion de la textura del Personaje
