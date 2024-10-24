@@ -418,7 +418,7 @@
 1725644054 source:c:\users\luka\desktop\juego\src\personaje.cpp
 	"Personaje.h"
 
-1729285921 source:c:\users\brandon\onedrive\escritorio\juego2utn\main.cpp
+1729725414 source:c:\users\brandon\onedrive\escritorio\juego2utn\main.cpp
 	<SFML/Graphics.hpp>
 	"Personaje.h"
 	<iostream>
@@ -837,28 +837,30 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1729031456 c:\users\brandon\onedrive\escritorio\juego2utn\include\personaje.h
+1729725414 c:\users\brandon\onedrive\escritorio\juego2utn\include\personaje.h
 	<SFML/Graphics.hpp>
 	"Colisionable.h"
+	"inventory.h"
 
-1729277491 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\personaje.cpp
+1729719636 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\personaje.cpp
 	"Personaje.h"
 
-1728574389 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\menu.cpp
+1729725414 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\menu.cpp
 	"menu.h"
 	<SFML/Graphics.hpp>
 	<iostream>
 
-1728574389 c:\users\brandon\onedrive\escritorio\juego2utn\include\menu.h
+1729725414 c:\users\brandon\onedrive\escritorio\juego2utn\include\menu.h
 	<SFML/Graphics.hpp>
 	<iostream>
 
-1729282582 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\monstruo.cpp
+1729728529 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\monstruo.cpp
 	"Monstruo.h"
 	<SFML/Graphics.hpp>
 	<iostream>
+	"inventory.h"
 
-1729281767 c:\users\brandon\onedrive\escritorio\juego2utn\include\monstruo.h
+1729726893 c:\users\brandon\onedrive\escritorio\juego2utn\include\monstruo.h
 	<SFML/Graphics.hpp>
 	<iostream>
 	"Colisionable.h"
@@ -1335,12 +1337,12 @@
 1729032574 c:\users\brandon\onedrive\escritorio\juego2utn\include\colisionable.h
 	<SFML/Graphics.hpp>
 
-1729278683 c:\users\brandon\onedrive\escritorio\juego2utn\include\escenario1.h
+1729725414 c:\users\brandon\onedrive\escritorio\juego2utn\include\escenario1.h
 	<SFML/Graphics.hpp>
 	<iostream>
 	"Colisionable.h"
 
-1729285675 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\escenario1.cpp
+1729725414 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\escenario1.cpp
 	<SFML/Graphics.hpp>
 	<iostream>
 	"escenario1.h"
@@ -1364,10 +1366,12 @@
 	<iostream>
 	"escenario1.h"
 
-1729286461 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\funciones.cpp
+1729729205 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\funciones.cpp
 	"Funciones.h"
+	"inventory.h"
+	"Personaje.h"
 
-1729282582 c:\users\brandon\onedrive\escritorio\juego2utn\include\funciones.h
+1729725414 c:\users\brandon\onedrive\escritorio\juego2utn\include\funciones.h
 	<SFML/Graphics.hpp>
 	<Personaje.h>
 	<iostream>
@@ -1412,4 +1416,17 @@
 	<vector>
 	<algorithm>
 	<Monstruo.h>
+
+1729719636 c:\users\brandon\onedrive\escritorio\juego2utn\include\inventory.h
+	<SFML/Graphics.hpp>
+	<iostream>
+	<vector>
+	<algorithm>
+	<Monstruo.h>
+
+1729719636 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\inventory.cpp
+	"inventory.h"
+	"Monstruo.h"
+	<algorithm>
+	<vector>
 
