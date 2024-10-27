@@ -37,7 +37,7 @@ void startGame() {
 
     // Agregar un reloj para el cooldown de colisiones
     sf::Clock collisionCooldown;
-    float cooldownTime = 2.0f;  // Cooldown de 2 segundos
+    float cooldownTime = 1;  // Cooldown de 2 segundos
 
     // Game loop
     while (window.isOpen()) {
@@ -52,12 +52,13 @@ void startGame() {
 
         // Verificar si el cooldown ha pasado
         if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime) {
-            int EventoPokemon = 0;
+            int EventoPokemon = 2;
             // Verificar colisiones con cada objeto en la lista
             for (const bush6x4& b : listaBushes) {
                 if (rojo.isCollision(b)) {
                     EventoPokemon = std::rand() % 2000;
-                    if (EventoPokemon <= 50) {
+                    if (EventoPokemon <= 2000)
+ {
                         escenarioPelea();
                         // Reiniciar el reloj del cooldown al activar la pelea
                         collisionCooldown.restart();
@@ -89,7 +90,7 @@ int main()
 {
     srand ((unsigned)time(0));
     // Crear una ventana
-    sf::RenderWindow window(sf::VideoMode(1920, 1080), "Menu de Pokemon");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Menu de Pokemon");
 
     // Cargar imagen de fondo
     sf::Texture backgroundTexture;
