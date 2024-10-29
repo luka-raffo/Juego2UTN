@@ -418,7 +418,7 @@
 1725644054 source:c:\users\luka\desktop\juego\src\personaje.cpp
 	"Personaje.h"
 
-1729285921 source:c:\users\brandon\onedrive\escritorio\juego2utn\main.cpp
+1730243325 source:c:\users\brandon\onedrive\escritorio\juego2utn\main.cpp
 	<SFML/Graphics.hpp>
 	"Personaje.h"
 	<iostream>
@@ -837,28 +837,30 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1729031456 c:\users\brandon\onedrive\escritorio\juego2utn\include\personaje.h
+1729725414 c:\users\brandon\onedrive\escritorio\juego2utn\include\personaje.h
 	<SFML/Graphics.hpp>
 	"Colisionable.h"
+	"inventory.h"
 
-1729277491 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\personaje.cpp
+1729719636 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\personaje.cpp
 	"Personaje.h"
 
-1728574389 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\menu.cpp
+1729725414 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\menu.cpp
 	"menu.h"
 	<SFML/Graphics.hpp>
 	<iostream>
 
-1728574389 c:\users\brandon\onedrive\escritorio\juego2utn\include\menu.h
+1729725414 c:\users\brandon\onedrive\escritorio\juego2utn\include\menu.h
 	<SFML/Graphics.hpp>
 	<iostream>
 
-1729282582 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\monstruo.cpp
+1730245938 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\monstruo.cpp
 	"Monstruo.h"
 	<SFML/Graphics.hpp>
 	<iostream>
+	"inventory.h"
 
-1729281767 c:\users\brandon\onedrive\escritorio\juego2utn\include\monstruo.h
+1730245600 c:\users\brandon\onedrive\escritorio\juego2utn\include\monstruo.h
 	<SFML/Graphics.hpp>
 	<iostream>
 	"Colisionable.h"
@@ -1335,12 +1337,12 @@
 1729032574 c:\users\brandon\onedrive\escritorio\juego2utn\include\colisionable.h
 	<SFML/Graphics.hpp>
 
-1729278683 c:\users\brandon\onedrive\escritorio\juego2utn\include\escenario1.h
+1730243837 c:\users\brandon\onedrive\escritorio\juego2utn\include\escenario1.h
 	<SFML/Graphics.hpp>
 	<iostream>
 	"Colisionable.h"
 
-1729285675 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\escenario1.cpp
+1730244782 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\escenario1.cpp
 	<SFML/Graphics.hpp>
 	<iostream>
 	"escenario1.h"
@@ -1364,11 +1366,14 @@
 	<iostream>
 	"escenario1.h"
 
-1729286461 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\funciones.cpp
+1730245869 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\funciones.cpp
 	"Funciones.h"
+	"inventory.h"
+	"Personaje.h"
 
-1729282582 c:\users\brandon\onedrive\escritorio\juego2utn\include\funciones.h
+1730244782 c:\users\brandon\onedrive\escritorio\juego2utn\include\funciones.h
 	<SFML/Graphics.hpp>
+	<SFML/Audio.hpp>
 	<Personaje.h>
 	<iostream>
 	"menu.h"
@@ -1412,4 +1417,121 @@
 	<vector>
 	<algorithm>
 	<Monstruo.h>
+
+1729719636 c:\users\brandon\onedrive\escritorio\juego2utn\include\inventory.h
+	<SFML/Graphics.hpp>
+	<iostream>
+	<vector>
+	<algorithm>
+	<Monstruo.h>
+
+1729719636 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\inventory.cpp
+	"inventory.h"
+	"Monstruo.h"
+	<algorithm>
+	<vector>
+
+1725844752 c:\users\brandon\onedrive\escritorio\juego2utn\sfml\include\sfml\audio.hpp
+	<SFML/System.hpp>
+	<SFML/Audio/InputSoundFile.hpp>
+	<SFML/Audio/Listener.hpp>
+	<SFML/Audio/Music.hpp>
+	<SFML/Audio/OutputSoundFile.hpp>
+	<SFML/Audio/Sound.hpp>
+	<SFML/Audio/SoundBuffer.hpp>
+	<SFML/Audio/SoundBufferRecorder.hpp>
+	<SFML/Audio/SoundFileFactory.hpp>
+	<SFML/Audio/SoundFileReader.hpp>
+	<SFML/Audio/SoundFileWriter.hpp>
+	<SFML/Audio/SoundRecorder.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/Audio/SoundStream.hpp>
+
+1725844752 c:\users\brandon\onedrive\escritorio\juego2utn\sfml\include\sfml\audio\inputsoundfile.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+	<algorithm>
+
+1725844752 c:\users\brandon\onedrive\escritorio\juego2utn\sfml\include\sfml\audio\export.hpp
+	<SFML/Config.hpp>
+
+1725844752 c:\users\brandon\onedrive\escritorio\juego2utn\sfml\include\sfml\audio\listener.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/Vector3.hpp>
+
+1725844752 c:\users\brandon\onedrive\escritorio\juego2utn\sfml\include\sfml\audio\music.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundStream.hpp>
+	<SFML/Audio/InputSoundFile.hpp>
+	<SFML/System/Mutex.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+	<vector>
+
+1725844752 c:\users\brandon\onedrive\escritorio\juego2utn\sfml\include\sfml\audio\soundstream.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/System/Thread.hpp>
+	<SFML/System/Time.hpp>
+	<SFML/System/Mutex.hpp>
+	<cstdlib>
+
+1725844752 c:\users\brandon\onedrive\escritorio\juego2utn\sfml\include\sfml\audio\soundsource.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AlResource.hpp>
+	<SFML/System/Vector3.hpp>
+
+1725844752 c:\users\brandon\onedrive\escritorio\juego2utn\sfml\include\sfml\audio\alresource.hpp
+	<SFML/Audio/Export.hpp>
+
+1725844752 c:\users\brandon\onedrive\escritorio\juego2utn\sfml\include\sfml\audio\outputsoundfile.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/NonCopyable.hpp>
+	<string>
+
+1725844752 c:\users\brandon\onedrive\escritorio\juego2utn\sfml\include\sfml\audio\sound.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/System/Time.hpp>
+	<cstdlib>
+
+1725844752 c:\users\brandon\onedrive\escritorio\juego2utn\sfml\include\sfml\audio\soundbuffer.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AlResource.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+	<vector>
+	<set>
+
+1725844752 c:\users\brandon\onedrive\escritorio\juego2utn\sfml\include\sfml\audio\soundbufferrecorder.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundBuffer.hpp>
+	<SFML/Audio/SoundRecorder.hpp>
+	<vector>
+
+1725844752 c:\users\brandon\onedrive\escritorio\juego2utn\sfml\include\sfml\audio\soundrecorder.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/AlResource.hpp>
+	<SFML/System/Thread.hpp>
+	<SFML/System/Time.hpp>
+	<vector>
+	<string>
+
+1725844752 c:\users\brandon\onedrive\escritorio\juego2utn\sfml\include\sfml\audio\soundfilefactory.hpp
+	<SFML/Audio/Export.hpp>
+	<string>
+	<vector>
+	<SFML/Audio/SoundFileFactory.inl>
+
+1725844752 c:\users\brandon\onedrive\escritorio\juego2utn\sfml\include\sfml\audio\soundfilefactory.inl
+
+1725844752 c:\users\brandon\onedrive\escritorio\juego2utn\sfml\include\sfml\audio\soundfilereader.hpp
+	<SFML/Audio/Export.hpp>
+	<string>
+
+1725844752 c:\users\brandon\onedrive\escritorio\juego2utn\sfml\include\sfml\audio\soundfilewriter.hpp
+	<SFML/Audio/Export.hpp>
+	<string>
 

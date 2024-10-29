@@ -101,89 +101,93 @@ bool Monstruo::cargarTextura(const std::string& archivo) {
 
 
 // Hornerot
-/*Hornerot::Hornerot() {
-    // Asignacion para la textura
-    if (!_texture.loadFromFile("include/velom.PNG")) {
-        std::cerr << "Error al cargar velom.PNG" << std::endl;
+Hornerot::Hornerot(float vida, float danio, float defensa, const string& texturaArchivo) : Monstruo(vida, danio, defensa) {
+if (!cargarTextura(texturaArchivo)) {
+        throw std::runtime_error("Error al cargar la textura del hornerot");
     }
-    // Asignacion de la textura del Personaje
-    _sprite.setTexture(_texture);
-    _sprite.setPosition(0,0);
-    _sprite.setScale(2,2);
 }
 
-void Hornerot::Sumarvida(float vida) {
-    _vida = vida + std::rand() % 300 + 100;
-}
 
-void Hornerot::Sumarataque(float danio) {
-    _danio = danio + std::rand() % 100 + 100;
-}
-
+// Sobrescribir la función draw
 void Hornerot::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-    target.draw(_sprite, states);
+    // Llamar a la función draw de la clase base
+    Monstruo::draw(target, states);
+    // Aquí podrías añadir código para dibujar elementos específicos del sprite
 }
 
+// Sobrescribir la función getBounds
 sf::FloatRect Hornerot::getBounds() const {
-    return _sprite.getGlobalBounds();
-}*/
+    return Monstruo::getBounds();
+}
 
-/*
-// Pelucin
-Pelucin::Pelucin() {
-    // Asignacion para la textura
-    if (!_texture.loadFromFile("include/pelucin.PNG")) {
-        std::cerr << "Error al cargar pelucin.PNG" << std::endl;
+// Método para cargar la textura del Dragon
+bool Hornerot::cargarTextura(const string& archivo) {
+    if (!_HornerotTexture.loadFromFile(archivo)) {
+        return false;
     }
-    // Asignacion de la textura del Personaje
-    _sprite.setTexture(_texture);
-    _sprite.setScale(2,2);
-}
+    getSprite().setTexture(_HornerotTexture);
+    return true;
 
-void Pelucin::Sumarvida(float vida) {
-    _vida = vida + std::rand() % 300 + 100;
 }
-
-void Pelucin::Sumarataque(float danio) {
-    _danio = danio + std::rand() % 100 + 100;
-}
-
-void Pelucin::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-    target.draw(_sprite, states);
-}
-
-sf::FloatRect Pelucin::getBounds() const {
-    return _sprite.getGlobalBounds();
-}
-*/
-/*
-// Balleton
-Balleton::Balleton() {
-    // Asignacion para la textura
-    if (!_texture.loadFromFile("include/balleton.PNG")) {
-        std::cerr << "Error al cargar balleton.PNG" << std::endl;
+//peluchin
+Peluchin::Peluchin(float vida, float danio, float defensa, const string& texturaArchivo) : Monstruo(vida, danio, defensa) {
+if (!cargarTextura(texturaArchivo)) {
+        throw std::runtime_error("Error al cargar la textura del Peluchin");
     }
-    // Asignacion de la textura del Personaje
-    _sprite.setTexture(_texture);
-    _sprite.setScale(2,2);
 }
 
-void Balleton::Sumarvida(float vida) {
-    _vida = vida + std::rand() % 300 + 100;
+
+// Sobrescribir la función draw
+void Peluchin::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+    // Llamar a la función draw de la clase base
+    Monstruo::draw(target, states);
+    // Aquí podrías añadir código para dibujar elementos específicos del sprite
 }
 
-void Balleton::Sumarataque(float danio) {
-    _danio = danio + std::rand() % 100 + 100;
+// Sobrescribir la función getBounds
+sf::FloatRect Peluchin::getBounds() const {
+    return Monstruo::getBounds();
 }
 
-void Balleton::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-    target.draw(_sprite, states);
+// Método para cargar la textura del Dragon
+bool Peluchin::cargarTextura(const string& archivo) {
+    if (!_PeluchinTexture.loadFromFile(archivo)) {
+        return false;
+    }
+    getSprite().setTexture(_PeluchinTexture);
+    return true;
+
+}
+//balleton
+
+balleton::balleton(float vida, float danio, float defensa, const string& texturaArchivo) : Monstruo(vida, danio, defensa) {
+if (!cargarTextura(texturaArchivo)) {
+        throw std::runtime_error("Error al cargar la textura del balleton");
+    }
 }
 
-sf::FloatRect Balleton::getBounds() const {
-    return _sprite.getGlobalBounds();
+
+// Sobrescribir la función draw
+void balleton::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+    // Llamar a la función draw de la clase base
+    Monstruo::draw(target, states);
+    // Aquí podrías añadir código para dibujar elementos específicos del sprite
 }
-*/
+
+// Sobrescribir la función getBounds
+sf::FloatRect balleton::getBounds() const {
+    return Monstruo::getBounds();
+}
+
+// Método para cargar la textura del Dragon
+bool balleton::cargarTextura(const string& archivo) {
+    if (!_BalletonTexture.loadFromFile(archivo)) {
+        return false;
+    }
+    getSprite().setTexture(_BalletonTexture);
+    return true;
+
+}
 
 // Velom
 Velom::Velom(float vida, float danio, float defensa, const string& texturaArchivo) : Monstruo(vida, danio, defensa) {
@@ -214,86 +218,113 @@ bool Velom::cargarTextura(const string& archivo) {
     return true;
 }
 
+//tukin
 
-/*
-
-// Tukin
-Tukin::Tukin() {
-    // Asignacion para la textura
-    if (!_texture.loadFromFile("include/tukin.PNG")) {
-        std::cerr << "Error al cargar tukin.PNG" << std::endl;
+Tukin::Tukin(float vida, float danio, float defensa, const string& texturaArchivo) : Monstruo(vida, danio, defensa) {
+if (!cargarTextura(texturaArchivo)) {
+        throw std::runtime_error("Error al cargar la textura del tukin");
     }
-    // Asignacion de la textura del Personaje
-    _sprite.setTexture(_texture);
-    _sprite.setScale(2,2);
 }
 
-void Tukin::Sumarvida(float vida) {
-    _vida = vida + std::rand() % 300 + 100;
-}
 
-void Tukin::Sumarataque(float danio) {
-    _danio = danio + std::rand() % 100 + 100;
-}
-
+// Sobrescribir la función draw
 void Tukin::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-    target.draw(_sprite, states);
+    // Llamar a la función draw de la clase base
+    Monstruo::draw(target, states);
+    // Aquí podrías añadir código para dibujar elementos específicos del sprite
 }
 
+// Sobrescribir la función getBounds
 sf::FloatRect Tukin::getBounds() const {
-    return _sprite.getGlobalBounds();
-}*/
-/*
-// Lechuza
-Lechuza::Lechuza() {
-    // Asignacion para la textura
-    if (!_texture.loadFromFile("include/FuckingLechuza.PNG")) {
-        std::cerr << "Error al cargar FuckingLechuza.PNG" << std::endl;
+    return Monstruo::getBounds();
+}
+
+// Método para cargar la textura del Dragon
+bool Tukin::cargarTextura(const string& archivo) {
+    if (!_TukinTexture.loadFromFile(archivo)) {
+        return false;
     }
-    // Asignacion de la textura del Personaje
-    _sprite.setTexture(_texture);
-    _sprite.setScale(2,2);
+    getSprite().setTexture(_TukinTexture);
+    return true;
+}
+//lechuza
+Lechuza::Lechuza(float vida, float danio, float defensa, const string& texturaArchivo) : Monstruo(vida, danio, defensa) {
+if (!cargarTextura(texturaArchivo)) {
+        throw std::runtime_error("Error al cargar la textura de la fucking lechuza");
+    }
 }
 
-void Lechuza::Sumarvida(float vida) {
-    _vida = vida + std::rand() % 300 + 100;
-}
 
-void Lechuza::Sumarataque(float danio) {
-    _danio = danio + std::rand() % 100 + 100;
-}
-
+// Sobrescribir la función draw
 void Lechuza::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-    target.draw(_sprite, states);
+    // Llamar a la función draw de la clase base
+    Monstruo::draw(target, states);
+    // Aquí podrías añadir código para dibujar elementos específicos del sprite
 }
 
+// Sobrescribir la función getBounds
 sf::FloatRect Lechuza::getBounds() const {
-    return _sprite.getGlobalBounds();
+    return Monstruo::getBounds();
 }
 
-// Bufalont
-Bufalont::Bufalont() {
-    // Asignacion para la textura
-    if (!_texture.loadFromFile("include/bufalont.PNG")) {
-        std::cerr << "Error al cargar bufalont.PNG" << std::endl;
+// Método para cargar la textura del Dragon
+bool Lechuza::cargarTextura(const string& archivo) {
+    if (!_LechuzaTexture.loadFromFile(archivo)) {
+        return false;
     }
-    // Asignacion de la textura del Personaje
-    _sprite.setTexture(_texture);
-    _sprite.setScale(2,2);
+    getSprite().setTexture(_LechuzaTexture);
+    return true;
+}
+//bufalont
+Bufalont::Bufalont(float vida, float danio, float defensa, const string& texturaArchivo) : Monstruo(vida, danio, defensa) {
+if (!cargarTextura(texturaArchivo)) {
+        throw std::runtime_error("Error al cargar la textura del bufalont");
+    }
 }
 
-void Bufalont::Sumarvida(float vida) {
-    _vida = vida + std::rand() % 300 + 100;
-}
 
-void Bufalont::Sumarataque(float danio) {
-    _danio = danio + std::rand() % 100 + 100;
-}
-
+// Sobrescribir la función draw
 void Bufalont::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-    target.draw(_sprite, states);
+    // Llamar a la función draw de la clase base
+    Monstruo::draw(target, states);
+    // Aquí podrías añadir código para dibujar elementos específicos del sprite
 }
 
+// Sobrescribir la función getBounds
 sf::FloatRect Bufalont::getBounds() const {
-    return _sprite.getGlobalBounds();
-}*/
+    return Monstruo::getBounds();
+}
+
+// Método para cargar la textura del Dragon
+bool Bufalont::cargarTextura(const string& archivo) {
+    if (!_BufalontTexture.loadFromFile(archivo)) {
+        return false;
+    }
+    getSprite().setTexture(_BufalontTexture);
+    return true;
+}
+//Lobizon
+Lobizon::Lobizon(float vida, float danio, float defensa, const string& texturaArchivo) : Monstruo(vida, danio, defensa) {
+if (!cargarTextura(texturaArchivo)) {
+        throw std::runtime_error("Error al cargar la textura del bufalont");
+    }
+}
+void Lobizon::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+    // Llamar a la función draw de la clase base
+    Monstruo::draw(target, states);
+    // Aquí podrías añadir código para dibujar elementos específicos del sprite
+}
+
+// Sobrescribir la función getBounds
+sf::FloatRect Lobizon::getBounds() const {
+    return Monstruo::getBounds();
+}
+
+// Método para cargar la textura del Dragon
+bool Lobizon::cargarTextura(const string& archivo) {
+    if (!_LobizonTexture.loadFromFile(archivo)) {
+        return false;
+    }
+    getSprite().setTexture(_LobizonTexture);
+    return true;
+}

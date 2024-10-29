@@ -31,10 +31,10 @@ void startGame() {
     listaBushes.push_back(b1);
     listaBushes.push_back(b2);
     listaBushes.push_back(b3);
-
+    piso suelo;
+    suelo.setPosition(650,0);
     // Crear fondo
     escenario Fondo;
-
     // Agregar un reloj para el cooldown de colisiones
     sf::Clock collisionCooldown;
     float cooldownTime = 1;  // Cooldown de 2 segundos
@@ -69,6 +69,12 @@ void startGame() {
                 }
             }
         }
+        if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime) {
+        if (rojo.isCollision(suelo)){
+            starthistoria();
+            collisionCooldown.restart();
+        }
+        }
 
         // Dibujar todo
         window.clear();
@@ -80,7 +86,7 @@ void startGame() {
         for (const bush6x4& b : listaBushes) {
             window.draw(b);
         }
-
+        window.draw(suelo);
         window.draw(rojo);
         window.display();
     }
@@ -181,7 +187,7 @@ int main()
         menu.draw(window);
         sf::Sprite titulo;
         sf::Texture titulo_text;
-        titulo_text.loadFromFile("include/Titulo.jpeg");
+        titulo_text.loadFromFile("include/campusmon.png");
         titulo.setTexture(titulo_text);
         titulo.setPosition(700,100);
         window.draw(titulo);

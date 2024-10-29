@@ -56,83 +56,57 @@ public:
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override = 0;
         virtual sf::FloatRect getBounds() const override = 0;
 };
-
-/*class Hornerot :public sf::Drawable, public Colisionable
+//hornerot
+class Hornerot : public Monstruo
 {
 private:
+    sf::Texture _HornerotTexture; // Textura específica del Velom
 
-    float _vida=100;
-    float _danio=25;
-    sf::Sprite _sprite;
-    sf::Texture _texture;
-    //std::rand()%700+100
+
+
 public:
     Hornerot();
-    void Sumarvida(float vida);
-    void Sumarataque( float danio);
-    void setPosition(float x, float y)
-    {
-        _sprite.setPosition(x, y);
-    };
-    const sf::Sprite& getSprite() const
-    {
-        return _sprite;
-    }
+    Hornerot(float vida, float danio, float defensa, const string& texturaArchivo);
+
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     sf::FloatRect getBounds() const override;
+
+     bool cargarTextura(const string& archivo);
 };
+//peluchin
 
-*/
-
-
-/*class Pelucin : public sf::Drawable,public Colisionable
+class Peluchin : public Monstruo
 {
 private:
+    sf::Texture _PeluchinTexture; // Textura específica del Velom
 
-    float _vida=150;
-    float _danio=35;
-    sf::Sprite _sprite;
-    sf::Texture _texture;
-    //std::rand()%700+100
+
+
 public:
-    Pelucin();
-    void Sumarvida(float vida);
-    void Sumarataque( float danio);
-    void setPosition(float x, float y)
-    {
-        _sprite.setPosition(x, y);
-    };
-    const sf::Sprite& getSprite() const
-    {
-        return _sprite;
-    }
+    Peluchin();
+    Peluchin(float vida, float danio, float defensa, const string& texturaArchivo);
+
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     sf::FloatRect getBounds() const override;
-};*/
-/*class Balleton : public sf::Drawable,public Colisionable
+
+     bool cargarTextura(const string& archivo);
+};
+class balleton : public Monstruo
 {
 private:
+    sf::Texture _BalletonTexture; // Textura específica del Velom
 
-    float _vida=200;
-    float _danio=40;
-    sf::Sprite _sprite;
-    sf::Texture _texture;
-    //std::rand()%700+100
+
+
 public:
-    Balleton();
-    void Sumarvida(float vida);
-    void Sumarataque( float danio);
-    void setPosition(float x, float y)
-    {
-        _sprite.setPosition(x, y);
-    };
-    const sf::Sprite& getSprite() const
-    {
-        return _sprite;
-    }
+    balleton();
+    balleton(float vida, float danio, float defensa, const string& texturaArchivo);
+
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     sf::FloatRect getBounds() const override;
-};*/
+
+     bool cargarTextura(const string& archivo);
+};
 
 
 
@@ -154,90 +128,72 @@ public:
 };
 
 
-
-/*
-class Tukin : public sf::Drawable,public Colisionable
+//tukin
+class Tukin : public Monstruo
 {
 private:
+    sf::Texture _TukinTexture; // Textura específica del Velom
 
-    float _vida=200;
-    float _danio=60;
-    sf::Sprite _sprite;
-    sf::Texture _texture;
-    //std::rand()%700+100
+
+
 public:
     Tukin();
-    void Sumarvida(float vida);
-    void Sumarataque( float danio);
-    void setPosition(float x, float y)
-    {
-        _sprite.setPosition(x, y);
-    };
-    const sf::Sprite& getSprite() const
-    {
-        return _sprite;
-    }
+    Tukin(float vida, float danio, float defensa, const string& texturaArchivo);
+
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     sf::FloatRect getBounds() const override;
+
+     bool cargarTextura(const string& archivo);
 };
-
-/*
-
-
-/*class Lechuza : public sf::Drawable,public Colisionable
+//lechuza
+class Lechuza : public Monstruo
 {
 private:
+    sf::Texture _LechuzaTexture; // Textura específica del Velom
 
-    float _vida=250;
-    float _danio=50;
-    sf::Sprite _sprite;
-    sf::Texture _texture;
-    //std::rand()%700+100
+
+
 public:
     Lechuza();
-    void Sumarvida(float vida);
-    void Sumarataque( float danio);
-    void setPosition(float x, float y)
-    {
-        _sprite.setPosition(x, y);
-    };
+    Lechuza(float vida, float danio, float defensa, const string& texturaArchivo);
 
-
-
-    const sf::Sprite& getSprite() const
-    {
-        return _sprite;
-    }
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     sf::FloatRect getBounds() const override;
-};
 
-*/
-/*
-class Bufalont : public sf::Drawable,public Colisionable
+     bool cargarTextura(const string& archivo);
+};
+//bufalont
+class Bufalont : public Monstruo
 {
 private:
+    sf::Texture _BufalontTexture; // Textura específica del Velom
 
-    float _vida=250;
-    float _danio=50;
-    sf::Sprite _sprite;
-    sf::Texture _texture;
-    //std::rand()%700+100
+
+
 public:
     Bufalont();
-    void Sumarvida(float vida);
-    void Sumarataque( float danio);
-    void setPosition(float x, float y)
-    {
-        _sprite.setPosition(x, y);
-    };
-    const sf::Sprite& getSprite() const
-    {
-        return _sprite;
-    }
+    Bufalont(float vida, float danio, float defensa, const string& texturaArchivo);
+
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     sf::FloatRect getBounds() const override;
-};
 
-*/
+     bool cargarTextura(const string& archivo);
+};
+//lechuza
+class Lobizon : public Monstruo
+{
+private:
+    sf::Texture _LobizonTexture; // Textura específica del Velom
+
+
+
+public:
+    Lobizon();
+    Lobizon(float vida, float danio, float defensa, const string& texturaArchivo);
+
+    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+    sf::FloatRect getBounds() const override;
+
+     bool cargarTextura(const string& archivo);
+};
 #endif // MONSTRUO_H
