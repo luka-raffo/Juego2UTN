@@ -206,17 +206,15 @@ void escenarioPelea()
                 defensaTotal = monstruoJugador.getDefensa();
                 turnoJugador=false;
 
-                if (defensaTotal > vel.getDanio())
+                if (monstruoJugador.getDefensa() > vel.getDanio())
                 {
                     cout << "El ataque fue bloqueado con exito!" << endl;
-                }
-                else
-                {
+                    monstruoJugador.setDefensa(monstruoJugador.getDefensa()-vel.getDanio());
+                }else if(monstruoJugador.getDefensa()<=vel.getDanio()){
 
-                    float danioRecibido = vel.getDanio() - defensaTotal;
+                    monstruoJugador.setVida(monstruoJugador.getVida()+monstruoJugador.getDefensa()-vel.getDanio());
 
-                    monstruoJugador.Sumarvida(-danioRecibido);
-                    cout << "Recibiste " << danioRecibido << " de daño." << endl;
+                    monstruoJugador.setDefensa(0);
 
                 }
             }
@@ -244,7 +242,17 @@ void escenarioPelea()
         {
             // Turno del enemigo
             cout << "El enemigo ataca!" << endl;
-            monstruoJugador.Sumarvida(-vel.getDanio());
+
+            cout<<"defensa mi monstruo= "<<monstruoJugador.getDefensa();
+
+            if(monstruoJugador.getDefensa()<=0){
+
+            cout << "El enemigo ah hecho: "<< vel.getDanio() << endl;
+            cout << "La vida de tu pokemon es: "<< monstruoJugador.getVida() << endl;
+            }else{
+
+            cout << "La vida de tu pokemon es: "<< monstruoJugador.getVida() << endl;
+            }
 
             // Cambiar turno al jugador
             turnoJugador = true;
@@ -258,6 +266,15 @@ void escenarioPelea()
         if(vel.getVida()<=0){
             //cout<<"FELICIDADES GANASTE"<<endl;
             menuTexto.setString("Eres el vencedor");
+            menuTexto.setCharacterSize(60);
+            menuTexto.setFillColor(sf::Color::Black);
+            menuTexto.setPosition(150, 170);
+             if (WinCooldown.getElapsedTime().asSeconds() >= cooldownTime){
+                window.close();
+             }
+        }else if(monstruoJugador.getVida()<=0){
+
+            menuTexto.setString("Perdiste");
             menuTexto.setCharacterSize(60);
             menuTexto.setFillColor(sf::Color::Black);
             menuTexto.setPosition(150, 170);
