@@ -45,6 +45,27 @@ void Monstruo::setDefensa(float defensa) {
     _defensa = defensa;
 }
 
+// Método para obtener el nivel
+int Monstruo::getNivel() const {
+    return _nivel;
+}
+
+// Método para obtener la experiencia actual
+float Monstruo::getExperiencia() const {
+    return _experiencia;
+}
+
+// Método para ganar experiencia y subir de nivel si llega a 100
+void Monstruo::ganarExperiencia(float exp) {
+    _experiencia += exp;
+    if (_experiencia >= 100) {
+        _experiencia -= 100; // Reiniciar experiencia
+        _nivel++; // Subir de nivel
+        _vida += 10; // Aumentar vida
+        _defensa += 5; // Aumentar defensa
+        _danio += 5; // Aumentar daño
+    }
+}
 // Métodos para posición y escala
 void Monstruo::setPosition(float x, float y) {
     _sprite.setPosition(x, y);
@@ -306,7 +327,7 @@ bool Bufalont::cargarTextura(const string& archivo) {
 //Lobizon
 Lobizon::Lobizon(float vida, float danio, float defensa, const string& texturaArchivo) : Monstruo(vida, danio, defensa) {
 if (!cargarTextura(texturaArchivo)) {
-        throw std::runtime_error("Error al cargar la textura del bufalont");
+        throw std::runtime_error("Error al cargar la textura del lobizon");
     }
 }
 void Lobizon::draw(sf::RenderTarget& target, sf::RenderStates states) const {

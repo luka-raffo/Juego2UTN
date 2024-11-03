@@ -15,7 +15,9 @@ private:
     float _defensa;
     sf::Sprite _sprite;
     sf::Texture _texture;
-
+    //nuevos atributos
+      int _nivel;
+    float _experiencia; // Nueva experiencia
 protected:
     sf::Sprite& getSprite();
 
@@ -39,6 +41,11 @@ public:
         // Métodos para defensa
         float getDefensa() const;
         void setDefensa(float defensa);
+
+        // Métodos para nivel y experiencia
+    int getNivel() const;
+    float getExperiencia() const;
+    void ganarExperiencia(float exp);
 
         // Métodos para posición y escala
         void setPosition(float x, float y);

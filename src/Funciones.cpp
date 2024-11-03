@@ -3,6 +3,88 @@
 #include "Personaje.h"
 
 using namespace std;
+void startGame() {
+    // Crear una ventana
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Inicia Juego");
+
+    // Establecer el límite de FPS
+    window.setFramerateLimit(60);
+
+    // Crear un personaje
+    Personaje rojo;
+
+    rojo.setPosition(400, 300);
+
+    // Crear lista de bush
+    vector<bush6x4> listaBushes;
+    bush6x4 b1, b2, b3;
+    b1.setPosition(0, 0);
+    b2.setPosition(0, 64);
+    b3.setPosition(450, 200);
+    listaBushes.push_back(b1);
+    listaBushes.push_back(b2);
+    listaBushes.push_back(b3);
+    piso suelo;
+    suelo.setPosition(650,0);
+    // Crear fondo
+    escenario Fondo;
+    // Agregar un reloj para el cooldown de colisiones
+    sf::Clock collisionCooldown;
+    float cooldownTime = 1;  // Cooldown de 2 segundos
+
+    // Game loop
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+        // Actualizar el personaje
+        rojo.update();
+
+        // Verificar si el cooldown ha pasado
+        if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime) {
+            int EventoPokemon = 2;
+            // Verificar colisiones con cada objeto en la lista
+            for (const bush6x4& b : listaBushes) {
+                if (rojo.isCollision(b)) {
+                    EventoPokemon = std::rand() % 2000;
+                    if (EventoPokemon <= 2000)
+ {
+                        escenarioPelea();
+                        // Reiniciar el reloj del cooldown al activar la pelea
+                        collisionCooldown.restart();
+                    }
+
+                    cout << "colision" << endl;
+                    break;  // Evitar múltiples colisiones en un mismo frame
+                }
+            }
+        }
+        if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime) {
+        if (rojo.isCollision(suelo)){
+            starthistoria();
+            collisionCooldown.restart();
+        }
+        }
+
+        // Dibujar todo
+        window.clear();
+
+        /************ Los window.draw se dibujan según su orden creando capas **************/
+        window.draw(Fondo);
+
+        // Recorrer la lista y dibujar los bush
+        for (const bush6x4& b : listaBushes) {
+            window.draw(b);
+        }
+        window.draw(suelo);
+        window.draw(rojo);
+        window.display();
+    }
+}
+
 void escenarioPelea()
 {
     // Crear una ventana
@@ -18,13 +100,17 @@ void escenarioPelea()
 
     // Crear los monstruos
     Velom monstruo(100.0f, 50.0f, 30.0f,"include/velom.PNG");
-    //Pelucin pelu;
-    //Tukin tuki;
     Velom vel(100.0f, 50.0f, 30.0f,"include/velom.PNG");
+    //Pelucin pelu;
+     Peluchin pelu(100.0f, 50.0f, 30.0f,"include/peluchin.PNG");
+    //Tukin tuki;
+     Tukin tuka(100.0f, 50.0f, 30.0f,"include/tukin.PNG");
     //Lechuza lechu;
+     Lechuza lechu(100.0f, 50.0f, 30.0f,"include/FuckingLechuza.PNG");
     //Balleton ballena;
+     balleton ballena(100.0f, 50.0f, 30.0f,"include/balleton.PNG");
     //Bufalont bufalo;
-
+      Bufalont bufalo(100.0f, 50.0f, 30.0f,"include/bufalont.PNG");
 
     // Variables de pelea
     bool turnoJugador = true;  // Variable para alternar los turnos
@@ -178,6 +264,7 @@ void escenarioPelea()
 
 
         // Lógica de pelea por turnos
+
         if (turnoJugador)
         {
 
@@ -256,7 +343,17 @@ void escenarioPelea()
 
             // Cambiar turno al jugador
             turnoJugador = true;
-        }
+        } /*else
+        {
+            // Probabilidad de curación para el enemigo
+            int probabilidadCura = rand() % 100;
+            if (probabilidadCura < 20)  // 20% de probabilidad de curación
+            {
+                float curacion = 20.0f;
+                vel.setVida(vel.getVida() + curacion);
+                std::cout << "El enemigo se ha curado " << curacion << " puntos de vida." << std::endl;
+                turnoJugador = true;  // Pierde el turno al curarse
+            }}*/
 
         // Verificar si el enemigo es capturable
         if (vel.getVida() <= vel.getVida() * 0.25)
@@ -310,7 +407,7 @@ void batallacueva(){ // Crear una ventana
     Velom monstruo(100.0f, 50.0f, 30.0f,"include/velom.PNG");
     //Pelucin pelu;
     //Tukin tuki;
-    Lobizon lobo(100.0f, 50.0f, 30.0f,"monsters/Old Versions/Chickadee.PNG");
+    Lobizon lobo(100.0f, 50.0f, 30.0f,"include/Lobizon.PNG");
     Velom vel(100.0f, 50.0f, 30.0f,"include/velom.PNG");
     //Lechuza lechu;
     //Balleton ballena;
@@ -338,7 +435,7 @@ void batallacueva(){ // Crear una ventana
 
 
     // crear el fondo
-    BattleBackground fondo;
+    CavernaBattleBackground fondo;
 
     // Crear elementos del menú en pantalla
     sf::Font font;
@@ -374,7 +471,7 @@ void batallacueva(){ // Crear una ventana
     // Asignar monstruo según probabilidad
     if (probabilidad < 0)    // 20% de probabilidad para Hornerot
     {
-      lobo.setPosition(570, 160);
+      lobo.setPosition(600, 160);
 
 
         monstruoSeleccionado = &monstruo;
@@ -386,8 +483,8 @@ void batallacueva(){ // Crear una ventana
 
     else if (probabilidad < 100)
     {
-        lobo.setPosition(570, 160);
-        monstruoSeleccionado = &vel;
+        lobo.setPosition(550, 100);
+        monstruoSeleccionado = &lobo;
         cout<<"hola"<<endl;
         inventario.agregarItem(vel);
         inventario.mostrarInventario();
@@ -533,11 +630,12 @@ void starthistoria(){
     // Crear un personaje
     Personaje rojo;
 
-    rojo.setPosition(500, 500);
+    rojo.setPosition(400, 500);
     piso suelo;
-    suelo.setPosition(300,500);
+    suelo.setPosition(400,580);
     caverna cueva;
-    cueva.setPosition(150,100);
+    cueva.setPosition(250,100);
+
 
 
     // Crear fondo
@@ -580,5 +678,73 @@ void starthistoria(){
         window.draw(rojo);
         window.display();
         }
+    }
+}
+void llegadaisla() {
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Inicia Juego");
+
+    window.setFramerateLimit(60);
+
+    // Crear el personaje y definir su posición inicial
+    Personaje rojo;
+    rojo.setPosition(400, 300);
+
+    // Crear fondo y otros objetos
+    piso suelo;
+    suelo.setPosition(650, 0);
+    escenariollegada Fondo;
+
+    // Crear varias barreras
+    Barrera barrera1;
+    barrera1.setPosition(300, 300);
+    Barrera barrera2;
+    barrera2.setPosition(500, 300);
+
+    // Agregar las barreras a un vector de objetos colisionables
+    std::vector<Colisionable*> colisionables = { &barrera1, &barrera2 };
+
+     sf::Clock collisionCooldown;
+    float cooldownTime = 1;  // Cooldown de 2 segundos
+
+
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+        // Guardar la posición actual del personaje antes de moverlo
+        sf::Vector2f previousPosition = rojo.getPosition();
+
+        // Actualizar el personaje
+        rojo.update();
+
+        // Verificar colisiones con cada barrera/////////////////////////////
+        for (const auto& colisionable : colisionables) {
+            if (rojo.isCollision(*colisionable)) {
+                // Si hay colisión, revertir a la posición anterior
+                rojo.setPosition(previousPosition.x, previousPosition.y);
+                break;
+            }
+        }
+////////////////////////////////////////////////////////////////////////////
+               if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime){
+            if(rojo.isCollision(suelo)) {
+                    startGame();
+                    cout << "colision" << endl;
+                    collisionCooldown.restart();
+                    window.close();
+
+                }}
+
+        // Dibujar todo
+        window.clear();
+        window.draw(Fondo);
+        window.draw(suelo);
+        window.draw(barrera1);
+        window.draw(barrera2);
+        window.draw(rojo);
+        window.display();
     }
 }

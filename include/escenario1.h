@@ -142,6 +142,38 @@ public:
         target.draw(_sprite, states);
     }
 };
+class escenariollegada : public sf::Drawable {
+private:
+    sf::Sprite _sprite;
+    sf::Texture _texture;
+
+public:
+
+    escenariollegada();
+    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override {
+        target.draw(_sprite, states);
+    }
+};
+
+class Barrera : public sf::Drawable, public Colisionable {
+    sf::Sprite _sprite;
+    sf::Texture _texture;
+
+public:
+    Barrera();
+
+  void setPosition(float x, float y) {
+        _sprite.setPosition(x, y);
+    };
+    const sf::Sprite& getSprite() const {
+        return _sprite;
+    }
+
+    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+    sf::FloatRect getBounds() const override;
+
+
+};
 
 
 #endif // ESCENARIO1_H_INCLUDED

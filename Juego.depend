@@ -418,7 +418,7 @@
 1725644054 source:c:\users\luka\desktop\juego\src\personaje.cpp
 	"Personaje.h"
 
-1730243325 source:c:\users\brandon\onedrive\escritorio\juego2utn\main.cpp
+1730671325 source:c:\users\brandon\onedrive\escritorio\juego2utn\main.cpp
 	<SFML/Graphics.hpp>
 	"Personaje.h"
 	<iostream>
@@ -837,7 +837,7 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1729725414 c:\users\brandon\onedrive\escritorio\juego2utn\include\personaje.h
+1730670045 c:\users\brandon\onedrive\escritorio\juego2utn\include\personaje.h
 	<SFML/Graphics.hpp>
 	"Colisionable.h"
 	"inventory.h"
@@ -854,13 +854,13 @@
 	<SFML/Graphics.hpp>
 	<iostream>
 
-1730245938 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\monstruo.cpp
+1730674726 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\monstruo.cpp
 	"Monstruo.h"
 	<SFML/Graphics.hpp>
 	<iostream>
 	"inventory.h"
 
-1730245600 c:\users\brandon\onedrive\escritorio\juego2utn\include\monstruo.h
+1730674625 c:\users\brandon\onedrive\escritorio\juego2utn\include\monstruo.h
 	<SFML/Graphics.hpp>
 	<iostream>
 	"Colisionable.h"
@@ -1337,12 +1337,12 @@
 1729032574 c:\users\brandon\onedrive\escritorio\juego2utn\include\colisionable.h
 	<SFML/Graphics.hpp>
 
-1730243837 c:\users\brandon\onedrive\escritorio\juego2utn\include\escenario1.h
+1730669843 c:\users\brandon\onedrive\escritorio\juego2utn\include\escenario1.h
 	<SFML/Graphics.hpp>
 	<iostream>
 	"Colisionable.h"
 
-1730244782 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\escenario1.cpp
+1730671619 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\escenario1.cpp
 	<SFML/Graphics.hpp>
 	<iostream>
 	"escenario1.h"
@@ -1366,12 +1366,12 @@
 	<iostream>
 	"escenario1.h"
 
-1730245869 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\funciones.cpp
+1730675866 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\funciones.cpp
 	"Funciones.h"
 	"inventory.h"
 	"Personaje.h"
 
-1730244782 c:\users\brandon\onedrive\escritorio\juego2utn\include\funciones.h
+1730671302 c:\users\brandon\onedrive\escritorio\juego2utn\include\funciones.h
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	<Personaje.h>

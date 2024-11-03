@@ -109,7 +109,7 @@ BattleBackground::BattleBackground(){
 Escenariojefe::Escenariojefe(){
 
 //Asignacion para la textura
-    _texture.loadFromFile("Tileset/fondojefe.png");
+    _texture.loadFromFile("Tileset/fondo2.jpg");
 
     //Asignacion de la textura del Personaje
     _sprite.setTexture(_texture);
@@ -120,7 +120,7 @@ Escenariojefe::Escenariojefe(){
 
 
 
-        if (!_texture.loadFromFile("Tileset/fondojefe.png")) {
+        if (!_texture.loadFromFile("Tileset/fondo2.jpg")) {
             cerr << "Error cargando la textura" << endl;
         }
         _sprite.setTexture(_texture);
@@ -162,17 +162,17 @@ caverna::caverna() {
 
 
 //Asignacion para la textura
-    _texture.loadFromFile("tileset/EntradaCueva.jpeg");
+    _texture.loadFromFile("tileset/Cueva.png");
 
     //selecciono las coordenada del arbusto en una hoja con varios sprites
 
-    _sprite.setScale(0.25, 0.25);
+
 
     _sprite.setTexture(_texture); // Asignar la textura al sprite
     //_sprite.setTextureRect(idleRestRect); // Asignar el rectángulo de textura al sprite
 
 
-    if (!_texture.loadFromFile("tileset/EntradaCueva.jpeg")) {
+    if (!_texture.loadFromFile("tileset/Cueva.png")) {
             cerr << "Error cargando la textura piso" << endl;
         }
         _sprite.setTexture(_texture);
@@ -191,7 +191,7 @@ void caverna::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 CavernaBattleBackground::CavernaBattleBackground(){
 
 //Asignacion para la textura
-    _texture.loadFromFile("Battle Backgrounds/Without Textboxes/cueva.Png");
+    _texture.loadFromFile("Battle Backgrounds/cueva.png");
 
     //Asignacion de la textura del Personaje
     _sprite.setTexture(_texture);
@@ -202,8 +202,43 @@ CavernaBattleBackground::CavernaBattleBackground(){
 
     _sprite.setPosition(0, 0);
 
-        if (!_texture.loadFromFile("Battle Backgrounds/Without Textboxes/cueva.png")) {
+        if (!_texture.loadFromFile("Battle Backgrounds/cueva.png")) {
             cerr << "Error cargando la textura" << endl;
         }
         _sprite.setTexture(_texture);
     }
+escenariollegada::escenariollegada(){
+
+//Asignacion para la textura
+    _texture.loadFromFile("Tileset/FondPinterest.JPG");
+
+    //Asignacion de la textura del Personaje
+    _sprite.setTexture(_texture);
+
+    //reescalar ell fondo (porque es muy grande, igual hay q cambiarlo)
+
+      _sprite.setScale(0.50, 0.50);
+
+
+    _sprite.setPosition(0, 0);
+
+        if (!_texture.loadFromFile("Tileset/FondPinterest.JPG")) {
+            cerr << "Error cargando la textura" << endl;
+        }
+        _sprite.setTexture(_texture);
+    }
+//////////////////////////////////////////////////////////////////////////////////////////////
+    Barrera::Barrera(){
+
+        _texture.loadFromFile("include/bush.jpeg"); // Usa la ruta de la textura de la barrera
+        _sprite.setTexture(_texture);
+        _sprite.setPosition(300, 300); // Ajusta la posición según sea necesario
+    }
+sf::FloatRect Barrera::getBounds() const {
+    return _sprite.getGlobalBounds();
+}
+
+void Barrera::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+    target.draw(_sprite, states);
+}
+//////////////////////////////////////////////////////////////////////////////

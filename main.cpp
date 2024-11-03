@@ -10,87 +10,6 @@ using namespace std;
 
 
 
-void startGame() {
-    // Crear una ventana
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Inicia Juego");
-
-    // Establecer el límite de FPS
-    window.setFramerateLimit(60);
-
-    // Crear un personaje
-    Personaje rojo;
-
-    rojo.setPosition(400, 300);
-
-    // Crear lista de bush
-    vector<bush6x4> listaBushes;
-    bush6x4 b1, b2, b3;
-    b1.setPosition(0, 0);
-    b2.setPosition(0, 64);
-    b3.setPosition(450, 200);
-    listaBushes.push_back(b1);
-    listaBushes.push_back(b2);
-    listaBushes.push_back(b3);
-    piso suelo;
-    suelo.setPosition(650,0);
-    // Crear fondo
-    escenario Fondo;
-    // Agregar un reloj para el cooldown de colisiones
-    sf::Clock collisionCooldown;
-    float cooldownTime = 1;  // Cooldown de 2 segundos
-
-    // Game loop
-    while (window.isOpen()) {
-        sf::Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-
-        // Actualizar el personaje
-        rojo.update();
-
-        // Verificar si el cooldown ha pasado
-        if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime) {
-            int EventoPokemon = 2;
-            // Verificar colisiones con cada objeto en la lista
-            for (const bush6x4& b : listaBushes) {
-                if (rojo.isCollision(b)) {
-                    EventoPokemon = std::rand() % 2000;
-                    if (EventoPokemon <= 2000)
- {
-                        escenarioPelea();
-                        // Reiniciar el reloj del cooldown al activar la pelea
-                        collisionCooldown.restart();
-                    }
-
-                    cout << "colision" << endl;
-                    break;  // Evitar múltiples colisiones en un mismo frame
-                }
-            }
-        }
-        if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime) {
-        if (rojo.isCollision(suelo)){
-            starthistoria();
-            collisionCooldown.restart();
-        }
-        }
-
-        // Dibujar todo
-        window.clear();
-
-        /************ Los window.draw se dibujan según su orden creando capas **************/
-        window.draw(Fondo);
-
-        // Recorrer la lista y dibujar los bush
-        for (const bush6x4& b : listaBushes) {
-            window.draw(b);
-        }
-        window.draw(suelo);
-        window.draw(rojo);
-        window.display();
-    }
-}
 
 int main()
 {
@@ -136,7 +55,8 @@ int main()
                         std::cout << "Nuevo Juego seleccionado" << std::endl;
                         // Lógica para iniciar un nuevo juego
                         window.close();  // Cierra el menú para comenzar el juego
-                        startGame();     // Llama a la función que inicia el juego
+                        //startGame();     // Llama a la función que inicia el juego
+                        llegadaisla();
                     }
                     else if (selected == 1)
                     {

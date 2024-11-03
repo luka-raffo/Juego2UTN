@@ -10,10 +10,11 @@
 #include "escenario1.h"
 #include "Monstruo.h"
 using namespace std;
+void startGame();
 void escenarioPelea();
 void starthistoria();
 void BatallaCueva();
-
+void llegadaisla();
 
 
 
