@@ -15,11 +15,24 @@ private:
     float _defensa;
     sf::Sprite _sprite;
     sf::Texture _texture;
+
+
+
+
+
+
     //nuevos atributos
       int _nivel;
     float _experiencia; // Nueva experiencia
 protected:
     sf::Sprite& getSprite();
+    sf::IntRect Ataque[3]; // Tres frames para la animación de ataque
+    sf::Sprite _spriteAtaque;
+    sf::Texture _textureAtaque;
+    sf::Clock _animationClockAtaque; // Reloj para controlar la animación
+    int _currentFrameAtaque = 0;
+    bool _animacionEnCurso = false;
+
 
 public:
         Monstruo();  // Constructor por defecto
@@ -27,6 +40,11 @@ public:
 
         bool cargarTextura(const string& archivo);
 
+        const sf::Sprite& getSpriteAtaque() const;
+
+        void iniciarAnimacionAtaque();
+
+        void actualizarAnimacionAtaque();
 
         // Métodos para vida
         float getVida() const;
@@ -124,9 +142,16 @@ private:
 
 
 
+
+
+
 public:
     Velom();
     Velom(float vida, float danio, float defensa, const string& texturaArchivo);
+
+
+    void actualizar();
+
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     sf::FloatRect getBounds() const override;

@@ -1,6 +1,8 @@
 #include "Funciones.h"
 #include "inventory.h"
 #include "Personaje.h"
+#include <cstdlib>  // Para rand() y srand()
+#include <ctime>    // Para time()
 
 using namespace std;
 void startGame() {
@@ -87,6 +89,9 @@ void startGame() {
 
 void escenarioPelea()
 {
+    // Inicializa la semilla del generador de números aleatorios
+        srand(static_cast<unsigned>(time(0)));
+
     // Crear una ventana
     sf::RenderWindow window(sf::VideoMode(800, 600), "Inicia la pelea");
 
@@ -102,7 +107,7 @@ void escenarioPelea()
     Velom monstruo(100.0f, 50.0f, 30.0f,"include/velom.PNG");
     Velom vel(100.0f, 50.0f, 30.0f,"include/velom.PNG");
     //Pelucin pelu;
-     Peluchin pelu(100.0f, 50.0f, 30.0f,"include/peluchin.PNG");
+     //Peluchin pelu(100.0f, 50.0f, 30.0f,"include/peluchin.PNG");
     //Tukin tuki;
      Tukin tuka(100.0f, 50.0f, 30.0f,"include/tukin.PNG");
     //Lechuza lechu;
@@ -121,7 +126,7 @@ void escenarioPelea()
 
     //PROBANDO GILADAS CARTEL DE VICTORIA
      sf::Clock WinCooldown;
-      float cooldownTime = 2;
+      float cooldownTime = 5;
 
               // sonido, funca si podes configurar el codeblocks
              /*  sf::SoundBuffer buffer;
@@ -160,6 +165,7 @@ void escenarioPelea()
     cout<<"la vida de tu pokemon es: "<<monstruoJugador.getVida()<<endl;
     cout<<"el daño de tu pokemon es: "<<monstruoJugador.getDanio()<<endl;
     cout<<"La defensa de tu pokemon es: "<<monstruoJugador.getDefensa()<<endl;
+
 
 
 
@@ -276,37 +282,49 @@ void escenarioPelea()
 
 
                 cout << "Atacas al enemigo!" << endl;
-                vel.setVida(vel.getVida()-monstruoJugador.getDanio());
-                cout << "Tu Monstruo ah hecho " << monstruoJugador.getDanio()<<" de daño" << endl;
 
-                cout << "La videdel enemigo! es " << vel.getVida() << endl;
+
+                vel.iniciarAnimacionAtaque();
+
+
+
+                if (vel.getDefensa() > monstruoJugador.getDanio())
+                {
+                    cout << "El enemigo ah bloqueado tu ataque!" << endl;
+                    vel.setDefensa(vel.getDefensa()-monstruoJugador.getDanio());
+                }else if(monstruoJugador.getDefensa()<=vel.getDanio()){
+
+                   cout << "Tu Monstruo ah hecho " << monstruoJugador.getDanio()<<" de daño" << endl;
+
+                    vel.setVida(vel.getVida()+vel.getDefensa()-monstruoJugador.getDanio());
+
+                    cout << "La vida del enemigo es: "<< vel.getVida() << endl;
+
+                    vel.setDefensa(0);
+
+                }
+
+
 
                 //sound.play();
 
                 turnoJugador=false;
 
             }
-
             else if (event.type == sf::Event::KeyPressed && event.key.code ==  sf::Keyboard::Num2)      // Defender
             {
                 cout << "Te defiendes!" << endl;
-                defensaTotal = monstruoJugador.getDefensa();
+
+                monstruoJugador.setDefensa( rand() % 100 + 1);
+                cout<<"defensa mi monstruo aumento = "<<monstruoJugador.getDefensa()<<endl;
+
+
                 turnoJugador=false;
 
-                if (monstruoJugador.getDefensa() > vel.getDanio())
-                {
-                    cout << "El ataque fue bloqueado con exito!" << endl;
-                    monstruoJugador.setDefensa(monstruoJugador.getDefensa()-vel.getDanio());
-                }else if(monstruoJugador.getDefensa()<=vel.getDanio()){
 
-                    monstruoJugador.setVida(monstruoJugador.getVida()+monstruoJugador.getDefensa()-vel.getDanio());
-
-                    monstruoJugador.setDefensa(0);
-
-                }
             }
 
-            else if (event.type == sf::Event::KeyPressed && event.key.code ==  sf::Keyboard::Num3 && capturable)    // Capturar
+           /* else if (event.type == sf::Event::KeyPressed && event.key.code ==  sf::Keyboard::Num3 && capturable)    // Capturar
             {
                 cout << "Intentas capturar al enemigo!" << endl;
                 int probCaptura = rand() % 100;
@@ -321,7 +339,7 @@ void escenarioPelea()
                     cout << "El intento de captura falló." << endl;
                 }
                 turnoJugador=false;
-            }
+            }*/
 
 
         }
@@ -330,19 +348,32 @@ void escenarioPelea()
             // Turno del enemigo
             cout << "El enemigo ataca!" << endl;
 
-            cout<<"defensa mi monstruo= "<<monstruoJugador.getDefensa();
 
-            if(monstruoJugador.getDefensa()<=0){
 
-            cout << "El enemigo ah hecho: "<< vel.getDanio() << endl;
-            cout << "La vida de tu pokemon es: "<< monstruoJugador.getVida() << endl;
-            }else{
+            if (monstruoJugador.getDefensa() > vel.getDanio())
+                {
+                    cout << "El ataque fue bloqueado con exito!" << endl;
+                    monstruoJugador.setDefensa(monstruoJugador.getDefensa()-vel.getDanio());
+                    // Cambiar turno al jugador
+                    turnoJugador = true;
+                }else if(monstruoJugador.getDefensa()<=vel.getDanio()){
 
-            cout << "La vida de tu pokemon es: "<< monstruoJugador.getVida() << endl;
-            }
+                   cout << "El enemigo ah hecho: "<< vel.getDanio() << endl;
 
-            // Cambiar turno al jugador
-            turnoJugador = true;
+                    monstruoJugador.setVida(monstruoJugador.getVida()+monstruoJugador.getDefensa()-vel.getDanio());
+
+                    cout << "La vida de tu pokemon es: "<< monstruoJugador.getVida() << endl;
+
+                    monstruoJugador.setDefensa(0);
+                    // Cambiar turno al jugador
+                    turnoJugador = true;
+
+                }
+                cout<<"defensa mi monstruo= "<<monstruoJugador.getDefensa()<<endl;
+
+
+
+
         } /*else
         {
             // Probabilidad de curación para el enemigo
@@ -355,6 +386,10 @@ void escenarioPelea()
                 turnoJugador = true;  // Pierde el turno al curarse
             }}*/
 
+        vel.actualizar();
+
+
+
         // Verificar si el enemigo es capturable
         if (vel.getVida() <= vel.getVida() * 0.25)
         {
@@ -366,6 +401,7 @@ void escenarioPelea()
             menuTexto.setCharacterSize(60);
             menuTexto.setFillColor(sf::Color::Black);
             menuTexto.setPosition(150, 170);
+            window.draw(menuTexto);
              if (WinCooldown.getElapsedTime().asSeconds() >= cooldownTime){
                 window.close();
              }
@@ -375,6 +411,7 @@ void escenarioPelea()
             menuTexto.setCharacterSize(60);
             menuTexto.setFillColor(sf::Color::Black);
             menuTexto.setPosition(150, 170);
+            window.draw(menuTexto);
              if (WinCooldown.getElapsedTime().asSeconds() >= cooldownTime){
                 window.close();
              }
@@ -384,9 +421,14 @@ void escenarioPelea()
 
 
         //dibujar las opciones de la pelea
-        window.draw(menuTexto);
+
 
         // Mostrar lo dibujado
+
+        if (vel.getSpriteAtaque().getTextureRect().width > 0) { // Solo dibujar si hay una textura válida
+        window.draw(vel.getSpriteAtaque());
+    }
+
         window.display();
 
         }
@@ -510,8 +552,7 @@ void batallacueva(){ // Crear una ventana
 
 
 
-        // Limpiar la pantalla
-        window.clear();
+
 
         // Dibujar el fondo
         window.draw(fondo);
@@ -526,8 +567,7 @@ void batallacueva(){ // Crear una ventana
             cout<<"mamahuevo"<<endl;
         }
 
-        //dibujar monstruo jugador
-        window.draw(monstruoJugador);
+
 
 
         // Lógica de pelea por turnos
@@ -608,7 +648,8 @@ void batallacueva(){ // Crear una ventana
 
 
 
-
+        // Limpiar la pantalla
+        window.clear();
 
         //dibujar las opciones de la pelea
         window.draw(menuTexto);
