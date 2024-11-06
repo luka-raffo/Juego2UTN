@@ -5,7 +5,8 @@
 #include <ctime>    // Para time()
 
 using namespace std;
-void startGame() {
+void startGame()
+{
     // Crear una ventana
     sf::RenderWindow window(sf::VideoMode(800, 600), "Inicia Juego");
 
@@ -38,9 +39,11 @@ void startGame() {
     float cooldownTime = 1;  // Cooldown de 2 segundos
 
     // Game loop
-    while (window.isOpen()) {
+    while (window.isOpen())
+    {
         sf::Event event;
-        while (window.pollEvent(event)) {
+        while (window.pollEvent(event))
+        {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
@@ -49,14 +52,17 @@ void startGame() {
         rojo.update();
 
         // Verificar si el cooldown ha pasado
-        if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime) {
+        if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime)
+        {
             int EventoPokemon = 2;
             // Verificar colisiones con cada objeto en la lista
-            for (const bush6x4& b : listaBushes) {
-                if (rojo.isCollision(b)) {
+            for (const bush6x4& b : listaBushes)
+            {
+                if (rojo.isCollision(b))
+                {
                     EventoPokemon = std::rand() % 2000;
                     if (EventoPokemon <= 2000)
- {
+                    {
                         escenarioPelea();
                         // Reiniciar el reloj del cooldown al activar la pelea
                         collisionCooldown.restart();
@@ -67,18 +73,23 @@ void startGame() {
                 }
             }
         }
-        if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime) {
-        if (rojo.isCollision(suelo)){
-            starthistoria();
-            collisionCooldown.restart();
-            window.close();
+        if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime)
+        {
+            if (rojo.isCollision(suelo))
+            {
+                starthistoria();
+                collisionCooldown.restart();
+                window.close();
+            }
         }
-        } if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime) {
-        if (rojo.isCollision(suelo2)){
-            llegadaisla();
-            collisionCooldown.restart();
-            window.close();
-        }
+        if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime)
+        {
+            if (rojo.isCollision(suelo2))
+            {
+                llegadaisla();
+                collisionCooldown.restart();
+                window.close();
+            }
         }
 
         // Dibujar todo
@@ -88,11 +99,12 @@ void startGame() {
         window.draw(Fondo);
 
         // Recorrer la lista y dibujar los bush
-        for (const bush6x4& b : listaBushes) {
+        for (const bush6x4& b : listaBushes)
+        {
             window.draw(b);
         }
         window.draw(suelo);
-         window.draw(suelo2);
+        window.draw(suelo2);
         window.draw(rojo);
         window.display();
     }
@@ -101,7 +113,9 @@ void startGame() {
 void escenarioPelea()
 {
     // Inicializa la semilla del generador de números aleatorios
-        srand(static_cast<unsigned>(time(0)));
+    srand(static_cast<unsigned>(time(0)));
+
+    bool b_ataqueJugador=false;
 
     // Crear una ventana
     sf::RenderWindow window(sf::VideoMode(800, 600), "Inicia la pelea");
@@ -116,35 +130,35 @@ void escenarioPelea()
 
     // Crear los monstruos
     Velom monstruo(100.0f, 50.0f, 30.0f,"include/velom.PNG");
-    Velom vel(100.0f, 50.0f, 30.0f,"include/velom.PNG");
+    Velom vel(1000.0f, 50.0f, 30.0f,"include/velom.PNG");
     //Pelucin pelu;
-     //Peluchin pelu(100.0f, 50.0f, 30.0f,"include/peluchin.PNG");
+    //Peluchin pelu(100.0f, 50.0f, 30.0f,"include/peluchin.PNG");
     //Tukin tuki;
-     Tukin tuka(100.0f, 50.0f, 30.0f,"include/tukin.PNG");
+    Tukin tuka(100.0f, 50.0f, 30.0f,"include/tukin.PNG");
     //Lechuza lechu;
-     Lechuza lechu(100.0f, 50.0f, 30.0f,"include/FuckingLechuza.PNG");
+    Lechuza lechu(100.0f, 50.0f, 30.0f,"include/FuckingLechuza.PNG");
     //Balleton ballena;
-     balleton ballena(100.0f, 50.0f, 30.0f,"include/balleton.PNG");
+    balleton ballena(100.0f, 50.0f, 30.0f,"include/balleton.PNG");
     //Bufalont bufalo;
-      Bufalont bufalo(100.0f, 50.0f, 30.0f,"include/bufalont.PNG");
+    Bufalont bufalo(100.0f, 50.0f, 30.0f,"include/bufalont.PNG");
 
     // Variables de pelea
     bool turnoJugador = true;  // Variable para alternar los turnos
     bool capturable = false;   // Indica si el monstruo puede ser capturado
     bool peleaActiva = true;
     bool opcionSeleccionada = false;
-    ;
+
 
     //PROBANDO GILADAS CARTEL DE VICTORIA
-     sf::Clock WinCooldown;
-      float cooldownTime = 5;
+    sf::Clock WinCooldown;
+    float cooldownTime = 5;
 
-              // sonido, funca si podes configurar el codeblocks
-              sf::SoundBuffer buffer;
-                buffer.loadFromFile("mamahuevo.wav");
+    // sonido, funca si podes configurar el codeblocks
+    sf::SoundBuffer buffer;
+    buffer.loadFromFile("mamahuevo.wav");
 
-                sf::Sound sound;
-                sound.setBuffer(buffer);
+    sf::Sound sound;
+    sound.setBuffer(buffer);
 
 
 
@@ -260,117 +274,112 @@ void escenarioPelea()
 
 
 
-        // Limpiar la pantalla
-        window.clear();
-
-        // Dibujar el fondo
-        window.draw(fondo);
-
-        // Dibujar el monstruo seleccionado
-        if (monstruoSeleccionado != nullptr)
-        {
-            window.draw(*monstruoSeleccionado);
-        }
-        else
-        {
-            cout<<"mamahuevo"<<endl;
-        }
-
-        //dibujar monstruo jugador
-        window.draw(monstruoJugador);
-
-
-        // Lógica de pelea por turnos
-
-        if (turnoJugador)
-        {
 
 
 
-            //opciones de pelea
-            if (event.type == sf::Event::KeyPressed && event.key.code ==  sf::Keyboard::Num1)    // Atacar
+
+
+            // Lógica de pelea por turnos
+
+            if (turnoJugador)
             {
 
 
-                cout << "Atacas al enemigo!" << endl;
 
-
-                vel.iniciarAnimacionAtaque();
-
-
-
-                if (vel.getDefensa() > monstruoJugador.getDanio())
+                //opciones de pelea
+                if (event.type == sf::Event::KeyPressed && event.key.code ==  sf::Keyboard::Num1)    // Atacar
                 {
-                    cout << "El enemigo ah bloqueado tu ataque!" << endl;
-                    vel.setDefensa(vel.getDefensa()-monstruoJugador.getDanio());
-                }else if(monstruoJugador.getDefensa()<=vel.getDanio()){
 
-                   cout << "Tu Monstruo ah hecho " << monstruoJugador.getDanio()<<" de daño" << endl;
 
-                    vel.setVida(vel.getVida()+vel.getDefensa()-monstruoJugador.getDanio());
+                    cout << "Atacas al enemigo!" << endl;
 
-                    cout << "La vida del enemigo es: "<< vel.getVida() << endl;
+                    vel.iniciarAnimacionAtaque();
 
-                    vel.setDefensa(0);
+
+                    b_ataqueJugador=true;
+
+
+
+
+
+
+                    if (vel.getDefensa() > monstruoJugador.getDanio())
+                    {
+                        cout << "El enemigo ah bloqueado tu ataque!" << endl;
+                        vel.setDefensa(vel.getDefensa()-monstruoJugador.getDanio());
+                    }
+                    else if(monstruoJugador.getDefensa()<=vel.getDanio())
+                    {
+
+                        cout << "Tu Monstruo ah hecho " << monstruoJugador.getDanio()<<" de daño" << endl;
+
+                        vel.setVida(vel.getVida()+vel.getDefensa()-monstruoJugador.getDanio());
+
+                        cout << "La vida del enemigo es: "<< vel.getVida() << endl;
+
+                        vel.setDefensa(0);
+
+
+
+                    }
+
+
+
+                    //sound.play();
+
+                    turnoJugador=false;
+
+                }
+                else if (event.type == sf::Event::KeyPressed && event.key.code ==  sf::Keyboard::Num2)      // Defender
+                {
+                    cout << "Te defiendes!" << endl;
+
+                    monstruoJugador.setDefensa( rand() % 100 + 1);
+                    cout<<"defensa mi monstruo aumento = "<<monstruoJugador.getDefensa()<<endl;
+
+
+                    turnoJugador=false;
 
 
                 }
 
+                /* else if (event.type == sf::Event::KeyPressed && event.key.code ==  sf::Keyboard::Num3 && capturable)    // Capturar
+                 {
+                     cout << "Intentas capturar al enemigo!" << endl;
+                     int probCaptura = rand() % 100;
+                     if (probCaptura < 50)    // Supongamos una chance de 50%
+                     {
+                         cout << "Capturaste al enemigo!" << endl;
+                         // inventario.agregarItem(enemigo);
+                         peleaActiva = false;
+                     }
+                     else
+                     {
+                         cout << "El intento de captura falló." << endl;
+                     }
+                     turnoJugador=false;
+                 }*/
 
-
-                //sound.play();
-
-                turnoJugador=false;
 
             }
-            else if (event.type == sf::Event::KeyPressed && event.key.code ==  sf::Keyboard::Num2)      // Defender
+            else
             {
-                cout << "Te defiendes!" << endl;
-
-                monstruoJugador.setDefensa( rand() % 100 + 1);
-                cout<<"defensa mi monstruo aumento = "<<monstruoJugador.getDefensa()<<endl;
-
-
-                turnoJugador=false;
-
-
-            }
-
-           /* else if (event.type == sf::Event::KeyPressed && event.key.code ==  sf::Keyboard::Num3 && capturable)    // Capturar
-            {
-                cout << "Intentas capturar al enemigo!" << endl;
-                int probCaptura = rand() % 100;
-                if (probCaptura < 50)    // Supongamos una chance de 50%
-                {
-                    cout << "Capturaste al enemigo!" << endl;
-                    // inventario.agregarItem(enemigo);
-                    peleaActiva = false;
-                }
-                else
-                {
-                    cout << "El intento de captura falló." << endl;
-                }
-                turnoJugador=false;
-            }*/
-
-
-        }
-        else
-        {
-            // Turno del enemigo
-            cout << "El enemigo ataca!" << endl;
+                // Turno del enemigo
+                cout << "El enemigo ataca!" << endl;
 
 
 
-            if (monstruoJugador.getDefensa() > vel.getDanio())
+                if (monstruoJugador.getDefensa() > vel.getDanio())
                 {
                     cout << "El ataque fue bloqueado con exito!" << endl;
                     monstruoJugador.setDefensa(monstruoJugador.getDefensa()-vel.getDanio());
                     // Cambiar turno al jugador
                     turnoJugador = true;
-                }else if(monstruoJugador.getDefensa()<=vel.getDanio()){
+                }
+                else if(monstruoJugador.getDefensa()<=vel.getDanio())
+                {
 
-                   cout << "El enemigo ah hecho: "<< vel.getDanio() << endl;
+                    cout << "El enemigo ah hecho: "<< vel.getDanio() << endl;
 
                     monstruoJugador.setVida(monstruoJugador.getVida()+monstruoJugador.getDefensa()-vel.getDanio());
 
@@ -386,7 +395,7 @@ void escenarioPelea()
 
 
 
-        } /*else
+            }} /*else
         {
             // Probabilidad de curación para el enemigo
             int probabilidadCura = rand() % 100;
@@ -398,56 +407,82 @@ void escenarioPelea()
                 turnoJugador = true;  // Pierde el turno al curarse
             }}*/
 
-        vel.actualizar();
+
+            vel.actualizar();
+
+
+            // Limpiar la pantalla
+            window.clear();
+
+            // Verificar si el enemigo es capturable
+            if (vel.getVida() <= vel.getVida() * 0.25)
+            {
+                capturable = true;
+            }
+            if(vel.getVida()<=0)
+            {
+                //cout<<"FELICIDADES GANASTE"<<endl;
+                menuTexto.setString("Eres el vencedor");
+                menuTexto.setCharacterSize(60);
+                menuTexto.setFillColor(sf::Color::Black);
+                menuTexto.setPosition(150, 170);
+                window.draw(menuTexto);
+                if (WinCooldown.getElapsedTime().asSeconds() >= cooldownTime)
+                {
+                    window.close();
+                    sound.play();
+                }
+            }
+            else if(monstruoJugador.getVida()<=0)
+            {
+
+                menuTexto.setString("Perdiste");
+                menuTexto.setCharacterSize(60);
+                menuTexto.setFillColor(sf::Color::Black);
+                menuTexto.setPosition(150, 170);
+                window.draw(menuTexto);
+                if (WinCooldown.getElapsedTime().asSeconds() >= cooldownTime)
+                {
+                    window.close();
+                }
+            }
 
 
 
-        // Verificar si el enemigo es capturable
-        if (vel.getVida() <= vel.getVida() * 0.25)
-        {
-            capturable = true;
-        }
-        if(vel.getVida()<=0){
-            //cout<<"FELICIDADES GANASTE"<<endl;
-            menuTexto.setString("Eres el vencedor");
-            menuTexto.setCharacterSize(60);
-            menuTexto.setFillColor(sf::Color::Black);
-            menuTexto.setPosition(150, 170);
-            window.draw(menuTexto);
-             if (WinCooldown.getElapsedTime().asSeconds() >= cooldownTime){
-                window.close();
-                sound.play();
-             }
-        }else if(monstruoJugador.getVida()<=0){
-
-            menuTexto.setString("Perdiste");
-            menuTexto.setCharacterSize(60);
-            menuTexto.setFillColor(sf::Color::Black);
-            menuTexto.setPosition(150, 170);
-            window.draw(menuTexto);
-             if (WinCooldown.getElapsedTime().asSeconds() >= cooldownTime){
-                window.close();
-             }
-        }
 
 
 
+            // Mostrar lo dibujado
 
-        //dibujar las opciones de la pelea
+            // Dibujar el fondo
+            window.draw(fondo);
+
+            // Dibujar el monstruo seleccionado
+            if (monstruoSeleccionado != nullptr)
+            {
+                window.draw(*monstruoSeleccionado);
+            }
+            else
+            {
+                cout<<"mamahuevo"<<endl;
+            }
+
+            //dibujar monstruo jugador
+            window.draw(monstruoJugador);
+
+            //dibujar las opciones de la pelea
+            if (vel.getSpriteAtaque().getTextureRect().width > 0 && b_ataqueJugador==true)   // Solo dibujar si hay una textura válida
+                        {
+                            window.draw(vel.getSpriteAtaque());
+                        }
+
+            window.display();
 
 
-        // Mostrar lo dibujado
-
-        if (vel.getSpriteAtaque().getTextureRect().width > 0) { // Solo dibujar si hay una textura válida
-        window.draw(vel.getSpriteAtaque());
-    }
-
-        window.display();
-
-        }
     }
 }
-void batallacueva(){ // Crear una ventana
+void batallacueva()  // Crear una ventana
+{
     sf::RenderWindow window(sf::VideoMode(800, 600), "Inicia la pelea");
 
     // Establecer el límite de FPS
@@ -476,15 +511,15 @@ void batallacueva(){ // Crear una ventana
     ;
 
     //PROBANDO GILADAS CARTEL DE VICTORIA
-     sf::Clock WinCooldown;
-      float cooldownTime = 2;
+    sf::Clock WinCooldown;
+    float cooldownTime = 2;
 
-              // sonido, funca si podes configurar el codeblocks
-             /*  sf::SoundBuffer buffer;
-                buffer.loadFromFile("include/mamahuevo.wav");
+    // sonido, funca si podes configurar el codeblocks
+    /*  sf::SoundBuffer buffer;
+       buffer.loadFromFile("include/mamahuevo.wav");
 
-                sf::Sound sound;
-                sound.setBuffer(buffer);*/
+       sf::Sound sound;
+       sound.setBuffer(buffer);*/
 
 
 
@@ -526,7 +561,7 @@ void batallacueva(){ // Crear una ventana
     // Asignar monstruo según probabilidad
     if (probabilidad < 0)    // 20% de probabilidad para Hornerot
     {
-      lobo.setPosition(600, 160);
+        lobo.setPosition(600, 160);
 
 
         monstruoSeleccionado = &monstruo;
@@ -549,133 +584,140 @@ void batallacueva(){ // Crear una ventana
         cout<<"La defensa del enemigo es: " << lobo.getDefensa()<<endl;
 
 
-    while (window.isOpen() && peleaActiva)
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
+        while (window.isOpen() && peleaActiva)
         {
-            if (event.type == sf::Event::Closed)
-                window.close();
-
-            // Salir del escenario al presionar ESC
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
+            sf::Event event;
+            while (window.pollEvent(event))
             {
-                window.close();
-            }
+                if (event.type == sf::Event::Closed)
+                    window.close();
 
-
-
-
-
-        // Dibujar el fondo
-        window.draw(fondo);
-
-        // Dibujar el monstruo seleccionado
-        if (monstruoSeleccionado != nullptr)
-        {
-            window.draw(*monstruoSeleccionado);
-        }
-        else
-        {
-            cout<<"mamahuevo"<<endl;
-        }
-
-
-
-
-        // Lógica de pelea por turnos
-        if (turnoJugador)
-        {
-
-
-
-            //opciones de pelea
-            if (event.type == sf::Event::KeyPressed && event.key.code ==  sf::Keyboard::Num1)    // Atacar
-            {
-
-
-                cout << "Atacas al enemigo!" << endl;
-                lobo.setVida(lobo.getVida()-monstruoJugador.getDanio());
-                cout << "Tu Monstruo ah hecho " << monstruoJugador.getDanio()<<" de daño" << endl;
-
-                cout << "La vida del enemigo! es " << lobo.getVida() << endl;
-
-                //sound.play();
-
-                turnoJugador=false;
-
-            }
-
-            else if (event.type == sf::Event::KeyPressed && event.key.code ==  sf::Keyboard::Num2)      // Defender
-            {
-                cout << "Te defiendes!" << endl;
-                defensaTotal = monstruoJugador.getDefensa();
-                turnoJugador=false;
-
-                if (defensaTotal > lobo.getDanio())
+                // Salir del escenario al presionar ESC
+                if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
                 {
-                    cout << "El ataque fue bloqueado con exito!" << endl;
+                    window.close();
+                }
+
+
+
+
+
+                // Dibujar el fondo
+                window.draw(fondo);
+
+                // Dibujar el monstruo seleccionado
+                if (monstruoSeleccionado != nullptr)
+                {
+                    window.draw(*monstruoSeleccionado);
                 }
                 else
                 {
-
-                    float danioRecibido = lobo.getDanio() - defensaTotal;
-
-                    monstruoJugador.Sumarvida(-danioRecibido);
-                    cout << "Recibiste " << danioRecibido << " de daño." << endl;
-
+                    cout<<"mamahuevo"<<endl;
                 }
+
+
+
+
+                // Lógica de pelea por turnos
+                if (turnoJugador)
+                {
+
+
+
+                    //opciones de pelea
+                    if (event.type == sf::Event::KeyPressed && event.key.code ==  sf::Keyboard::Num1)    // Atacar
+                    {
+
+
+                        cout << "Atacas al enemigo!" << endl;
+                        lobo.setVida(lobo.getVida()-monstruoJugador.getDanio());
+                        cout << "Tu Monstruo ah hecho " << monstruoJugador.getDanio()<<" de daño" << endl;
+
+                        cout << "La vida del enemigo! es " << lobo.getVida() << endl;
+
+                        //sound.play();
+
+                        turnoJugador=false;
+
+                    }
+
+                    else if (event.type == sf::Event::KeyPressed && event.key.code ==  sf::Keyboard::Num2)      // Defender
+                    {
+                        cout << "Te defiendes!" << endl;
+                        defensaTotal = monstruoJugador.getDefensa();
+                        turnoJugador=false;
+
+                        if (defensaTotal > lobo.getDanio())
+                        {
+                            cout << "El ataque fue bloqueado con exito!" << endl;
+                        }
+                        else
+                        {
+
+                            float danioRecibido = lobo.getDanio() - defensaTotal;
+
+                            monstruoJugador.Sumarvida(-danioRecibido);
+                            cout << "Recibiste " << danioRecibido << " de daño." << endl;
+
+                        }
+                    }
+                }
+                else
+                {
+                    // Turno del enemigo
+                    cout << "El enemigo ataca!" << endl;
+                    monstruoJugador.Sumarvida(-lobo.getDanio());
+
+                    // Cambiar turno al jugador
+                    turnoJugador = true;
+                }
+
+
+                if(lobo.getVida()<=0)
+                {
+                    //cout<<"FELICIDADES GANASTE"<<endl;
+                    menuTexto.setString("Eres el vencedor");
+                    menuTexto.setCharacterSize(60);
+                    menuTexto.setFillColor(sf::Color::Black);
+                    menuTexto.setPosition(150, 170);
+                    if (WinCooldown.getElapsedTime().asSeconds() >= cooldownTime)
+                    {
+                        window.close();
+                    }
+                }
+                if(monstruoJugador.getVida()<=0)
+                {
+                    //cout<<"FELICIDADES GANASTE"<<endl;
+                    menuTexto.setString("Perdiste pipi");
+                    menuTexto.setCharacterSize(60);
+                    menuTexto.setFillColor(sf::Color::Black);
+                    menuTexto.setPosition(150, 170);
+                    if (WinCooldown.getElapsedTime().asSeconds() >= cooldownTime)
+                    {
+                        window.close();
+                    }
+                }
+
+
+
+                // Limpiar la pantalla
+                window.clear();
+
+                //dibujar las opciones de la pelea
+                window.draw(menuTexto);
+
+                // Mostrar lo dibujado
+                window.display();
+
             }
         }
-        else
-        {
-            // Turno del enemigo
-            cout << "El enemigo ataca!" << endl;
-            monstruoJugador.Sumarvida(-lobo.getDanio());
+    }
+}
 
-            // Cambiar turno al jugador
-            turnoJugador = true;
-        }
+void starthistoria()
+{
 
-
-        if(lobo.getVida()<=0){
-            //cout<<"FELICIDADES GANASTE"<<endl;
-            menuTexto.setString("Eres el vencedor");
-            menuTexto.setCharacterSize(60);
-            menuTexto.setFillColor(sf::Color::Black);
-            menuTexto.setPosition(150, 170);
-             if (WinCooldown.getElapsedTime().asSeconds() >= cooldownTime){
-                window.close();
-             }
-        }
-         if(monstruoJugador.getVida()<=0){
-            //cout<<"FELICIDADES GANASTE"<<endl;
-            menuTexto.setString("Perdiste pipi");
-            menuTexto.setCharacterSize(60);
-            menuTexto.setFillColor(sf::Color::Black);
-            menuTexto.setPosition(150, 170);
-             if (WinCooldown.getElapsedTime().asSeconds() >= cooldownTime){
-                window.close();
-             }
-        }
-
-
-
-        // Limpiar la pantalla
-        window.clear();
-
-        //dibujar las opciones de la pelea
-        window.draw(menuTexto);
-
-        // Mostrar lo dibujado
-        window.display();
-
-        }
-    }}}
-
-void starthistoria(){
-
-     // Crear una ventana
+    // Crear una ventana
     sf::RenderWindow window(sf::VideoMode(800, 600), "escenario final Juego");
 
     // Establecer el límite de FPS
@@ -706,61 +748,71 @@ void starthistoria(){
     float cooldownTime = 1;  // Cooldown de 2 segundos
 
     // Game loop
-    while (window.isOpen()) {
+    while (window.isOpen())
+    {
         sf::Event event;
-        while (window.pollEvent(event)) {
+        while (window.pollEvent(event))
+        {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-         // Guardar la posición actual del personaje antes de moverlo
+        // Guardar la posición actual del personaje antes de moverlo
         sf::Vector2f previousPosition = rojo.getPosition();
 
         std::vector<Colisionable*> colisionables = { &valla,&valla2,&valla3,&valla4 };
         // Actualizar el personaje
         rojo.update();
 
-         if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime){
-    if(rojo.isCollision(suelo)) {
+        if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime)
+        {
+            if(rojo.isCollision(suelo))
+            {
 
-                    cout << "colision" << endl;
-                    collisionCooldown.restart();
-                    window.close();
-                    startGame();
+                cout << "colision" << endl;
+                collisionCooldown.restart();
+                window.close();
+                startGame();
 
-                }}
-        if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime) {
-        if (rojo.isCollision(cueva)){
-            batallacueva();
-            collisionCooldown.restart();
-        }
-        for (const auto& colisionable : colisionables) {
-            if (rojo.isCollision(*colisionable)) {
-                // Si hay colisión, revertir a la posición anterior
-                rojo.setPosition(previousPosition.x, previousPosition.y);
-                break;
             }
         }
+        if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime)
+        {
+            if (rojo.isCollision(cueva))
+            {
+                batallacueva();
+                collisionCooldown.restart();
+            }
+            for (const auto& colisionable : colisionables)
+            {
+                if (rojo.isCollision(*colisionable))
+                {
+                    // Si hay colisión, revertir a la posición anterior
+                    rojo.setPosition(previousPosition.x, previousPosition.y);
+                    break;
+                }
+            }
 
-        // Dibujar todo
-        window.clear();
+            // Dibujar todo
+            window.clear();
 
-        /************ Los window.draw se dibujan según su orden creando capas **************/
-        window.draw(fondo1);
-        window.draw(suelo);
-        window.draw(cueva);
-        ////////////////////////
-        window.draw(valla);
-        window.draw(valla2);
-        window.draw(valla3);
-        window.draw(valla4);
-        //////////////////////
-        window.draw(rojo);
-        window.display();
+            /************ Los window.draw se dibujan según su orden creando capas **************/
+            window.draw(fondo1);
+            window.draw(suelo);
+            window.draw(cueva);
+            ////////////////////////
+            window.draw(valla);
+            window.draw(valla2);
+            window.draw(valla3);
+            window.draw(valla4);
+            //////////////////////
+            window.draw(rojo);
+            window.display();
         }
 
     }
 }
-void llegadaisla() {
+void llegadaisla()
+{
     sf::RenderWindow window(sf::VideoMode(800, 600), "Inicia Juego");
 
     window.setFramerateLimit(60);
@@ -797,7 +849,7 @@ void llegadaisla() {
     Flor.setPosition(190, 470);
     Flores Flor2;
     Flor2.setPosition(0, 300);
-     Flores Flor3;
+    Flores Flor3;
     Flor3.setPosition(620, 480);
     //Crear vallas
     Cerco valla;
@@ -805,15 +857,17 @@ void llegadaisla() {
 
 
     // Agregar las barreras a un vector de objetos colisionables
-    std::vector<Colisionable*> colisionables = { &casa, &bar, &Flor ,&valla,&casa2,&bar2,&Flor2,&bar3,&bar4,&casa3,&casa4,&Flor3 };
+    std::vector<Colisionable*> colisionables = { &casa, &bar, &Flor,&valla,&casa2,&bar2,&Flor2,&bar3,&bar4,&casa3,&casa4,&Flor3 };
 
-     sf::Clock collisionCooldown;
+    sf::Clock collisionCooldown;
     float cooldownTime = 1;  // Cooldown de 2 segundos
 
 
-    while (window.isOpen()) {
+    while (window.isOpen())
+    {
         sf::Event event;
-        while (window.pollEvent(event)) {
+        while (window.pollEvent(event))
+        {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
@@ -825,22 +879,27 @@ void llegadaisla() {
         rojo.update();
 
         // Verificar colisiones con cada barrera/////////////////////////////
-        for (const auto& colisionable : colisionables) {
-            if (rojo.isCollision(*colisionable)) {
+        for (const auto& colisionable : colisionables)
+        {
+            if (rojo.isCollision(*colisionable))
+            {
                 // Si hay colisión, revertir a la posición anterior
                 rojo.setPosition(previousPosition.x, previousPosition.y);
                 break;
             }
         }
 ////////////////////////////////////////////////////////////////////////////
-               if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime){
-            if(rojo.isCollision(suelo)) {
-                    startGame();
-                    cout << "colision" << endl;
-                    collisionCooldown.restart();
-                    window.close();
+        if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime)
+        {
+            if(rojo.isCollision(suelo))
+            {
+                startGame();
+                cout << "colision" << endl;
+                collisionCooldown.restart();
+                window.close();
 
-                }}
+            }
+        }
 
         // Dibujar todo
         window.clear();
@@ -851,16 +910,16 @@ void llegadaisla() {
         window.draw(casa2);
         window.draw(casa3);
         window.draw(casa4);
-         /////////
+        /////////
         window.draw(bar);
         window.draw(bar2);
         window.draw(bar3);
         window.draw(bar4);
-          //////////
+        //////////
         window.draw(Flor);
-          window.draw(Flor2);
-          window.draw(Flor3);
-          ///////////
+        window.draw(Flor2);
+        window.draw(Flor3);
+        ///////////
         window.draw(valla);
 
         //////////

@@ -19,14 +19,18 @@ void Monstruo::iniciarAnimacionAtaque() {
 
 
 void Monstruo::actualizarAnimacionAtaque() {
+    _spriteAtaque.setScale(2.50f, 2.50f);
+    _spriteAtaque.setPosition(320, 130);
+
     if (_animacionEnCurso) {
-        sf::Time frameTime = sf::seconds(0.1f);
+        sf::Time frameTime = sf::seconds(1);
 
         if (_animationClockAtaque.getElapsedTime() > frameTime) {
             _currentFrameAtaque++;
             if (_currentFrameAtaque < 2) {
                 _spriteAtaque.setTextureRect(Ataque[_currentFrameAtaque]);
                 _animationClockAtaque.restart();
+
             } else {
                 _animacionEnCurso = false;
                 _spriteAtaque.setTextureRect(sf::IntRect()); // Hacer desaparecer el sprite
@@ -288,8 +292,8 @@ Velom::Velom(float vida, float danio, float defensa, const string& texturaArchiv
     _textureAtaque.loadFromFile("Animations/zoonami_player_scorch_animation.PNG");
     _spriteAtaque.setTexture(_textureAtaque);
 
-    Ataque[0] = sf::IntRect(0,0, 159, 150);
-    Ataque[1] = sf::IntRect(0, 160, 159, 300);
+    Ataque[0] = sf::IntRect(0, 0, 159,159 );
+    Ataque[1] = sf::IntRect(0, 159, 159, 159);
 
 
 
