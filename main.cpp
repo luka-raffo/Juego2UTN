@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include "escenario1.h"
 #include "Funciones.H"
+#include "escenario2.h"
+#include "escenario3.h"
 using namespace std;
 
 

@@ -28,6 +28,9 @@ void startGame() {
     listaBushes.push_back(b3);
     piso suelo;
     suelo.setPosition(650,0);
+    piso suelo2;
+    suelo2.setPosition(0,235);
+
     // Crear fondo
     escenario Fondo;
     // Agregar un reloj para el cooldown de colisiones
@@ -68,6 +71,13 @@ void startGame() {
         if (rojo.isCollision(suelo)){
             starthistoria();
             collisionCooldown.restart();
+            window.close();
+        }
+        } if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime) {
+        if (rojo.isCollision(suelo2)){
+            llegadaisla();
+            collisionCooldown.restart();
+            window.close();
         }
         }
 
@@ -82,6 +92,7 @@ void startGame() {
             window.draw(b);
         }
         window.draw(suelo);
+         window.draw(suelo2);
         window.draw(rojo);
         window.display();
     }
@@ -129,11 +140,11 @@ void escenarioPelea()
       float cooldownTime = 5;
 
               // sonido, funca si podes configurar el codeblocks
-             /*  sf::SoundBuffer buffer;
-                buffer.loadFromFile("include/mamahuevo.wav");
+              sf::SoundBuffer buffer;
+                buffer.loadFromFile("mamahuevo.wav");
 
                 sf::Sound sound;
-                sound.setBuffer(buffer);*/
+                sound.setBuffer(buffer);
 
 
 
@@ -302,6 +313,7 @@ void escenarioPelea()
 
                     vel.setDefensa(0);
 
+
                 }
 
 
@@ -404,6 +416,7 @@ void escenarioPelea()
             window.draw(menuTexto);
              if (WinCooldown.getElapsedTime().asSeconds() >= cooldownTime){
                 window.close();
+                sound.play();
              }
         }else if(monstruoJugador.getVida()<=0){
 
@@ -671,13 +684,19 @@ void starthistoria(){
     // Crear un personaje
     Personaje rojo;
 
-    rojo.setPosition(400, 500);
+    rojo.setPosition(400,600);
     piso suelo;
-    suelo.setPosition(400,580);
+    suelo.setPosition(405,580);
     caverna cueva;
     cueva.setPosition(250,100);
-
-
+    vallas valla;
+    valla.setPosition(0,445);
+    vallas valla2;
+    valla2.setPosition(170,445);
+    vallas valla3;
+    valla3.setPosition(450,445);
+    vallas valla4;
+    valla4.setPosition(630,445);
 
     // Crear fondo
     Escenariojefe fondo1;
@@ -693,20 +712,33 @@ void starthistoria(){
             if (event.type == sf::Event::Closed)
                 window.close();
         }
+         // Guardar la posición actual del personaje antes de moverlo
+        sf::Vector2f previousPosition = rojo.getPosition();
 
+        std::vector<Colisionable*> colisionables = { &valla,&valla2,&valla3,&valla4 };
         // Actualizar el personaje
         rojo.update();
+
          if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime){
     if(rojo.isCollision(suelo)) {
-                    window.close();
+
                     cout << "colision" << endl;
                     collisionCooldown.restart();
+                    window.close();
+                    startGame();
 
                 }}
         if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime) {
         if (rojo.isCollision(cueva)){
             batallacueva();
             collisionCooldown.restart();
+        }
+        for (const auto& colisionable : colisionables) {
+            if (rojo.isCollision(*colisionable)) {
+                // Si hay colisión, revertir a la posición anterior
+                rojo.setPosition(previousPosition.x, previousPosition.y);
+                break;
+            }
         }
 
         // Dibujar todo
@@ -716,9 +748,16 @@ void starthistoria(){
         window.draw(fondo1);
         window.draw(suelo);
         window.draw(cueva);
+        ////////////////////////
+        window.draw(valla);
+        window.draw(valla2);
+        window.draw(valla3);
+        window.draw(valla4);
+        //////////////////////
         window.draw(rojo);
         window.display();
         }
+
     }
 }
 void llegadaisla() {
@@ -731,18 +770,42 @@ void llegadaisla() {
     rojo.setPosition(400, 300);
 
     // Crear fondo y otros objetos
-    piso suelo;
-    suelo.setPosition(650, 0);
+    pasto suelo;
+    suelo.setPosition(400, 155);
     escenariollegada Fondo;
 
     // Crear varias barreras
-    Barrera barrera1;
-    barrera1.setPosition(300, 300);
-    Barrera barrera2;
-    barrera2.setPosition(500, 300);
+    Barrera casa;
+    casa.setPosition(450, 150);
+    Barrera casa2;
+    casa2.setPosition(630, 150);
+    Barrera casa3;
+    casa3.setPosition(225, 300);
+    Barrera casa4;
+    casa4.setPosition(645, 305);
+    // Crear bar
+    Barcito bar;
+    bar.setPosition(0, 150);
+    Barcito bar2;
+    bar2.setPosition(197, 150);
+    Barcito bar3;
+    bar3.setPosition(450, 305);
+    Barcito bar4;
+    bar4.setPosition(0, 470);
+    //crear flores
+    Flores Flor;
+    Flor.setPosition(190, 470);
+    Flores Flor2;
+    Flor2.setPosition(0, 300);
+     Flores Flor3;
+    Flor3.setPosition(620, 480);
+    //Crear vallas
+    Cerco valla;
+    valla.setPosition(430, 550);
+
 
     // Agregar las barreras a un vector de objetos colisionables
-    std::vector<Colisionable*> colisionables = { &barrera1, &barrera2 };
+    std::vector<Colisionable*> colisionables = { &casa, &bar, &Flor ,&valla,&casa2,&bar2,&Flor2,&bar3,&bar4,&casa3,&casa4,&Flor3 };
 
      sf::Clock collisionCooldown;
     float cooldownTime = 1;  // Cooldown de 2 segundos
@@ -782,9 +845,25 @@ void llegadaisla() {
         // Dibujar todo
         window.clear();
         window.draw(Fondo);
+        ////////
         window.draw(suelo);
-        window.draw(barrera1);
-        window.draw(barrera2);
+        window.draw(casa);
+        window.draw(casa2);
+        window.draw(casa3);
+        window.draw(casa4);
+         /////////
+        window.draw(bar);
+        window.draw(bar2);
+        window.draw(bar3);
+        window.draw(bar4);
+          //////////
+        window.draw(Flor);
+          window.draw(Flor2);
+          window.draw(Flor3);
+          ///////////
+        window.draw(valla);
+
+        //////////
         window.draw(rojo);
         window.display();
     }

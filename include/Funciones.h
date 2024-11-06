@@ -9,6 +9,8 @@
 #include <stdlib.h>
 #include "escenario1.h"
 #include "Monstruo.h"
+#include "Escenario2.h"
+#include "escenario3.h"
 using namespace std;
 void startGame();
 void escenarioPelea();
