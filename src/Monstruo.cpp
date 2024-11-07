@@ -7,40 +7,17 @@
 Monstruo::Monstruo() : _vida(0), _danio(0), _defensa(0) {}
 
 // Constructor con parámetros
-Monstruo::Monstruo(float vida, float danio, float defensa): _vida(vida), _danio(danio), _defensa(defensa) {}
+Monstruo::Monstruo(float vida, float danio, float defensa): _vida(vida), _danio(danio), _defensa(defensa) {
 
 
-void Monstruo::iniciarAnimacionAtaque() {
-    _animacionEnCurso = true;
-    _currentFrameAtaque = 0;
-    _spriteAtaque.setTextureRect(Ataque[_currentFrameAtaque]);
-    _animationClockAtaque.restart();
+
+
 }
 
 
-void Monstruo::actualizarAnimacionAtaque() {
-    _spriteAtaque.setScale(2.50f, 2.50f);
-    _spriteAtaque.setPosition(320, 130);
 
-    if (_animacionEnCurso) {
-        sf::Time frameTime = sf::seconds(1);
 
-        if (_animationClockAtaque.getElapsedTime() > frameTime) {
-            _currentFrameAtaque++;
-            if (_currentFrameAtaque < 2) {
-                _spriteAtaque.setTextureRect(Ataque[_currentFrameAtaque]);
-                _animationClockAtaque.restart();
 
-            } else {
-                _animacionEnCurso = false;
-                _spriteAtaque.setTextureRect(sf::IntRect()); // Hacer desaparecer el sprite
-            }
-        }
-    }
-}
-const sf::Sprite& Monstruo::getSpriteAtaque() const {
-    return _spriteAtaque;
-}
 
 
 // Métodos de vida
@@ -289,24 +266,12 @@ bool balleton::cargarTextura(const string& archivo)
 Velom::Velom(float vida, float danio, float defensa, const string& texturaArchivo) : Monstruo(vida, danio, defensa)
 {
 
-    _textureAtaque.loadFromFile("Animations/zoonami_player_scorch_animation.PNG");
-    _spriteAtaque.setTexture(_textureAtaque);
-
-    Ataque[0] = sf::IntRect(0, 0, 159,159 );
-    Ataque[1] = sf::IntRect(0, 159, 159, 159);
-
-
-
-
-    if (!cargarTextura(texturaArchivo))
+if (!cargarTextura(texturaArchivo))
     {
         throw std::runtime_error("Error al cargar la textura del monstruo");
     }
 }
 
-void Velom::actualizar() {
-    actualizarAnimacionAtaque();
-}
 
 
 // Sobrescribir la función draw

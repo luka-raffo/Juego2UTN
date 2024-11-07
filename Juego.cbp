@@ -41,6 +41,7 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="include/AnimacionAtaque.h" />
 		<Unit filename="include/Colisionable.h" />
 		<Unit filename="include/Escenario2.h" />
 		<Unit filename="include/Funciones.h" />
@@ -53,6 +54,7 @@
 		<Unit filename="main.cpp">
 			<Option target="Debug" />
 		</Unit>
+		<Unit filename="src/AnimacionAtaque.cpp" />
 		<Unit filename="src/Colisionable.cpp" />
 		<Unit filename="src/Escenario2.cpp" />
 		<Unit filename="src/Funciones.cpp" />

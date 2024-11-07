@@ -3,6 +3,8 @@
 #include "Personaje.h"
 #include <cstdlib>  // Para rand() y srand()
 #include <ctime>    // Para time()
+#include "AnimacionAtaque.h"
+
 
 using namespace std;
 void startGame()
@@ -17,6 +19,8 @@ void startGame()
     Personaje rojo;
     int Banderaposicion;
     rojo.cargarPosicion();
+
+
 
     // Crear lista de bush
     vector<bush6x4> listaBushes;
@@ -129,12 +133,15 @@ void escenarioPelea()
 
     inventory inventario(100);
 
+
+
     //crear monstruo jugador
     Velom monstruoJugador(100.0f, 50.0f, 30.0f,"include/velom.PNG");
 
     // Crear los monstruos
     Velom monstruo(100.0f, 50.0f, 30.0f,"include/velom.PNG");
-    Velom vel(1000.0f, 50.0f, 30.0f,"include/velom.PNG");
+
+    Velom vel (1000.0f, 50.0f, 30.0f, "include/velom.PNG");
     //Pelucin pelu;
     //Peluchin pelu(100.0f, 50.0f, 30.0f,"include/peluchin.PNG");
     //Tukin tuki;
@@ -146,6 +153,11 @@ void escenarioPelea()
     //Bufalont bufalo;
     Bufalont bufalo(100.0f, 50.0f, 30.0f,"include/bufalont.PNG");
 
+
+
+    AnimacionAtaque ataque;
+
+
     // Variables de pelea
     bool turnoJugador = true;  // Variable para alternar los turnos
     bool capturable = false;   // Indica si el monstruo puede ser capturado
@@ -153,7 +165,7 @@ void escenarioPelea()
     bool opcionSeleccionada = false;
 
 
-    //PROBANDO GILADAS CARTEL DE VICTORIA
+    //PROBANDO cosas del CARTEL DE VICTORIA
     sf::Clock WinCooldown;
     float cooldownTime = 5;
 
@@ -260,7 +272,12 @@ void escenarioPelea()
         monstruoSeleccionado = &bufalo;
     }*/
 
+
+
+
+
     // Bucle del juego
+
     while (window.isOpen() && peleaActiva)
     {
         sf::Event event;
@@ -297,8 +314,10 @@ void escenarioPelea()
 
                     cout << "Atacas al enemigo!" << endl;
 
-                    vel.iniciarAnimacionAtaque();
-                    sonidoAtaque.play(); // Reproducir sonido de ataque
+
+                    ataque.startAnimation();
+
+                    //sonidoAtaque.play(); // Reproducir sonido de ataque
 
 
                     b_ataqueJugador=true;
@@ -413,8 +432,7 @@ void escenarioPelea()
             }}*/
 
 
-            vel.actualizar();
-
+            ataque.update();
 
             // Limpiar la pantalla
             window.clear();
@@ -486,13 +504,13 @@ void escenarioPelea()
 
 
 
+            window.draw(ataque);
+
             //dibujar las opciones de la pelea
-            if (vel.getSpriteAtaque().getTextureRect().width > 0 && b_ataqueJugador==true)   // Solo dibujar si hay una textura válida
-                        {
-                            window.draw(vel.getSpriteAtaque());
-                        }
+
 
             window.display();
+
 
 
     }

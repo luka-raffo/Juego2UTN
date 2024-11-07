@@ -21,17 +21,13 @@ private:
 
 
 
+
     //nuevos atributos
       int _nivel;
     float _experiencia; // Nueva experiencia
 protected:
     sf::Sprite& getSprite();
-    sf::IntRect Ataque[3]; // Tres frames para la animación de ataque
-    sf::Sprite _spriteAtaque;
-    sf::Texture _textureAtaque;
-    sf::Clock _animationClockAtaque; // Reloj para controlar la animación
-    int _currentFrameAtaque = 0;
-    bool _animacionEnCurso = false;
+
 
 
 public:
@@ -43,6 +39,8 @@ public:
         const sf::Sprite& getSpriteAtaque() const;
 
         void iniciarAnimacionAtaque();
+
+        void reiniciarAnimacion();
 
         void actualizarAnimacionAtaque();
 

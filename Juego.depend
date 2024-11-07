@@ -1289,10 +1289,11 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1730679085 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\personaje.h
+1730983582 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\personaje.h
 	<SFML/Graphics.hpp>
 	"Colisionable.h"
 	"inventory.h"
+	<fstream>
 
 1729077470 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\menu.h
 	<SFML/Graphics.hpp>
@@ -1303,18 +1304,18 @@
 	<SFML/Graphics.hpp>
 	<iostream>
 
-1730927402 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\monstruo.cpp
+1731008953 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\monstruo.cpp
 	"Monstruo.h"
 	<SFML/Graphics.hpp>
 	<iostream>
 	"inventory.h"
 
-1730815506 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\monstruo.h
+1731008849 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\monstruo.h
 	<SFML/Graphics.hpp>
 	<iostream>
 	"Colisionable.h"
 
-1729704809 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\personaje.cpp
+1730983582 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\personaje.cpp
 	"Personaje.h"
 
 1728848082 source:c:\users\brandon\onedrive\escritorio\juego2utn\funciones.cpp
@@ -1368,7 +1369,7 @@
 1729077470 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\colisionable.cpp
 	"Colisionable.h"
 
-1730907894 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\escenario1.cpp
+1730983582 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\escenario1.cpp
 	<SFML/Graphics.hpp>
 	<iostream>
 	"escenario1.h"
@@ -1394,25 +1395,27 @@
 	"Escenario2.h"
 	"escenario3.h"
 
-1730907893 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\funciones.h
+1730983582 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\funciones.h
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	<Personaje.h>
 	<iostream>
 	"menu.h"
 	<ctime>
+	<fstream>
 	<stdlib.h>
 	"escenario1.h"
 	"Monstruo.h"
 	"Escenario2.h"
 	"escenario3.h"
 
-1730926599 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\funciones.cpp
+1731014685 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\funciones.cpp
 	"Funciones.h"
 	"inventory.h"
 	"Personaje.h"
 	<cstdlib>
 	<ctime>
+	"AnimacionAtaque.h"
 
 1729687991 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\item.cpp
 	"Item.h"
@@ -2269,7 +2272,7 @@
 	"Colisionable.h"
 	<SFML/Audio.hpp>
 
-1730907893 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\escenario2.h
+1730983582 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\escenario2.h
 	<SFML/Graphics.hpp>
 	<iostream>
 	"Colisionable.h"
@@ -2283,6 +2286,12 @@
 1730907894 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\escenario3.cpp
 	"escenario3.h"
 
-1730907894 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\escenario2.cpp
+1730983582 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\escenario2.cpp
 	"Escenario2.h"
+
+1731010748 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\animacionataque.cpp
+	"AnimacionAtaque.h"
+
+1731014685 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\animacionataque.h
+	<SFML/Graphics.hpp>
 
