@@ -135,3 +135,4 @@ sf::FloatRect piso::getBounds() const {
 void piso::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     target.draw(_sprite, states);
 }
+

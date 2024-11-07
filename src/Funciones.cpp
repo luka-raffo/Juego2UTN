@@ -15,8 +15,8 @@ void startGame()
 
     // Crear un personaje
     Personaje rojo;
-
-    rojo.setPosition(400, 300);
+    int Banderaposicion;
+    rojo.cargarPosicion();
 
     // Crear lista de bush
     vector<bush6x4> listaBushes;
@@ -78,7 +78,9 @@ void startGame()
             if (rojo.isCollision(suelo))
             {
                 starthistoria();
+                Banderaposicion=1;
                 collisionCooldown.restart();
+                rojo.guardarPosicion();
                 window.close();
             }
         }
@@ -87,6 +89,8 @@ void startGame()
             if (rojo.isCollision(suelo2))
             {
                 llegadaisla();
+                Banderaposicion=0;
+                rojo.guardarPosicion();
                 collisionCooldown.restart();
                 window.close();
             }
@@ -153,29 +157,28 @@ void escenarioPelea()
     sf::Clock WinCooldown;
     float cooldownTime = 5;
 
-    // sonido, funca si podes configurar el codeblocks
-    sf::SoundBuffer buffer;
-    buffer.loadFromFile("mamahuevo.wav");
-
-    sf::Sound sound;
-    sound.setBuffer(buffer);
-
-
-
+     // Crear buffer para el sonido de ataque
+    sf::SoundBuffer bufferAtaque;
+    if (!bufferAtaque.loadFromFile("mamahuevo.wav")) {
+        std::cout << "Error al cargar mamahuevo.wav" << std::endl;
+    }
+    sf::Sound sonidoAtaque;
+    sonidoAtaque.setBuffer(bufferAtaque);
 
     // crear el fondo
     BattleBackground fondo;
 
+
     // Crear elementos del menú en pantalla
     sf::Font font;
     font.loadFromFile("include/Pokemon.ttf");
+   sf::Text menuTexto;
 
-    sf::Text menuTexto;
     menuTexto.setFont(font);
     menuTexto.setString("1) Atacar  2) Defender");
     menuTexto.setCharacterSize(24);
     menuTexto.setFillColor(sf::Color::Black);
-    menuTexto.setPosition(95, 360);
+    menuTexto.setPosition(350, 400);
 
     //elementos monstruo jugador
     monstruoJugador.setPosition(30, 350);  // Jugador a la izquierda
@@ -286,6 +289,7 @@ void escenarioPelea()
 
 
 
+
                 //opciones de pelea
                 if (event.type == sf::Event::KeyPressed && event.key.code ==  sf::Keyboard::Num1)    // Atacar
                 {
@@ -294,6 +298,7 @@ void escenarioPelea()
                     cout << "Atacas al enemigo!" << endl;
 
                     vel.iniciarAnimacionAtaque();
+                    sonidoAtaque.play(); // Reproducir sonido de ataque
 
 
                     b_ataqueJugador=true;
@@ -325,7 +330,7 @@ void escenarioPelea()
 
 
 
-                    //sound.play();
+
 
                     turnoJugador=false;
 
@@ -430,8 +435,15 @@ void escenarioPelea()
                 if (WinCooldown.getElapsedTime().asSeconds() >= cooldownTime)
                 {
                     window.close();
-                    sound.play();
+
                 }
+                // *Distribución de experiencia al ganar*
+                int expGanada = 30; // Ajusta este valor a tu preferencia
+                monstruoJugador.ganarExperiencia(expGanada); // Agregar exp al monstruo del jugador
+                cout << "Ganaste " << expGanada << " puntos de experiencia!" << endl;
+
+                peleaActiva = false;
+
             }
             else if(monstruoJugador.getVida()<=0)
             {
@@ -469,6 +481,10 @@ void escenarioPelea()
 
             //dibujar monstruo jugador
             window.draw(monstruoJugador);
+             // Dibujar opciones de pelea siempre en pantalla
+               window.draw(menuTexto);
+
+
 
             //dibujar las opciones de la pelea
             if (vel.getSpriteAtaque().getTextureRect().width > 0 && b_ataqueJugador==true)   // Solo dibujar si hay una textura válida
@@ -481,6 +497,8 @@ void escenarioPelea()
 
     }
 }
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
 void batallacueva()  // Crear una ventana
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "Inicia la pelea");
@@ -515,11 +533,11 @@ void batallacueva()  // Crear una ventana
     float cooldownTime = 2;
 
     // sonido, funca si podes configurar el codeblocks
-    /*  sf::SoundBuffer buffer;
+      sf::SoundBuffer buffer;
        buffer.loadFromFile("include/mamahuevo.wav");
 
        sf::Sound sound;
-       sound.setBuffer(buffer);*/
+       sound.setBuffer(buffer);
 
 
 
@@ -726,7 +744,7 @@ void starthistoria()
     // Crear un personaje
     Personaje rojo;
 
-    rojo.setPosition(400,600);
+    rojo.cargarPosicion();
     piso suelo;
     suelo.setPosition(405,580);
     caverna cueva;
@@ -770,6 +788,7 @@ void starthistoria()
 
                 cout << "colision" << endl;
                 collisionCooldown.restart();
+                rojo.guardarPosicion();
                 window.close();
                 startGame();
 
@@ -819,8 +838,7 @@ void llegadaisla()
 
     // Crear el personaje y definir su posición inicial
     Personaje rojo;
-    rojo.setPosition(400, 300);
-
+   rojo.cargarPosicion();
     // Crear fondo y otros objetos
     pasto suelo;
     suelo.setPosition(400, 155);
@@ -894,6 +912,7 @@ void llegadaisla()
             if(rojo.isCollision(suelo))
             {
                 startGame();
+                rojo.guardarPosicion();
                 cout << "colision" << endl;
                 collisionCooldown.restart();
                 window.close();

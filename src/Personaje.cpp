@@ -155,3 +155,24 @@ void Personaje::update(){
     sf::FloatRect Personaje::getBounds()const{
     return _sprite.getGlobalBounds();
     }
+void Personaje::guardarPosicion() {
+    std::ofstream archivo("posicion.txt");
+    if (archivo.is_open()) {
+        sf::Vector2f posicion = this->getPosition();
+        archivo << posicion.x << " " << posicion.y;
+        archivo.close();
+    }
+}
+
+void Personaje::cargarPosicion() {
+    std::ifstream archivo("posicion.txt");
+    if (archivo.is_open()) {
+        float x, y;
+        archivo >> x >> y;
+        this->setPosition(x, y);
+        archivo.close();
+    } else {
+        // Si el archivo no existe, puedes asignar una posición inicial por defecto
+        this->setPosition(400, 300); // o cualquier otra posición inicial
+    }
+}

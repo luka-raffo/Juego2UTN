@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "Colisionable.h"
 #include "inventory.h"
-
+#include <fstream>  // Para leer y escribir archivos
 
 class Personaje: public sf::Drawable, public Colisionable
 {
@@ -40,8 +40,10 @@ public:
         _sprite.setPosition(x, y);
     }
     sf::Vector2f getPosition() const {
-    return _sprite.getPosition();
-}
+    return _sprite.getPosition();}
+
+   void guardarPosicion();  // Guarda la posición actual en un archivo
+    void cargarPosicion();   // Carga la posición desde un archivo
 
 };
 

@@ -6,6 +6,7 @@
 #include <iostream>
 #include "menu.h"
 #include <ctime>
+#include <fstream>  // Para leer y escribir archivos
 #include <stdlib.h>
 #include "escenario1.h"
 #include "Monstruo.h"
@@ -17,7 +18,6 @@ void escenarioPelea();
 void starthistoria();
 void BatallaCueva();
 void llegadaisla();
-
 
 
 #endif // FUNCIONES_H_INCLUDED
