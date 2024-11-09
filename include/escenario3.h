@@ -19,6 +19,7 @@ public:
         target.draw(_sprite, states);
     }
 };
+
 class caverna : public sf::Drawable, public Colisionable {
 private:
     sf::Sprite _sprite;
@@ -52,6 +53,7 @@ public:
         target.draw(_sprite, states);
     }
 };
+
 class vallas : public sf::Drawable, public Colisionable {
     sf::Sprite _sprite;
     sf::Texture _texture;

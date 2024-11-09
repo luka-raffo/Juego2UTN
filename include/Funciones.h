@@ -12,12 +12,13 @@
 #include "Monstruo.h"
 #include "Escenario2.h"
 #include "escenario3.h"
+
 using namespace std;
 void startGame();
 void escenarioPelea();
 void starthistoria();
 void BatallaCueva();
 void llegadaisla();
-
+bool FuncionPos();
 
 #endif // FUNCIONES_H_INCLUDED

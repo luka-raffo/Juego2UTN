@@ -54,7 +54,7 @@ void caverna::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 CavernaBattleBackground::CavernaBattleBackground(){
 
 //Asignacion para la textura
-    _texture.loadFromFile("Battle Backgrounds/cueva.png");
+    _texture.loadFromFile("tileset/cueva2.png");
 
     //Asignacion de la textura del Personaje
     _sprite.setTexture(_texture);
@@ -65,7 +65,7 @@ CavernaBattleBackground::CavernaBattleBackground(){
 
     _sprite.setPosition(0, 0);
 
-        if (!_texture.loadFromFile("Battle Backgrounds/cueva.png")) {
+        if (!_texture.loadFromFile("tileset/cueva2.png")) {
             cerr << "Error cargando la textura" << endl;
         }
         _sprite.setTexture(_texture);

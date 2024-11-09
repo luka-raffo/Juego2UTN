@@ -161,6 +161,9 @@ void Personaje::guardarPosicion() {
         sf::Vector2f posicion = this->getPosition();
         archivo << posicion.x << " " << posicion.y;
         archivo.close();
+
+    } else {
+        std::cerr << "Error al guardar la posición: no se pudo abrir el archivo." << std::endl;
     }
 }
 
@@ -173,6 +176,6 @@ void Personaje::cargarPosicion() {
         archivo.close();
     } else {
         // Si el archivo no existe, puedes asignar una posición inicial por defecto
-        this->setPosition(400, 300); // o cualquier otra posición inicial
+        this->setPosition(400, 590); // o cualquier otra posición inicial
     }
 }

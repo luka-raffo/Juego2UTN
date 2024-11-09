@@ -7,6 +7,14 @@
 
 
 using namespace std;
+
+bool FuncionPos(){
+bool banderaPos = true;
+
+
+
+
+}
 void startGame()
 {
     // Crear una ventana
@@ -137,13 +145,18 @@ void escenarioPelea()
 
     //crear monstruo jugador
     Velom monstruoJugador(100.0f, 50.0f, 30.0f,"include/velom.PNG");
+    Tukin monstruojugador1(100.0f, 50.0f, 30.0f,"include/tukin.PNG");
+    Lechuza montruojugador2(100.0f, 50.0f, 30.0f,"include/FuckingLechuza.PNG");
+    balleton monstruojugador3(100.0f, 50.0f, 30.0f,"include/balleton.PNG");
+    Bufalont monstruojugador4(100.0f, 50.0f, 30.0f,"include/bufalont.PNG");
+
 
     // Crear los monstruos
     Velom monstruo(100.0f, 50.0f, 30.0f,"include/velom.PNG");
 
     Velom vel (1000.0f, 50.0f, 30.0f, "include/velom.PNG");
     //Pelucin pelu;
-    //Peluchin pelu(100.0f, 50.0f, 30.0f,"include/peluchin.PNG");
+    Peluchin pelu(100.0f, 50.0f, 30.0f,"include/pelucin.PNG");
     //Tukin tuki;
     Tukin tuka(100.0f, 50.0f, 30.0f,"include/tukin.PNG");
     //Lechuza lechu;
@@ -295,10 +308,6 @@ void escenarioPelea()
 
 
 
-
-
-
-
             // Lógica de pelea por turnos
 
             if (turnoJugador)
@@ -321,6 +330,7 @@ void escenarioPelea()
 
 
                     b_ataqueJugador=true;
+                    sonidoAtaque.play();
 
 
 
@@ -419,7 +429,7 @@ void escenarioPelea()
 
 
 
-            }} /*else
+            }} /*else if
         {
             // Probabilidad de curación para el enemigo
             int probabilidadCura = rand() % 100;
@@ -466,6 +476,7 @@ void escenarioPelea()
             else if(monstruoJugador.getVida()<=0)
             {
 
+
                 menuTexto.setString("Perdiste");
                 menuTexto.setCharacterSize(60);
                 menuTexto.setFillColor(sf::Color::Black);
@@ -475,6 +486,8 @@ void escenarioPelea()
                 {
                     window.close();
                 }
+
+
             }
 
 
@@ -544,7 +557,7 @@ void batallacueva()  // Crear una ventana
     bool turnoJugador = true;
     bool peleaActiva = true;
     bool opcionSeleccionada = false;
-    ;
+
 
     //PROBANDO GILADAS CARTEL DE VICTORIA
     sf::Clock WinCooldown;
@@ -552,7 +565,7 @@ void batallacueva()  // Crear una ventana
 
     // sonido, funca si podes configurar el codeblocks
       sf::SoundBuffer buffer;
-       buffer.loadFromFile("include/mamahuevo.wav");
+       buffer.loadFromFile("mamahuevo.wav");
 
        sf::Sound sound;
        sound.setBuffer(buffer);
@@ -671,7 +684,7 @@ void batallacueva()  // Crear una ventana
 
                         cout << "La vida del enemigo! es " << lobo.getVida() << endl;
 
-                        //sound.play();
+                        sound.play();
 
                         turnoJugador=false;
 
@@ -739,6 +752,22 @@ void batallacueva()  // Crear una ventana
                 // Limpiar la pantalla
                 window.clear();
 
+                // Dibujar el fondo
+            window.draw(fondo);
+
+            // Dibujar el monstruo seleccionado
+            if (monstruoSeleccionado != nullptr)
+            {
+                window.draw(*monstruoSeleccionado);
+            }
+            else
+            {
+                cout<<"mamahuevo"<<endl;
+            }
+
+            //dibujar monstruo jugador
+            window.draw(monstruoJugador);
+
                 //dibujar las opciones de la pelea
                 window.draw(menuTexto);
 
@@ -750,38 +779,42 @@ void batallacueva()  // Crear una ventana
     }
 }
 
+
 void starthistoria()
 {
-
     // Crear una ventana
-    sf::RenderWindow window(sf::VideoMode(800, 600), "escenario final Juego");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Escenario final Juego");
 
     // Establecer el límite de FPS
     window.setFramerateLimit(60);
 
-    // Crear un personaje
+    // Crear un personaje y cargar su posición
     Personaje rojo;
-
+    bool BanderaPos= true;
+    if(BanderaPos= true){
     rojo.cargarPosicion();
+    }
+
+    // Crear objetos colisionables
     piso suelo;
-    suelo.setPosition(405,580);
+    suelo.setPosition(405, 580);
     caverna cueva;
-    cueva.setPosition(250,100);
+    cueva.setPosition(250, 100);
     vallas valla;
-    valla.setPosition(0,445);
+    valla.setPosition(0, 445);
     vallas valla2;
-    valla2.setPosition(170,445);
+    valla2.setPosition(170, 445);
     vallas valla3;
-    valla3.setPosition(450,445);
+    valla3.setPosition(450, 445);
     vallas valla4;
-    valla4.setPosition(630,445);
+    valla4.setPosition(630, 445);
 
     // Crear fondo
     Escenariojefe fondo1;
 
     // Agregar un reloj para el cooldown de colisiones
     sf::Clock collisionCooldown;
-    float cooldownTime = 1;  // Cooldown de 2 segundos
+    float cooldownTime = 1.0f;  // Cooldown de 1 segundo
 
     // Game loop
     while (window.isOpen())
@@ -790,62 +823,69 @@ void starthistoria()
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
+            {
+                rojo.guardarPosicion();
                 window.close();
+            }
         }
+
         // Guardar la posición actual del personaje antes de moverlo
         sf::Vector2f previousPosition = rojo.getPosition();
 
-        std::vector<Colisionable*> colisionables = { &valla,&valla2,&valla3,&valla4 };
+        // Vector de colisionables
+        std::vector<Colisionable*> colisionables = {&valla, &valla2, &valla3, &valla4};
+
         // Actualizar el personaje
         rojo.update();
 
+        // Verificar colisiones después de actualizar la posición del personaje
         if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime)
         {
-            if(rojo.isCollision(suelo))
+            // Colisión con el suelo
+            if (rojo.isCollision(suelo))
             {
-
-                cout << "colision" << endl;
+                std::cout << "Colisión con el suelo" << std::endl;
                 collisionCooldown.restart();
                 rojo.guardarPosicion();
                 window.close();
                 startGame();
-
             }
-        }
-        if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime)
-        {
+
+            // Colisión con la cueva
             if (rojo.isCollision(cueva))
             {
+                std::cout << "Colisión con la cueva" << std::endl;
                 batallacueva();
                 collisionCooldown.restart();
             }
+
+            // Colisión con las vallas
             for (const auto& colisionable : colisionables)
             {
                 if (rojo.isCollision(*colisionable))
                 {
                     // Si hay colisión, revertir a la posición anterior
                     rojo.setPosition(previousPosition.x, previousPosition.y);
+                    collisionCooldown.restart();
                     break;
                 }
             }
-
-            // Dibujar todo
-            window.clear();
-
-            /************ Los window.draw se dibujan según su orden creando capas **************/
-            window.draw(fondo1);
-            window.draw(suelo);
-            window.draw(cueva);
-            ////////////////////////
-            window.draw(valla);
-            window.draw(valla2);
-            window.draw(valla3);
-            window.draw(valla4);
-            //////////////////////
-            window.draw(rojo);
-            window.display();
         }
 
+        // Dibujar todo
+        window.clear();
+
+        // Dibujar en el orden correcto
+        window.draw(fondo1);
+        window.draw(suelo);
+        window.draw(cueva);
+        window.draw(valla);
+        window.draw(valla2);
+        window.draw(valla3);
+        window.draw(valla4);
+        window.draw(rojo);
+
+        window.display();
     }
 }
 void llegadaisla()

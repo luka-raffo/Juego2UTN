@@ -21,12 +21,12 @@ private:
 
 
 
-
-    //nuevos atributos
-      int _nivel;
-    float _experiencia; // Nueva experiencia
 protected:
     sf::Sprite& getSprite();
+
+    //nuevos atributos
+    int _nivel;
+    float _experiencia; // Nueva experiencia
 
 
 
@@ -85,6 +85,9 @@ class Hornerot : public Monstruo
 private:
     sf::Texture _HornerotTexture; // Textura específica del Velom
 
+   //nuevos atributos
+    int _nivel;
+    float _experiencia; // Nueva experiencia
 
 
 public:
@@ -102,7 +105,9 @@ class Peluchin : public Monstruo
 {
 private:
     sf::Texture _PeluchinTexture; // Textura específica del Velom
-
+    //nuevos atributos
+    int _nivel;
+    float _experiencia; // Nueva experiencia
 
 
 public:
@@ -118,6 +123,9 @@ class balleton : public Monstruo
 {
 private:
     sf::Texture _BalletonTexture; // Textura específica del Velom
+   //nuevos atributos
+    int _nivel;
+    float _experiencia; // Nueva experiencia
 
 
 
@@ -138,6 +146,9 @@ class Velom : public Monstruo
 private:
     sf::Texture _velomTexture; // Textura específica del Velom
 
+//nuevos atributos
+    int _nivel;
+    float _experiencia; // Nueva experiencia
 
 
 
@@ -164,6 +175,9 @@ class Tukin : public Monstruo
 private:
     sf::Texture _TukinTexture; // Textura específica del Velom
 
+  //nuevos atributos
+    int _nivel;
+    float _experiencia; // Nueva experiencia
 
 
 public:
@@ -181,6 +195,9 @@ class Lechuza : public Monstruo
 private:
     sf::Texture _LechuzaTexture; // Textura específica del Velom
 
+    //nuevos atributos
+    int _nivel;
+    float _experiencia; // Nueva experiencia
 
 
 public:
@@ -198,6 +215,9 @@ class Bufalont : public Monstruo
 private:
     sf::Texture _BufalontTexture; // Textura específica del Velom
 
+  //nuevos atributos
+    int _nivel;
+    float _experiencia; // Nueva experiencia
 
 
 public:
@@ -215,6 +235,9 @@ class Lobizon : public Monstruo
 private:
     sf::Texture _LobizonTexture; // Textura específica del Velom
 
+//nuevos atributos
+    int _nivel;
+    float _experiencia; // Nueva experiencia
 
 
 public:
