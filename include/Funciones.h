@@ -12,6 +12,8 @@
 #include "Monstruo.h"
 #include "Escenario2.h"
 #include "escenario3.h"
+#include "Juego.h"
+
 
 using namespace std;
 void startGame();

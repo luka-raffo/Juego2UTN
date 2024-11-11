@@ -1304,18 +1304,18 @@
 	<SFML/Graphics.hpp>
 	<iostream>
 
-1731008953 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\monstruo.cpp
+1731271559 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\monstruo.cpp
 	"Monstruo.h"
 	<SFML/Graphics.hpp>
 	<iostream>
 	"inventory.h"
 
-1731008849 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\monstruo.h
+1731261296 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\monstruo.h
 	<SFML/Graphics.hpp>
 	<iostream>
 	"Colisionable.h"
 
-1730983582 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\personaje.cpp
+1731237413 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\personaje.cpp
 	"Personaje.h"
 
 1728848082 source:c:\users\brandon\onedrive\escritorio\juego2utn\funciones.cpp
@@ -1396,7 +1396,7 @@
 	"Escenario2.h"
 	"escenario3.h"
 
-1730983582 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\funciones.h
+1731261747 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\funciones.h
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	<Personaje.h>
@@ -1409,14 +1409,16 @@
 	"Monstruo.h"
 	"Escenario2.h"
 	"escenario3.h"
+	"Juego.h"
 
-1731014685 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\funciones.cpp
+1731282029 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\funciones.cpp
 	"Funciones.h"
 	"inventory.h"
 	"Personaje.h"
 	<cstdlib>
 	<ctime>
 	"AnimacionAtaque.h"
+	"Juego.h"
 
 1729687991 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\item.cpp
 	"Item.h"
@@ -2278,19 +2280,19 @@
 	<iostream>
 	"Colisionable.h"
 
-1730907893 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\escenario3.h
+1731237412 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\escenario3.h
 	<SFML/Graphics.hpp>
 	<iostream>
 	"Colisionable.h"
 	<SFML/Audio.hpp>
 
-1730907894 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\escenario3.cpp
+1731237413 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\escenario3.cpp
 	"escenario3.h"
 
 1730983582 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\escenario2.cpp
 	"Escenario2.h"
 
-1731010748 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\animacionataque.cpp
+1731014948 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\animacionataque.cpp
 	"AnimacionAtaque.h"
 
 1731014685 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\animacionataque.h
@@ -2301,4 +2303,14 @@
 
 1731091504 c:\users\brandon\onedrive\escritorio\juego2utn\include\animacionataque.h
 	<SFML/Graphics.hpp>
+
+1731283116 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\juego.cpp
+	"Juego.h"
+
+1731283116 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\juego.h
+	<SFML/Graphics.hpp>
+	<iostream>
+	<vector>
+	<string>
+	<Monstruo.h>
 

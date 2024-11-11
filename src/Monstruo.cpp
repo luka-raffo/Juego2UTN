@@ -3,11 +3,12 @@
 #include <iostream>
 #include "inventory.h"
 
+
 // Constructor por defecto de Monstruo con valores aleatorios
 Monstruo::Monstruo() : _vida(0), _danio(0), _defensa(0) {}
 
 // Constructor con parámetros
-Monstruo::Monstruo(float vida, float danio, float defensa): _vida(vida), _danio(danio), _defensa(defensa) {
+Monstruo::Monstruo(float vida, float danio, float defensa,string texturaArchivo): _vida(vida), _danio(danio), _defensa(defensa), _texturaArchivo(texturaArchivo) {
 
 
 
@@ -16,7 +17,9 @@ Monstruo::Monstruo(float vida, float danio, float defensa): _vida(vida), _danio(
 
 
 
-
+bool Monstruo::estaVivo(float vida) {
+        return vida > 0;
+    }
 
 
 
@@ -131,16 +134,12 @@ bool Monstruo::operator==(const Monstruo& other) const
 }
 
 // Función para dibujar
-void Monstruo::draw(sf::RenderTarget& target, sf::RenderStates states) const
-{
+void Monstruo::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     target.draw(_sprite, states);
 }
 
-// Función para obtener los límites del sprite
-sf::FloatRect Monstruo::getBounds() const
-{
-    return _sprite.getGlobalBounds();
-}
+
+
 
 // Método para cargar la textura del Monstruo
 bool Monstruo::cargarTextura(const std::string& archivo)
@@ -156,7 +155,7 @@ bool Monstruo::cargarTextura(const std::string& archivo)
 
 
 // Hornerot
-Hornerot::Hornerot(float vida, float danio, float defensa, const string& texturaArchivo) : Monstruo(vida, danio, defensa)
+Hornerot::Hornerot(float vida, float danio, float defensa, string texturaArchivo) : Monstruo(vida, danio, defensa,texturaArchivo)
 {
     if (!cargarTextura(texturaArchivo))
     {
@@ -176,7 +175,7 @@ void Hornerot::draw(sf::RenderTarget& target, sf::RenderStates states) const
 // Sobrescribir la función getBounds
 sf::FloatRect Hornerot::getBounds() const
 {
-    return Monstruo::getBounds();
+    return Hornerot::getBounds();
 }
 
 // Método para cargar la textura del Dragon
@@ -191,7 +190,7 @@ bool Hornerot::cargarTextura(const string& archivo)
 
 }
 //peluchin
-Peluchin::Peluchin(float vida, float danio, float defensa, const string& texturaArchivo) : Monstruo(vida, danio, defensa)
+Peluchin::Peluchin(float vida, float danio, float defensa, string texturaArchivo) : Monstruo(vida, danio, defensa,texturaArchivo)
 {
     if (!cargarTextura(texturaArchivo))
     {
@@ -211,7 +210,7 @@ void Peluchin::draw(sf::RenderTarget& target, sf::RenderStates states) const
 // Sobrescribir la función getBounds
 sf::FloatRect Peluchin::getBounds() const
 {
-    return Monstruo::getBounds();
+    return Peluchin::getBounds();
 }
 
 // Método para cargar la textura del Dragon
@@ -227,7 +226,7 @@ bool Peluchin::cargarTextura(const string& archivo)
 }
 //balleton
 
-balleton::balleton(float vida, float danio, float defensa, const string& texturaArchivo) : Monstruo(vida, danio, defensa)
+balleton::balleton(float vida, float danio, float defensa, string texturaArchivo) : Monstruo(vida, danio, defensa,texturaArchivo)
 {
     if (!cargarTextura(texturaArchivo))
     {
@@ -247,7 +246,7 @@ void balleton::draw(sf::RenderTarget& target, sf::RenderStates states) const
 // Sobrescribir la función getBounds
 sf::FloatRect balleton::getBounds() const
 {
-    return Monstruo::getBounds();
+    return balleton::getBounds();
 }
 
 // Método para cargar la textura del Dragon
@@ -263,7 +262,7 @@ bool balleton::cargarTextura(const string& archivo)
 }
 
 // Velom
-Velom::Velom(float vida, float danio, float defensa, const string& texturaArchivo) : Monstruo(vida, danio, defensa)
+Velom::Velom(float vida, float danio, float defensa,string texturaArchivo) : Monstruo(vida, danio, defensa,texturaArchivo)
 {
 
 if (!cargarTextura(texturaArchivo))
@@ -285,7 +284,7 @@ void Velom::draw(sf::RenderTarget& target, sf::RenderStates states) const
 // Sobrescribir la función getBounds
 sf::FloatRect Velom::getBounds() const
 {
-    return Monstruo::getBounds();
+    return Velom::getBounds();
 }
 
 // Método para cargar la textura del Dragon
@@ -301,7 +300,7 @@ bool Velom::cargarTextura(const string& archivo)
 
 //tukin
 
-Tukin::Tukin(float vida, float danio, float defensa, const string& texturaArchivo) : Monstruo(vida, danio, defensa)
+Tukin::Tukin(float vida, float danio, float defensa, string texturaArchivo) : Monstruo(vida, danio, defensa,texturaArchivo)
 {
     if (!cargarTextura(texturaArchivo))
     {
@@ -321,7 +320,7 @@ void Tukin::draw(sf::RenderTarget& target, sf::RenderStates states) const
 // Sobrescribir la función getBounds
 sf::FloatRect Tukin::getBounds() const
 {
-    return Monstruo::getBounds();
+    return Tukin    ::getBounds();
 }
 
 // Método para cargar la textura del Dragon
@@ -335,7 +334,7 @@ bool Tukin::cargarTextura(const string& archivo)
     return true;
 }
 //lechuza
-Lechuza::Lechuza(float vida, float danio, float defensa, const string& texturaArchivo) : Monstruo(vida, danio, defensa)
+Lechuza::Lechuza(float vida, float danio, float defensa, string texturaArchivo) : Monstruo(vida, danio, defensa,texturaArchivo)
 {
     if (!cargarTextura(texturaArchivo))
     {
@@ -355,7 +354,7 @@ void Lechuza::draw(sf::RenderTarget& target, sf::RenderStates states) const
 // Sobrescribir la función getBounds
 sf::FloatRect Lechuza::getBounds() const
 {
-    return Monstruo::getBounds();
+    return Lechuza::getBounds();
 }
 
 // Método para cargar la textura del Dragon
@@ -369,7 +368,7 @@ bool Lechuza::cargarTextura(const string& archivo)
     return true;
 }
 //bufalont
-Bufalont::Bufalont(float vida, float danio, float defensa, const string& texturaArchivo) : Monstruo(vida, danio, defensa)
+Bufalont::Bufalont(float vida, float danio, float defensa, string texturaArchivo) : Monstruo(vida, danio, defensa,texturaArchivo)
 {
     if (!cargarTextura(texturaArchivo))
     {
@@ -389,7 +388,7 @@ void Bufalont::draw(sf::RenderTarget& target, sf::RenderStates states) const
 // Sobrescribir la función getBounds
 sf::FloatRect Bufalont::getBounds() const
 {
-    return Monstruo::getBounds();
+    return Bufalont::getBounds();
 }
 
 // Método para cargar la textura del Dragon
@@ -403,7 +402,7 @@ bool Bufalont::cargarTextura(const string& archivo)
     return true;
 }
 //Lobizon
-Lobizon::Lobizon(float vida, float danio, float defensa, const string& texturaArchivo) : Monstruo(vida, danio, defensa)
+Lobizon::Lobizon(float vida, float danio, float defensa,string texturaArchivo) : Monstruo(vida, danio, defensa,texturaArchivo)
 {
     if (!cargarTextura(texturaArchivo))
     {
@@ -420,7 +419,7 @@ void Lobizon::draw(sf::RenderTarget& target, sf::RenderStates states) const
 // Sobrescribir la función getBounds
 sf::FloatRect Lobizon::getBounds() const
 {
-    return Monstruo::getBounds();
+    return Lobizon::getBounds();
 }
 
 // Método para cargar la textura del Dragon

@@ -6,14 +6,17 @@
 
 using namespace std;
 
-class Monstruo :public sf::Drawable, public Colisionable
+
+
+class Monstruo :public sf::Drawable
 {
 private:
     string nombre;
+    string _texturaArchivo;
     float _vida;
     float _danio;
     float _defensa;
-    sf::Sprite _sprite;
+
     sf::Texture _texture;
 
 
@@ -31,8 +34,12 @@ protected:
 
 
 public:
+        sf::Sprite _sprite;
+
         Monstruo();  // Constructor por defecto
-        Monstruo(float vida, float danio, float defensa);
+        Monstruo(float vida, float danio, float defensa,string texturaArchivo);
+
+        bool estaVivo(float vida);
 
         bool cargarTextura(const string& archivo);
 
@@ -59,9 +66,9 @@ public:
         void setDefensa(float defensa);
 
         // Métodos para nivel y experiencia
-    int getNivel() const;
-    float getExperiencia() const;
-    void ganarExperiencia(float exp);
+        int getNivel() const;
+        float getExperiencia() const;
+        void ganarExperiencia(float exp);
 
         // Métodos para posición y escala
         void setPosition(float x, float y);
@@ -75,12 +82,16 @@ public:
         // Sobrecarga del operador ==
         bool operator==(const Monstruo& other) const;
 
-        // Funciones virtuales puras
-        virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override = 0;
-        virtual sf::FloatRect getBounds() const override = 0;
+        void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
+
+
 };
+
+
+
 //hornerot
-class Hornerot : public Monstruo
+class Hornerot : public Monstruo, public Colisionable
 {
 private:
     sf::Texture _HornerotTexture; // Textura específica del Velom
@@ -92,7 +103,7 @@ private:
 
 public:
     Hornerot();
-    Hornerot(float vida, float danio, float defensa, const string& texturaArchivo);
+    Hornerot(float vida, float danio, float defensa, string texturaArchivo);
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     sf::FloatRect getBounds() const override;
@@ -101,7 +112,7 @@ public:
 };
 //peluchin
 
-class Peluchin : public Monstruo
+class Peluchin : public Monstruo, public Colisionable
 {
 private:
     sf::Texture _PeluchinTexture; // Textura específica del Velom
@@ -112,14 +123,14 @@ private:
 
 public:
     Peluchin();
-    Peluchin(float vida, float danio, float defensa, const string& texturaArchivo);
+    Peluchin(float vida, float danio, float defensa, string texturaArchivo);
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     sf::FloatRect getBounds() const override;
 
      bool cargarTextura(const string& archivo);
 };
-class balleton : public Monstruo
+class balleton : public Monstruo, public Colisionable
 {
 private:
     sf::Texture _BalletonTexture; // Textura específica del Velom
@@ -131,7 +142,7 @@ private:
 
 public:
     balleton();
-    balleton(float vida, float danio, float defensa, const string& texturaArchivo);
+    balleton(float vida, float danio, float defensa, string texturaArchivo);
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     sf::FloatRect getBounds() const override;
@@ -141,7 +152,7 @@ public:
 
 
 
-class Velom : public Monstruo
+class Velom : public Monstruo, public Colisionable
 {
 private:
     sf::Texture _velomTexture; // Textura específica del Velom
@@ -156,7 +167,7 @@ private:
 
 public:
     Velom();
-    Velom(float vida, float danio, float defensa, const string& texturaArchivo);
+    Velom(float vida, float danio, float defensa, string texturaArchivo);
 
 
     void actualizar();
@@ -170,7 +181,7 @@ public:
 
 
 //tukin
-class Tukin : public Monstruo
+class Tukin : public Monstruo, public Colisionable
 {
 private:
     sf::Texture _TukinTexture; // Textura específica del Velom
@@ -182,7 +193,7 @@ private:
 
 public:
     Tukin();
-    Tukin(float vida, float danio, float defensa, const string& texturaArchivo);
+    Tukin(float vida, float danio, float defensa, string texturaArchivo);
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     sf::FloatRect getBounds() const override;
@@ -190,7 +201,7 @@ public:
      bool cargarTextura(const string& archivo);
 };
 //lechuza
-class Lechuza : public Monstruo
+class Lechuza : public Monstruo, public Colisionable
 {
 private:
     sf::Texture _LechuzaTexture; // Textura específica del Velom
@@ -202,7 +213,7 @@ private:
 
 public:
     Lechuza();
-    Lechuza(float vida, float danio, float defensa, const string& texturaArchivo);
+    Lechuza(float vida, float danio, float defensa, string texturaArchivo);
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     sf::FloatRect getBounds() const override;
@@ -210,7 +221,7 @@ public:
      bool cargarTextura(const string& archivo);
 };
 //bufalont
-class Bufalont : public Monstruo
+class Bufalont : public Monstruo, public Colisionable
 {
 private:
     sf::Texture _BufalontTexture; // Textura específica del Velom
@@ -222,7 +233,7 @@ private:
 
 public:
     Bufalont();
-    Bufalont(float vida, float danio, float defensa, const string& texturaArchivo);
+    Bufalont(float vida, float danio, float defensa,string texturaArchivo);
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     sf::FloatRect getBounds() const override;
@@ -230,7 +241,7 @@ public:
      bool cargarTextura(const string& archivo);
 };
 //lechuza
-class Lobizon : public Monstruo
+class Lobizon : public Monstruo, public Colisionable
 {
 private:
     sf::Texture _LobizonTexture; // Textura específica del Velom
@@ -242,7 +253,7 @@ private:
 
 public:
     Lobizon();
-    Lobizon(float vida, float danio, float defensa, const string& texturaArchivo);
+    Lobizon(float vida, float danio, float defensa,string texturaArchivo);
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     sf::FloatRect getBounds() const override;

@@ -4,12 +4,13 @@
 #include <cstdlib>  // Para rand() y srand()
 #include <ctime>    // Para time()
 #include "AnimacionAtaque.h"
-
+#include "Juego.h"
 
 using namespace std;
 
-bool FuncionPos(){
-bool banderaPos = true;
+bool FuncionPos()
+{
+    bool banderaPos = true;
 
 
 
@@ -145,10 +146,13 @@ void escenarioPelea()
 
     //crear monstruo jugador
     Velom monstruoJugador(100.0f, 50.0f, 30.0f,"include/velom.PNG");
-    Tukin monstruojugador1(100.0f, 50.0f, 30.0f,"include/tukin.PNG");
-    Lechuza montruojugador2(100.0f, 50.0f, 30.0f,"include/FuckingLechuza.PNG");
-    balleton monstruojugador3(100.0f, 50.0f, 30.0f,"include/balleton.PNG");
-    Bufalont monstruojugador4(100.0f, 50.0f, 30.0f,"include/bufalont.PNG");
+
+    Juego juego;
+
+    juego.agregarMonstruo(new Velom(20.0f, 50.0f, 30.0f, "include/velom.PNG"));
+    juego.agregarMonstruo(new Bufalont(1000.0f, 50.0f, 30.0f, "include/bufalont.PNG"));
+    juego.setPositionTodosMonstruos(570, 160);
+
 
 
     // Crear los monstruos
@@ -182,9 +186,10 @@ void escenarioPelea()
     sf::Clock WinCooldown;
     float cooldownTime = 5;
 
-     // Crear buffer para el sonido de ataque
+    // Crear buffer para el sonido de ataque
     sf::SoundBuffer bufferAtaque;
-    if (!bufferAtaque.loadFromFile("mamahuevo.wav")) {
+    if (!bufferAtaque.loadFromFile("mamahuevo.wav"))
+    {
         std::cout << "Error al cargar mamahuevo.wav" << std::endl;
     }
     sf::Sound sonidoAtaque;
@@ -197,7 +202,7 @@ void escenarioPelea()
     // Crear elementos del menú en pantalla
     sf::Font font;
     font.loadFromFile("include/Pokemon.ttf");
-   sf::Text menuTexto;
+    sf::Text menuTexto;
 
     menuTexto.setFont(font);
     menuTexto.setString("1) Atacar  2) Defender");
@@ -229,7 +234,9 @@ void escenarioPelea()
     // Asignar monstruo según probabilidad
     if (probabilidad < 0)    // 20% de probabilidad para Hornerot
     {
-        vel.setPosition(570, 160);
+
+
+
 
 
         monstruoSeleccionado = &monstruo;
@@ -251,15 +258,14 @@ void escenarioPelea()
 
     else if (probabilidad < 100)    // 10% de probabilidad para Velom (60 + 10 = 70)
     {
-        vel.setPosition(570, 160);
-        monstruoSeleccionado = &vel;
+        juego.setPosition(570, 160);
+
         cout<<"hola"<<endl;
-        inventario.agregarItem(vel);
-        inventario.mostrarInventario();
-        vel.setScale(2,2);
-        cout<<"la vida del enemigo es: " << vel.getVida()<<endl;
-        cout<<"el daño del enemigo es: " << vel.getDanio()<<endl;
-        cout<<"La defensa del enemigo es: " << vel.getDefensa()<<endl;
+
+        juego.setScale(2,2);
+        cout<<"la vida del enemigo es: " << juego.getVidaMonstruoActual()<<endl;
+        cout<<"el daño del enemigo es: " << juego.getDanioMonstruoActual()<<endl;
+        cout<<"La defensa del enemigo es: " << juego.getDefensaMonstruoActual()<<endl;
         if (capturable)
         {
             cout << " 3) Capturar" << endl;
@@ -337,21 +343,21 @@ void escenarioPelea()
 
 
 
-                    if (vel.getDefensa() > monstruoJugador.getDanio())
+                    if (juego.getDefensaMonstruoActual() > monstruoJugador.getDanio())
                     {
                         cout << "El enemigo ah bloqueado tu ataque!" << endl;
-                        vel.setDefensa(vel.getDefensa()-monstruoJugador.getDanio());
+                        juego.setDefensaMonstruoActual(juego.getDefensaMonstruoActual()-monstruoJugador.getDanio());
                     }
-                    else if(monstruoJugador.getDefensa()<=vel.getDanio())
+                    else if(monstruoJugador.getDefensa()<=juego.getDanioMonstruoActual())
                     {
 
                         cout << "Tu Monstruo ah hecho " << monstruoJugador.getDanio()<<" de daño" << endl;
 
-                        vel.setVida(vel.getVida()+vel.getDefensa()-monstruoJugador.getDanio());
+                        juego.setVidaMonstruoActual(juego.getVidaMonstruoActual()+juego.getDefensaMonstruoActual()-monstruoJugador.getDanio());
 
-                        cout << "La vida del enemigo es: "<< vel.getVida() << endl;
+                        cout << "La vida del enemigo es: "<< juego.getVidaMonstruoActual() << endl;
 
-                        vel.setDefensa(0);
+                        juego.setDefensaMonstruoActual(0);
 
 
 
@@ -403,19 +409,19 @@ void escenarioPelea()
 
 
 
-                if (monstruoJugador.getDefensa() > vel.getDanio())
+                if (monstruoJugador.getDefensa() > juego.getDanioMonstruoActual())
                 {
                     cout << "El ataque fue bloqueado con exito!" << endl;
-                    monstruoJugador.setDefensa(monstruoJugador.getDefensa()-vel.getDanio());
+                    monstruoJugador.setDefensa(monstruoJugador.getDefensa()-juego.getDanioMonstruoActual());
                     // Cambiar turno al jugador
                     turnoJugador = true;
                 }
-                else if(monstruoJugador.getDefensa()<=vel.getDanio())
+                else if(monstruoJugador.getDefensa()<=juego.getDanioMonstruoActual())
                 {
 
-                    cout << "El enemigo ah hecho: "<< vel.getDanio() << endl;
+                    cout << "El enemigo ah hecho: "<< juego.getDanioMonstruoActual() << endl;
 
-                    monstruoJugador.setVida(monstruoJugador.getVida()+monstruoJugador.getDefensa()-vel.getDanio());
+                    monstruoJugador.setVida(monstruoJugador.getVida()+monstruoJugador.getDefensa()-juego.getDanioMonstruoActual());
 
                     cout << "La vida de tu pokemon es: "<< monstruoJugador.getVida() << endl;
 
@@ -429,7 +435,8 @@ void escenarioPelea()
 
 
 
-            }} /*else if
+            }
+        } /*else if
         {
             // Probabilidad de curación para el enemigo
             int probabilidadCura = rand() % 100;
@@ -442,17 +449,21 @@ void escenarioPelea()
             }}*/
 
 
-            ataque.update();
+        ataque.update();
 
-            // Limpiar la pantalla
-            window.clear();
+        // Limpiar la pantalla
+        window.clear();
 
-            // Verificar si el enemigo es capturable
-            if (vel.getVida() <= vel.getVida() * 0.25)
-            {
-                capturable = true;
-            }
-            if(vel.getVida()<=0)
+        // Verificar si el enemigo es capturable
+        if (juego.getVidaMonstruoActual() <= juego.getVidaMonstruoActual() * 0.25)
+        {
+            capturable = true;
+        }
+        if(juego.getVidaMonstruoActual()<=0)
+        {
+
+            if(juego.pasarAlSiguienteMonstruo()) {}
+            else
             {
                 //cout<<"FELICIDADES GANASTE"<<endl;
                 menuTexto.setString("Eres el vencedor");
@@ -471,58 +482,50 @@ void escenarioPelea()
                 cout << "Ganaste " << expGanada << " puntos de experiencia!" << endl;
 
                 peleaActiva = false;
-
             }
-            else if(monstruoJugador.getVida()<=0)
+        }
+        else if(monstruoJugador.getVida()<=0)
+        {
+
+
+            menuTexto.setString("Perdiste");
+            menuTexto.setCharacterSize(60);
+            menuTexto.setFillColor(sf::Color::Black);
+            menuTexto.setPosition(150, 170);
+            window.draw(menuTexto);
+            if (WinCooldown.getElapsedTime().asSeconds() >= cooldownTime)
             {
-
-
-                menuTexto.setString("Perdiste");
-                menuTexto.setCharacterSize(60);
-                menuTexto.setFillColor(sf::Color::Black);
-                menuTexto.setPosition(150, 170);
-                window.draw(menuTexto);
-                if (WinCooldown.getElapsedTime().asSeconds() >= cooldownTime)
-                {
-                    window.close();
-                }
-
-
+                window.close();
             }
 
 
+        }
 
 
 
 
-            // Mostrar lo dibujado
 
-            // Dibujar el fondo
-            window.draw(fondo);
 
-            // Dibujar el monstruo seleccionado
-            if (monstruoSeleccionado != nullptr)
-            {
-                window.draw(*monstruoSeleccionado);
-            }
-            else
-            {
-                cout<<"mamahuevo"<<endl;
-            }
+        // Mostrar lo dibujado
 
-            //dibujar monstruo jugador
-            window.draw(monstruoJugador);
-             // Dibujar opciones de pelea siempre en pantalla
-               window.draw(menuTexto);
+        // Dibujar el fondo
+        window.draw(fondo);
 
 
 
-            window.draw(ataque);
+        //dibujar monstruo jugador
+        window.draw(monstruoJugador);
+        // Dibujar opciones de pelea siempre en pantalla
+        window.draw(menuTexto);
 
-            //dibujar las opciones de la pelea
 
 
-            window.display();
+        window.draw(ataque);
+
+        //dibujar las opciones de la pelea
+
+        juego.dibujar(window);
+        window.display();
 
 
 
@@ -564,11 +567,11 @@ void batallacueva()  // Crear una ventana
     float cooldownTime = 2;
 
     // sonido, funca si podes configurar el codeblocks
-      sf::SoundBuffer buffer;
-       buffer.loadFromFile("mamahuevo.wav");
+    sf::SoundBuffer buffer;
+    buffer.loadFromFile("mamahuevo.wav");
 
-       sf::Sound sound;
-       sound.setBuffer(buffer);
+    sf::Sound sound;
+    sound.setBuffer(buffer);
 
 
 
@@ -753,20 +756,20 @@ void batallacueva()  // Crear una ventana
                 window.clear();
 
                 // Dibujar el fondo
-            window.draw(fondo);
+                window.draw(fondo);
 
-            // Dibujar el monstruo seleccionado
-            if (monstruoSeleccionado != nullptr)
-            {
-                window.draw(*monstruoSeleccionado);
-            }
-            else
-            {
-                cout<<"mamahuevo"<<endl;
-            }
+                // Dibujar el monstruo seleccionado
+                if (monstruoSeleccionado != nullptr)
+                {
+                    window.draw(*monstruoSeleccionado);
+                }
+                else
+                {
+                    cout<<"mamahuevo"<<endl;
+                }
 
-            //dibujar monstruo jugador
-            window.draw(monstruoJugador);
+                //dibujar monstruo jugador
+                window.draw(monstruoJugador);
 
                 //dibujar las opciones de la pelea
                 window.draw(menuTexto);
@@ -791,8 +794,9 @@ void starthistoria()
     // Crear un personaje y cargar su posición
     Personaje rojo;
     bool BanderaPos= true;
-    if(BanderaPos= true){
-    rojo.cargarPosicion();
+    if(BanderaPos= true)
+    {
+        rojo.cargarPosicion();
     }
 
     // Crear objetos colisionables
@@ -896,7 +900,7 @@ void llegadaisla()
 
     // Crear el personaje y definir su posición inicial
     Personaje rojo;
-   rojo.cargarPosicion();
+    rojo.cargarPosicion();
     // Crear fondo y otros objetos
     pasto suelo;
     suelo.setPosition(400, 155);
