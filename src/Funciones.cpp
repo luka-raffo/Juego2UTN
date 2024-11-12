@@ -8,14 +8,7 @@
 
 using namespace std;
 
-bool FuncionPos()
-{
-    bool banderaPos = true;
 
-
-
-
-}
 void startGame()
 {
     // Crear una ventana
@@ -26,10 +19,15 @@ void startGame()
 
     // Crear un personaje
     Personaje rojo;
-    int Banderaposicion;
-    rojo.cargarPosicion();
+    int Banderaposicion = 0; // Inicializamos la bandera en 0
 
 
+    // Ajustar posición inicial según la bandera antes del bucle de juego
+    if (Banderaposicion == 1) {
+        rojo.setPosition(650, 0);  // Posición para piso 1
+    } else {
+        rojo.setPosition(0, 235);  // Posición para piso 2
+    }
 
     // Crear lista de bush
     vector<bush6x4> listaBushes;
@@ -40,16 +38,19 @@ void startGame()
     listaBushes.push_back(b1);
     listaBushes.push_back(b2);
     listaBushes.push_back(b3);
+
+    // Crear pisos
     piso suelo;
-    suelo.setPosition(650,0);
+    suelo.setPosition(650, 0);
     piso suelo2;
-    suelo2.setPosition(0,235);
+    suelo2.setPosition(0, 235);
 
     // Crear fondo
     escenario Fondo;
+
     // Agregar un reloj para el cooldown de colisiones
     sf::Clock collisionCooldown;
-    float cooldownTime = 1;  // Cooldown de 2 segundos
+    float cooldownTime = 1;  // Cooldown de 1 segundo
 
     // Game loop
     while (window.isOpen())
@@ -68,6 +69,7 @@ void startGame()
         if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime)
         {
             int EventoPokemon = 2;
+
             // Verificar colisiones con cada objeto en la lista
             for (const bush6x4& b : listaBushes)
             {
@@ -77,7 +79,6 @@ void startGame()
                     if (EventoPokemon <= 2000)
                     {
                         escenarioPelea();
-                        // Reiniciar el reloj del cooldown al activar la pelea
                         collisionCooldown.restart();
                     }
 
@@ -85,37 +86,35 @@ void startGame()
                     break;  // Evitar múltiples colisiones en un mismo frame
                 }
             }
-        }
-        if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime)
-        {
+
+            // Colisión con el suelo 1
             if (rojo.isCollision(suelo))
             {
                 starthistoria();
-                Banderaposicion=1;
+                Banderaposicion = 0;
+                rojo.setPosition(650, 0);  // Reposicionar al colisionar con suelo 1
                 collisionCooldown.restart();
                 rojo.guardarPosicion();
                 window.close();
             }
-        }
-        if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime)
-        {
+
+            // Colisión con el suelo 2
             if (rojo.isCollision(suelo2))
             {
                 llegadaisla();
-                Banderaposicion=0;
-                rojo.guardarPosicion();
+                Banderaposicion = 1;
+                rojo.setPosition(0, 235);  // Reposicionar al colisionar con suelo 2
                 collisionCooldown.restart();
+                rojo.guardarPosicion();
                 window.close();
             }
         }
 
         // Dibujar todo
         window.clear();
-
-        /************ Los window.draw se dibujan según su orden creando capas **************/
         window.draw(Fondo);
 
-        // Recorrer la lista y dibujar los bush
+        // Dibujar bush y demás objetos
         for (const bush6x4& b : listaBushes)
         {
             window.draw(b);
@@ -127,451 +126,6 @@ void startGame()
     }
 }
 
-void escenarioPelea()
-{
-    // Inicializa la semilla del generador de números aleatorios
-    srand(static_cast<unsigned>(time(0)));
-
-    bool b_ataqueJugador=false;
-
-    // Crear una ventana
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Inicia la pelea");
-
-    // Establecer el límite de FPS
-    window.setFramerateLimit(60);
-
-    inventory inventario(100);
-
-
-
-    //crear monstruo jugador
-    Velom monstruoJugador(100.0f, 50.0f, 30.0f,"include/velom.PNG");
-
-    Juego juego;
-
-    juego.agregarMonstruo(new Velom(10.0f, 50.0f, 30.0f, "include/velom.PNG"));
-   juego.agregarMonstruo(new Bufalont (10.0f, 50.0f, 30.0f, "include/bufalont.PNG"));
-    juego.agregarMonstruo(new Tukin(10.0f, 50.0f, 30.0f, "include/tukin.PNG"));
-    juego.agregarMonstruo(new Lechuza(10.0f, 50.0f, 30.0f, "include/FuckingLechuza.PNG"));
-    juego.agregarMonstruo(new Peluchin(10.0f, 50.0f, 30.0f, "include/pelucin.PNG"));
-    juego.agregarMonstruo(new Peluchin(10.0f, 50.0f, 30.0f, "include/balleton.PNG"));
-    juego.setPositionTodosMonstruos(570, 160);
-
-
-
-    // Crear los monstruos
-    Velom monstruo(100.0f, 50.0f, 30.0f,"include/velom.PNG");
-
-    Velom vel (1000.0f, 50.0f, 30.0f, "include/velom.PNG");
-    //Pelucin pelu;
-    Peluchin pelu(100.0f, 50.0f, 30.0f,"include/pelucin.PNG");
-    //Tukin tuki;
-    Tukin tuka(100.0f, 50.0f, 30.0f,"include/tukin.PNG");
-    //Lechuza lechu;
-    Lechuza lechu(100.0f, 50.0f, 30.0f,"include/FuckingLechuza.PNG");
-    //Balleton ballena;
-    balleton ballena(100.0f, 50.0f, 30.0f,"include/balleton.PNG");
-    //Bufalont bufalo;
-    Bufalont bufalo(100.0f, 50.0f, 30.0f,"include/bufalont.PNG");
-
-
-
-    AnimacionAtaque ataque;
-
-
-    // Variables de pelea
-    bool turnoJugador = true;  // Variable para alternar los turnos
-    bool capturable = false;   // Indica si el monstruo puede ser capturado
-    bool peleaActiva = true;
-    bool opcionSeleccionada = false;
-
-
-    //PROBANDO cosas del CARTEL DE VICTORIA
-    sf::Clock WinCooldown;
-    float cooldownTime = 15;
-
-    // Crear buffer para el sonido de ataque
-    sf::SoundBuffer bufferAtaque;
-    if (!bufferAtaque.loadFromFile("mamahuevo.wav"))
-    {
-        std::cout << "Error al cargar mamahuevo.wav" << std::endl;
-    }
-    sf::Sound sonidoAtaque;
-    sonidoAtaque.setBuffer(bufferAtaque);
-    ///////////////////////////////////
-    /////////////////////////////////////////
-  sf::SoundBuffer bufferDefensa;
-    if (!bufferDefensa.loadFromFile("Sonidos/paaraaaaa.wav"))
-    {
-        std::cout << "Error al cargar paaraaaaa.wav" << std::endl;
-    }
-    sf::Sound sonidoDefensa;
-    sonidoDefensa.setBuffer(bufferDefensa);
-    /////////////////////////////////////
-    sf::SoundBuffer bufferPelea;
-    if (!bufferPelea.loadFromFile("Sonidos/omg-esto-va-a-ser-epico-papus.wav"))
-    {
-        std::cout << "Error al cargar omg-esto-va-a-ser-epico-papus.wav" << std::endl;
-    }
-    sf::Sound sonidoPelea;
-    sonidoPelea.setBuffer(bufferPelea);
-///////////////////////////////////////////
-  sf::SoundBuffer bufferDerrota;
-    if (!bufferDerrota.loadFromFile("Sonidos/estoy-cansado-jefe.wav"))
-    {
-        std::cout << "Error al cargar estoy-cansado-jefe.wav" << std::endl;
-    }
-    sf::Sound sonidoDerrota;
-    sonidoDerrota.setBuffer(bufferDerrota);
-    //////////////////////////////////////
-      sf::SoundBuffer bufferVictoria;
-    if (!bufferVictoria.loadFromFile("Sonidos/bokita.wav"))
-    {
-        std::cout << "Error al cargar bokita.wav" << std::endl;
-    }
-    sf::Sound sonidoVictoria;
-    sonidoVictoria.setBuffer(bufferVictoria);
-
-    // crear el fondo
-    BattleBackground fondo;
-
-
-    // Crear elementos del menú en pantalla
-    sf::Font font;
-    font.loadFromFile("include/Pokemon.ttf");
-    sf::Text menuTexto;
-
-    menuTexto.setFont(font);
-    menuTexto.setString("1) Atacar  2) Defender");
-    menuTexto.setCharacterSize(24);
-    menuTexto.setFillColor(sf::Color::Black);
-    menuTexto.setPosition(350, 400);
-
-    //elementos monstruo jugador
-    monstruoJugador.setPosition(30, 350);  // Jugador a la izquierda
-    monstruoJugador.setScale(4,4);
-    float defensaTotal;
-
-    //cartel opciones pelea
-    // Submenú para que el jugador elija la acción: atacar, defender, capturar (si es posible)
-    cout << "Elige una acción: 1) Atacar 2) Defender"<<endl;
-
-
-    cout<<"la vida de tu pokemon es: "<<monstruoJugador.getVida()<<endl;
-    cout<<"el daño de tu pokemon es: "<<monstruoJugador.getDanio()<<endl;
-    cout<<"La defensa de tu pokemon es: "<<monstruoJugador.getDefensa()<<endl;
-
-
-
-
-    // Seleccionar un monstruo aleatorio con probabilidades distintas
-    int probabilidad = std::rand() % 100;  // Generar un número entre 0 y 99 (100 posibles valores)
-    sf::Drawable* monstruoSeleccionado = nullptr;
-
-    // Asignar monstruo según probabilidad
-    if (probabilidad < 0)    // 20% de probabilidad para Hornerot
-    {
-
-
-
-
-
-        monstruoSeleccionado = &monstruo;
-        cout<<"entro al if"<<endl;
-    }
-
-
-    else if (probabilidad < 35) {  // 15% de probabilidad para Pelucin (20 + 15 = 35)
-        pelu.setPosition(570, 160);
-        monstruoSeleccionado = &pelu;
-    }
-
-
-    else if (probabilidad < 60) {  // 25% de probabilidad para Tukin (35 + 25 = 60)
-        tuka.setPosition(570, 160);
-        monstruoSeleccionado = &tuka;
-    }
-
-
-    else if (probabilidad < 100)    // 10% de probabilidad para Velom (60 + 10 = 70)
-    {
-        juego.setPosition(570, 160);
-
-        cout<<"hola"<<endl;
-        sonidoPelea.play();
-
-        juego.setScale(2,2);
-        cout<<"la vida del enemigo es: " << juego.getVidaMonstruoActual()<<endl;
-        cout<<"el daño del enemigo es: " << juego.getDanioMonstruoActual()<<endl;
-        cout<<"La defensa del enemigo es: " << juego.getDefensaMonstruoActual()<<endl;
-        if (capturable)
-        {
-            cout << " 3) Capturar" << endl;
-        }
-
-    }
-
-
-    else if (probabilidad < 80) {  // 10% de probabilidad para Lechuza (70 + 10 = 80)
-        lechu.setPosition(570, 160);
-        monstruoSeleccionado = &lechu;
-    }
-
-
-    else if (probabilidad < 90) {  // 10% de probabilidad para Balleton (80 + 10 = 90)
-        ballena.setPosition(570, 160);
-        monstruoSeleccionado = &ballena;
-    }
-
-
-    else {  // 10% de probabilidad para Bufalont (90 a 99)
-        bufalo.setPosition(570, 160);
-        monstruoSeleccionado = &bufalo;
-    }
-
-
-
-
-
-    // Bucle del juego
-
-    while (window.isOpen() && peleaActiva)
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-
-            // Salir del escenario al presionar ESC
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
-            {
-                window.close();
-            }
-
-
-
-
-            // Lógica de pelea por turnos
-
-            if (turnoJugador)
-            {
-
-
-
-
-                //opciones de pelea
-                if (event.type == sf::Event::KeyPressed && event.key.code ==  sf::Keyboard::Num1)    // Atacar
-                {
-
-
-                    cout << "Atacas al enemigo!" << endl;
-
-
-                    ataque.startAnimation();
-
-                    //sonidoAtaque.play(); // Reproducir sonido de ataque
-
-
-                    b_ataqueJugador=true;
-                    sonidoAtaque.play();
-
-
-
-
-
-
-                    if (juego.getDefensaMonstruoActual() > monstruoJugador.getDanio())
-                    {
-                        cout << "El enemigo ah bloqueado tu ataque!" << endl;
-                        juego.setDefensaMonstruoActual(juego.getDefensaMonstruoActual()-monstruoJugador.getDanio());
-                    }
-                    else if(monstruoJugador.getDefensa()<=juego.getDanioMonstruoActual())
-                    {
-
-                        cout << "Tu Monstruo ah hecho " << monstruoJugador.getDanio()<<" de daño" << endl;
-
-                        juego.setVidaMonstruoActual(juego.getVidaMonstruoActual()+juego.getDefensaMonstruoActual()-monstruoJugador.getDanio());
-
-                        cout << "La vida del enemigo es: "<< juego.getVidaMonstruoActual() << endl;
-
-                        juego.setDefensaMonstruoActual(0);
-
-
-
-                    }
-
-
-
-
-
-                    turnoJugador=false;
-
-                }
-                else if (event.type == sf::Event::KeyPressed && event.key.code ==  sf::Keyboard::Num2)      // Defender
-                {
-                    cout << "Te defiendes!" << endl;
-
-                    monstruoJugador.setDefensa( rand() % 100 + 1);
-                    cout<<"defensa mi monstruo aumento = "<<monstruoJugador.getDefensa()<<endl;
-
-                     sonidoDefensa.play();
-                    turnoJugador=false;
-
-
-                }
-
-                /* else if (event.type == sf::Event::KeyPressed && event.key.code ==  sf::Keyboard::Num3 && capturable)    // Capturar
-                 {
-                     cout << "Intentas capturar al enemigo!" << endl;
-                     int probCaptura = rand() % 100;
-                     if (probCaptura < 50)    // Supongamos una chance de 50%
-                     {
-                         cout << "Capturaste al enemigo!" << endl;
-                         // inventario.agregarItem(enemigo);
-                         peleaActiva = false;
-                     }
-                     else
-                     {
-                         cout << "El intento de captura falló." << endl;
-                     }
-                     turnoJugador=false;
-                 }*/
-
-
-            }
-            else
-            {
-                // Turno del enemigo
-                cout << "El enemigo ataca!" << endl;
-
-
-
-                if (monstruoJugador.getDefensa() > juego.getDanioMonstruoActual())
-                {
-                    cout << "El ataque fue bloqueado con exito!" << endl;
-                    monstruoJugador.setDefensa(monstruoJugador.getDefensa()-juego.getDanioMonstruoActual());
-                    // Cambiar turno al jugador
-                    turnoJugador = true;
-                }
-                else if(monstruoJugador.getDefensa()<=juego.getDanioMonstruoActual())
-                {
-
-                    cout << "El enemigo ah hecho: "<< juego.getDanioMonstruoActual() << endl;
-
-                    monstruoJugador.setVida(monstruoJugador.getVida()+monstruoJugador.getDefensa()-juego.getDanioMonstruoActual());
-
-                    cout << "La vida de tu pokemon es: "<< monstruoJugador.getVida() << endl;
-
-                    monstruoJugador.setDefensa(0);
-                    // Cambiar turno al jugador
-                    turnoJugador = true;
-
-                }
-                cout<<"defensa mi monstruo= "<<monstruoJugador.getDefensa()<<endl;
-
-
-
-
-            }
-        } /*else if
-        {
-            // Probabilidad de curación para el enemigo
-            int probabilidadCura = rand() % 100;
-            if (probabilidadCura < 20)  // 20% de probabilidad de curación
-            {
-                float curacion = 20.0f;
-                vel.setVida(vel.getVida() + curacion);
-                std::cout << "El enemigo se ha curado " << curacion << " puntos de vida." << std::endl;
-                turnoJugador = true;  // Pierde el turno al curarse
-            }}*/
-
-
-        ataque.update();
-
-        // Limpiar la pantalla
-        window.clear();
-
-        // Verificar si el enemigo es capturable
-        if (juego.getVidaMonstruoActual() <= juego.getVidaMonstruoActual() * 0.25)
-        {
-            capturable = true;
-        }
-        if(juego.getVidaMonstruoActual()<=0)
-        {
-
-            if(juego.pasarAlSiguienteMonstruo()) {}
-            else
-            {
-                sonidoVictoria.play();
-                //cout<<"FELICIDADES GANASTE"<<endl;
-                menuTexto.setString("Eres el vencedor");
-                menuTexto.setCharacterSize(60);
-                menuTexto.setFillColor(sf::Color::Black);
-                menuTexto.setPosition(150, 170);
-                window.draw(menuTexto);
-                if (WinCooldown.getElapsedTime().asSeconds() >= cooldownTime)
-                {
-                    window.close();
-
-                }
-                // *Distribución de experiencia al ganar*
-                int expGanada = 30; // Ajusta este valor a tu preferencia
-                monstruoJugador.ganarExperiencia(expGanada); // Agregar exp al monstruo del jugador
-                cout << "Ganaste " << expGanada << " puntos de experiencia!" << endl;
-
-                peleaActiva = false;
-            }
-        }
-        else if(monstruoJugador.getVida()<=0)
-        {
-
-
-             sonidoDerrota.play();
-            menuTexto.setString("Perdiste");
-            menuTexto.setCharacterSize(60);
-            menuTexto.setFillColor(sf::Color::Black);
-            menuTexto.setPosition(150, 170);
-            window.draw(menuTexto);
-
-            if (WinCooldown.getElapsedTime().asSeconds() >= cooldownTime)
-            {
-                window.close();
-            }
-
-
-        }
-
-
-
-
-
-
-        // Mostrar lo dibujado
-
-        // Dibujar el fondo
-        window.draw(fondo);
-
-
-
-        //dibujar monstruo jugador
-        window.draw(monstruoJugador);
-        // Dibujar opciones de pelea siempre en pantalla
-        window.draw(menuTexto);
-
-
-
-        window.draw(ataque);
-
-        //dibujar las opciones de la pelea
-
-        juego.dibujar(window);
-        window.display();
-
-
-
-    }
-}
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
 void batallacueva()  // Crear una ventana
@@ -593,9 +147,9 @@ void batallacueva()  // Crear una ventana
     monstruoJugador.agregarMonstruo(new Bufalont (10.0f, 50.0f, 30.0f, "include/bufalont.PNG"));
     monstruoJugador.agregarMonstruo(new Tukin(10.0f, 50.0f, 30.0f, "include/tukin.PNG"));
     monstruoJugador.agregarMonstruo(new Lechuza(10.0f, 50.0f, 30.0f, "include/FuckingLechuza.PNG"));
+    monstruoJugador.agregarMonstruo(new balleton(10.0f, 50.0f, 30.0f, "include/balleton.PNG"));
     monstruoJugador.agregarMonstruo(new Peluchin(10.0f, 50.0f, 30.0f, "include/pelucin.PNG"));
-    monstruoJugador.agregarMonstruo(new Peluchin(10.0f, 50.0f, 30.0f, "include/balleton.PNG"));
-    monstruoJugador.setPositionTodosMonstruos(70, 500);
+    monstruoJugador.setPositionTodosMonstruos(70, 470);
     monstruoJugador.setScale(2,2);
 
     // Crear los monstruos
@@ -608,7 +162,7 @@ void batallacueva()  // Crear una ventana
     //Balleton ballena;
     //Bufalont bufalo;
      AnimacionAtaque ataque;
-
+     AnimacionDefensa Defensa;
 
     // Variables de pelea
     bool turnoJugador = true;
@@ -645,6 +199,15 @@ void batallacueva()  // Crear una ventana
     }
     sf::Sound sonidoPelea;
     sonidoPelea.setBuffer(bufferPelea);
+    ///////////////////////////////////////////
+          sf::SoundBuffer bufferVictoria;
+    if (!bufferVictoria.loadFromFile("Sonidos/bokita.wav"))
+    {
+        std::cout << "Error al cargar bokita.wav" << std::endl;
+    }
+    sf::Sound sonidoVictoria;
+    sonidoVictoria.setBuffer(bufferVictoria);
+
 
 
 
@@ -661,7 +224,7 @@ void batallacueva()  // Crear una ventana
     menuTexto.setString("1) Atacar  2) Defender");
     menuTexto.setCharacterSize(24);
     menuTexto.setFillColor(sf::Color::Black);
-    menuTexto.setPosition(95, 360);
+    menuTexto.setPosition(500, 500);
 
     //elementos monstruo jugador
     //monstruoJugador.setPosition(30, 350);  // Jugador a la izquierda
@@ -689,7 +252,7 @@ void batallacueva()  // Crear una ventana
 
      if (probabilidad < 100)    // 10% de probabilidad para Velom (60 + 10 = 70)
     {
-        lobo.setPosition(570, 160);
+        lobo.setPosition(520, 100);
 
         cout<<"hola"<<endl;
 
@@ -700,11 +263,6 @@ void batallacueva()  // Crear una ventana
         sonidoPelea.play();
 
     }
-
-
-
-
-
 
 
 
@@ -790,6 +348,8 @@ void batallacueva()  // Crear una ventana
                     monstruoJugador.setDefensaMonstruoActual( rand() % 100 + 1);
                     cout<<"defensa mi monstruo aumento = "<<monstruoJugador.getDefensaMonstruoActual()<<endl;
                     sonidoDefensa.play(); // Reproducir sonido de ataque
+                    Defensa.startAnimation();
+
 
 
 
@@ -798,97 +358,68 @@ void batallacueva()  // Crear una ventana
 
                 }
 
-                /* else if (event.type == sf::Event::KeyPressed && event.key.code ==  sf::Keyboard::Num3 && capturable)    // Capturar
-                 {
-                     cout << "Intentas capturar al enemigo!" << endl;
-                     int probCaptura = rand() % 100;
-                     if (probCaptura < 50)    // Supongamos una chance de 50%
-                     {
-                         cout << "Capturaste al enemigo!" << endl;
-                         // inventario.agregarItem(enemigo);
-                         peleaActiva = false;
-                     }
-                     else
-                     {
-                         cout << "El intento de captura falló." << endl;
-                     }
-                     turnoJugador=false;
-                 }*/
 
 
             }
-            else
-            {
-                // Turno del enemigo
-                cout << "El enemigo ataca!" << endl;
+           else {
+    // Turno del enemigo
+    cout << "El enemigo ataca!" << endl;
 
+    // Probabilidad de curación para el enemigo
+    int probabilidadCura = rand() % 100;
+    if (probabilidadCura < 100) {  // 20% de probabilidad de curación
+        float curacion = 20.0f;
+        lobo.setVida(lobo.getVida() + curacion);  // 'vel' representa al monstruo enemigo
+        cout << "El enemigo se ha curado " << curacion << " puntos de vida." << endl;
 
+        // Cambiar turno al jugador después de curarse
+        turnoJugador = true;
+    } else {
+        // Lógica de ataque del enemigo
+        if (monstruoJugador.getDefensaMonstruoActual() > lobo.getDefensa()) {
+            cout << "El ataque fue bloqueado con éxito!" << endl;
+            monstruoJugador.setDefensaMonstruoActual(monstruoJugador.getDefensaMonstruoActual() - lobo.getDanio());
 
-                if (monstruoJugador.getDefensaMonstruoActual() > lobo.getDanio())
-                {
-                    cout << "El ataque fue bloqueado con exito!" << endl;
-                    monstruoJugador.setDefensaMonstruoActual(monstruoJugador.getDefensaMonstruoActual()-lobo.getDanio());
-                    // Cambiar turno al jugador
-                    turnoJugador = true;
-                }
-                else if(monstruoJugador.getDefensaMonstruoActual()<=lobo.getDanio())
-                {
+            // Cambiar turno al jugador
+            turnoJugador = true;
+        } else if (monstruoJugador.getDefensaMonstruoActual() <= lobo.getDanio()) {
+            cout << "El enemigo ha hecho: " << lobo.getDanio() << endl;
 
-                    cout << "El enemigo ah hecho: "<< lobo.getDanio() << endl;
+            monstruoJugador.setVidaMonstruoActual(monstruoJugador.getVidaMonstruoActual() + monstruoJugador.getDefensaMonstruoActual() - lobo.getDanio());
+            cout << "La vida de tu monstruo es: " << monstruoJugador.getVidaMonstruoActual() << endl;
 
-                    monstruoJugador.setVidaMonstruoActual(monstruoJugador.getVidaMonstruoActual()+monstruoJugador.getDefensaMonstruoActual()-lobo.getDanio());
+            monstruoJugador.setDefensaMonstruoActual(0);
 
-                    cout << "La vida de tu pokemon es: "<< monstruoJugador.getVidaMonstruoActual() << endl;
-
-                    monstruoJugador.setDefensaMonstruoActual(0);
-                    // Cambiar turno al jugador
-                    turnoJugador = true;
-
-                }
-                cout<<"defensa mi monstruo= "<<monstruoJugador.getDefensaMonstruoActual()<<endl;
-
-
-
-
-            }
-        } /*else if
-        {
-            // Probabilidad de curación para el enemigo
-            int probabilidadCura = rand() % 100;
-            if (probabilidadCura < 20)  // 20% de probabilidad de curación
-            {
-                float curacion = 20.0f;
-                vel.setVida(vel.getVida() + curacion);
-                std::cout << "El enemigo se ha curado " << curacion << " puntos de vida." << std::endl;
-                turnoJugador = true;  // Pierde el turno al curarse
-            }}*/
-
-
-        ataque.update();
-
-        // Limpiar la pantalla
-        window.clear();
-
-        // Verificar si el enemigo es capturable
-        if (lobo.getVida() <= lobo.getVida() * 0.25)
-        {
-            //capturable = true;
+            // Cambiar turno al jugador
+            turnoJugador = true;
         }
-
-
-            if(lobo.getVida()<=0)
+        cout << "Defensa de mi monstruo = " << monstruoJugador.getDefensaMonstruoActual() << endl;
+    }
+}
+   if(lobo.getVida()<=0)
             {
-                //cout<<"FELICIDADES GANASTE"<<endl;
-                menuTexto.setString("Eres el vencedor");
-                menuTexto.setCharacterSize(60);
-                menuTexto.setFillColor(sf::Color::Black);
-                menuTexto.setPosition(150, 170);
-                window.draw(menuTexto);
-                if (WinCooldown.getElapsedTime().asSeconds() >= cooldownTime)
-                {
-                    window.close();
+                 // Cambiar el mensaje a "Eres el vencedor"
+             menuTexto.setString("Eres el vencedor");
+             menuTexto.setCharacterSize(60);
+              menuTexto.setFillColor(sf::Color::Black);
+              menuTexto.setPosition(150, 170);
 
-                }
+
+    // Mantener ventana abierta unos segundos más
+    sf::Clock clock;
+        while (clock.getElapsedTime().asSeconds() < 3.0f) {  // Mostrar el mensaje por 3 segundos
+        window.clear();
+        window.draw(fondo);
+        window.draw(menuTexto);
+        window.display();
+        sonidoVictoria.play();
+
+
+    }
+
+    // Cerrar la ventana después de mostrar el mensaje
+    window.close();
+
                 // *Distribución de experiencia al ganar*
                 int expGanada = 30; // Ajusta este valor a tu preferencia
                 monstruoJugador.ganarExperienciaMonstruoActual(expGanada); // Agregar exp al monstruo del jugador
@@ -896,16 +427,19 @@ void batallacueva()  // Crear una ventana
 
                 peleaActiva = false;
             }
-        else if(monstruoJugador.getVidaMonstruoActual()<=0)
+        if(monstruoJugador.getVidaMonstruoActual()<=0)
         {
             monstruoJugador.pasarAlSiguienteMonstruo();
+}
 
-            menuTexto.setCharacterSize(60);
-            menuTexto.setFillColor(sf::Color::Black);
-            menuTexto.setPosition(150, 170);
-            window.draw(menuTexto);
 
-        }
+        }//llave del while
+
+        ataque.update();
+        Defensa.update();
+
+        // Limpiar la pantalla
+
 
 
 
@@ -927,6 +461,7 @@ void batallacueva()  // Crear una ventana
 
 
         window.draw(ataque);
+        window.draw(Defensa);
 
         //dibujar las opciones de la pelea
 

@@ -1,5 +1,6 @@
-#ifndef FUNCIONES_H_INCLUDED
-#define FUNCIONES_H_INCLUDED
+#ifndef FUNCIONSTARTGAME_H_INCLUDED
+#define FUNCIONSTARTGAME_H_INCLUDED
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <Personaje.h>
@@ -13,15 +14,10 @@
 #include "Escenario2.h"
 #include "escenario3.h"
 #include "Juego.h"
-#include "FuncionStartgame.h"
 
 
 using namespace std;
-void startGame();
-//void escenarioPelea();
-void starthistoria();
-void BatallaCueva();
-void llegadaisla();
-bool FuncionPos();
+void escenarioPelea();
 
-#endif // FUNCIONES_H_INCLUDED
+
+#endif // FUNCIONSTARTGAME_H_INCLUDED

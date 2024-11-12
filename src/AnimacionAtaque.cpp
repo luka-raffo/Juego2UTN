@@ -67,3 +67,71 @@ AnimacionAtaque::~AnimacionAtaque()
 {
     //dtor
 }
+////////////////////////////////////////////////////////
+AnimacionDefensa::AnimacionDefensa()
+{
+
+    _textureDefensa.loadFromFile("Animations/zoonami_enemy_smog_animation.PNG");
+    _spriteDefensa.setTexture(_textureDefensa);
+
+    Defensa[0] = sf::IntRect(0, 0, 159,159 );
+    Defensa[1] = sf::IntRect(0, 159, 159, 159);
+
+    _currentIdleRect = &idleVacio; // Inicialmente en reposo mirando hacia abajo
+
+    _spriteDefensa.setTextureRect(*_currentIdleRect);
+
+    _animacionEnCurso = false;
+
+    _spriteDefensa.setScale(2.50f, 2.50f);
+    _spriteDefensa.setPosition(320, 130);
+}
+
+
+void AnimacionDefensa::startAnimation()
+{
+    if (!_animacionEnCurso)
+    {
+        _animacionEnCurso = true;
+        _animationClockDefensa.restart();
+        _currentFrameDefensa = 0;
+    }
+}
+
+void AnimacionDefensa::update(){
+    sf::Time frameTime = sf::seconds(0.5f); // Duración de cada frame
+
+
+    if (_animacionEnCurso)
+    {
+        if (_animationClockDefensa.getElapsedTime() > frameTime)
+        {
+
+            if (_currentFrameDefensa < 2)
+            {
+                _spriteDefensa.setTextureRect(Defensa[_currentFrameDefensa]);
+                _animationClockDefensa.restart();
+            _currentFrameDefensa++;
+            }
+            else
+            {
+                _animacionEnCurso = false;
+                _spriteDefensa.setTextureRect(*_currentIdleRect); // Volver al estado idle
+            }
+
+
+        }
+    }
+}
+
+void AnimacionDefensa::draw(sf::RenderTarget& target, sf::RenderStates states)const {
+    if (_animacionEnCurso)
+    {
+        target.draw(_spriteDefensa, states);
+    }
+    }
+
+AnimacionDefensa::~AnimacionDefensa()
+{
+    //dtor
+}
