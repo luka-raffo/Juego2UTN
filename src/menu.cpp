@@ -24,11 +24,18 @@ Menu::Menu(float width, float height) {
 
     menu[2].setFont(font);
     menu[2].setFillColor(sf::Color::White);
-    menu[2].setString("Salir");
+    menu[2].setString("Ranking");
     menu[2].setCharacterSize(130);
     menu[2].setPosition(120,700);
 
-    selectedItemIndex = 0;
+
+
+   // menu[2].setFont(font);
+    //menu[2].setFillColor(sf::Color::White);
+   // menu[2].setString("Salir");
+   // menu[2].setCharacterSize(130);
+   // menu[2].setPosition(120,700);
+   // selectedItemIndex = 0;
 }
 
 Menu::~Menu() {}
