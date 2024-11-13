@@ -4,6 +4,11 @@
 #include "menu.h"
 #include <ctime>
 #include <stdlib.h>
+#include <SFML/Audio.hpp>
+#include <chrono>
+#include <string>
+#include <vector>
+#include <algorithm>
 #include "escenario1.h"
 #include "Funciones.H"
 #include "escenario2.h"
@@ -15,6 +20,19 @@ using namespace std;
 
 int main()
 {
+    sf::Music music;
+    if (!music.openFromFile("musica.wav")) {
+    std::cerr << "Error al cargar el archivo de música" << std::endl;
+        return -1;
+    };
+
+    music.setLoop(true);
+    music.setVolume(15);
+
+    music.play();
+
+
+
     srand ((unsigned)time(0));
     // Crear una ventana
     sf::RenderWindow window(sf::VideoMode(800, 600), "Menu de Pokemon");
@@ -68,6 +86,11 @@ int main()
                     }
                     else if (selected == 2)
                     {
+                        std::cout << "Ranking" << std::endl;
+
+                    }
+                    else if (selected == 3)
+                    {
                         window.close();
                     }
                 }
@@ -96,6 +119,10 @@ int main()
                         // Lógica para cargar el juego
                     }
                     else if (selected == 2)
+                    {
+                        std::cout << "Ranking seleccionado con ratón" << std::endl;
+
+                    }else if (selected == 3)
                     {
                         window.close();
                     }
