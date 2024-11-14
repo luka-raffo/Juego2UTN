@@ -6,10 +6,12 @@
 
 
 // Constructor por defecto de Monstruo con valores aleatorios
-Monstruo::Monstruo()
+Monstruo::Monstruo(string texturaArchivo)
     : _vida(getRandomStat(100.0f, 150.0f)),  // Vida entre 50 y 100
       _danio(getRandomStat(40.0f, 80.0f)),  // Daño entre 10 y 30
-      _defensa(getRandomStat(30.0f, 60.0f))  // Defensa entre 5 y 20
+      _defensa(getRandomStat(30.0f, 60.0f)),  // Defensa entre 5 y 20
+      _texturaArchivo(texturaArchivo)
+
 {}
 
 // Constructor con parámetros

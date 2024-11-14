@@ -27,3 +27,5 @@ bool FuncionPos();
 float getRandomStat(float min, float max);
 
 #endif // FUNCIONES_H_INCLUDED
+
+

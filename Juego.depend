@@ -418,7 +418,7 @@
 1725644054 source:c:\users\luka\desktop\juego\src\personaje.cpp
 	"Personaje.h"
 
-1731563678 source:c:\users\brandon\onedrive\escritorio\juego2utn\main.cpp
+1731583913 source:c:\users\brandon\onedrive\escritorio\juego2utn\main.cpp
 	<SFML/Graphics.hpp>
 	"Personaje.h"
 	<iostream>
@@ -868,14 +868,14 @@
 	<SFML/Graphics.hpp>
 	<iostream>
 
-1731562652 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\monstruo.cpp
+1731584131 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\monstruo.cpp
 	"Monstruo.h"
 	<SFML/Graphics.hpp>
 	<iostream>
 	"inventory.h"
 	"Funciones.h"
 
-1731561821 c:\users\brandon\onedrive\escritorio\juego2utn\include\monstruo.h
+1731584069 c:\users\brandon\onedrive\escritorio\juego2utn\include\monstruo.h
 	<SFML/Graphics.hpp>
 	<iostream>
 	"Colisionable.h"
@@ -1386,7 +1386,7 @@
 	<iostream>
 	"escenario1.h"
 
-1731563368 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\funciones.cpp
+1731583708 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\funciones.cpp
 	"Funciones.h"
 	"inventory.h"
 	"Personaje.h"
@@ -1394,8 +1394,18 @@
 	<ctime>
 	"AnimacionAtaque.h"
 	"Juego.h"
+	<SFML/Graphics.hpp>
+	<iostream>
+	"PedirNombre.h"
+	"PedirNombre.h"
+	<SFML/Graphics.hpp>
+	<iostream>
+	<string>
+	<fstream>
+	<vector>
+	<algorithm>
 
-1731563403 c:\users\brandon\onedrive\escritorio\juego2utn\include\funciones.h
+1731583533 c:\users\brandon\onedrive\escritorio\juego2utn\include\funciones.h
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	<Personaje.h>
@@ -2356,7 +2366,7 @@
 	"escenario3.h"
 	"Juego.h"
 
-1731561741 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\funcionstartgame.cpp
+1731584167 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\funcionstartgame.cpp
 	"FuncionStartgame.h"
 	"inventory.h"
 	"Personaje.h"
@@ -2367,11 +2377,13 @@
 
 1731544197 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\funcionesranking.cpp
 
-1731563368 c:\users\brandon\onedrive\escritorio\juego2utn\include\pedirnombre.h
+1731583515 c:\users\brandon\onedrive\escritorio\juego2utn\include\pedirnombre.h
 	<SFML/Graphics.hpp>
 	<string>
+	<string>
+	<vector>
 
-1731563368 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\pedirnombre.cpp
+1731583515 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\pedirnombre.cpp
 	"PedirNombre.h"
 	<SFML/Graphics.hpp>
 	<iostream>

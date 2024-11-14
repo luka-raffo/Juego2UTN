@@ -36,7 +36,7 @@ protected:
 public:
         sf::Sprite _sprite;
 
-        Monstruo();  // Constructor por defecto
+        Monstruo(string texturaArchivo);  // Constructor por defecto
         Monstruo(float vida, float danio, float defensa,string texturaArchivo);
 
         bool estaVivo(float vida);
