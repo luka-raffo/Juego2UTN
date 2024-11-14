@@ -42,19 +42,19 @@ void escenarioPelea()
 
 
     // Crear los monstruos
-    Velom monstruo(100.0f, 50.0f, 30.0f,"include/velom.PNG");
+    Velom monstruo(160.0f, 50.0f, 40.0f,"include/velom.PNG");
 
-    Velom vel (1000.0f, 50.0f, 30.0f, "include/velom.PNG");
+    Velom vel (100.0f, 50.0f, 40.0f, "include/velom.PNG");
     //Pelucin pelu;
-    Peluchin pelu(100.0f, 50.0f, 30.0f,"include/pelucin.PNG");
+    Peluchin pelu(150.0f, 50.0f, 40.0f,"include/pelucin.PNG");
     //Tukin tuki;
-    Tukin tuka(100.0f, 50.0f, 30.0f,"include/tukin.PNG");
+    Tukin tuka(170.0f, 50.0f, 40.0f,"include/tukin.PNG");
     //Lechuza lechu;
-    Lechuza lechu(100.0f, 50.0f, 30.0f,"include/FuckingLechuza.PNG");
+    Lechuza lechu(170.0f, 50.0f, 40.0f,"include/FuckingLechuza.PNG");
     //Balleton ballena;
-    balleton ballena(100.0f, 50.0f, 30.0f,"include/balleton.PNG");
+    balleton ballena(180.0f, 50.0f, 40.0f,"include/balleton.PNG");
     //Bufalont bufalo;
-    Bufalont bufalo(100.0f, 50.0f, 30.0f,"include/bufalont.PNG");
+    Bufalont bufalo(150.0f, 50.0f, 40.0f,"include/bufalont.PNG");
 
 
 
@@ -336,7 +336,7 @@ void escenarioPelea()
     // Probabilidad de curación para el enemigo
     int probabilidadCura = rand() % 100;
     if (probabilidadCura < 20) {  // 20% de probabilidad de curación
-        float curacion = 20.0f;
+        float curacion = 30.0f;
         vel.setVida(vel.getVida() + curacion);  // 'vel' representa al monstruo enemigo
         cout << "El enemigo se ha curado " << curacion << " puntos de vida." << endl;
 
@@ -471,7 +471,7 @@ void escenarioPelea()
     // Probabilidad de curación para el enemigo
     int probabilidadCura = rand() % 100;
     if (probabilidadCura < 20) {  // 20% de probabilidad de curación
-        float curacion = 20.0f;
+        float curacion = 40.0f;
         pelu.setVida(pelu.getVida() + curacion);  // 'vel' representa al monstruo enemigo
         cout << "El enemigo se ha curado " << curacion << " puntos de vida." << endl;
 
@@ -605,7 +605,7 @@ void escenarioPelea()
     // Probabilidad de curación para el enemigo
     int probabilidadCura = rand() % 100;
     if (probabilidadCura < 20) {  // 20% de probabilidad de curación
-        float curacion = 20.0f;
+        float curacion = 40.0f;
         tuka.setVida(tuka.getVida() + curacion);  // 'vel' representa al monstruo enemigo
         cout << "El enemigo se ha curado " << curacion << " puntos de vida." << endl;
 
@@ -875,7 +875,7 @@ void escenarioPelea()
     // Probabilidad de curación para el enemigo
     int probabilidadCura = rand() % 100;
     if (probabilidadCura < 20) {  // 20% de probabilidad de curación
-        float curacion = 20.0f;
+        float curacion = 40.0f;
         ballena.setVida(ballena.getVida() + curacion);  // 'vel' representa al monstruo enemigo
         cout << "El enemigo se ha curado " << curacion << " puntos de vida." << endl;
 
@@ -1010,7 +1010,7 @@ void escenarioPelea()
     // Probabilidad de curación para el enemigo
     int probabilidadCura = rand() % 100;
     if (probabilidadCura < 20) {  // 20% de probabilidad de curación
-        float curacion = 20.0f;
+        float curacion = 40.0f;
         bufalo.setVida(bufalo.getVida() + curacion);  // 'vel' representa al monstruo enemigo
         cout << "El enemigo se ha curado " << curacion << " puntos de vida." << endl;
 

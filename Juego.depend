@@ -868,7 +868,7 @@
 	<SFML/Graphics.hpp>
 	<iostream>
 
-1731584131 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\monstruo.cpp
+1731584173 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\monstruo.cpp
 	"Monstruo.h"
 	<SFML/Graphics.hpp>
 	<iostream>
@@ -1386,7 +1386,7 @@
 	<iostream>
 	"escenario1.h"
 
-1731583708 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\funciones.cpp
+1731585887 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\funciones.cpp
 	"Funciones.h"
 	"inventory.h"
 	"Personaje.h"
@@ -2366,7 +2366,7 @@
 	"escenario3.h"
 	"Juego.h"
 
-1731584167 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\funcionstartgame.cpp
+1731584652 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\funcionstartgame.cpp
 	"FuncionStartgame.h"
 	"inventory.h"
 	"Personaje.h"

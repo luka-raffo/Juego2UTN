@@ -368,12 +368,12 @@ void batallacueva()  // Crear una ventana
 
     //Pelucin pelu;
     //Tukin tuki;
-    Lobizon lobo(100.0f, 50.0f, 30.0f,"include/Lobizon.PNG");
+    Lobizon lobo(500.0f, 60.0f, 50.0f,"include/Lobizon.PNG");
     Velom vel(100.0f, 50.0f, 30.0f,"include/velom.PNG");
     //Lechuza lechu;
     //Balleton ballena;
     //Bufalont bufalo;
-     AnimacionAtaque ataque;
+    AnimacionAtaque ataque;
     ataque.setRutaPNG("Animations/zoonami_player_vice_grip_animation.PNG");
      AnimacionDefensa Defensa;
 
@@ -398,9 +398,9 @@ void batallacueva()  // Crear una ventana
     sonidoAtaque.setBuffer(bufferAtaque);
  /////////////////////////////////////////
   sf::SoundBuffer bufferDefensa;
-    if (!bufferDefensa.loadFromFile("Sonidos/paaraaaaa.wav"))
+    if (!bufferDefensa.loadFromFile("Sonidos/bueeeee.wav"))
     {
-        std::cout << "Error al cargar paaraaaaa.wav" << std::endl;
+        std::cout << "Error al cargar bueeeee.wav" << std::endl;
     }
     sf::Sound sonidoDefensa;
     sonidoDefensa.setBuffer(bufferDefensa);
@@ -562,7 +562,7 @@ void batallacueva()  // Crear una ventana
                 {
                     cout << "Te defiendes!" << endl;
 
-                    monstruoJugador.setDefensaMonstruoActual( rand() % 100 + 1);
+                    monstruoJugador.setDefensaMonstruoActual( rand() % 60 + 1);
                     cout<<"defensa mi monstruo aumento = "<<monstruoJugador.getDefensaMonstruoActual()<<endl;
                     sonidoDefensa.play(); // Reproducir sonido de ataque
                     Defensa.startAnimation();
@@ -644,6 +644,8 @@ void batallacueva()  // Crear una ventana
 
 }
 */
+
+
 if (lobo.getVida() <= 0) {
     menuTexto.setString("Eres el vencedor");
     menuTexto.setCharacterSize(60);
@@ -658,11 +660,16 @@ if (lobo.getVida() <= 0) {
 
     manejarVictoria(window, font, reloj, true);  // Llama a la función para manejar el nombre y el tiempo del jugador
 }
+if(monstruoJugador.getVidaMonstruoActual()<=0){
+  monstruoJugador.pasarAlSiguienteMonstruo();
+}
 
 
 }
 
         // Mostrar lo dibujado
+        ataque.update();
+        Defensa.update();
 
         // Dibujar el fondo
         window.draw(fondo);
@@ -688,7 +695,6 @@ if (lobo.getVida() <= 0) {
 
     }
 }
-
 void starthistoria()
 {
     // Crear una ventana
