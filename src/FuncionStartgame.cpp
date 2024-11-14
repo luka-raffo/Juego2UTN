@@ -29,12 +29,12 @@ void escenarioPelea()
 
     Juego monstruoJugador;
 
-    monstruoJugador.agregarMonstruo(new Velom(10.0f, 50.0f, 30.0f, "include/velom.PNG"));
-    monstruoJugador.agregarMonstruo(new Bufalont (10.0f, 50.0f, 30.0f, "include/bufalont.PNG"));
-    monstruoJugador.agregarMonstruo(new Tukin(10.0f, 50.0f, 30.0f, "include/tukin.PNG"));
-    monstruoJugador.agregarMonstruo(new Lechuza(10.0f, 50.0f, 30.0f, "include/FuckingLechuza.PNG"));
-    monstruoJugador.agregarMonstruo(new Peluchin(10.0f, 50.0f, 30.0f, "include/pelucin.PNG"));
-    monstruoJugador.agregarMonstruo(new Peluchin(10.0f, 50.0f, 30.0f, "include/balleton.PNG"));
+    monstruoJugador.agregarMonstruo(new Velom(150.0f, 50.0f, 30.0f, "include/velom.PNG"));
+    monstruoJugador.agregarMonstruo(new Bufalont (150.0f, 50.0f, 30.0f, "include/bufalont.PNG"));
+    monstruoJugador.agregarMonstruo(new Tukin(150.0f, 50.0f, 30.0f, "include/tukin.PNG"));
+    monstruoJugador.agregarMonstruo(new Lechuza(150.0f, 50.0f, 30.0f, "include/FuckingLechuza.PNG"));
+    monstruoJugador.agregarMonstruo(new Peluchin(150.0f, 50.0f, 30.0f, "include/pelucin.PNG"));
+    monstruoJugador.agregarMonstruo(new Peluchin(150.0f, 50.0f, 30.0f, "include/balleton.PNG"));
     monstruoJugador.setPositionTodosMonstruos(50, 500);
     monstruoJugador.setScale(2,2);
 
@@ -59,6 +59,11 @@ void escenarioPelea()
 
 
     AnimacionAtaque ataque;
+    ataque.setRutaPNG("Animations/zoonami_enemy_aqua_jet_animation.PNG");
+
+    AnimacionAtaque ataque2;
+    ataque.setRutaPNG("Animations/zoonami_player_vice_grip_animation.PNG");
+
     AnimacionDefensa Defensa;
 
 
@@ -75,16 +80,16 @@ void escenarioPelea()
 
     // Crear buffer para el sonido de ataque
     sf::SoundBuffer bufferAtaque;
-    if (!bufferAtaque.loadFromFile("mamahuevo.wav"))
+    if (!bufferAtaque.loadFromFile("Sonidos/pew.wav"))
     {
-        std::cout << "Error al cargar mamahuevo.wav" << std::endl;
+        std::cout << "Error al cargar pew.wav" << std::endl;
     }
     sf::Sound sonidoAtaque;
     sonidoAtaque.setBuffer(bufferAtaque);
     ///////////////////////////////////
     /////////////////////////////////////////
   sf::SoundBuffer bufferDefensa;
-    if (!bufferDefensa.loadFromFile("Sonidos/paaraaaaa.wav"))
+    if (!bufferDefensa.loadFromFile("Sonidos/bueeeee.wav"))
     {
         std::cout << "Error al cargar paaraaaaa.wav" << std::endl;
     }
@@ -114,6 +119,14 @@ void escenarioPelea()
     }
     sf::Sound sonidoVictoria;
     sonidoVictoria.setBuffer(bufferVictoria);
+    ///////////////////////////////////
+      sf::SoundBuffer bufferExp;
+    if (!bufferExp.loadFromFile("Sonidos/orb.wav"))
+    {
+        std::cout << "Error al cargar orb.wav" << std::endl;
+    }
+    sf::Sound sonidoExp;
+    sonidoExp.setBuffer(bufferExp);
 
     // crear el fondo
     BattleBackground fondo;
@@ -160,7 +173,7 @@ void escenarioPelea()
     }
 
 
-    else if (probabilidad < 00) {  // 15% de probabilidad para Pelucin (20 + 15 = 35)
+    else if (probabilidad < 15 && probabilidad>0) {  // 15% de probabilidad para Pelucin (20 + 15 = 35)
         pelu.setPosition(570, 160);
         monstruoSeleccionado = &pelu;
           cout<<"hola"<<endl;
@@ -172,7 +185,7 @@ void escenarioPelea()
     }
 
 
-    else if (probabilidad < 00) {  // 25% de probabilidad para Tukin (35 + 25 = 60)
+    else if (probabilidad < 40 && probabilidad >15) {  // 25% de probabilidad para Tukin (35 + 25 = 60)
         tuka.setPosition(570, 160);
         monstruoSeleccionado = &tuka;
           cout<<"hola"<<endl;
@@ -184,7 +197,7 @@ void escenarioPelea()
     }
 
 
-    else if (probabilidad < 00)    // 10% de probabilidad para Velom (60 + 10 = 70)
+    else if (probabilidad < 50 && probabilidad > 40)    // 10% de probabilidad para Velom (60 + 10 = 70)
     {
          monstruoSeleccionado= &vel;
         vel.setPosition(570, 160);
@@ -197,7 +210,7 @@ void escenarioPelea()
     }
 
 
-    else if (probabilidad < 10) {  // 10% de probabilidad para Lechuza (70 + 10 = 80)
+    else if (probabilidad <65 && probabilidad> 50) {  // 10% de probabilidad para Lechuza (70 + 10 = 80)
         lechu.setPosition(570, 160);
         monstruoSeleccionado = &lechu;
           cout<<"hola"<<endl;
@@ -209,7 +222,7 @@ void escenarioPelea()
     }
 
 
-    else if (probabilidad < 900) {  // 10% de probabilidad para Balleton (80 + 10 = 90)
+    else if (probabilidad < 75 && probabilidad> 65) {  // 10% de probabilidad para Balleton (80 + 10 = 90)
         ballena.setPosition(570, 160);
         monstruoSeleccionado = &ballena;
           cout<<"hola"<<endl;
@@ -267,9 +280,7 @@ void escenarioPelea()
 
                     cout << "Atacas al enemigo!" << endl;
 
-
-                    ataque.startAnimation();
-
+                    ataque2.startAnimation();
                     sonidoAtaque.play(); // Reproducir sonido de ataque
 
 
@@ -307,6 +318,7 @@ void escenarioPelea()
                 {
                     cout << "Te defiendes!" << endl;
 
+
                     monstruoJugador.setDefensaMonstruoActual( rand() % 100 + 1);
                     cout<<"defensa mi monstruo aumento = "<<monstruoJugador.getDefensaMonstruoActual()<<endl;
                     sonidoDefensa.play(); // Reproducir sonido de ataque
@@ -335,6 +347,7 @@ void escenarioPelea()
         if (monstruoJugador.getDefensaMonstruoActual() > vel.getDefensa()) {
             cout << "El ataque fue bloqueado con éxito!" << endl;
             monstruoJugador.setDefensaMonstruoActual(monstruoJugador.getDefensaMonstruoActual() - vel.getDanio());
+                    ataque.startAnimation();
 
             // Cambiar turno al jugador
             turnoJugador = true;
@@ -359,6 +372,8 @@ void escenarioPelea()
              menuTexto.setCharacterSize(60);
               menuTexto.setFillColor(sf::Color::Black);
               menuTexto.setPosition(150, 170);
+              sonidoExp.play();
+              sonidoVictoria.play();
 
 
     // Mantener ventana abierta unos segundos más
@@ -491,6 +506,8 @@ void escenarioPelea()
              menuTexto.setCharacterSize(60);
               menuTexto.setFillColor(sf::Color::Black);
               menuTexto.setPosition(150, 170);
+              sonidoExp.play();
+              sonidoVictoria.play();
 
 
     // Mantener ventana abierta unos segundos más
@@ -623,6 +640,8 @@ void escenarioPelea()
              menuTexto.setCharacterSize(60);
               menuTexto.setFillColor(sf::Color::Black);
               menuTexto.setPosition(150, 170);
+              sonidoExp.play();
+              sonidoVictoria.play();
 
 
     // Mantener ventana abierta unos segundos más
@@ -756,6 +775,8 @@ void escenarioPelea()
              menuTexto.setCharacterSize(60);
               menuTexto.setFillColor(sf::Color::Black);
               menuTexto.setPosition(150, 170);
+              sonidoExp.play();
+              sonidoVictoria.play();
 
 
     // Mantener ventana abierta unos segundos más
@@ -889,6 +910,8 @@ void escenarioPelea()
              menuTexto.setCharacterSize(60);
               menuTexto.setFillColor(sf::Color::Black);
               menuTexto.setPosition(150, 170);
+              sonidoExp.play();
+              sonidoVictoria.play();
 
 
     // Mantener ventana abierta unos segundos más
@@ -1022,6 +1045,8 @@ void escenarioPelea()
              menuTexto.setCharacterSize(60);
               menuTexto.setFillColor(sf::Color::Black);
               menuTexto.setPosition(150, 170);
+              sonidoExp.play();
+              sonidoVictoria.play();
 
 
     // Mantener ventana abierta unos segundos más
@@ -1040,7 +1065,7 @@ void escenarioPelea()
     window.close();
 
                 // *Distribución de experiencia al ganar*
-                int expGanada = 30; // Ajusta este valor a tu preferencia
+                int expGanada = 40; // Ajusta este valor a tu preferencia
                 monstruoJugador.ganarExperienciaMonstruoActual(expGanada); // Agregar exp al monstruo del jugador
                 cout << "Ganaste " << expGanada << " puntos de experiencia!" << endl;
 
@@ -1059,6 +1084,7 @@ void escenarioPelea()
 
 
         ataque.update();
+        ataque2.update();
         Defensa.update();
 
 
@@ -1090,6 +1116,7 @@ void escenarioPelea()
 
 
         window.draw(ataque);
+        window.draw(ataque2);
         window.draw(Defensa);
 
         //dibujar las opciones de la pelea

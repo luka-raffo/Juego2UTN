@@ -17,7 +17,7 @@ Menu::Menu(float width, float height) {
 
     menu[1].setFont(font);
     menu[1].setFillColor(sf::Color::White);
-    menu[1].setString("Creditos");
+    menu[1].setString("Ranking");
     menu[1].setCharacterSize(130);
     menu[1].setPosition(100,500);
 

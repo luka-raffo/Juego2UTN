@@ -46,8 +46,10 @@
 		<Unit filename="include/Escenario2.h" />
 		<Unit filename="include/FuncionStartgame.h" />
 		<Unit filename="include/Funciones.h" />
+		<Unit filename="include/FuncionesRanking.h" />
 		<Unit filename="include/Juego.h" />
 		<Unit filename="include/Monstruo.h" />
+		<Unit filename="include/PEDIRNOMBRE.h" />
 		<Unit filename="include/Personaje.h" />
 		<Unit filename="include/escenario1.h" />
 		<Unit filename="include/escenario3.h" />
@@ -61,8 +63,10 @@
 		<Unit filename="src/Escenario2.cpp" />
 		<Unit filename="src/FuncionStartgame.cpp" />
 		<Unit filename="src/Funciones.cpp" />
+		<Unit filename="src/FuncionesRanking.cpp" />
 		<Unit filename="src/Juego.cpp" />
 		<Unit filename="src/Monstruo.cpp" />
+		<Unit filename="src/PEDIRNOMBRE.CPP" />
 		<Unit filename="src/Personaje.cpp" />
 		<Unit filename="src/escenario1.cpp" />
 		<Unit filename="src/escenario3.cpp" />

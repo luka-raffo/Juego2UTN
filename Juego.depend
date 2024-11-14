@@ -418,17 +418,28 @@
 1725644054 source:c:\users\luka\desktop\juego\src\personaje.cpp
 	"Personaje.h"
 
-1730843835 source:c:\users\brandon\onedrive\escritorio\juego2utn\main.cpp
+1731563678 source:c:\users\brandon\onedrive\escritorio\juego2utn\main.cpp
 	<SFML/Graphics.hpp>
 	"Personaje.h"
 	<iostream>
 	"menu.h"
 	<ctime>
-	<stdlib.h>
+	<SFML/Audio.hpp>
+	<chrono>
+	<string>
+	<vector>
+	<algorithm>
 	"escenario1.h"
 	"Funciones.H"
 	"escenario2.h"
 	"escenario3.h"
+	"PedirNombre.h"
+	<SFML/Graphics.hpp>
+	<SFML/Audio.hpp>
+	<iostream>
+	<string>
+	"pedirNombre.h"
+	"Menu.h"
 
 1725844752 c:\users\brandon\onedrive\escritorio\juego2utn\sfml\include\sfml\graphics.hpp
 	<SFML/Window.hpp>
@@ -839,7 +850,7 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1731109643 c:\users\brandon\onedrive\escritorio\juego2utn\include\personaje.h
+1731560829 c:\users\brandon\onedrive\escritorio\juego2utn\include\personaje.h
 	<SFML/Graphics.hpp>
 	"Colisionable.h"
 	"inventory.h"
@@ -848,7 +859,7 @@
 1731112998 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\personaje.cpp
 	"Personaje.h"
 
-1729725414 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\menu.cpp
+1731562652 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\menu.cpp
 	"menu.h"
 	<SFML/Graphics.hpp>
 	<iostream>
@@ -857,13 +868,14 @@
 	<SFML/Graphics.hpp>
 	<iostream>
 
-1731291924 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\monstruo.cpp
+1731562652 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\monstruo.cpp
 	"Monstruo.h"
 	<SFML/Graphics.hpp>
 	<iostream>
 	"inventory.h"
+	"Funciones.h"
 
-1731291924 c:\users\brandon\onedrive\escritorio\juego2utn\include\monstruo.h
+1731561821 c:\users\brandon\onedrive\escritorio\juego2utn\include\monstruo.h
 	<SFML/Graphics.hpp>
 	<iostream>
 	"Colisionable.h"
@@ -1374,7 +1386,7 @@
 	<iostream>
 	"escenario1.h"
 
-1731378936 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\funciones.cpp
+1731563368 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\funciones.cpp
 	"Funciones.h"
 	"inventory.h"
 	"Personaje.h"
@@ -1383,7 +1395,7 @@
 	"AnimacionAtaque.h"
 	"Juego.h"
 
-1731378758 c:\users\brandon\onedrive\escritorio\juego2utn\include\funciones.h
+1731563403 c:\users\brandon\onedrive\escritorio\juego2utn\include\funciones.h
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	<Personaje.h>
@@ -1398,6 +1410,7 @@
 	"escenario3.h"
 	"Juego.h"
 	"FuncionStartgame.h"
+	"PedirNombre.h"
 
 1731261747 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\funciones.h
 	<SFML/Graphics.hpp>
@@ -2261,18 +2274,18 @@
 	<SFML/Audio/Export.hpp>
 	<string>
 
-1730936166 c:\users\brandon\onedrive\escritorio\juego2utn\include\escenario2.h
+1731550183 c:\users\brandon\onedrive\escritorio\juego2utn\include\escenario2.h
 	<SFML/Graphics.hpp>
 	<iostream>
 	"Colisionable.h"
 
-1730936166 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\escenario2.cpp
+1731550183 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\escenario2.cpp
 	"Escenario2.h"
 
-1731113214 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\escenario3.cpp
+1731548985 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\escenario3.cpp
 	"escenario3.h"
 
-1731111301 c:\users\brandon\onedrive\escritorio\juego2utn\include\escenario3.h
+1731548833 c:\users\brandon\onedrive\escritorio\juego2utn\include\escenario3.h
 	<SFML/Graphics.hpp>
 	<iostream>
 	"Colisionable.h"
@@ -2301,11 +2314,12 @@
 1731014685 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\animacionataque.h
 	<SFML/Graphics.hpp>
 
-1731368255 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\animacionataque.cpp
+1731554252 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\animacionataque.cpp
 	"AnimacionAtaque.h"
 
-1731364118 c:\users\brandon\onedrive\escritorio\juego2utn\include\animacionataque.h
+1731554261 c:\users\brandon\onedrive\escritorio\juego2utn\include\animacionataque.h
 	<SFML/Graphics.hpp>
+	<string>
 
 1731283116 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\juego.cpp
 	"Juego.h"
@@ -2342,7 +2356,7 @@
 	"escenario3.h"
 	"Juego.h"
 
-1731378900 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\funcionstartgame.cpp
+1731561741 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\funcionstartgame.cpp
 	"FuncionStartgame.h"
 	"inventory.h"
 	"Personaje.h"
@@ -2350,4 +2364,19 @@
 	<ctime>
 	"AnimacionAtaque.h"
 	"Juego.h"
+
+1731544197 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\funcionesranking.cpp
+
+1731563368 c:\users\brandon\onedrive\escritorio\juego2utn\include\pedirnombre.h
+	<SFML/Graphics.hpp>
+	<string>
+
+1731563368 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\pedirnombre.cpp
+	"PedirNombre.h"
+	<SFML/Graphics.hpp>
+	<iostream>
+	<SFML/Graphics.hpp>
+	<iostream>
+	<string>
+	<fstream>
 

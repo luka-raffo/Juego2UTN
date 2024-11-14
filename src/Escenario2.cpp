@@ -5,7 +5,7 @@ using namespace std;
 escenario::escenario(){
 
 //Asignacion para la textura
-    _texture.loadFromFile("Tileset/fondoJue.JPG");
+    _texture.loadFromFile("Tileset/nuevo.JPG");
 
     //Asignacion de la textura del Personaje
     _sprite.setTexture(_texture);
@@ -16,7 +16,7 @@ escenario::escenario(){
 
     _sprite.setPosition(0, 0);
 
-        if (!_texture.loadFromFile("Tileset/fondoJue.JPG")) {
+        if (!_texture.loadFromFile("Tileset/nuevo.JPG")) {
             cerr << "Error cargando la textura" << endl;
         }
         _sprite.setTexture(_texture);
@@ -136,3 +136,34 @@ void piso::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     target.draw(_sprite, states);
 }
 
+//arboles
+arboles::arboles() {
+
+
+
+//Asignacion para la textura
+    _texture.loadFromFile("tileset/arboles.png");
+
+    //selecciono las coordenada del arbusto en una hoja con varios sprites
+
+
+
+    _sprite.setTexture(_texture); // Asignar la textura al sprite
+    //_sprite.setTextureRect(idleRestRect); // Asignar el rectángulo de textura al sprite
+
+
+    if (!_texture.loadFromFile("tileset/arboles.png")) {
+            cerr << "Error cargando la textura piso" << endl;
+        }
+        _sprite.setTexture(_texture);
+
+
+}
+
+sf::FloatRect arboles::getBounds() const {
+    return _sprite.getGlobalBounds();
+}
+
+void arboles::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+    target.draw(_sprite, states);
+}

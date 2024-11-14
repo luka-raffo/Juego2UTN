@@ -7,7 +7,7 @@
 
 class Personaje: public sf::Drawable, public Colisionable
 {
-    float _velocity=12;
+    float _velocity=4;
 
 
     sf::Sprite _sprite;

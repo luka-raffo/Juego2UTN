@@ -7,6 +7,9 @@
 #include "Juego.h"
 
 using namespace std;
+float getRandomStat(float min, float max) {
+    return min + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (max - min)));
+}
 
 
 void startGame()
@@ -26,24 +29,95 @@ void startGame()
     if (Banderaposicion == 1) {
         rojo.setPosition(650, 0);  // Posición para piso 1
     } else {
-        rojo.setPosition(0, 235);  // Posición para piso 2
+        rojo.setPosition(300,580);  // Posición para piso 2
     }
 
     // Crear lista de bush
     vector<bush6x4> listaBushes;
-    bush6x4 b1, b2, b3;
-    b1.setPosition(0, 0);
-    b2.setPosition(0, 64);
-    b3.setPosition(450, 200);
+    bush6x4 b1, b2, b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13,b14,b15;
+    b1.setPosition(500, 160);
+    b2.setPosition(500, 20);
+    b3.setPosition(500, 230);
+    b4.setPosition(0, 550);
+    b5.setPosition(100,210 );
+    b6.setPosition(200,210);
+    b7.setPosition(300, 210);
+    b8.setPosition(100, 270);
+    b9.setPosition(200, 270);
+    b10.setPosition(300, 270);
+    b11.setPosition(500, 90);
+    b12.setPosition(500, 300);
+    b13.setPosition(500, 530);
+    b14.setPosition(600, 530);
+    b15.setPosition(700, 530);
     listaBushes.push_back(b1);
     listaBushes.push_back(b2);
     listaBushes.push_back(b3);
+    listaBushes.push_back(b4);
+    listaBushes.push_back(b5);
+    listaBushes.push_back(b6);
+    listaBushes.push_back(b7);
+    listaBushes.push_back(b8);
+    listaBushes.push_back(b9);
+    listaBushes.push_back(b10);
+    listaBushes.push_back(b11);
+    listaBushes.push_back(b12);
+    listaBushes.push_back(b13);
+    listaBushes.push_back(b14);
+    listaBushes.push_back(b15);
+
+
+
 
     // Crear pisos
     piso suelo;
     suelo.setPosition(650, 0);
     piso suelo2;
-    suelo2.setPosition(0, 235);
+    suelo2.setPosition(300,580);
+    //crear arboles
+    arboles arbol;
+    arbol.setPosition(100,0);
+    arboles arbol2;
+    arbol2.setPosition(100,100);
+
+    arboles arbol3;
+    arbol3.setPosition(10,450);
+
+    arboles arbol4;
+    arbol4.setPosition(200,0);
+    arboles arbol5;
+    arbol5.setPosition(200,100);
+
+    arboles arbol6;
+    arbol6.setPosition(300,0);
+    arboles arbol7;
+    arbol7.setPosition(300,100);
+
+    arboles arbol8;
+    arbol8.setPosition(10,0);
+    arboles arbol9;
+    arbol9.setPosition(10,100);
+
+     arboles arbol10;
+    arbol10.setPosition(10,200);
+    arboles arbol11;
+    arbol11.setPosition(10,300);
+
+     arboles arbol12;
+    arbol12.setPosition(400,0);
+    arboles arbol13;
+    arbol13.setPosition(400,100);
+
+    arboles arbol14;
+    arbol14.setPosition(400,200);
+    arboles arbol15;
+    arbol15.setPosition(400,300);
+
+     arboles arbol16;
+    arbol15.setPosition(400,500);
+    arboles arbol17;
+    arbol17.setPosition(400,300);
+
 
     // Crear fondo
     escenario Fondo;
@@ -61,6 +135,12 @@ void startGame()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
+         // Guardar la posición actual del personaje antes de moverlo
+        sf::Vector2f previousPosition = rojo.getPosition();
+
+        // Vector de colisionables
+        std::vector<Colisionable*> colisionables = {&arbol,&arbol2,&arbol3,&arbol4,&arbol5,&arbol6,&arbol7,&arbol8,&arbol9,&arbol10,&arbol11,&arbol12,&arbol13,&arbol14,&arbol15,&arbol16,&arbol17};
+
 
         // Actualizar el personaje
         rojo.update();
@@ -94,7 +174,6 @@ void startGame()
                 Banderaposicion = 0;
                 rojo.setPosition(650, 0);  // Reposicionar al colisionar con suelo 1
                 collisionCooldown.restart();
-                rojo.guardarPosicion();
                 window.close();
             }
 
@@ -105,8 +184,16 @@ void startGame()
                 Banderaposicion = 1;
                 rojo.setPosition(0, 235);  // Reposicionar al colisionar con suelo 2
                 collisionCooldown.restart();
-                rojo.guardarPosicion();
                 window.close();
+            }
+        }
+              for (const auto& colisionable : colisionables)
+        {
+            if (rojo.isCollision(*colisionable))
+            {
+                // Si hay colisión, revertir a la posición anterior
+                rojo.setPosition(previousPosition.x, previousPosition.y);
+                break;
             }
         }
 
@@ -119,6 +206,24 @@ void startGame()
         {
             window.draw(b);
         }
+         window.draw(arbol);
+         window.draw(arbol2);
+         window.draw(arbol3);
+           window.draw(arbol4);
+         window.draw(arbol5);
+         window.draw(arbol6);
+           window.draw(arbol7);
+            window.draw(arbol8);
+           window.draw(arbol9);
+           window.draw(arbol10);
+           window.draw(arbol11);
+           window.draw(arbol12);
+           window.draw(arbol13);
+           window.draw(arbol14);
+           window.draw(arbol15);
+           window.draw(arbol16);
+           window.draw(arbol17);
+
         window.draw(suelo);
         window.draw(suelo2);
         window.draw(rojo);
@@ -162,6 +267,7 @@ void batallacueva()  // Crear una ventana
     //Balleton ballena;
     //Bufalont bufalo;
      AnimacionAtaque ataque;
+    ataque.setRutaPNG("Animations/zoonami_player_vice_grip_animation.PNG");
      AnimacionDefensa Defensa;
 
     // Variables de pelea
@@ -177,7 +283,7 @@ void batallacueva()  // Crear una ventana
 
      // Crear buffer para el sonido de ataque
     sf::SoundBuffer bufferAtaque;
-    if (!bufferAtaque.loadFromFile("mamahuevo.wav"))
+    if (!bufferAtaque.loadFromFile("Sonidos/pew.wav"))
     {
         std::cout << "Error al cargar mamahuevo.wav" << std::endl;
     }
@@ -226,6 +332,9 @@ void batallacueva()  // Crear una ventana
     menuTexto.setFillColor(sf::Color::Black);
     menuTexto.setPosition(500, 500);
 
+    bool usar=true;
+    bool ganaste=false;
+
     //elementos monstruo jugador
     //monstruoJugador.setPosition(30, 350);  // Jugador a la izquierda
    // monstruoJugador.setScale(4,4);
@@ -234,6 +343,7 @@ void batallacueva()  // Crear una ventana
     //cartel opciones pelea
     // Submenú para que el jugador elija la acción: atacar, defender, capturar (si es posible)
     cout << "Elige una acción: 1) Atacar 2) Defender"<<endl;
+
 
 
     cout<<"la vida de tu pokemon es: "<<monstruoJugador.getVidaMonstruoActual()<<endl;
@@ -349,11 +459,8 @@ void batallacueva()  // Crear una ventana
                     cout<<"defensa mi monstruo aumento = "<<monstruoJugador.getDefensaMonstruoActual()<<endl;
                     sonidoDefensa.play(); // Reproducir sonido de ataque
                     Defensa.startAnimation();
-
-
-
-
                     turnoJugador=false;
+
 
 
                 }
@@ -398,53 +505,42 @@ void batallacueva()  // Crear una ventana
 }
    if(lobo.getVida()<=0)
             {
+              //double tiempoTotal = detenerTemporizador(inicioJuego); // Detener el cronómetro
+              //guardarResultado(nombreJugador, tiempoTotal);           // Guardar el tiempo en la clasificación
+
+    // Muestra el tiempo total al jugador (opcional)
+    //std::cout << "¡Has completado el juego en " << tiempoTotal << " segundos!" << std::endl;
                  // Cambiar el mensaje a "Eres el vencedor"
-             menuTexto.setString("Eres el vencedor");
-             menuTexto.setCharacterSize(60);
+              menuTexto.setString("Eres el vencedor");
+
+
+
+
+
+              menuTexto.setCharacterSize(60);
               menuTexto.setFillColor(sf::Color::Black);
               menuTexto.setPosition(150, 170);
 
-
-    // Mantener ventana abierta unos segundos más
-    sf::Clock clock;
-        while (clock.getElapsedTime().asSeconds() < 3.0f) {  // Mostrar el mensaje por 3 segundos
-        window.clear();
-        window.draw(fondo);
-        window.draw(menuTexto);
-        window.display();
-        sonidoVictoria.play();
+              // Dibujar el fondo
+                window.draw(fondo);
 
 
-    }
 
-    // Cerrar la ventana después de mostrar el mensaje
-    window.close();
+            //dibujar monstruo jugador
+            window.draw(lobo);
+            // Dibujar opciones de pelea siempre en pantalla
+            window.draw(menuTexto);
+            monstruoJugador.dibujar(window);
+            window.display();
 
-                // *Distribución de experiencia al ganar*
-                int expGanada = 30; // Ajusta este valor a tu preferencia
-                monstruoJugador.ganarExperienciaMonstruoActual(expGanada); // Agregar exp al monstruo del jugador
-                cout << "Ganaste " << expGanada << " puntos de experiencia!" << endl;
+              pedirNombre(window, font,usar);
 
-                peleaActiva = false;
-            }
-        if(monstruoJugador.getVidaMonstruoActual()<=0)
-        {
-            monstruoJugador.pasarAlSiguienteMonstruo();
 }
 
 
-        }//llave del while
-
-        ataque.update();
-        Defensa.update();
-
-        // Limpiar la pantalla
 
 
-
-
-
-
+}
 
         // Mostrar lo dibujado
 
@@ -473,7 +569,6 @@ void batallacueva()  // Crear una ventana
     }
 }
 
-
 void starthistoria()
 {
     // Crear una ventana
@@ -487,22 +582,24 @@ void starthistoria()
     bool BanderaPos= true;
     if(BanderaPos= true)
     {
-        rojo.cargarPosicion();
+     rojo.setPosition(450, 570);
     }
 
     // Crear objetos colisionables
-    piso suelo;
-    suelo.setPosition(405, 580);
+    suelo piso;
+    piso.setPosition(450, 580);
     caverna cueva;
     cueva.setPosition(250, 100);
     vallas valla;
     valla.setPosition(0, 445);
     vallas valla2;
-    valla2.setPosition(170, 445);
+    valla2.setPosition(150, 445);
     vallas valla3;
     valla3.setPosition(450, 445);
     vallas valla4;
-    valla4.setPosition(630, 445);
+    valla4.setPosition(600, 445);
+    vallas valla5;
+    valla5.setPosition(750, 445);
 
     // Crear fondo
     Escenariojefe fondo1;
@@ -528,7 +625,7 @@ void starthistoria()
         sf::Vector2f previousPosition = rojo.getPosition();
 
         // Vector de colisionables
-        std::vector<Colisionable*> colisionables = {&valla, &valla2, &valla3, &valla4};
+        std::vector<Colisionable*> colisionables = {&valla, &valla2, &valla3, &valla4,&valla5};
 
         // Actualizar el personaje
         rojo.update();
@@ -537,7 +634,7 @@ void starthistoria()
         if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime)
         {
             // Colisión con el suelo
-            if (rojo.isCollision(suelo))
+            if (rojo.isCollision(piso))
             {
                 std::cout << "Colisión con el suelo" << std::endl;
                 collisionCooldown.restart();
@@ -556,15 +653,14 @@ void starthistoria()
 
             // Colisión con las vallas
             for (const auto& colisionable : colisionables)
+        {
+            if (rojo.isCollision(*colisionable))
             {
-                if (rojo.isCollision(*colisionable))
-                {
-                    // Si hay colisión, revertir a la posición anterior
-                    rojo.setPosition(previousPosition.x, previousPosition.y);
-                    collisionCooldown.restart();
-                    break;
-                }
+                // Si hay colisión, revertir a la posición anterior
+                rojo.setPosition(previousPosition.x, previousPosition.y);
+                break;
             }
+        }
         }
 
         // Dibujar todo
@@ -572,12 +668,13 @@ void starthistoria()
 
         // Dibujar en el orden correcto
         window.draw(fondo1);
-        window.draw(suelo);
+        window.draw(piso);
         window.draw(cueva);
         window.draw(valla);
         window.draw(valla2);
         window.draw(valla3);
         window.draw(valla4);
+        window.draw(valla5);
         window.draw(rojo);
 
         window.display();
@@ -591,7 +688,7 @@ void llegadaisla()
 
     // Crear el personaje y definir su posición inicial
     Personaje rojo;
-    rojo.cargarPosicion();
+    rojo.setPosition(400, 200);
     // Crear fondo y otros objetos
     pasto suelo;
     suelo.setPosition(400, 155);

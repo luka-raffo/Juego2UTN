@@ -3,8 +3,7 @@
 AnimacionAtaque::AnimacionAtaque()
 {
 
-    _textureAtaque.loadFromFile("Animations/zoonami_enemy_aqua_jet_animation.PNG");
-    _spriteAtaque.setTexture(_textureAtaque);
+
 
     Ataque[0] = sf::IntRect(0, 0, 159,159 );
     Ataque[1] = sf::IntRect(0, 159, 159, 159);
@@ -17,6 +16,16 @@ AnimacionAtaque::AnimacionAtaque()
 
     _spriteAtaque.setScale(2.50f, 2.50f);
     _spriteAtaque.setPosition(320, 130);
+}
+
+void AnimacionAtaque::setRutaPNG(const std::string& rutaPNG)
+{
+    if (_textureAtaque.loadFromFile(rutaPNG)) {
+        _spriteAtaque.setTexture(_textureAtaque);
+        _spriteAtaque.setTextureRect(*_currentIdleRect);
+    } else {
+        // Manejar el error de carga
+    }
 }
 
 
@@ -135,3 +144,4 @@ AnimacionDefensa::~AnimacionDefensa()
 {
     //dtor
 }
+////////////////////////////////////////////////////////

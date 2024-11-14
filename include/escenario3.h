@@ -73,5 +73,26 @@ public:
 
 
 };
+class suelo : public sf::Drawable, public Colisionable {
+private:
+    sf::Sprite _sprite;
+    sf::Texture _texture;
+
+public:
+    suelo();
+
+
+     void setPosition(float x, float y) {
+        _sprite.setPosition(x, y);
+    };
+    const sf::Sprite& getSprite() const {
+        return _sprite;
+    }
+
+    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+    sf::FloatRect getBounds() const override;
+
+
+};
 
 #endif // ESCENARIO3_H

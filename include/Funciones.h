@@ -14,6 +14,7 @@
 #include "escenario3.h"
 #include "Juego.h"
 #include "FuncionStartgame.h"
+#include "PedirNombre.h"
 
 
 using namespace std;
@@ -23,5 +24,6 @@ void starthistoria();
 void BatallaCueva();
 void llegadaisla();
 bool FuncionPos();
+float getRandomStat(float min, float max);
 
 #endif // FUNCIONES_H_INCLUDED

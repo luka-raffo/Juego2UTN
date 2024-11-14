@@ -1,6 +1,9 @@
 #ifndef ANIMACIONATAQUE_H
 #define ANIMACIONATAQUE_H
 #include <SFML/Graphics.hpp>
+#include<string>
+
+using namespace std;
 
 class AnimacionAtaque: public sf::Drawable
 {
@@ -19,6 +22,8 @@ class AnimacionAtaque: public sf::Drawable
     sf::IntRect* _currentIdleRect; // Frame de reposo actual
     public:
     AnimacionAtaque();
+
+    void setRutaPNG(const std::string& rutaPNG);
 
     void update();
 
@@ -54,4 +59,5 @@ class AnimacionDefensa: public sf::Drawable
 
     virtual ~AnimacionDefensa();
 };
+
 #endif // ANIMACIONATAQUE_H
