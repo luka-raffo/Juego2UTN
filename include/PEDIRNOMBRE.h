@@ -9,3 +9,21 @@ std::string pedirNombre(sf::RenderWindow &window, sf::Font &font, bool usar=fals
 
 
 #endif // PEDIRNOMBRE_H_INCLUDED
+
+
+#ifndef RANKING_H
+#define RANKING_H
+
+#include <string>
+#include <vector>
+
+struct Puntaje {
+    std::string nombre;
+    float tiempo;
+};
+
+std::vector<Puntaje> cargarRanking();
+void guardarRanking(const std::vector<Puntaje>& ranking);
+void actualizarRanking(const std::string& nombreJugador, float tiempo);
+
+#endif

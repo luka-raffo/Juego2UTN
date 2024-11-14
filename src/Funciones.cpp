@@ -5,12 +5,119 @@
 #include <ctime>    // Para time()
 #include "AnimacionAtaque.h"
 #include "Juego.h"
+#include <SFML/Graphics.hpp>
+#include <iostream>
+#include "PedirNombre.h"
+#include "PedirNombre.h"
+#include <SFML/Graphics.hpp>
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <vector>
+#include <algorithm>
+#pragma once
+
 
 using namespace std;
 float getRandomStat(float min, float max) {
     return min + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (max - min)));
 }
 
+sf::Clock reloj;  // Crear el reloj aquí
+    bool usar = true;  // Condición de ejemplo para determinar si se debe guardar el tiempo
+
+
+
+// Función para leer el archivo de ranking y cargar los puntajes
+std::vector<Puntaje> cargarRanking() {
+    std::vector<Puntaje> ranking;
+    std::ifstream archivo("scores.txt");
+    std::string nombre;
+    float tiempo;
+    while (archivo >> nombre >> tiempo) {
+        ranking.push_back({nombre, tiempo});
+    }
+    archivo.close();
+    return ranking;
+}
+
+// Función para guardar el ranking en el archivo
+void guardarRanking(const std::vector<Puntaje>& ranking) {
+    std::ofstream archivo("scores.txt");
+    for (const auto& puntaje : ranking) {
+        archivo << puntaje.nombre << " " << puntaje.tiempo << "\n";
+    }
+    archivo.close();
+}
+
+// Función para agregar un nuevo puntaje y mantener el ranking de los 10 mejores
+void actualizarRanking(const std::string& nombreJugador, float tiempo) {
+    std::vector<Puntaje> ranking = cargarRanking();
+    ranking.push_back({nombreJugador, tiempo});
+
+    // Ordena el ranking por tiempo ascendente (los más rápidos primero)
+    std::sort(ranking.begin(), ranking.end(), [](const Puntaje& a, const Puntaje& b) {
+        return a.tiempo < b.tiempo;
+    });
+
+    // Mantener solo los 10 mejores puntajes
+    if (ranking.size() > 10) {
+        ranking.resize(10);
+    }
+
+    guardarRanking(ranking);
+}
+
+// Función para pedir el nombre y guardar el puntaje cuando se derrota al jefe final
+void manejarVictoria(sf::RenderWindow& window, sf::Font& font, sf::Clock& reloj, bool usar) {
+    if (usar) {
+        float tiempoTotal = reloj.getElapsedTime().asSeconds();
+        std::string nombreJugador = pedirNombre(window, font, usar);
+        actualizarRanking(nombreJugador, tiempoTotal);
+
+        std::cout  << nombreJugador << " Felicitaciones lo hiciste en:" << tiempoTotal << " segundos\n";
+
+    }
+}
+
+// Implementación de pedirNombre() modificada (sin el reinicio de reloj)
+std::string pedirNombre(sf::RenderWindow& window, sf::Font& font, bool usar) {
+    sf::Text textoPrompt("Ingrese su nombre:", font, 24);
+    textoPrompt.setPosition(100, 100);
+    textoPrompt.setFillColor(sf::Color::White);
+
+    std::string nombreJugador;
+    sf::Text nombreText("", font, 24);
+    nombreText.setPosition(100, 150);
+    nombreText.setFillColor(sf::Color::White);
+
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
+                window.close();
+                return "";
+            }
+            if (event.type == sf::Event::TextEntered) {
+                if (event.text.unicode < 128) {
+                    if (event.text.unicode == '\b' && !nombreJugador.empty()) {
+                        nombreJugador.pop_back();
+                    } else if (event.text.unicode == '\r' || event.text.unicode == '\n') {
+                        return nombreJugador;
+                    } else if (event.text.unicode != '\b') {
+                        nombreJugador += static_cast<char>(event.text.unicode);
+                    }
+                }
+            }
+        }
+        nombreText.setString(nombreJugador);
+        window.clear();
+        window.draw(textoPrompt);
+        window.draw(nombreText);
+        window.display();
+    }
+    return nombreJugador;
+}
 
 void startGame()
 {
@@ -503,7 +610,7 @@ void batallacueva()  // Crear una ventana
         cout << "Defensa de mi monstruo = " << monstruoJugador.getDefensaMonstruoActual() << endl;
     }
 }
-   if(lobo.getVida()<=0)
+  /* if(lobo.getVida()<=0)
             {
               //double tiempoTotal = detenerTemporizador(inicioJuego); // Detener el cronómetro
               //guardarResultado(nombreJugador, tiempoTotal);           // Guardar el tiempo en la clasificación
@@ -536,8 +643,21 @@ void batallacueva()  // Crear una ventana
               pedirNombre(window, font,usar);
 
 }
+*/
+if (lobo.getVida() <= 0) {
+    menuTexto.setString("Eres el vencedor");
+    menuTexto.setCharacterSize(60);
+    menuTexto.setFillColor(sf::Color::Black);
+    menuTexto.setPosition(150, 170);
 
+    window.draw(fondo);
+    window.draw(lobo);
+    window.draw(menuTexto);
+    monstruoJugador.dibujar(window);
+    window.display();
 
+    manejarVictoria(window, font, reloj, true);  // Llama a la función para manejar el nombre y el tiempo del jugador
+}
 
 
 }
