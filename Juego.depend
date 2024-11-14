@@ -2301,7 +2301,10 @@
 1731014685 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\animacionataque.h
 	<SFML/Graphics.hpp>
 
-<<<<<<< HEAD
+1731023313 D
+	"Juego.h"
+	"Juego.h"
+
 1731368255 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\animacionataque.cpp
 	"AnimacionAtaque.h"
 
@@ -2329,8 +2332,8 @@
 	"Juego.h"
 
 1731378578 c:\users\brandon\onedrive\escritorio\juego2utn\include\funcionstartgame.h
-=======
-1731037005 source:c:\proyec\hoola\juego2utn\main.cpp
+
+1731549269 source:c:\proyec\hoola\juego2utn\main.cpp
 	<SFML/Graphics.hpp>
 	"Personaje.h"
 	<iostream>
@@ -2346,6 +2349,31 @@
 	"Funciones.H"
 	"escenario2.h"
 	"escenario3.h"
+	<time.h>
+	<SFML/Graphics.hpp>
+	<iostream>
+	"PedirNombre.h"
+	<SFML/Graphics.hpp>
+	"Personaje.h"
+	<iostream>
+	"menu.h"
+	<ctime>
+	<SFML/Audio.hpp>
+	<chrono>
+	<string>
+	<vector>
+	<algorithm>
+	"escenario1.h"
+	"Funciones.H"
+	"escenario2.h"
+	"escenario3.h"
+	"PedirNombre.h"
+	<SFML/Graphics.hpp>
+	<SFML/Audio.hpp>
+	<iostream>
+	<string>
+	"pedirNombre.h"
+	"Menu.h"
 
 1731023270 c:\proyec\hoola\juego2utn\sfml\include\sfml\graphics.hpp
 	<SFML/Window.hpp>
@@ -2772,7 +2800,7 @@
 	<algorithm>
 	<Monstruo.h>
 
-1731023313 c:\proyec\hoola\juego2utn\include\monstruo.h
+1731462710 c:\proyec\hoola\juego2utn\include\monstruo.h
 	<SFML/Graphics.hpp>
 	<iostream>
 	"Colisionable.h"
@@ -2891,8 +2919,7 @@
 	<SFML/Audio/Export.hpp>
 	<string>
 
-1731023313 c:\proyec\hoola\juego2utn\include\funciones.h
->>>>>>> 1eef937 (Musica)
+1731535962 c:\proyec\hoola\juego2utn\include\funciones.h
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	<Personaje.h>
@@ -2905,28 +2932,50 @@
 	"Monstruo.h"
 	"Escenario2.h"
 	"escenario3.h"
-<<<<<<< HEAD
 	"Juego.h"
+	"FuncionStartgame.h"
+	<string>
+	<ctime>
+
+1731023313 f937 (Musica)
+	<SFML/Graphics.hpp>
+	<SFML/Audio.hpp>
+	<Personaje.h>
+	<iostream>
+	"menu.h"
+	<ctime>
+	<fstream>
+	<stdlib.h>
+	"escenario1.h"
+	"Monstruo.h"
+	"Escenario2.h"
+	"escenario3.h"
+	"inventory.h"
+	"Personaje.h"
+	<cstdlib>
+	<ctime>
+	"AnimacionAtaque.h"
 
 1731378900 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\funcionstartgame.cpp
 	"FuncionStartgame.h"
-=======
+
+1731378900 artgame.h"
 
 1731023313 c:\proyec\hoola\juego2utn\include\escenario2.h
 	<SFML/Graphics.hpp>
 	<iostream>
 	"Colisionable.h"
 
-1731023313 c:\proyec\hoola\juego2utn\include\escenario3.h
+1731462710 c:\proyec\hoola\juego2utn\include\escenario3.h
 	<SFML/Graphics.hpp>
 	<iostream>
 	"Colisionable.h"
 	<SFML/Audio.hpp>
 
-1731023313 source:c:\proyec\hoola\juego2utn\src\animacionataque.cpp
+1731462710 source:c:\proyec\hoola\juego2utn\src\animacionataque.cpp
 	"AnimacionAtaque.h"
 
-1731023313 c:\proyec\hoola\juego2utn\include\animacionataque.h
+1731462710 c:\proyec\hoola\juego2utn\include\animacionataque.h
 	<SFML/Graphics.hpp>
 
 1731023313 source:c:\proyec\hoola\juego2utn\src\colisionable.cpp
@@ -2940,20 +2989,22 @@
 1731023313 source:c:\proyec\hoola\juego2utn\src\escenario2.cpp
 	"Escenario2.h"
 
-1731023313 source:c:\proyec\hoola\juego2utn\src\escenario3.cpp
+1731462710 source:c:\proyec\hoola\juego2utn\src\escenario3.cpp
 	"escenario3.h"
 
-1731023313 source:c:\proyec\hoola\juego2utn\src\funciones.cpp
+1731543401 source:c:\proyec\hoola\juego2utn\src\funciones.cpp
 	"Funciones.h"
->>>>>>> 1eef937 (Musica)
 	"inventory.h"
 	"Personaje.h"
 	<cstdlib>
 	<ctime>
 	"AnimacionAtaque.h"
-<<<<<<< HEAD
 	"Juego.h"
-=======
+	<cstdio>
+	"PedirNombre.h"
+	<time.h>
+
+1731023313 
 
 1731023313 source:c:\proyec\hoola\juego2utn\src\inventory.cpp
 	"inventory.h"
@@ -2961,18 +3012,80 @@
 	<algorithm>
 	<vector>
 
-1731037340 source:c:\proyec\hoola\juego2utn\src\menu.cpp
+1731462711 source:c:\proyec\hoola\juego2utn\src\menu.cpp
 	"menu.h"
 	<SFML/Graphics.hpp>
 	<iostream>
 
-1731023313 source:c:\proyec\hoola\juego2utn\src\monstruo.cpp
+1731462710 source:c:\proyec\hoola\juego2utn\src\monstruo.cpp
 	"Monstruo.h"
 	<SFML/Graphics.hpp>
 	<iostream>
 	"inventory.h"
 
-1731023313 source:c:\proyec\hoola\juego2utn\src\personaje.cpp
+1731462710 source:c:\proyec\hoola\juego2utn\src\personaje.cpp
 	"Personaje.h"
->>>>>>> 1eef937 (Musica)
+
+1731462710 c:\proyec\hoola\juego2utn\include\juego.h
+	<SFML/Graphics.hpp>
+	<iostream>
+	<vector>
+	<string>
+	<Monstruo.h>
+
+1731462710 c:\proyec\hoola\juego2utn\include\funcionstartgame.h
+	<SFML/Graphics.hpp>
+	<SFML/Audio.hpp>
+	<Personaje.h>
+	<iostream>
+	"menu.h"
+	<ctime>
+	<fstream>
+	<stdlib.h>
+	"escenario1.h"
+	"Monstruo.h"
+	"Escenario2.h"
+	"escenario3.h"
+	"Juego.h"
+
+1731462710 source:c:\proyec\hoola\juego2utn\src\funcionstartgame.cpp
+	"FuncionStartgame.h"
+	"inventory.h"
+	"Personaje.h"
+	<cstdlib>
+	<ctime>
+	"AnimacionAtaque.h"
+	"Juego.h"
+
+1731462710 source:c:\proyec\hoola\juego2utn\src\juego.cpp
+	"Juego.h"
+
+1731514630 c:\proyec\hoola\juego2utn\pedirnombre.h
+	<SFML/Graphics.hpp>
+	<string>
+
+1731513856 source:c:\proyec\hoola\juego2utn\pedirnombre.cpp
+
+1731546036 c:\proyec\hoola\juego2utn\include\pedirnombre.h
+	<SFML/Graphics.hpp>
+	<string>
+
+1731545992 source:c:\proyec\hoola\juego2utn\src\pedirnombre.cpp
+	"PedirNombre.h"
+	<SFML/Graphics.hpp>
+	<iostream>
+	<SFML/Graphics.hpp>
+	<iostream>
+	<string>
+
+1731542830 source:c:\proyec\hoola\juego2utn\src\ranking.cpp
+	"Ranking.h"
+	<iostream>
+	<fstream>
+	<algorithm>
+	<vector>
+
+1731542830 c:\proyec\hoola\juego2utn\include\ranking.h
+	<string>
+	<vector>
 

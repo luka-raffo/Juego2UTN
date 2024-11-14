@@ -5,12 +5,27 @@
 #include <ctime>    // Para time()
 #include "AnimacionAtaque.h"
 #include "Juego.h"
+#include <cstdio>
+#include "PedirNombre.h"
+#include <time.h>
 
 using namespace std;
 
+/*
+std::string IngresarNombre() {
+    sf::RenderWindow windowNombre(sf::VideoMode(800, 600), "Ingrese Nombre");
+    std::string nombreJugador = pedirNombre(windowNombre);
+    windowNombre.close();
 
-void startGame()
-{
+        std::cout << "Bienvenido, " << nombreJugador << "!" << std::endl;
+
+
+    return nombreJugador;
+}
+*/
+void startGame() {
+
+
     // Crear una ventana
     sf::RenderWindow window(sf::VideoMode(800, 600), "Inicia Juego");
 
@@ -20,7 +35,6 @@ void startGame()
     // Crear un personaje
     Personaje rojo;
     int Banderaposicion = 0; // Inicializamos la bandera en 0
-
 
     // Ajustar posición inicial según la bandera antes del bucle de juego
     if (Banderaposicion == 1) {
@@ -48,16 +62,14 @@ void startGame()
     // Crear fondo
     escenario Fondo;
 
-    // Agregar un reloj para el cooldown de colisiones
-    sf::Clock collisionCooldown;
-    float cooldownTime = 1;  // Cooldown de 1 segundo
+    // Variables de cooldown
+    sf::Clock collisionCooldown;  // Reloj para el tiempo de cooldown
+    float cooldownTime = 2.0f;    // Tiempo de cooldown en segundos
 
     // Game loop
-    while (window.isOpen())
-    {
+    while (window.isOpen()) {
         sf::Event event;
-        while (window.pollEvent(event))
-        {
+        while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
@@ -66,18 +78,14 @@ void startGame()
         rojo.update();
 
         // Verificar si el cooldown ha pasado
-        if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime)
-        {
+        if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime) {
             int EventoPokemon = 2;
 
             // Verificar colisiones con cada objeto en la lista
-            for (const bush6x4& b : listaBushes)
-            {
-                if (rojo.isCollision(b))
-                {
+            for (const bush6x4& b : listaBushes) {
+                if (rojo.isCollision(b)) {
                     EventoPokemon = std::rand() % 2000;
-                    if (EventoPokemon <= 2000)
-                    {
+                    if (EventoPokemon < 1000) {  // Umbral ajustable para activar el evento
                         escenarioPelea();
                         collisionCooldown.restart();
                     }
@@ -88,8 +96,7 @@ void startGame()
             }
 
             // Colisión con el suelo 1
-            if (rojo.isCollision(suelo))
-            {
+            if (rojo.isCollision(suelo)) {
                 starthistoria();
                 Banderaposicion = 0;
                 rojo.setPosition(650, 0);  // Reposicionar al colisionar con suelo 1
@@ -99,8 +106,7 @@ void startGame()
             }
 
             // Colisión con el suelo 2
-            if (rojo.isCollision(suelo2))
-            {
+            if (rojo.isCollision(suelo2)) {
                 llegadaisla();
                 Banderaposicion = 1;
                 rojo.setPosition(0, 235);  // Reposicionar al colisionar con suelo 2
@@ -115,8 +121,7 @@ void startGame()
         window.draw(Fondo);
 
         // Dibujar bush y demás objetos
-        for (const bush6x4& b : listaBushes)
-        {
+        for (const bush6x4& b : listaBushes) {
             window.draw(b);
         }
         window.draw(suelo);
@@ -398,53 +403,22 @@ void batallacueva()  // Crear una ventana
 }
    if(lobo.getVida()<=0)
             {
+              //double tiempoTotal = detenerTemporizador(inicioJuego); // Detener el cronómetro
+              //guardarResultado(nombreJugador, tiempoTotal);           // Guardar el tiempo en la clasificación
+
+    // Muestra el tiempo total al jugador (opcional)
+    //std::cout << "¡Has completado el juego en " << tiempoTotal << " segundos!" << std::endl;
                  // Cambiar el mensaje a "Eres el vencedor"
-             menuTexto.setString("Eres el vencedor");
-             menuTexto.setCharacterSize(60);
+              menuTexto.setString("Eres el vencedor");
+              menuTexto.setCharacterSize(60);
               menuTexto.setFillColor(sf::Color::Black);
               menuTexto.setPosition(150, 170);
-
-
-    // Mantener ventana abierta unos segundos más
-    sf::Clock clock;
-        while (clock.getElapsedTime().asSeconds() < 3.0f) {  // Mostrar el mensaje por 3 segundos
-        window.clear();
-        window.draw(fondo);
-        window.draw(menuTexto);
-        window.display();
-        sonidoVictoria.play();
-
-
-    }
-
-    // Cerrar la ventana después de mostrar el mensaje
-    window.close();
-
-                // *Distribución de experiencia al ganar*
-                int expGanada = 30; // Ajusta este valor a tu preferencia
-                monstruoJugador.ganarExperienciaMonstruoActual(expGanada); // Agregar exp al monstruo del jugador
-                cout << "Ganaste " << expGanada << " puntos de experiencia!" << endl;
-
-                peleaActiva = false;
-            }
-        if(monstruoJugador.getVidaMonstruoActual()<=0)
-        {
-            monstruoJugador.pasarAlSiguienteMonstruo();
 }
 
 
-        }//llave del while
-
-        ataque.update();
-        Defensa.update();
-
-        // Limpiar la pantalla
 
 
-
-
-
-
+}
 
         // Mostrar lo dibujado
 
