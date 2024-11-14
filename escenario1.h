@@ -23,7 +23,7 @@ private
     sf::Sprite _sprite;
     sf::Texture _texture;
 
-    public
+    publicaaa
 
 
 }
