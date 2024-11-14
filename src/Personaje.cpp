@@ -2,6 +2,8 @@
 
 Personaje::Personaje()
 {
+    inventory inventario(100);
+
     //Asignacion para la textura
     _texture.loadFromFile("Characters/character 4.png");
 
@@ -29,13 +31,15 @@ Personaje::Personaje()
 
 
     // Inicializar los frames de reposo
-    idleDownRect = sf::IntRect(0, 0, 14, 20);
+    idleDownRect = sf::IntRect(0, 0, 15, 20);
     idleLeftRect = sf::IntRect(0, 40, 14, 20);
     idleRightRect = sf::IntRect(0, 60, 14, 20);
-    idleUpRect = sf::IntRect(0, 20, 14, 20);
+    idleUpRect = sf::IntRect(0, 20, 15, 20);
 
     _currentIdleRect = &idleDownRect; // Inicialmente en reposo mirando hacia abajo
     _sprite.setTextureRect(*_currentIdleRect);
+
+
 
 
 }
@@ -147,3 +151,31 @@ void Personaje::update(){
     void Personaje::draw(sf::RenderTarget& target, sf::RenderStates states)const {
     target.draw(_sprite, states);
     }
+
+    sf::FloatRect Personaje::getBounds()const{
+    return _sprite.getGlobalBounds();
+    }
+void Personaje::guardarPosicion() {
+    std::ofstream archivo("posicion.txt");
+    if (archivo.is_open()) {
+        sf::Vector2f posicion = this->getPosition();
+        archivo << posicion.x << " " << posicion.y;
+        archivo.close();
+
+    } else {
+        std::cerr << "Error al guardar la posición: no se pudo abrir el archivo." << std::endl;
+    }
+}
+
+void Personaje::cargarPosicion() {
+    std::ifstream archivo("posicion.txt");
+    if (archivo.is_open()) {
+        float x, y;
+        archivo >> x >> y;
+        this->setPosition(x, y);
+        archivo.close();
+    } else {
+        // Si el archivo no existe, puedes asignar una posición inicial por defecto
+        this->setPosition(400, 590); // o cualquier otra posición inicial
+    }
+}

@@ -20,6 +20,7 @@
 					<Add library="sfml-graphics" />
 					<Add library="sfml-window" />
 					<Add library="sfml-system" />
+					<Add library="sfml-audio" />
 					<Add directory="SFML/lib" />
 				</Linker>
 			</Target>
@@ -40,21 +41,38 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="escenario1.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="escenario1.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="include/AnimacionAtaque.h" />
+		<Unit filename="include/Colisionable.h" />
+		<Unit filename="include/Escenario2.h" />
+		<Unit filename="include/FuncionStartgame.h" />
+		<Unit filename="include/Funciones.h" />
+		<Unit filename="include/Juego.h" />
 		<Unit filename="include/Monstruo.h" />
+		<Unit filename="include/PedirNombre.h" />
 		<Unit filename="include/Personaje.h" />
+		<Unit filename="include/Ranking.h" />
+		<Unit filename="include/escenario1.h" />
+		<Unit filename="include/escenario3.h" />
+		<Unit filename="include/inventory.h" />
 		<Unit filename="include/menu.h" />
 		<Unit filename="main.cpp">
 			<Option target="Debug" />
 		</Unit>
+		<Unit filename="src/AnimacionAtaque.cpp" />
+		<Unit filename="src/Colisionable.cpp" />
+		<Unit filename="src/Escenario2.cpp" />
+		<Unit filename="src/FuncionStartgame.cpp" />
+		<Unit filename="src/Funciones.cpp" />
+		<Unit filename="src/Juego.cpp" />
 		<Unit filename="src/Monstruo.cpp" />
+		<Unit filename="src/PedirNombre.cpp" />
 		<Unit filename="src/Personaje.cpp" />
+		<Unit filename="src/Ranking.cpp" />
+		<Unit filename="src/escenario1.cpp" />
+		<Unit filename="src/escenario3.cpp" />
+		<Unit filename="src/inventory.cpp" />
 		<Unit filename="src/menu.cpp" />
+		<Unit filename="time.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
