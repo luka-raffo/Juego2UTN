@@ -4,13 +4,51 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <string>
+#include <fstream>
 
-std::string pedirNombre(sf::RenderWindow &window, sf::Font &font) {
+std::string nombreJugador;
+sf::Clock reloj;
+
+void cerrarPrograma() {
+    std::exit(0);  // Termina el programa inmediatamente
+}
+
+// Función para iniciar el reloj
+sf::Clock iniciarReloj() {
+    sf::Clock reloj;
+    return reloj;
+}
+
+
+
+// Función para detener el reloj y guardar el tiempo
+void detenerRelojYGuardarTiempo(bool usar) {
+    if(usar){
+    sf::Time tiempoTranscurrido = reloj.getElapsedTime();
+    std::ofstream archivo("scores.txt", std::ios::app);
+    if (archivo.is_open()) {
+        archivo << nombreJugador << " - " << tiempoTranscurrido.asSeconds() << " segundos\n";
+        archivo.close();
+    }
+    cerrarPrograma();
+    }
+}
+
+
+
+std::string pedirNombre(sf::RenderWindow &window, sf::Font &font, bool usar) {
+
+    detenerRelojYGuardarTiempo(usar);
     sf::Text textoPrompt("Ingrese su nombre:", font, 24);
     textoPrompt.setPosition(100, 100);
     textoPrompt.setFillColor(sf::Color::White);
 
-    std::string nombreJugador;
+
+
+    sf::Clock clock;
+    sf::Time elapsedTime;
+
+
     sf::Text nombreText("", font, 24);
     nombreText.setPosition(100, 150);
     nombreText.setFillColor(sf::Color::White);
@@ -43,8 +81,12 @@ std::string pedirNombre(sf::RenderWindow &window, sf::Font &font) {
 
         // Actualiza el texto del nombre del jugador
         nombreText.setString(nombreJugador);
+         iniciarReloj();
 
         // Renderiza el prompt y el nombre ingresado
+
+
+
         window.clear();
         window.draw(textoPrompt);
         window.draw(nombreText);
@@ -53,3 +95,5 @@ std::string pedirNombre(sf::RenderWindow &window, sf::Font &font) {
 
     return nombreJugador;
 }
+
+

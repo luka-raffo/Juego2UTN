@@ -9,6 +9,7 @@
 #include "PedirNombre.h"
 #include <time.h>
 
+
 using namespace std;
 
 /*
@@ -231,6 +232,9 @@ void batallacueva()  // Crear una ventana
     menuTexto.setFillColor(sf::Color::Black);
     menuTexto.setPosition(500, 500);
 
+    bool usar=true;
+    bool ganaste=false;
+
     //elementos monstruo jugador
     //monstruoJugador.setPosition(30, 350);  // Jugador a la izquierda
    // monstruoJugador.setScale(4,4);
@@ -239,6 +243,7 @@ void batallacueva()  // Crear una ventana
     //cartel opciones pelea
     // Submenú para que el jugador elija la acción: atacar, defender, capturar (si es posible)
     cout << "Elige una acción: 1) Atacar 2) Defender"<<endl;
+
 
 
     cout<<"la vida de tu pokemon es: "<<monstruoJugador.getVidaMonstruoActual()<<endl;
@@ -354,11 +359,8 @@ void batallacueva()  // Crear una ventana
                     cout<<"defensa mi monstruo aumento = "<<monstruoJugador.getDefensaMonstruoActual()<<endl;
                     sonidoDefensa.play(); // Reproducir sonido de ataque
                     Defensa.startAnimation();
-
-
-
-
                     turnoJugador=false;
+
 
 
                 }
@@ -410,9 +412,29 @@ void batallacueva()  // Crear una ventana
     //std::cout << "¡Has completado el juego en " << tiempoTotal << " segundos!" << std::endl;
                  // Cambiar el mensaje a "Eres el vencedor"
               menuTexto.setString("Eres el vencedor");
+
+
+
+
+
               menuTexto.setCharacterSize(60);
               menuTexto.setFillColor(sf::Color::Black);
               menuTexto.setPosition(150, 170);
+
+              // Dibujar el fondo
+                window.draw(fondo);
+
+
+
+            //dibujar monstruo jugador
+            window.draw(lobo);
+            // Dibujar opciones de pelea siempre en pantalla
+            window.draw(menuTexto);
+            monstruoJugador.dibujar(window);
+            window.display();
+
+              pedirNombre(window, font,usar);
+
 }
 
 
@@ -446,6 +468,7 @@ void batallacueva()  // Crear una ventana
 
     }
 }
+
 
 
 void starthistoria()
@@ -562,6 +585,8 @@ void llegadaisla()
     sf::RenderWindow window(sf::VideoMode(800, 600), "Inicia Juego");
 
     window.setFramerateLimit(60);
+
+
 
     // Crear el personaje y definir su posición inicial
     Personaje rojo;

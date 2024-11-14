@@ -48,7 +48,7 @@ using namespace std;
 
 std::string IngresarNombre() {
     sf::RenderWindow windowNombre(sf::VideoMode(800, 600), "Ingrese Nombre");
-
+    bool usar=false;
     sf::Font font;
     if (!font.loadFromFile("include/Pokemon.ttf")) {
         std::cerr << "Error cargando la fuente\n";
@@ -56,7 +56,7 @@ std::string IngresarNombre() {
     }
 
     // Llama a la función pedirNombre pasando tanto la ventana como la fuente
-    std::string nombreJugador = pedirNombre(windowNombre, font);
+    std::string nombreJugador = pedirNombre(windowNombre, font,usar);
 
     windowNombre.close();
 
