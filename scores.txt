@@ -10,3 +10,4 @@ luka - 11.3751 segundos
 sii - 10.4813 segundos
 444444 - 13.0878 segundos
 ++++ - 12.7353 segundos
+puta - 15.9835 segundos
