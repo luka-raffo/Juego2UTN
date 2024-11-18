@@ -17,6 +17,7 @@
 
 
 using namespace std;
+void manejarCombate();
 void escenarioPelea();
 
 

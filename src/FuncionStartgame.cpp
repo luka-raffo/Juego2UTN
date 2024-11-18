@@ -5,6 +5,170 @@
 #include <ctime>    // Para time()
 #include "AnimacionAtaque.h"
 #include "Juego.h"
+void manejarCombate(Monstruo& enemigo, Juego& monstruoJugador, sf::Text& menuTexto, sf::RenderWindow& window) {
+    srand(static_cast<unsigned>(time(0)));
+
+    bool b_ataqueJugador=false;
+     AnimacionAtaque ataque;
+    ataque.setRutaPNG("Animations/zoonami_enemy_aqua_jet_animation.PNG");
+
+    AnimacionAtaque ataque2;
+    ataque.setRutaPNG("Animations/zoonami_player_vice_grip_animation.PNG");
+
+    AnimacionDefensa Defensa;
+
+
+    // Variables de pelea
+    bool turnoJugador = true;  // Variable para alternar los turnos
+
+    bool peleaActiva = true;
+    bool opcionSeleccionada = false;
+
+
+    //PROBANDO cosas del CARTEL DE VICTORIA
+    sf::Clock WinCooldown;
+    float cooldownTime = 15;
+
+    // Crear buffer para el sonido de ataque
+    sf::SoundBuffer bufferAtaque;
+    if (!bufferAtaque.loadFromFile("Sonidos/pew.wav"))
+    {
+        std::cout << "Error al cargar pew.wav" << std::endl;
+    }
+    sf::Sound sonidoAtaque;
+    sonidoAtaque.setBuffer(bufferAtaque);
+    ///////////////////////////////////
+    /////////////////////////////////////////
+  sf::SoundBuffer bufferDefensa;
+    if (!bufferDefensa.loadFromFile("Sonidos/bueeeee.wav"))
+    {
+        std::cout << "Error al cargar paaraaaaa.wav" << std::endl;
+    }
+    sf::Sound sonidoDefensa;
+    sonidoDefensa.setBuffer(bufferDefensa);
+    /////////////////////////////////////
+    sf::SoundBuffer bufferPelea;
+    if (!bufferPelea.loadFromFile("Sonidos/omg-esto-va-a-ser-epico-papus.wav"))
+    {
+        std::cout << "Error al cargar omg-esto-va-a-ser-epico-papus.wav" << std::endl;
+    }
+    sf::Sound sonidoPelea;
+    sonidoPelea.setBuffer(bufferPelea);
+///////////////////////////////////////////
+  sf::SoundBuffer bufferDerrota;
+    if (!bufferDerrota.loadFromFile("Sonidos/estoy-cansado-jefe.wav"))
+    {
+        std::cout << "Error al cargar estoy-cansado-jefe.wav" << std::endl;
+    }
+    sf::Sound sonidoDerrota;
+    sonidoDerrota.setBuffer(bufferDerrota);
+    //////////////////////////////////////
+      sf::SoundBuffer bufferVictoria;
+    if (!bufferVictoria.loadFromFile("Sonidos/bokita.wav"))
+    {
+        std::cout << "Error al cargar bokita.wav" << std::endl;
+    }
+    sf::Sound sonidoVictoria;
+    sonidoVictoria.setBuffer(bufferVictoria);
+    ///////////////////////////////////
+      sf::SoundBuffer bufferExp;
+    if (!bufferExp.loadFromFile("Sonidos/orb.wav"))
+    {
+        std::cout << "Error al cargar orb.wav" << std::endl;
+    }
+    sf::Sound sonidoExp;
+    sonidoExp.setBuffer(bufferExp);
+
+      while (window.isOpen() && peleaActiva)
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+
+            // Salir del escenario al presionar ESC
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
+            {
+                window.close();
+            }
+
+
+    if (turnoJugador) {
+        if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Num1) {  // Atacar
+            cout << "Atacas al enemigo!" << endl;
+            ataque.startAnimation();
+            sonidoAtaque.play();
+
+            if (enemigo.getDefensa() > monstruoJugador.getDanioMonstruoActual()) {
+                cout << "El enemigo ha bloqueado tu ataque!" << endl;
+                enemigo.setDefensa(enemigo.getDefensa() - monstruoJugador.getDanioMonstruoActual());
+            } else {
+                float danio = monstruoJugador.getDanioMonstruoActual() - enemigo.getDefensa();
+                enemigo.setVida(enemigo.getVida() - danio);
+                enemigo.setDefensa(0);
+                cout << "Has hecho " << danio << " de daño. Vida del enemigo: " << enemigo.getVida() << endl;
+            }
+
+            turnoJugador = false;
+        } else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Num2) {  // Defender
+            cout << "Te defiendes!" << endl;
+            monstruoJugador.setDefensaMonstruoActual(rand() % 100 + 1);
+            sonidoDefensa.play();
+            Defensa.startAnimation();
+            turnoJugador = false;
+        }
+    } else {
+        // Turno del enemigo
+        cout << "El enemigo ataca!" << endl;
+        int probabilidadCura = rand() % 100;
+        if (probabilidadCura < 20) {
+            float curacion = 40.0f;
+            enemigo.setVida(enemigo.getVida() + curacion);
+            cout << "El enemigo se ha curado " << curacion << " puntos de vida." << endl;
+        } else {
+            if (monstruoJugador.getDefensaMonstruoActual() > enemigo.getDanio()) {
+                cout << "El ataque fue bloqueado con éxito!" << endl;
+                monstruoJugador.setDefensaMonstruoActual(monstruoJugador.getDefensaMonstruoActual() - enemigo.getDanio());
+            } else {
+                float danio = enemigo.getDanio() - monstruoJugador.getDefensaMonstruoActual();
+                monstruoJugador.setVidaMonstruoActual(monstruoJugador.getVidaMonstruoActual() - danio);
+                monstruoJugador.setDefensaMonstruoActual(0);
+                cout << "El enemigo ha hecho " << danio << " de daño. Vida de tu monstruo: " << monstruoJugador.getVidaMonstruoActual() << endl;
+            }
+        }
+        turnoJugador = true;
+    }
+
+    if (enemigo.getVida() <= 0) {
+        menuTexto.setString("Eres el vencedor");
+        menuTexto.setCharacterSize(60);
+        menuTexto.setFillColor(sf::Color::Black);
+        menuTexto.setPosition(150, 170);
+        sonidoExp.play();
+        sonidoVictoria.play();
+
+        sf::Clock clock;
+        while (clock.getElapsedTime().asSeconds() < 3.0f) {
+            window.clear();
+
+            window.draw(menuTexto);
+            window.display();
+        }
+        window.close();
+
+        int expGanada = 30;
+        monstruoJugador.ganarExperienciaMonstruoActual(expGanada);
+        cout << "Ganaste " << expGanada << " puntos de experiencia!" << endl;
+        peleaActiva = false;
+    }
+
+    if (monstruoJugador.getVidaMonstruoActual() <= 0) {
+        monstruoJugador.pasarAlSiguienteMonstruo();
+    }
+}
+}
+}
 
 void escenarioPelea()
 {
@@ -69,7 +233,7 @@ void escenarioPelea()
 
     // Variables de pelea
     bool turnoJugador = true;  // Variable para alternar los turnos
-    bool capturable = false;   // Indica si el monstruo puede ser capturado
+
     bool peleaActiva = true;
     bool opcionSeleccionada = false;
 

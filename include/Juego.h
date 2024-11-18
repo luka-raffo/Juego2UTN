@@ -11,44 +11,42 @@ using namespace std;
 class Juego
 {
     private:
-    vector<Monstruo*> monstruos;
-    int indiceActual;
-
-    protected:
+        vector<Monstruo*> monstruos;
+        int indiceActual;
 
     public:
-     Juego();
-    void agregarMonstruo(Monstruo *m);
-    void verificarVida(float vida);
-    void dibujar(sf::RenderWindow& ventana);
+        Juego();
+        ~Juego(); // Destructor para liberar memoria
 
-    // Método para pasar al siguiente monstruo
-    bool pasarAlSiguienteMonstruo();
+        void agregarMonstruo(Monstruo *m);
+        void verificarVida(float vida);
+        void dibujar(sf::RenderWindow& ventana);
 
-    // Métodos para el monstruo actual
-    void setVidaMonstruoActual(float nuevaVida);
-    void sumarVidaMonstruoActual(float vida);
-    float getVidaMonstruoActual() const;
+        // Método para pasar al siguiente monstruo
+        bool pasarAlSiguienteMonstruo();
 
-    void setAtaqueMonstruoActual(float danio);
-    void sumarAtaqueMonstruoActual(float danio);
-    float getDanioMonstruoActual() const;
+        // Métodos para el monstruo actual
+        void setVidaMonstruoActual(float nuevaVida);
+        void sumarVidaMonstruoActual(float vida);
+        float getVidaMonstruoActual() const;
 
-    void setDefensaMonstruoActual(float defensa);
-    float getDefensaMonstruoActual() const;
+        void setAtaqueMonstruoActual(float danio);
+        void sumarAtaqueMonstruoActual(float danio);
+        float getDanioMonstruoActual() const;
 
-    int getNivelMonstruoActual() const;
-    float getExperienciaMonstruoActual() const;
-    void ganarExperienciaMonstruoActual(float exp);
+        void setDefensaMonstruoActual(float defensa);
+        float getDefensaMonstruoActual() const;
 
-    // Métodos para posición y escala
+        int getNivelMonstruoActual() const;
+        float getExperienciaMonstruoActual() const;
+        void ganarExperienciaMonstruoActual(float exp);
+
+        // Métodos para posición y escala
         void setPosition(float x, float y);
         void setScale(float x, float y);
 
-    // Método para establecer la posición de todos los monstruos
-    void setPositionTodosMonstruos(float x, float y);
-
-
+        // Método para establecer la posición de todos los monstruos
+        void setPositionTodosMonstruos(float x, float y);
 };
 
 #endif // JUEGO_H

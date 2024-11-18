@@ -1386,7 +1386,7 @@
 	<iostream>
 	"escenario1.h"
 
-1731585887 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\funciones.cpp
+1731587448 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\funciones.cpp
 	"Funciones.h"
 	"inventory.h"
 	"Personaje.h"
@@ -2341,17 +2341,17 @@
 	<string>
 	<Monstruo.h>
 
-1731291924 c:\users\brandon\onedrive\escritorio\juego2utn\include\juego.h
+1731952021 c:\users\brandon\onedrive\escritorio\juego2utn\include\juego.h
 	<SFML/Graphics.hpp>
 	<iostream>
 	<vector>
 	<string>
 	<Monstruo.h>
 
-1731291924 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\juego.cpp
+1731952021 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\juego.cpp
 	"Juego.h"
 
-1731378578 c:\users\brandon\onedrive\escritorio\juego2utn\include\funcionstartgame.h
+1731954267 c:\users\brandon\onedrive\escritorio\juego2utn\include\funcionstartgame.h
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	<Personaje.h>
@@ -2366,7 +2366,7 @@
 	"escenario3.h"
 	"Juego.h"
 
-1731584652 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\funcionstartgame.cpp
+1731956869 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\funcionstartgame.cpp
 	"FuncionStartgame.h"
 	"inventory.h"
 	"Personaje.h"

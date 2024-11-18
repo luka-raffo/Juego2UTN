@@ -2,6 +2,14 @@
 
 Juego::Juego() : indiceActual(0) {}
 
+// Destructor
+Juego::~Juego() {
+    for (Monstruo* m : monstruos) {
+        delete m; // Liberar memoria de cada monstruo
+    }
+    monstruos.clear(); // Limpiar el vector
+}
+
 void Juego::agregarMonstruo(Monstruo *m) {
     monstruos.push_back(m);
 }
@@ -19,7 +27,6 @@ void Juego::dibujar(sf::RenderWindow& ventana) {
     }
 }
 
-
 bool Juego::pasarAlSiguienteMonstruo() {
     if (indiceActual < monstruos.size() - 1) {
         indiceActual++;
@@ -30,7 +37,6 @@ bool Juego::pasarAlSiguienteMonstruo() {
         return false;
     }
 }
-
 
 // Métodos para el monstruo actual
 void Juego::setVidaMonstruoActual(float nuevaVida) {
@@ -105,21 +111,18 @@ void Juego::ganarExperienciaMonstruoActual(float exp) {
 }
 
 // Métodos para posición y escala
-void Juego::setPosition(float x, float y)
-{
+void Juego::setPosition(float x, float y) {
     if (indiceActual < monstruos.size()) {
         monstruos[indiceActual]->setPosition(x, y);
     }
 }
 
-void Juego::setScale(float x, float y)
-{
+void Juego::setScale(float x, float y) {
     if (indiceActual < monstruos.size()) {
-        monstruos[indiceActual]->setScale(x,y);
+        monstruos[indiceActual]->setScale(x, y);
     }
 }
 
-// Método para establecer la posición de todos los monstruos
 void Juego::setPositionTodosMonstruos(float x, float y) {
     for (Monstruo* m : monstruos) {
         m->setPosition(x, y);
