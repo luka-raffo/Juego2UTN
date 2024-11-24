@@ -3,6 +3,7 @@
 #include <iostream>
 #include "inventory.h"
 #include "Funciones.h"
+#include "AnimacionAtaque.h"
 
 
 // Constructor por defecto de Monstruo con valores aleatorios
@@ -151,10 +152,18 @@ bool Monstruo::cargarTextura(const std::string& archivo)
 {
     if (!_texture.loadFromFile(archivo))
     {
+
         return false;
     }
     _sprite.setTexture(_texture);
     return true;
+}
+
+bool Monstruo::atacar(){
+    cout << "Atacas al enemigo!" << endl;
+
+
+
 }
 
 

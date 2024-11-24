@@ -15,7 +15,8 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
-#pragma once
+#pragma once"
+#include "Escenario.h"
 
 
 using namespace std;
@@ -227,7 +228,8 @@ void startGame()
 
 
     // Crear fondo
-    escenario Fondo;
+    Escenario Fondo("Tileset/nuevo.JPG");
+
 
     // Agregar un reloj para el cooldown de colisiones
     sf::Clock collisionCooldown;

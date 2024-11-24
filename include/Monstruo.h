@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "Colisionable.h"
+#include "AnimacionAtaque.h"
 
 using namespace std;
 
@@ -18,6 +19,8 @@ private:
     float _defensa;
 
     sf::Texture _texture;
+
+
 
 
 
@@ -84,7 +87,7 @@ public:
 
         void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
-
+        virtual bool atacar();
 
 };
 
