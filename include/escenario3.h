@@ -4,95 +4,60 @@
 #include <iostream>
 #include "Colisionable.h"
 #include <SFML/Audio.hpp>
+#include "escenario1.h"
 
 using namespace std;
 
-class Escenariojefe : public sf::Drawable {
-private:
-    sf::Sprite _sprite;
-    sf::Texture _texture;
 
+class EscenarioJefe : public EscenarioBase {
 public:
+    EscenarioJefe() {
+        inicializar();
+    }
 
-    Escenariojefe();
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override {
-        target.draw(_sprite, states);
+    void cargarTextura() override {
+        if (!_texture.loadFromFile("Tileset/SInVALLAS.jpg")) {
+            std::cerr << "Error cargando la textura de EscenarioJefe" << std::endl;
+        }
     }
 };
 
-class caverna : public sf::Drawable, public Colisionable {
-private:
-    sf::Sprite _sprite;
-    sf::Texture _texture;
-
+class CavernaBattleBackground : public EscenarioBase {
 public:
-    caverna();
-
-
-     void setPosition(float x, float y) {
-        _sprite.setPosition(x, y);
-    };
-    const sf::Sprite& getSprite() const {
-        return _sprite;
+    CavernaBattleBackground() {
+        inicializar();
+        _sprite.setScale(5, 5); // Escalado específico
     }
 
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-    sf::FloatRect getBounds() const override;
-
-
+    void cargarTextura() override {
+        if (!_texture.loadFromFile("tileset/cueva2.png")) {
+            std::cerr << "Error cargando la textura de CavernaBattleBackground" << std::endl;
+        }
+    }
 };
-class CavernaBattleBackground : public sf::Drawable {
-private:
-    sf::Sprite _sprite;
-    sf::Texture _texture;
-
+class caverna : public ObjetoEscenario {
 public:
-
-    CavernaBattleBackground();
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override {
-        target.draw(_sprite, states);
+    caverna() {
+        _texture.loadFromFile("tileset/Cueva.png");
+        _sprite.setTexture(_texture);
     }
 };
 
-class vallas : public sf::Drawable, public Colisionable {
-    sf::Sprite _sprite;
-    sf::Texture _texture;
-
+class vallas : public ObjetoEscenario {
 public:
-    vallas();
-
-  void setPosition(float x, float y) {
-        _sprite.setPosition(x, y);
-    };
-    const sf::Sprite& getSprite() const {
-        return _sprite;
+    vallas() {
+        _texture.loadFromFile("tileset/Vallas.sprite.jpg");
+        _sprite.setTexture(_texture);
     }
-
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-    sf::FloatRect getBounds() const override;
-
-
 };
-class suelo : public sf::Drawable, public Colisionable {
-private:
-    sf::Sprite _sprite;
-    sf::Texture _texture;
 
+class suelo : public ObjetoEscenario {
 public:
-    suelo();
-
-
-     void setPosition(float x, float y) {
-        _sprite.setPosition(x, y);
-    };
-    const sf::Sprite& getSprite() const {
-        return _sprite;
+    suelo () {
+        _texture.loadFromFile("tileset/suelo.png");
+        _sprite.setTexture(_texture);
     }
-
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-    sf::FloatRect getBounds() const override;
-
-
 };
+
 
 #endif // ESCENARIO3_H

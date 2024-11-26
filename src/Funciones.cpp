@@ -569,12 +569,7 @@ void batallacueva()  // Crear una ventana
                     sonidoDefensa.play(); // Reproducir sonido de ataque
                     Defensa.startAnimation();
                     turnoJugador=false;
-
-
-
                 }
-
-
 
             }
            else {
@@ -612,40 +607,6 @@ void batallacueva()  // Crear una ventana
         cout << "Defensa de mi monstruo = " << monstruoJugador.getDefensaMonstruoActual() << endl;
     }
 }
-  /* if(lobo.getVida()<=0)
-            {
-              //double tiempoTotal = detenerTemporizador(inicioJuego); // Detener el cronómetro
-              //guardarResultado(nombreJugador, tiempoTotal);           // Guardar el tiempo en la clasificación
-
-    // Muestra el tiempo total al jugador (opcional)
-    //std::cout << "¡Has completado el juego en " << tiempoTotal << " segundos!" << std::endl;
-                 // Cambiar el mensaje a "Eres el vencedor"
-              menuTexto.setString("Eres el vencedor");
-
-
-
-
-
-              menuTexto.setCharacterSize(60);
-              menuTexto.setFillColor(sf::Color::Black);
-              menuTexto.setPosition(150, 170);
-
-              // Dibujar el fondo
-                window.draw(fondo);
-
-
-
-            //dibujar monstruo jugador
-            window.draw(lobo);
-            // Dibujar opciones de pelea siempre en pantalla
-            window.draw(menuTexto);
-            monstruoJugador.dibujar(window);
-            window.display();
-
-              pedirNombre(window, font,usar);
-
-}
-*/
 
 
 if (lobo.getVida() <= 0) {
@@ -693,8 +654,6 @@ if(monstruoJugador.getVidaMonstruoActual()<=0){
         monstruoJugador.dibujar(window);
         window.display();
 
-
-
     }
 }
 void starthistoria()
@@ -730,7 +689,7 @@ void starthistoria()
     valla5.setPosition(750, 445);
 
     // Crear fondo
-    Escenariojefe fondo1;
+    EscenarioJefe fondo1;
 
     // Agregar un reloj para el cooldown de colisiones
     sf::Clock collisionCooldown;
@@ -820,7 +779,7 @@ void llegadaisla()
     // Crear fondo y otros objetos
     pasto suelo;
     suelo.setPosition(400, 155);
-    escenariollegada Fondo;
+    EscenarioLlegada Fondo;
 
     // Crear varias barreras
     Barrera casa;

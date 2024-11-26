@@ -183,10 +183,6 @@ void escenarioPelea()
     // Establecer el límite de FPS
     window.setFramerateLimit(60);
 
-    inventory inventario(100);
-
-
-
     //crear monstruo jugador
     //Velom monstruoJugador(100.0f, 50.0f, 30.0f,"include/velom.PNG");
 
@@ -207,16 +203,6 @@ void escenarioPelea()
 
 
     Juego monstruoEnemigo;
-
-
-
-
-
-
-
-
-
-
 
     AnimacionAtaque ataque;
     ataque.setRutaPNG("Animations/zoonami_enemy_aqua_jet_animation.PNG");
@@ -312,7 +298,6 @@ void escenarioPelea()
     // Submenú para que el jugador elija la acción: atacar, defender, capturar (si es posible)
     cout << "Elige una acción: 1) Atacar 2) Defender"<<endl;
 
-
     cout<<"la vida de tu pokemon es: "<<monstruoJugador.getVidaMonstruoActual()<<endl;
     cout<<"el daño de tu pokemon es: "<<monstruoJugador.getDanioMonstruoActual()<<endl;
     cout<<"La defensa de tu pokemon es: "<<monstruoJugador.getDefensaMonstruoActual()<<endl;
@@ -331,8 +316,6 @@ void escenarioPelea()
 
         cout<<"entro al if"<<endl;
     }
-
-
 
 
     else if (probabilidad < 15 && probabilidad>0) {  // 15% de probabilidad para Pelucin (20 + 15 = 35)
@@ -495,7 +478,7 @@ void escenarioPelea()
     int probabilidadCura = rand() % 100;
     if (probabilidadCura < 20) {  // 20% de probabilidad de curación
         float curacion = 30.0f;
-        monstruoEnemigo.setVidaMonstruoActual(monstruoJugador.getVidaMonstruoActual() + curacion);  // 'vel' representa al monstruo enemigo
+        monstruoEnemigo.setVidaMonstruoActual(monstruoEnemigo.getVidaMonstruoActual() + curacion);  // 'vel' representa al monstruo enemigo
         cout << "El enemigo se ha curado " << curacion << " puntos de vida." << endl;
 
         // Cambiar turno al jugador después de curarse
@@ -560,9 +543,6 @@ void escenarioPelea()
         {
             monstruoJugador.pasarAlSiguienteMonstruo();}
 
-
-
-
         }//llave del while
 
 
@@ -574,13 +554,6 @@ void escenarioPelea()
 
         // Limpiar la pantalla
         window.clear();
-
-
-
-
-
-
-
 
         // Mostrar lo dibujado
 
@@ -608,8 +581,5 @@ void escenarioPelea()
 
         //juego.dibujar(window);
         window.display();
-
-
-
-    }
+}
 }

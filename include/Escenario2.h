@@ -3,121 +3,66 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "Colisionable.h"
+#include "escenario1.h"
 
 using namespace std;
-class escenario : public sf::Drawable {
-private:
-    sf::Sprite _sprite;
-    sf::Texture _texture;
-
+class escenario : public EscenarioBase {
 public:
+    Escenario() {
+        inicializar();
+    }
 
-    escenario();
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override {
-        target.draw(_sprite, states);
+    void cargarTextura() override {
+        if (!_texture.loadFromFile("Tileset/nuevo.JPG")) {
+            std::cerr << "Error cargando la textura de Escenario" << std::endl;
+        }
     }
 };
 
-class bush : public sf::Drawable, public Colisionable {
-private:
-    sf::Sprite _sprite;
-    sf::Texture _texture;
-
+class BattleBackground : public EscenarioBase {
 public:
-    bush();
-
-
-     void setPosition(float x, float y) {
-        _sprite.setPosition(x, y);
-    };
-    const sf::Sprite& getSprite() const {
-        return _sprite;
+    BattleBackground() {
+        inicializar();
+        _sprite.setScale(5, 5); // Escalado específico
     }
 
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-    sf::FloatRect getBounds() const override;
-
-
-};
-
-class bush6x4 : public sf::Drawable, public Colisionable {
-private:
-    sf::Sprite _sprite;
-    sf::Texture _texture;
-
-public:
-    bush6x4();
-
-
-
-     void setPosition(float x, float y) {
-        _sprite.setPosition(x, y);
-    };
-    const sf::Sprite& getSprite() const {
-        return _sprite;
+    void cargarTextura() override {
+        if (!_texture.loadFromFile("Battle Backgrounds/With Textboxes/BattleBackground.png")) {
+            std::cerr << "Error cargando la textura de BattleBackground" << std::endl;
+        }
     }
-
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-    sf::FloatRect getBounds() const override;
-
-
 };
-class BattleBackground : public sf::Drawable {
-private:
-    sf::Sprite _sprite;
-    sf::Texture _texture;
 
+class bush : public ObjetoEscenario {
 public:
-
-    BattleBackground();
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override {
-        target.draw(_sprite, states);
+    bush() {
+        _texture.loadFromFile("arbustos4x4.PNG");
+        _sprite.setTexture(_texture);
+    }
+};
+class bush6x4 : public ObjetoEscenario {
+public:
+    bush6x4() {
+        _texture.loadFromFile("arbustos4x4.PNG");
+        _sprite.setTexture(_texture);
+    }
+};
+class piso : public ObjetoEscenario {
+public:
+    piso() {
+        _texture.loadFromFile("tileset/piso.png");
+        _sprite.setTexture(_texture);
+    }
+};
+class arboles : public ObjetoEscenario {
+public:
+    arboles() {
+        _texture.loadFromFile("tileset/arboles.png");
+        _sprite.setTexture(_texture);
     }
 };
 
 
-class piso : public sf::Drawable, public Colisionable {
-private:
-    sf::Sprite _sprite;
-    sf::Texture _texture;
-
-public:
-    piso();
-
-
-     void setPosition(float x, float y) {
-        _sprite.setPosition(x, y);
-    };
-    const sf::Sprite& getSprite() const {
-        return _sprite;
-    }
-
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-    sf::FloatRect getBounds() const override;
-
-
-};
-class arboles : public sf::Drawable, public Colisionable {
-private:
-    sf::Sprite _sprite;
-    sf::Texture _texture;
-
-public:
-    arboles();
-
-
-     void setPosition(float x, float y) {
-        _sprite.setPosition(x, y);
-    };
-    const sf::Sprite& getSprite() const {
-        return _sprite;
-    }
-
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-    sf::FloatRect getBounds() const override;
-
-
-};
 
 
 #endif // ESCENARIO2_H

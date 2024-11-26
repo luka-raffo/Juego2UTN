@@ -7,117 +7,109 @@
 
 using namespace std;
 
-
-
-
-class escenariollegada : public sf::Drawable {
-private:
+class EscenarioBase : public sf::Drawable {
+protected:
     sf::Sprite _sprite;
     sf::Texture _texture;
 
 public:
+    EscenarioBase() {
+        _sprite.setPosition(0, 0); // Posición común
+    }
 
-    escenariollegada();
+    virtual ~EscenarioBase() {}
+
+    // Método virtual puro para cargar la textura específica de cada escenario
+    virtual void cargarTextura() = 0;
+
+    void inicializar() {
+        cargarTextura(); // Carga la textura específica
+        _sprite.setTexture(_texture);
+    }
+
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override {
         target.draw(_sprite, states);
     }
 };
 
-class Barrera : public sf::Drawable, public Colisionable {
+
+class EscenarioLlegada : public EscenarioBase {
+public:
+    EscenarioLlegada() {
+        inicializar();
+    }
+
+    void cargarTextura() override {
+        if (!_texture.loadFromFile("sprites/background/Lienzo3.JPG")) {
+            std::cerr << "Error cargando la textura de EscenarioLlegada" << std::endl;
+        }
+    }
+};
+class ObjetoEscenario : public sf::Drawable, public Colisionable {
+protected:
     sf::Sprite _sprite;
     sf::Texture _texture;
 
 public:
-    Barrera();
+   ObjetoEscenario() { cout << "Objeto creado.\n"; }
+    virtual ~ObjetoEscenario() {cout << "Objeto destruido.\n"; }
 
-  void setPosition(float x, float y) {
+    void setPosition(float x, float y) {
         _sprite.setPosition(x, y);
-    };
+    }
+
     const sf::Sprite& getSprite() const {
         return _sprite;
     }
 
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-    sf::FloatRect getBounds() const override;
+    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override {
+        target.draw(_sprite, states);
+    }
 
-
+    sf::FloatRect getBounds() const override {
+        return _sprite.getGlobalBounds();
+    }
 };
-class Barcito : public sf::Drawable, public Colisionable {
-    sf::Sprite _sprite;
-    sf::Texture _texture;
-
+class Barrera : public ObjetoEscenario {
 public:
-    Barcito();
-
-  void setPosition(float x, float y) {
-        _sprite.setPosition(x, y);
-    };
-    const sf::Sprite& getSprite() const {
-        return _sprite;
+    Barrera() {
+        // Carga textura y configuración inicial
+        _texture.loadFromFile("Sprites/Edificio/Casa.png");
+        _sprite.setTexture(_texture);
     }
-
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-    sf::FloatRect getBounds() const override;
-
-
 };
-class Flores : public sf::Drawable, public Colisionable {
-    sf::Sprite _sprite;
-    sf::Texture _texture;
 
+class Barcito : public ObjetoEscenario {
 public:
-    Flores();
-
-  void setPosition(float x, float y) {
-        _sprite.setPosition(x, y);
-    };
-    const sf::Sprite& getSprite() const {
-        return _sprite;
+    Barcito() {
+        _texture.loadFromFile("Sprites/Edificio/Barcito1.png");
+        _sprite.setTexture(_texture);
     }
-
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-    sf::FloatRect getBounds() const override;
-
-
 };
-class Cerco : public sf::Drawable, public Colisionable {
-    sf::Sprite _sprite;
-    sf::Texture _texture;
 
+class Flores : public ObjetoEscenario {
 public:
-    Cerco();
-
-  void setPosition(float x, float y) {
-        _sprite.setPosition(x, y);
-    };
-    const sf::Sprite& getSprite() const {
-        return _sprite;
+    Flores() {
+        _texture.loadFromFile("Sprites/Edificio/Flores1.png");
+        _sprite.setTexture(_texture);
     }
-
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-    sf::FloatRect getBounds() const override;
-
-
 };
-class pasto : public sf::Drawable, public Colisionable {
-private:
-    sf::Sprite _sprite;
-    sf::Texture _texture;
-
+class Cerco : public ObjetoEscenario {
 public:
-    pasto();
-
-
-     void setPosition(float x, float y) {
-        _sprite.setPosition(x, y);
-    };
-    const sf::Sprite& getSprite() const {
-        return _sprite;
+    Cerco() {
+        _texture.loadFromFile("Sprites/Edificio/Cerco1.png");
+        _sprite.setTexture(_texture);
     }
-
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-    sf::FloatRect getBounds() const override;
-
-
 };
+class pasto : public ObjetoEscenario {
+public:
+    pasto() {
+        _texture.loadFromFile("sprites/Edificio/piso1.png");
+        _sprite.setTexture(_texture);
+    }
+};
+
+
+
+
 #endif // ESCENARIO1_H_INCLUDED
