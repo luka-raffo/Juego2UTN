@@ -21,8 +21,9 @@ public:
 
 class BattleBackground : public EscenarioBase {
 public:
+
     BattleBackground() {
-        inicializar();
+        inicializar("Battle Backgrounds/With Textboxes/BattleBackground.png");
         _sprite.setScale(5, 5); // Escalado específico
     }
 
@@ -31,6 +32,7 @@ public:
             std::cerr << "Error cargando la textura de BattleBackground" << std::endl;
         }
     }
+
 };
 
 class bush : public ObjetoEscenario {

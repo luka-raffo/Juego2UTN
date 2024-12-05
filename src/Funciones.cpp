@@ -17,6 +17,7 @@
 #include <algorithm>
 #pragma once"
 #include "Escenario.h"
+#include "FuncionesRanking.h"
 
 
 using namespace std;
@@ -123,8 +124,7 @@ std::string pedirNombre(sf::RenderWindow& window, sf::Font& font, bool usar) {
 void startGame()
 {
     // Crear una ventana
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Inicia Juego");
-
+     sf::RenderWindow window(sf::VideoMode(800, 600), "Inicia Juego");
     // Establecer el límite de FPS
     window.setFramerateLimit(60);
 
@@ -174,8 +174,7 @@ void startGame()
     listaBushes.push_back(b14);
     listaBushes.push_back(b15);
 
-
-
+    // EscenarioPelea pelea(window);
 
     // Crear pisos
     piso suelo;
@@ -268,6 +267,7 @@ void startGame()
                     if (EventoPokemon <= 2000)
                     {
                         escenarioPelea();
+                         //pelea.ejecutar();
                         collisionCooldown.restart();
                     }
 
@@ -501,37 +501,22 @@ void batallacueva()  // Crear una ventana
                 window.close();
             }
 
-
-
-
             // Lógica de pelea por turnos
 
             if (turnoJugador)
             {
 
-
-
-
                 //opciones de pelea
                 if (event.type == sf::Event::KeyPressed && event.key.code ==  sf::Keyboard::Num1)    // Atacar
                 {
-
-
                     cout << "Atacas al enemigo!" << endl;
-
 
                     ataque.startAnimation();
 
                     sonidoAtaque.play(); // Reproducir sonido de ataque
 
-
                     b_ataqueJugador=true;
                     sonidoAtaque.play();
-
-
-
-
-
 
                     if (lobo.getDefensa() > monstruoJugador.getDanioMonstruoActual())
                     {
@@ -549,13 +534,7 @@ void batallacueva()  // Crear una ventana
 
                         lobo.setDefensa(0);
 
-
-
                     }
-
-
-
-
 
                     turnoJugador=false;
 

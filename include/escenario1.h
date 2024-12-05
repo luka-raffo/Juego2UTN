@@ -22,11 +22,17 @@ public:
     // Método virtual puro para cargar la textura específica de cada escenario
     virtual void cargarTextura() = 0;
 
-    void inicializar() {
-        cargarTextura(); // Carga la textura específica
-        _sprite.setTexture(_texture);
-    }
+   void inicializar() {
+    cargarTextura(); // Usar el método virtual puro
+    _sprite.setTexture(_texture);
+}
 
+ void inicializar(const std::string& rutaTextura) {
+    if (!_texture.loadFromFile(rutaTextura)) {
+        std::cerr << "Error cargando la textura desde " << rutaTextura << std::endl;
+    }
+    _sprite.setTexture(_texture);
+}
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override {
         target.draw(_sprite, states);
     }
