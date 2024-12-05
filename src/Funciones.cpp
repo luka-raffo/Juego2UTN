@@ -174,7 +174,7 @@ void startGame()
     listaBushes.push_back(b14);
     listaBushes.push_back(b15);
 
-    // EscenarioPelea pelea(window);
+
 
     // Crear pisos
     piso suelo;
@@ -226,6 +226,8 @@ void startGame()
     arbol17.setPosition(400,300);
 
 
+
+
     // Crear fondo
     Escenario Fondo("Tileset/nuevo.JPG");
 
@@ -266,8 +268,9 @@ void startGame()
                     EventoPokemon = std::rand() % 2000;
                     if (EventoPokemon <= 2000)
                     {
-                        escenarioPelea();
-                         //pelea.ejecutar();
+                         EscenarioPelea pelea;
+                         pelea.iniciar();
+
                         collisionCooldown.restart();
                     }
 
@@ -308,8 +311,8 @@ void startGame()
 
         // Dibujar todo
         window.clear();
-        window.draw(Fondo);
 
+        window.draw(Fondo);
         // Dibujar bush y demás objetos
         for (const bush6x4& b : listaBushes)
         {
@@ -670,6 +673,8 @@ void starthistoria()
     // Crear fondo
     EscenarioJefe fondo1;
 
+
+
     // Agregar un reloj para el cooldown de colisiones
     sf::Clock collisionCooldown;
     float cooldownTime = 1.0f;  // Cooldown de 1 segundo
@@ -713,7 +718,8 @@ void starthistoria()
             if (rojo.isCollision(cueva))
             {
                 std::cout << "Colisión con la cueva" << std::endl;
-                batallacueva();
+                Batallacaverna batalla;
+               batalla.iniciar();
                 collisionCooldown.restart();
             }
 

@@ -13,76 +13,72 @@
 #include "escenario3.h"
 #include "Juego.h"
 #include "FuncionStartgame.h"
-
-/*
 class EscenarioPelea {
 private:
     sf::RenderWindow window;
-    Juego monstruoJugador;
-    Juego monstruoEnemigo;
-     SonidoAtaque sonidoAtaque;
-    SonidoDefensa sonidoDefensa;
-    SonidoPelea sonidoPelea;
-    SonidoVictoria sonidoVictoria;
-    SonidoDerrota sonidoDerrota;
-    SonidoExp sonidoExp;
-    BattleBackground fondo;
-    CombateConAnimaciones combate;
     sf::Text menuTexto;
     sf::Font font;
-    bool turnoJugador;
-    bool peleaActiva;
 
-    // Métodos auxiliares
-    void inicializarVentana();
-    void inicializarMenuTexto();
-    void generarMonstruosJugador();
-    void seleccionarMonstruoEnemigo();
-    void procesarTurnoJugador(sf::Event& event);
-    void procesarTurnoEnemigo();
+    Juego monstruoJugador;
+    Juego monstruoEnemigo;
+
+    AnimacionAtaque animacionAtaqueJugador;
+    AnimacionAtaque animacionAtaqueEnemigo;
+    AnimacionDefensa animacionDefensa;
+
+    sf::SoundBuffer bufferAtaque, bufferDefensa, bufferPelea, bufferVictoria, bufferDerrota, bufferExp;
+    sf::Sound sonidoAtaque, sonidoDefensa, sonidoPelea, sonidoVictoria, sonidoDerrota, sonidoExp;
+
+    BattleBackground fondo;
+
+    bool turnoJugador = true;
+    bool peleaActiva = true;
+    bool b_ataqueJugador=true;
+    void configurarSonidos();
+    void configurarTexto();
+    void configurarFondo();
+    void inicializarMonstruos();
+    void logicaTurnoJugador(sf::Event& event);
+    void logicaTurnoEnemigo();
+    void mostrarMensajeFinal(const std::string& mensaje);
+
 public:
-     EscenarioPelea();
-    void iniciarPelea();
+    EscenarioPelea();
+    void iniciar();
 };
-*/
-// Clase EscenarioPelea
+class Batallacaverna {
+private:
+    sf::RenderWindow _window;
+    CavernaBattleBackground _fondo;
+    AnimacionAtaque _ataque;
+    AnimacionDefensa _defensa;
 
-    class EscenarioPelea {
-    private:
-         sf::RenderWindow& window;
-        SonidoAtaque sonidoAtaque;
-        SonidoDefensa sonidoDefensa;
-        SonidoPelea sonidoPelea;
-        SonidoVictoria sonidoVictoria;
-        SonidoDerrota sonidoDerrota;
-        SonidoExp sonidoExp;
+    sf::SoundBuffer _bufferAtaque, _bufferDefensa, _bufferPelea, _bufferVictoria;
+    sf::Sound _sonidoAtaque, _sonidoDefensa, _sonidoPelea, _sonidoVictoria;
 
-        // Otros elementos del juego (monstruos, fondo, etc.)
-        Juego monstruoJugador;
-        Juego monstruoEnemigo;
-        BattleBackground fondo;
+    sf::Font _font;
+    sf::Text _menuTexto;
 
-        AnimacionAtaque ataqueJugador;
-        AnimacionAtaque ataqueEnemigo;
-        AnimacionDefensa defensa;
+    Juego _monstruoJugador;
+    Lobizon _enemigo;
 
-        bool turnoJugador;
+    bool _turnoJugador;
+    bool _peleaActiva;
+   bool b_ataqueJugador=true;
+    void inicializarVentana();
+    void inicializarSonidos();
+    void inicializarMenu();
+    void inicializarMonstruos();
+    void manejarEventos();
+    void actualizar();
+    void dibujar();
+    void logicaTurnoJugador(sf::Event& event);
+    void logicaTurnoEnemigo();
+    void manejarVictoria();
 
-    public:
-        // Constructor
-           EscenarioPelea(sf::RenderWindow& w) : window(w), turnoJugador(true) {
-        window.setFramerateLimit(60);
-    }
-        // Inicializa los elementos del juego
-        void inicializarJuego();
+public:
+    Batallacaverna();
+    void iniciar();
+};
 
-        // Bucle principal del escenario de pelea
-        void ejecutar();
-
-        // Acción de ataque del jugador
-        void realizarAtaqueJugador();
-
-        // Acción de ataque del enemigo
-        void realizarAtaqueEnemigo();
-    };
 

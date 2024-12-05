@@ -100,6 +100,7 @@ public:
         std::cout << "Sonido de experiencia: orb.wav" << std::endl;
     }
 };
+/*
 class Combate {
 protected:
     Monstruo& enemigo;
@@ -143,6 +144,6 @@ public:
     void turnoDelEnemigo() override;
     void verificarEstado() override;
 };
-
+*/
 
 #endif // FUNCIONSTARTGAME_H_INCLUDED

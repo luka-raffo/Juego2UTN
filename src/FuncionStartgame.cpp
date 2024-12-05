@@ -6,7 +6,7 @@
 #include "AnimacionAtaque.h"
 #include "Juego.h"
 #include <SFML/Window/Event.hpp>
-
+/*
 Combate::Combate(Monstruo& enemigo, Juego& monstruoJugador, sf::RenderWindow& ventana, sf::Text& menuTexto)
     : enemigo(enemigo), monstruoJugador(monstruoJugador), ventana(ventana), menuTexto(menuTexto),
       sonidoAtaque(), sonidoDefensa(), sonidoVictoria(), sonidoDerrota(), sonidoPelea(), sonidoExp(),
@@ -202,7 +202,7 @@ void CombateConAnimaciones::verificarEstado() {
     }
 }
 
-
+*/
 
 /*
 void manejarCombate(Monstruo& enemigo, Juego& monstruoJugador, sf::Text& menuTexto, sf::RenderWindow& window) {

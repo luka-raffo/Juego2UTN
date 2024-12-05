@@ -8,13 +8,14 @@
 using namespace std;
 class escenario : public EscenarioBase {
 public:
-    Escenario() {
-        inicializar();
+    escenario() {
+        cargarTextura();
+        _sprite.setTexture(_texture);
     }
 
     void cargarTextura() override {
         if (!_texture.loadFromFile("Tileset/nuevo.JPG")) {
-            std::cerr << "Error cargando la textura de Escenario" << std::endl;
+            cerr << "Error cargando la textura de Escenario: Tileset/nuevo.JPG" << endl;
         }
     }
 };
@@ -29,7 +30,7 @@ public:
 
     void cargarTextura() override {
         if (!_texture.loadFromFile("Battle Backgrounds/With Textboxes/BattleBackground.png")) {
-            std::cerr << "Error cargando la textura de BattleBackground" << std::endl;
+            cerr << "Error cargando la textura de BattleBackground" << endl;
         }
     }
 

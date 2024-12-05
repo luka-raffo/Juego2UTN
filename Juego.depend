@@ -418,7 +418,7 @@
 1725644054 source:c:\users\luka\desktop\juego\src\personaje.cpp
 	"Personaje.h"
 
-1731583913 source:c:\users\brandon\onedrive\escritorio\juego2utn\main.cpp
+1733438311 source:c:\users\brandon\onedrive\escritorio\juego2utn\main.cpp
 	<SFML/Graphics.hpp>
 	"Personaje.h"
 	<iostream>
@@ -1357,7 +1357,7 @@
 1729032574 c:\users\brandon\onedrive\escritorio\juego2utn\include\colisionable.h
 	<SFML/Graphics.hpp>
 
-1733356644 c:\users\brandon\onedrive\escritorio\juego2utn\include\escenario1.h
+1733435745 c:\users\brandon\onedrive\escritorio\juego2utn\include\escenario1.h
 	<SFML/Graphics.hpp>
 	<iostream>
 	"Colisionable.h"
@@ -1388,7 +1388,7 @@
 	<iostream>
 	"escenario1.h"
 
-1733360333 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\funciones.cpp
+1733438380 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\funciones.cpp
 	"Funciones.h"
 	"inventory.h"
 	"Personaje.h"
@@ -2327,7 +2327,7 @@
 	<SFML/Audio/Export.hpp>
 	<string>
 
-1733356644 c:\users\brandon\onedrive\escritorio\juego2utn\include\escenario2.h
+1733435745 c:\users\brandon\onedrive\escritorio\juego2utn\include\escenario2.h
 	<SFML/Graphics.hpp>
 	<iostream>
 	"Colisionable.h"
@@ -2396,7 +2396,7 @@
 1731952021 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\juego.cpp
 	"Juego.h"
 
-1733349743 c:\users\brandon\onedrive\escritorio\juego2utn\include\funcionstartgame.h
+1733438480 c:\users\brandon\onedrive\escritorio\juego2utn\include\funcionstartgame.h
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	<Personaje.h>
@@ -2411,7 +2411,7 @@
 	"escenario3.h"
 	"Juego.h"
 
-1733351816 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\funcionstartgame.cpp
+1733438480 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\funcionstartgame.cpp
 	"FuncionStartgame.h"
 	"inventory.h"
 	"Personaje.h"
@@ -2421,7 +2421,7 @@
 	"Juego.h"
 	<SFML/Window/Event.hpp>
 
-1733356651 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\funcionesranking.cpp
+1733439461 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\funcionesranking.cpp
 	"FuncionesRanking.h"
 
 1731583515 c:\users\brandon\onedrive\escritorio\juego2utn\include\pedirnombre.h
@@ -2530,7 +2530,7 @@
 	<string>
 	<iostream>
 
-1733360193 c:\users\brandon\onedrive\escritorio\juego2utn\include\funcionesranking.h
+1733439560 c:\users\brandon\onedrive\escritorio\juego2utn\include\funcionesranking.h
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	<Personaje.h>
