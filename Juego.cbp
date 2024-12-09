@@ -50,12 +50,14 @@
 		<Unit filename="include/FuncionesRanking.h" />
 		<Unit filename="include/Juego.h" />
 		<Unit filename="include/Monstruo.h" />
+		<Unit filename="include/NombreJugador.h" />
 		<Unit filename="include/PEDIRNOMBRE.h" />
 		<Unit filename="include/Personaje.h" />
 		<Unit filename="include/escenario1.h" />
 		<Unit filename="include/escenario3.h" />
 		<Unit filename="include/inventory.h" />
 		<Unit filename="include/menu.h" />
+		<Unit filename="include/reloj.h" />
 		<Unit filename="main.cpp">
 			<Option target="Debug" />
 		</Unit>
@@ -68,12 +70,14 @@
 		<Unit filename="src/FuncionesRanking.cpp" />
 		<Unit filename="src/Juego.cpp" />
 		<Unit filename="src/Monstruo.cpp" />
+		<Unit filename="src/NombreJugador.cpp" />
 		<Unit filename="src/PEDIRNOMBRE.CPP" />
 		<Unit filename="src/Personaje.cpp" />
 		<Unit filename="src/escenario1.cpp" />
 		<Unit filename="src/escenario3.cpp" />
 		<Unit filename="src/inventory.cpp" />
 		<Unit filename="src/menu.cpp" />
+		<Unit filename="src/reloj.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

@@ -1,5 +1,7 @@
 #include "Funciones.h"
 #include "inventory.h"
+#include "reloj.h"
+
 #include "Personaje.h"
 #include <cstdlib>  // Para rand() y srand()
 #include <ctime>    // Para time()
@@ -15,7 +17,8 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
-#pragma once"
+#include "NombreJugador.h"
+
 #include "Escenario.h"
 #include "FuncionesRanking.h"
 
@@ -25,62 +28,29 @@ float getRandomStat(float min, float max) {
     return min + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (max - min)));
 }
 
-sf::Clock reloj;  // Crear el reloj aquí
-    bool usar = true;  // Condición de ejemplo para determinar si se debe guardar el tiempo
 
 
 
-// Función para leer el archivo de ranking y cargar los puntajes
-std::vector<Puntaje> cargarRanking() {
-    std::vector<Puntaje> ranking;
-    std::ifstream archivo("scores.txt");
-    std::string nombre;
-    float tiempo;
-    while (archivo >> nombre >> tiempo) {
-        ranking.push_back({nombre, tiempo});
-    }
-    archivo.close();
-    return ranking;
+
+
+bool grabarRegitroRanking(NombreJugador jugador){
+FILE *pRanking;
+//sf::Clock clock=rel.getReloj();
+//sf::Time tiempoTranscurrido = clock.getElapsedTime();
+//float segundos = tiempoTranscurrido.asSeconds();
+
+//cout<<"Holaaaaaaaaaaaaaaaaaaaa" << segundos<<endl;
+
+pRanking=fopen("Ranking.dat","ab");
+if(pRanking==nullptr) return false;
+int escribio=fwrite(&jugador,sizeof(jugador),1,pRanking);
+fclose(pRanking);
+return escribio;
 }
 
-// Función para guardar el ranking en el archivo
-void guardarRanking(const std::vector<Puntaje>& ranking) {
-    std::ofstream archivo("scores.txt");
-    for (const auto& puntaje : ranking) {
-        archivo << puntaje.nombre << " " << puntaje.tiempo << "\n";
-    }
-    archivo.close();
-}
 
-// Función para agregar un nuevo puntaje y mantener el ranking de los 10 mejores
-void actualizarRanking(const std::string& nombreJugador, float tiempo) {
-    std::vector<Puntaje> ranking = cargarRanking();
-    ranking.push_back({nombreJugador, tiempo});
 
-    // Ordena el ranking por tiempo ascendente (los más rápidos primero)
-    std::sort(ranking.begin(), ranking.end(), [](const Puntaje& a, const Puntaje& b) {
-        return a.tiempo < b.tiempo;
-    });
 
-    // Mantener solo los 10 mejores puntajes
-    if (ranking.size() > 10) {
-        ranking.resize(10);
-    }
-
-    guardarRanking(ranking);
-}
-
-// Función para pedir el nombre y guardar el puntaje cuando se derrota al jefe final
-void manejarVictoria(sf::RenderWindow& window, sf::Font& font, sf::Clock& reloj, bool usar) {
-    if (usar) {
-        float tiempoTotal = reloj.getElapsedTime().asSeconds();
-        std::string nombreJugador = pedirNombre(window, font, usar);
-        actualizarRanking(nombreJugador, tiempoTotal);
-
-        std::cout  << nombreJugador << " Felicitaciones lo hiciste en:" << tiempoTotal << " segundos\n";
-
-    }
-}
 
 // Implementación de pedirNombre() modificada (sin el reinicio de reloj)
 std::string pedirNombre(sf::RenderWindow& window, sf::Font& font, bool usar) {
@@ -121,12 +91,154 @@ std::string pedirNombre(sf::RenderWindow& window, sf::Font& font, bool usar) {
     return nombreJugador;
 }
 
-void startGame()
+
+void llegadaisla(sf::Clock clock)
+{
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Inicia Juego");
+
+
+    NombreJugador jugador;
+
+    window.setFramerateLimit(60);
+
+    reloj rel;
+    rel.setReloj(clock);
+
+    grabarRegitroRanking(jugador);
+
+
+
+    // Crear el personaje y definir su posición inicial
+    Personaje rojo;
+    rojo.setPosition(400, 200);
+    // Crear fondo y otros objetos
+    pasto suelo;
+    suelo.setPosition(400, 155);
+    EscenarioLlegada Fondo;
+
+    // Crear varias barreras
+    Barrera casa;
+    casa.setPosition(450, 150);
+    Barrera casa2;
+    casa2.setPosition(630, 150);
+    Barrera casa3;
+    casa3.setPosition(225, 300);
+    Barrera casa4;
+    casa4.setPosition(645, 305);
+    // Crear bar
+    Barcito bar;
+    bar.setPosition(0, 150);
+    Barcito bar2;
+    bar2.setPosition(197, 150);
+    Barcito bar3;
+    bar3.setPosition(450, 305);
+    Barcito bar4;
+    bar4.setPosition(0, 470);
+    //crear flores
+    Flores Flor;
+    Flor.setPosition(190, 470);
+    Flores Flor2;
+    Flor2.setPosition(0, 300);
+    Flores Flor3;
+    Flor3.setPosition(620, 480);
+    //Crear vallas
+    Cerco valla;
+    valla.setPosition(430, 550);
+
+
+    // Agregar las barreras a un vector de objetos colisionables
+    std::vector<Colisionable*> colisionables = { &casa, &bar, &Flor,&valla,&casa2,&bar2,&Flor2,&bar3,&bar4,&casa3,&casa4,&Flor3 };
+
+    sf::Clock collisionCooldown;
+    float cooldownTime = 1;  // Cooldown de 2 segundos
+
+
+    while (window.isOpen())
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+
+        rel.actualizar();
+
+
+
+        // Guardar la posición actual del personaje antes de moverlo
+        sf::Vector2f previousPosition = rojo.getPosition();
+
+        // Actualizar el personaje
+        rojo.update();
+
+        // Verificar colisiones con cada barrera/////////////////////////////
+        for (const auto& colisionable : colisionables)
+        {
+            if (rojo.isCollision(*colisionable))
+            {
+                // Si hay colisión, revertir a la posición anterior
+                rojo.setPosition(previousPosition.x, previousPosition.y);
+                break;
+            }
+        }
+////////////////////////////////////////////////////////////////////////////
+        if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime)
+        {
+            if(rojo.isCollision(suelo))
+            {
+                startGame(rel.getReloj());
+                rojo.guardarPosicion();
+                cout << "colision" << endl;
+                collisionCooldown.restart();
+                window.close();
+
+            }
+        }
+
+        // Dibujar todo
+        window.clear();
+        window.draw(Fondo);
+        ////////
+        window.draw(suelo);
+        window.draw(casa);
+        window.draw(casa2);
+        window.draw(casa3);
+        window.draw(casa4);
+        /////////
+        window.draw(bar);
+        window.draw(bar2);
+        window.draw(bar3);
+        window.draw(bar4);
+        //////////
+        window.draw(Flor);
+        window.draw(Flor2);
+        window.draw(Flor3);
+        ///////////
+        window.draw(valla);
+
+        //////////
+        window.draw(rojo);
+        window.display();
+    }
+    }
+
+
+
+void startGame(sf::Clock clock)
 {
     // Crear una ventana
-     sf::RenderWindow window(sf::VideoMode(800, 600), "Inicia Juego");
+     sf::RenderWindow window(sf::VideoMode(800, 600), "Arbustos");
     // Establecer el límite de FPS
     window.setFramerateLimit(60);
+
+
+
+    reloj rel;
+    rel.setReloj(clock);
+
+
 
     // Crear un personaje
     Personaje rojo;
@@ -248,6 +360,13 @@ void startGame()
          // Guardar la posición actual del personaje antes de moverlo
         sf::Vector2f previousPosition = rojo.getPosition();
 
+
+
+        //mostrar reloj x consola
+        rel.actualizar();
+
+
+
         // Vector de colisionables
         std::vector<Colisionable*> colisionables = {&arbol,&arbol2,&arbol3,&arbol4,&arbol5,&arbol6,&arbol7,&arbol8,&arbol9,&arbol10,&arbol11,&arbol12,&arbol13,&arbol14,&arbol15,&arbol16,&arbol17};
 
@@ -282,7 +401,7 @@ void startGame()
             // Colisión con el suelo 1
             if (rojo.isCollision(suelo))
             {
-                starthistoria();
+                starthistoria(rel.getReloj());
                 Banderaposicion = 0;
                 rojo.setPosition(650, 0);  // Reposicionar al colisionar con suelo 1
                 collisionCooldown.restart();
@@ -292,7 +411,7 @@ void startGame()
             // Colisión con el suelo 2
             if (rojo.isCollision(suelo2))
             {
-                llegadaisla();
+                llegadaisla(rel.getReloj());
                 Banderaposicion = 1;
                 rojo.setPosition(0, 235);  // Reposicionar al colisionar con suelo 2
                 collisionCooldown.restart();
@@ -345,9 +464,15 @@ void startGame()
 
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
-void batallacueva()  // Crear una ventana
+void batallacueva(sf::Clock clock)  // Crear una ventana
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "Inicia la pelea");
+
+
+    reloj rel;
+    rel.setReloj(clock);
+
+
 
     // Establecer el límite de FPS
     window.setFramerateLimit(60);
@@ -493,8 +618,17 @@ void batallacueva()  // Crear una ventana
     while (window.isOpen() && peleaActiva)
     {
         sf::Event event;
+
+
+
+
         while (window.pollEvent(event))
         {
+
+            rel.actualizar();
+
+
+
             if (event.type == sf::Event::Closed)
                 window.close();
 
@@ -603,7 +737,7 @@ if (lobo.getVida() <= 0) {
     monstruoJugador.dibujar(window);
     window.display();
 
-    manejarVictoria(window, font, reloj, true);  // Llama a la función para manejar el nombre y el tiempo del jugador
+
 }
 if(monstruoJugador.getVidaMonstruoActual()<=0){
   monstruoJugador.pasarAlSiguienteMonstruo();
@@ -638,10 +772,22 @@ if(monstruoJugador.getVidaMonstruoActual()<=0){
 
     }
 }
-void starthistoria()
+
+
+void starthistoria(sf::Clock clock)
 {
     // Crear una ventana
     sf::RenderWindow window(sf::VideoMode(800, 600), "Escenario final Juego");
+
+
+
+    reloj rel;
+
+    rel.setReloj(clock);
+
+
+
+
 
     // Establecer el límite de FPS
     window.setFramerateLimit(60);
@@ -692,6 +838,13 @@ void starthistoria()
             }
         }
 
+
+
+        rel.actualizar();
+
+
+
+
         // Guardar la posición actual del personaje antes de moverlo
         sf::Vector2f previousPosition = rojo.getPosition();
 
@@ -711,16 +864,19 @@ void starthistoria()
                 collisionCooldown.restart();
                 rojo.guardarPosicion();
                 window.close();
-                startGame();
+                startGame(rel.getReloj());
             }
 
             // Colisión con la cueva
             if (rojo.isCollision(cueva))
             {
+
                 std::cout << "Colisión con la cueva" << std::endl;
                 Batallacaverna batalla;
-               batalla.iniciar();
-                collisionCooldown.restart();
+               batalla.iniciar(rel.getReloj());
+               batalla.finReloj(rel.getReloj());
+               collisionCooldown.restart();
+
             }
 
             // Colisión con las vallas
@@ -752,119 +908,4 @@ void starthistoria()
         window.display();
     }
 }
-void llegadaisla()
-{
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Inicia Juego");
 
-    window.setFramerateLimit(60);
-
-    // Crear el personaje y definir su posición inicial
-    Personaje rojo;
-    rojo.setPosition(400, 200);
-    // Crear fondo y otros objetos
-    pasto suelo;
-    suelo.setPosition(400, 155);
-    EscenarioLlegada Fondo;
-
-    // Crear varias barreras
-    Barrera casa;
-    casa.setPosition(450, 150);
-    Barrera casa2;
-    casa2.setPosition(630, 150);
-    Barrera casa3;
-    casa3.setPosition(225, 300);
-    Barrera casa4;
-    casa4.setPosition(645, 305);
-    // Crear bar
-    Barcito bar;
-    bar.setPosition(0, 150);
-    Barcito bar2;
-    bar2.setPosition(197, 150);
-    Barcito bar3;
-    bar3.setPosition(450, 305);
-    Barcito bar4;
-    bar4.setPosition(0, 470);
-    //crear flores
-    Flores Flor;
-    Flor.setPosition(190, 470);
-    Flores Flor2;
-    Flor2.setPosition(0, 300);
-    Flores Flor3;
-    Flor3.setPosition(620, 480);
-    //Crear vallas
-    Cerco valla;
-    valla.setPosition(430, 550);
-
-
-    // Agregar las barreras a un vector de objetos colisionables
-    std::vector<Colisionable*> colisionables = { &casa, &bar, &Flor,&valla,&casa2,&bar2,&Flor2,&bar3,&bar4,&casa3,&casa4,&Flor3 };
-
-    sf::Clock collisionCooldown;
-    float cooldownTime = 1;  // Cooldown de 2 segundos
-
-
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-
-        // Guardar la posición actual del personaje antes de moverlo
-        sf::Vector2f previousPosition = rojo.getPosition();
-
-        // Actualizar el personaje
-        rojo.update();
-
-        // Verificar colisiones con cada barrera/////////////////////////////
-        for (const auto& colisionable : colisionables)
-        {
-            if (rojo.isCollision(*colisionable))
-            {
-                // Si hay colisión, revertir a la posición anterior
-                rojo.setPosition(previousPosition.x, previousPosition.y);
-                break;
-            }
-        }
-////////////////////////////////////////////////////////////////////////////
-        if (collisionCooldown.getElapsedTime().asSeconds() >= cooldownTime)
-        {
-            if(rojo.isCollision(suelo))
-            {
-                startGame();
-                rojo.guardarPosicion();
-                cout << "colision" << endl;
-                collisionCooldown.restart();
-                window.close();
-
-            }
-        }
-
-        // Dibujar todo
-        window.clear();
-        window.draw(Fondo);
-        ////////
-        window.draw(suelo);
-        window.draw(casa);
-        window.draw(casa2);
-        window.draw(casa3);
-        window.draw(casa4);
-        /////////
-        window.draw(bar);
-        window.draw(bar2);
-        window.draw(bar3);
-        window.draw(bar4);
-        //////////
-        window.draw(Flor);
-        window.draw(Flor2);
-        window.draw(Flor3);
-        ///////////
-        window.draw(valla);
-
-        //////////
-        window.draw(rojo);
-        window.display();
-    }
-    }

@@ -1,4 +1,6 @@
 #include "FuncionesRanking.h"
+using namespace std;
+
 EscenarioPelea::EscenarioPelea()
     : window(sf::VideoMode(800, 600), "Inicia la pelea")
 {
@@ -262,6 +264,7 @@ void Batallacaverna::manejarEventos() {
 }
 
 void Batallacaverna::logicaTurnoJugador(sf::Event& event) {
+
     if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Num1) {
         std::cout << "Atacas al enemigo!" << std::endl;
         _sonidoAtaque.play();
@@ -284,6 +287,7 @@ void Batallacaverna::logicaTurnoJugador(sf::Event& event) {
         std::cout << "Defensa de tu monstruo aumentó a: " << _monstruoJugador.getDefensaMonstruoActual() << std::endl;
         _turnoJugador = false;
     }
+
 }
 
 void Batallacaverna::logicaTurnoEnemigo() {
@@ -330,18 +334,30 @@ void Batallacaverna::dibujar() {
     _window.display();
 }
 
+void Batallacaverna::finReloj(sf::Clock clock){
+    sf::Time tiempoTranscurrido = clock.getElapsedTime();
+    float segundos = tiempoTranscurrido.asSeconds();
+    cout<<"haz acabado el juego en: " << segundos<<endl;
+}
+
+
 void Batallacaverna::manejarVictoria() {
     _menuTexto.setString("Eres el vencedor");
     _menuTexto.setCharacterSize(60);
+
     _menuTexto.setPosition(150, 170);
     _sonidoVictoria.play();
     _peleaActiva = false;
+
 }
 
-void Batallacaverna::iniciar() {
+void Batallacaverna::iniciar(sf::Clock clock) {
     while (_window.isOpen() && _peleaActiva) {
+
         manejarEventos();
         actualizar();
         dibujar();
+        }
+
     }
-}
+

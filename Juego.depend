@@ -882,17 +882,30 @@
 	"Colisionable.h"
 	"AnimacionAtaque.h"
 
-1730907893 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\main.cpp
+1733763774 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\main.cpp
+	"reloj.h"
 	<SFML/Graphics.hpp>
 	"Personaje.h"
 	<iostream>
 	"menu.h"
 	<ctime>
-	<stdlib.h>
+	<SFML/Audio.hpp>
+	<chrono>
+	<string>
+	<vector>
+	<algorithm>
 	"escenario1.h"
 	"Funciones.H"
 	"escenario2.h"
 	"escenario3.h"
+	"PedirNombre.h"
+	"NombreJugador.h"
+	<SFML/Graphics.hpp>
+	<SFML/Audio.hpp>
+	<iostream>
+	<string>
+	"pedirNombre.h"
+	"Menu.h"
 
 1727956699 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\sfml\include\sfml\graphics.hpp
 	<SFML/Window.hpp>
@@ -1303,7 +1316,7 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1730983582 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\personaje.h
+1733401034 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\personaje.h
 	<SFML/Graphics.hpp>
 	"Colisionable.h"
 	"inventory.h"
@@ -1313,23 +1326,26 @@
 	<SFML/Graphics.hpp>
 	<iostream>
 
-1729077470 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\menu.cpp
+1733401034 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\menu.cpp
 	"menu.h"
 	<SFML/Graphics.hpp>
 	<iostream>
 
-1731271559 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\monstruo.cpp
+1733401034 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\monstruo.cpp
 	"Monstruo.h"
 	<SFML/Graphics.hpp>
 	<iostream>
 	"inventory.h"
+	"Funciones.h"
+	"AnimacionAtaque.h"
 
-1731261296 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\monstruo.h
+1733401034 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\monstruo.h
 	<SFML/Graphics.hpp>
 	<iostream>
 	"Colisionable.h"
+	"AnimacionAtaque.h"
 
-1731237413 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\personaje.cpp
+1731291255 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\personaje.cpp
 	"Personaje.h"
 
 1728848082 source:c:\users\brandon\onedrive\escritorio\juego2utn\funciones.cpp
@@ -1374,7 +1390,7 @@
 1729077470 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\colisionable.h
 	<SFML/Graphics.hpp>
 
-1730907893 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\escenario1.h
+1733492882 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\escenario1.h
 	<SFML/Graphics.hpp>
 	<iostream>
 	"Colisionable.h"
@@ -1383,7 +1399,7 @@
 1729077470 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\colisionable.cpp
 	"Colisionable.h"
 
-1730983582 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\escenario1.cpp
+1733401034 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\escenario1.cpp
 	<SFML/Graphics.hpp>
 	<iostream>
 	"escenario1.h"
@@ -1426,7 +1442,7 @@
 	"FuncionStartgame.h"
 	"PedirNombre.h"
 
-1731261747 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\funciones.h
+1733529537 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\funciones.h
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	<Personaje.h>
@@ -1440,15 +1456,31 @@
 	"Escenario2.h"
 	"escenario3.h"
 	"Juego.h"
+	"FuncionStartgame.h"
+	"PedirNombre.h"
 
-1731282029 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\funciones.cpp
+1733765036 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\funciones.cpp
 	"Funciones.h"
 	"inventory.h"
+	"reloj.h"
 	"Personaje.h"
 	<cstdlib>
 	<ctime>
 	"AnimacionAtaque.h"
 	"Juego.h"
+	<SFML/Graphics.hpp>
+	<iostream>
+	"PedirNombre.h"
+	"PedirNombre.h"
+	<SFML/Graphics.hpp>
+	<iostream>
+	<string>
+	<fstream>
+	<vector>
+	<algorithm>
+	"NombreJugador.h"
+	"Escenario.h"
+	"FuncionesRanking.h"
 
 1729687991 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\item.cpp
 	"Item.h"
@@ -2346,28 +2378,31 @@
 	<SFML/Audio.hpp>
 	"escenario1.h"
 
-1730983582 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\escenario2.h
+1733492884 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\escenario2.h
 	<SFML/Graphics.hpp>
 	<iostream>
 	"Colisionable.h"
+	"escenario1.h"
 
-1731237412 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\escenario3.h
+1733401034 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\escenario3.h
 	<SFML/Graphics.hpp>
 	<iostream>
 	"Colisionable.h"
 	<SFML/Audio.hpp>
+	"escenario1.h"
 
-1731237413 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\escenario3.cpp
+1733401034 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\escenario3.cpp
 	"escenario3.h"
 
-1730983582 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\escenario2.cpp
+1733401034 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\escenario2.cpp
 	"Escenario2.h"
 
-1731014948 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\animacionataque.cpp
+1733401034 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\animacionataque.cpp
 	"AnimacionAtaque.h"
 
-1731014685 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\animacionataque.h
+1733401034 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\animacionataque.h
 	<SFML/Graphics.hpp>
+	<string>
 
 1731554252 source:c:\users\brandon\onedrive\escritorio\juego2utn\src\animacionataque.cpp
 	"AnimacionAtaque.h"
@@ -2376,10 +2411,10 @@
 	<SFML/Graphics.hpp>
 	<string>
 
-1731283116 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\juego.cpp
+1733401034 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\juego.cpp
 	"Juego.h"
 
-1731283116 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\juego.h
+1733401034 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\juego.h
 	<SFML/Graphics.hpp>
 	<iostream>
 	<vector>
@@ -2545,4 +2580,95 @@
 	"escenario3.h"
 	"Juego.h"
 	"FuncionStartgame.h"
+
+1733401034 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\escenario.cpp
+	"Escenario.h"
+
+1733401034 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\escenario.h
+	<SFML/Graphics.hpp>
+	<string>
+	<iostream>
+
+1733492884 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\funcionstartgame.h
+	<SFML/Graphics.hpp>
+	<SFML/Audio.hpp>
+	<Personaje.h>
+	<iostream>
+	"menu.h"
+	<ctime>
+	<fstream>
+	<stdlib.h>
+	"escenario1.h"
+	"Monstruo.h"
+	"Escenario2.h"
+	"escenario3.h"
+	"Juego.h"
+
+1733763647 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\pedirnombre.h
+	<SFML/Graphics.hpp>
+	<string>
+	<string>
+	<vector>
+
+1733685510 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\funcionesranking.h
+	<SFML/Graphics.hpp>
+	<SFML/Graphics.hpp>
+	<SFML/Audio.hpp>
+	<Personaje.h>
+	<iostream>
+	"menu.h"
+	<ctime>
+	<fstream>
+	<stdlib.h>
+	"escenario1.h"
+	"Monstruo.h"
+	"Escenario2.h"
+	"escenario3.h"
+	"reloj.h"
+	"Juego.h"
+	"FuncionStartgame.h"
+
+1733685416 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\funcionesranking.cpp
+	"FuncionesRanking.h"
+
+1733492884 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\funcionstartgame.cpp
+	"FuncionStartgame.h"
+	"inventory.h"
+	"Personaje.h"
+	<cstdlib>
+	<ctime>
+	"AnimacionAtaque.h"
+	"Juego.h"
+	<SFML/Window/Event.hpp>
+
+1733401034 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\pedirnombre.cpp
+	"PedirNombre.h"
+	<SFML/Graphics.hpp>
+	<iostream>
+	<SFML/Graphics.hpp>
+	<iostream>
+	<string>
+	<fstream>
+
+1733495725 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\ranking.cpp
+	"ranking.h"
+
+1733495776 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\ranking.h
+
+1733510177 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\reloj.cpp
+	"reloj.h"
+	<SFML/Graphics.hpp>
+
+1733510162 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\reloj.h
+	<SFML/Graphics.hpp>
+	<iostream>
+
+1733764925 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\src\nombrejugador.cpp
+	"NombreJugador.h"
+
+1733763719 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\juego2utn\include\nombrejugador.h
+	"string"
+	"iostream"
+	<SFML/Graphics.hpp>
+	"Funciones.h"
 

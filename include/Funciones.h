@@ -17,12 +17,13 @@
 #include "PedirNombre.h"
 
 
+
 using namespace std;
-void startGame();
+void startGame(sf::Clock clock);
 //void escenarioPelea();
-void starthistoria();
-void BatallaCueva();
-void llegadaisla();
+void starthistoria(sf::Clock clock);
+void BatallaCueva(sf::Clock clock);
+void llegadaisla(sf::Clock clock);
 bool FuncionPos();
 float getRandomStat(float min, float max);
 

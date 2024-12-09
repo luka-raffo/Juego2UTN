@@ -1,4 +1,4 @@
-
+#include <SFML/Graphics.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <Personaje.h>
@@ -11,8 +11,12 @@
 #include "Monstruo.h"
 #include "Escenario2.h"
 #include "escenario3.h"
+#include "reloj.h"
 #include "Juego.h"
 #include "FuncionStartgame.h"
+
+using namespace std;
+
 class EscenarioPelea {
 private:
     sf::RenderWindow window;
@@ -76,9 +80,11 @@ private:
     void logicaTurnoEnemigo();
     void manejarVictoria();
 
+
 public:
     Batallacaverna();
-    void iniciar();
+    void iniciar(sf::Clock clock);
+    void finReloj(sf::Clock clock);
 };
 
 
