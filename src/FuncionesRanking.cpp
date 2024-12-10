@@ -22,6 +22,9 @@ void EscenarioPelea::configurarSonidos() {
         !bufferExp.loadFromFile("Sonidos/orb.wav")) {
         cerr << "Error al cargar los sonidos" << endl;
     }
+    animacionAtaqueJugador.setRutaPNG("Animations/zoonami_player_vice_grip_animation.PNG");
+    animacionDefensa.setRutaPNG("Animations/zoonami_enemy_smog_animation.PNG");
+    animacionAtaqueEnemigo.setRutaPNG("Animations/zoonami_player_vice_grip_animation.PNG");
 
     sonidoAtaque.setBuffer(bufferAtaque);
     sonidoDefensa.setBuffer(bufferDefensa);
@@ -58,7 +61,7 @@ void EscenarioPelea::inicializarMonstruos() {
     monstruoJugador.agregarMonstruo(new balleton(150.0f, 50.0f, 30.0f, "include/balleton.PNG"));
     // Agregar más monstruos según sea necesario...
 
-    monstruoJugador.setPositionTodosMonstruos(50, 500);
+    monstruoJugador.setPositionTodosMonstruos(70, 475);
     monstruoJugador.setScale(2, 2);
 
     int probabilidad = std::rand() % 100;
@@ -85,12 +88,15 @@ void EscenarioPelea::logicaTurnoJugador(sf::Event& event) {
                     if (monstruoEnemigo.getDefensaMonstruoActual() > monstruoJugador.getDanioMonstruoActual())
                     {
                         cout << "El enemigo ah bloqueado tu ataque!" << endl;
+                        cout << "La vida del enemigo es: "<< monstruoEnemigo.getVidaMonstruoActual()<<endl;
+
                         monstruoEnemigo.setDefensaMonstruoActual(monstruoEnemigo.getDefensaMonstruoActual()-monstruoJugador.getDanioMonstruoActual());
                     }
                     else if(monstruoJugador.getDefensaMonstruoActual()<=monstruoEnemigo.getDanioMonstruoActual())
                     {
 
                         cout << "Tu Monstruo ah hecho " << monstruoJugador.getDanioMonstruoActual()<<" de daño" << endl;
+
 
                         monstruoEnemigo.setVidaMonstruoActual(monstruoEnemigo.getVidaMonstruoActual()+monstruoEnemigo.getDefensaMonstruoActual()-monstruoJugador.getDanioMonstruoActual());
 
@@ -106,6 +112,11 @@ void EscenarioPelea::logicaTurnoJugador(sf::Event& event) {
         monstruoJugador.setDefensaMonstruoActual( rand() % 100 + 1);
         cout<<"defensa mi monstruo aumento = "<<monstruoJugador.getDefensaMonstruoActual()<<endl;
         turnoJugador=false;
+        cout<<"La vida de tu monstruo es : "<<monstruoJugador.getVidaMonstruoActual()<< endl;
+    }
+
+    if (monstruoJugador.getVidaMonstruoActual() <= 0) {
+        monstruoJugador.pasarAlSiguienteMonstruo();
     }
 }
 
@@ -119,6 +130,7 @@ void EscenarioPelea::logicaTurnoEnemigo() {
         cout << "El enemigo se ha curado " << curacion << " puntos de vida." << endl;
         // Cambiar turno al jugador después de curarse
         turnoJugador = true;
+        cout <<" su vida es : "<< monstruoEnemigo.getVidaMonstruoActual() << " puntos de vida. "<< endl;
     } else {
         // Lógica de ataque del enemigo
         if (monstruoJugador.getDefensaMonstruoActual() > monstruoEnemigo.getDefensaMonstruoActual()) {
@@ -178,7 +190,7 @@ void EscenarioPelea::iniciar() {
             peleaActiva = false;
         }
 
-        animacionAtaqueEnemigo.update();
+
         animacionAtaqueJugador.update();
         animacionDefensa.update();
 
@@ -188,7 +200,6 @@ void EscenarioPelea::iniciar() {
         monstruoJugador.dibujar(window);
         monstruoEnemigo.dibujar(window);
         window.draw(animacionAtaqueJugador);
-        window.draw(animacionAtaqueEnemigo);
         window.draw(animacionDefensa);
 
         window.display();
@@ -288,6 +299,10 @@ void Batallacaverna::logicaTurnoJugador(sf::Event& event) {
         _turnoJugador = false;
     }
 
+    if (_monstruoJugador.getVidaMonstruoActual() <= 0) {
+        _monstruoJugador.pasarAlSiguienteMonstruo();
+    }
+
 }
 
 void Batallacaverna::logicaTurnoEnemigo() {
@@ -318,7 +333,7 @@ void Batallacaverna::actualizar() {
     _ataque.update();
     _defensa.update();
 
-    if (_enemigo.getVida() <= 0 || _monstruoJugador.getVidaMonstruoActual() <= 0) {
+    if (_enemigo.getVida() <= 0) {
         manejarVictoria();
     }
 }
