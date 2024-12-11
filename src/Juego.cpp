@@ -1,5 +1,5 @@
 #include "Juego.h"
-
+/*
 Juego::Juego() : indiceActual(0) {}
 
 // Destructor
@@ -128,3 +128,4 @@ void Juego::setPositionTodosMonstruos(float x, float y) {
         m->setPosition(x, y);
     }
 }
+*/
