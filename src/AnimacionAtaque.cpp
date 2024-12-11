@@ -1,5 +1,5 @@
 #include "AnimacionAtaque.h"
-
+/*
 AnimacionAtaque::AnimacionAtaque()
 {
 
@@ -145,3 +145,4 @@ AnimacionDefensa::~AnimacionDefensa()
     //dtor
 }
 ////////////////////////////////////////////////////////
+*/
