@@ -28,7 +28,6 @@ sf::Time tiempoTranscurrido = clock.getElapsedTime();
 float segundos = tiempoTranscurrido.asSeconds();
 
 
-//cout<<"Holaaaaaaaaaaaaaaaaaaaa" << segundos<<endl;
 
 pRanking=fopen("Rank.dat","ab");
 if(pRanking==nullptr) return false;

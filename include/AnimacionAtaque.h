@@ -12,24 +12,34 @@ protected:
     sf::IntRect* _currentIdleRect = nullptr;
     sf::IntRect idleVacio; // Frame de reposo
 
+    sf::IntRect* _frames = nullptr; // Puntero dinámico a los frames
+    int _frameCount = 0; // Número de frames
     int _currentFrame = 0;
     bool _animacionEnCurso = false;
     bool _isMoving = false;
 
-    std::vector<sf::IntRect> _frames; // Vector genérico para los frames
-
 public:
     Animacion() {}
 
-    virtual ~Animacion() {}
+    virtual ~Animacion() {
+        delete[] _frames; // Liberar memoria dinámica
+    }
 
     // Métodos comunes para todas las animaciones
-    virtual void setRutaPNG(const std::string& rutaPNG) {
+    virtual void setRutaPNG(const string& rutaPNG) {
         if (_texture.loadFromFile(rutaPNG)) {
             _sprite.setTexture(_texture);
             _sprite.setTextureRect(*_currentIdleRect);
-        } else {
-            // Manejar error de carga
+        }
+    }
+
+    // Configurar frames de animación
+    virtual void setFrames(sf::IntRect* frames, int count) {
+        delete[] _frames; // Limpiar cualquier frame previo
+        _frameCount = count;
+        _frames = new sf::IntRect[_frameCount];
+        for (int i = 0; i < _frameCount; ++i) {
+            _frames[i] = frames[i];
         }
     }
 
@@ -46,7 +56,7 @@ public:
 
         if (_animacionEnCurso) {
             if (_animationClock.getElapsedTime() > frameTime) {
-                if (_currentFrame < _frames.size()) {
+                if (_currentFrame < _frameCount) {
                     _sprite.setTextureRect(_frames[_currentFrame]);
                     _animationClock.restart();
                     _currentFrame++;
@@ -69,10 +79,13 @@ public:
 class AnimacionAtaque : public Animacion {
 public:
     AnimacionAtaque() {
-        _frames = {
+        sf::IntRect frames[] = {
             sf::IntRect(0, 0, 159, 159),
             sf::IntRect(0, 159, 159, 159)
         };
+
+        setFrames(frames, 2);
+
         idleVacio = sf::IntRect(0, 0, 159, 159);
         _currentIdleRect = &idleVacio;
 
@@ -86,10 +99,13 @@ public:
 class AnimacionDefensa : public Animacion {
 public:
     AnimacionDefensa() {
-        _frames = {
+        sf::IntRect frames[] = {
             sf::IntRect(0, 0, 159, 159),
             sf::IntRect(0, 159, 159, 159)
         };
+
+        setFrames(frames, 2);
+
         idleVacio = sf::IntRect(0, 0, 159, 159);
         _currentIdleRect = &idleVacio;
 

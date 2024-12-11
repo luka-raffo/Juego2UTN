@@ -3153,7 +3153,7 @@
 	"Colisionable.h"
 	"AnimacionAtaque.h"
 
-1733886692 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\presentacion\juego2utn\include\animacionataque.h
+1733914997 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\presentacion\juego2utn\include\animacionataque.h
 	<SFML/Graphics.hpp>
 	<string>
 
@@ -3355,7 +3355,7 @@
 1733881980 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\presentacion\juego2utn\src\escenario3.cpp
 	"escenario3.h"
 
-1733912034 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\presentacion\juego2utn\src\funciones.cpp
+1733914964 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\presentacion\juego2utn\src\funciones.cpp
 	"Funciones.h"
 	"reloj.h"
 	"Personaje.h"
@@ -3415,7 +3415,7 @@
 	<SFML/Graphics.hpp>
 	<iostream>
 
-1733912940 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\presentacion\juego2utn\src\monstruo.cpp
+1733914821 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\presentacion\juego2utn\src\monstruo.cpp
 	"Monstruo.h"
 	<SFML/Graphics.hpp>
 	<iostream>
