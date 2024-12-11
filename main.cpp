@@ -13,7 +13,7 @@
 #include "Funciones.H"
 #include "escenario2.h"
 #include "escenario3.h"
-#include "PedirNombre.h"
+
 #include "NombreJugador.h"
 
 using namespace std;
@@ -49,7 +49,7 @@ int main() {
     // Música de fondo
     sf::Music music;
     if (!music.openFromFile("musica.wav")) {
-        std::cerr << "Error al cargar el archivo de música" << std::endl;
+        cout << "Error al cargar el archivo de música" << std::endl;
         return -1;
     }
     music.setLoop(true);
@@ -59,7 +59,7 @@ int main() {
     // Cargar imagen de fondo
     sf::Texture backgroundTexture;
     if (!backgroundTexture.loadFromFile("include/PantallaTitulo.jpg")) {
-        std::cerr << "Error al cargar la imagen de fondo!" << std::endl;
+        cout << "Error al cargar la imagen de fondo!" << std::endl;
         return -1;
     }
     sf::Sprite background(backgroundTexture);

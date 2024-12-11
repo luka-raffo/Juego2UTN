@@ -2695,7 +2695,7 @@
 	"reloj.h"
 	<SFML/Graphics.hpp>
 
-1733886883 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\presentacion\juego2utn\main.cpp
+1733917484 source:c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\presentacion\juego2utn\main.cpp
 	"reloj.h"
 	<SFML/Graphics.hpp>
 	"Personaje.h"
@@ -2711,7 +2711,6 @@
 	"Funciones.H"
 	"escenario2.h"
 	"escenario3.h"
-	"PedirNombre.h"
 	"NombreJugador.h"
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
@@ -3318,7 +3317,7 @@
 	"escenario3.h"
 	"Juego.h"
 
-1733881978 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\presentacion\juego2utn\include\pedirnombre.h
+1733917520 c:\users\luka\onedrive - frgp.utn.edu.ar\escritorio\presentacion\juego2utn\include\pedirnombre.h
 	<SFML/Graphics.hpp>
 	<string>
 	<string>
