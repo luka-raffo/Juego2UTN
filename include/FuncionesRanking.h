@@ -5,7 +5,6 @@
 #include <iostream>
 #include "menu.h"
 #include <ctime>
-#include <fstream>  // Para leer y escribir archivos
 #include <stdlib.h>
 #include "escenario1.h"
 #include "Monstruo.h"
@@ -44,7 +43,7 @@ private:
     void inicializarMonstruos();
     void logicaTurnoJugador(sf::Event& event);
     void logicaTurnoEnemigo();
-    void mostrarMensajeFinal(const std::string& mensaje);
+    void mostrarMensajeFinal(const string& mensaje);
 
 public:
     EscenarioPelea();

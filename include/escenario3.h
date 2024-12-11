@@ -17,7 +17,7 @@ public:
 
     void cargarTextura() override {
         if (!_texture.loadFromFile("Tileset/SInVALLAS.jpg")) {
-            std::cerr << "Error cargando la textura de EscenarioJefe" << std::endl;
+            cout << "Error cargando la textura de EscenarioJefe" << endl;
         }
     }
 };
@@ -31,7 +31,7 @@ public:
 
     void cargarTextura() override {
         if (!_texture.loadFromFile("tileset/cueva2.png")) {
-            std::cerr << "Error cargando la textura de CavernaBattleBackground" << std::endl;
+            cout << "Error cargando la textura de CavernaBattleBackground" << endl;
         }
     }
 };

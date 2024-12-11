@@ -1,6 +1,8 @@
 #include "reloj.h"
 #include <SFML/Graphics.hpp>
 
+using namespace std;
+
 reloj::reloj()
 {
     rel.restart();
@@ -11,7 +13,7 @@ void reloj::actualizar() {
             // Obtener el tiempo transcurrido
             sf::Time tiempoTranscurrido = rel.getElapsedTime();
             float segundos = tiempoTranscurrido.asSeconds();
-            std::cout << "Segundos transcurridos: " << segundos << std::endl;
+            cout<<"Segundos transcurridos: " << segundos << endl;
         }
     }
 

@@ -45,7 +45,7 @@ public:
     void verificarVida(float vida) {
         if (!monstruos[indiceActual]->estaVivo(vida) && indiceActual < cantidad - 1) {
             indiceActual++;
-            std::cout << "El siguiente monstruo ha aparecido." << std::endl;
+            cout << "El siguiente monstruo ha aparecido." << endl;
         }
     }
 
@@ -58,10 +58,10 @@ public:
     bool pasarAlSiguienteMonstruo() {
         if (indiceActual < cantidad - 1) {
             indiceActual++;
-            std::cout << "El siguiente monstruo ha aparecido: " << indiceActual << std::endl;
+            cout << "El siguiente monstruo ha aparecido: " << indiceActual << endl;
             return true;
         } else {
-            std::cout << "No hay más monstruos." << std::endl;
+            cout << "No hay más monstruos." << endl;
             return false;
         }
     }

@@ -1,7 +1,5 @@
 #include "Funciones.h"
-#include "inventory.h"
 #include "reloj.h"
-
 #include "Personaje.h"
 #include <cstdlib>  // Para rand() y srand()
 #include <ctime>    // Para time()
@@ -10,15 +8,9 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "PedirNombre.h"
-#include "PedirNombre.h"
-#include <SFML/Graphics.hpp>
-#include <iostream>
 #include <string>
-#include <fstream>
 #include <vector>
-#include <algorithm>
 #include "NombreJugador.h"
-
 #include "Escenario.h"
 #include "FuncionesRanking.h"
 
@@ -29,36 +21,58 @@ float getRandomStat(float min, float max) {
 }
 
 
-
-
-
-
-bool grabarRegitroRanking(NombreJugador jugador){
+bool grabarRegitroRanking(reloj rel){
 FILE *pRanking;
-//sf::Clock clock=rel.getReloj();
-//sf::Time tiempoTranscurrido = clock.getElapsedTime();
-//float segundos = tiempoTranscurrido.asSeconds();
+sf::Clock clock=rel.getReloj();
+sf::Time tiempoTranscurrido = clock.getElapsedTime();
+float segundos = tiempoTranscurrido.asSeconds();
+
 
 //cout<<"Holaaaaaaaaaaaaaaaaaaaa" << segundos<<endl;
 
-pRanking=fopen("Ranking.dat","ab");
+pRanking=fopen("Rank.dat","ab");
 if(pRanking==nullptr) return false;
-int escribio=fwrite(&jugador,sizeof(jugador),1,pRanking);
+int escribio=fwrite(&rel,sizeof(rel),1,pRanking);
 fclose(pRanking);
 return escribio;
 }
+
+bool mostrarRwgistroRanking(){
+reloj rel;
+FILE *pRanking;
+sf::Clock clock=rel.getReloj();
+sf::Time tiempoTranscurrido = clock.getElapsedTime();
+float segundos = tiempoTranscurrido.asSeconds();
+pRanking = fopen("Rank.dat","rb");
+if(pRanking==NULL){
+    cout<<"ERRORRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"<<endl;
+    return false;
+}
+while(fread(&rel,sizeof(rel),1,pRanking)==1){
+    rel.actualizar();
+    cout<<endl;
+
+}
+fclose(pRanking);
+return true;
+
+};
+
+
+
+
 
 
 
 
 
 // Implementación de pedirNombre() modificada (sin el reinicio de reloj)
-std::string pedirNombre(sf::RenderWindow& window, sf::Font& font, bool usar) {
+string pedirNombre(sf::RenderWindow& window, sf::Font& font, bool usar) {
     sf::Text textoPrompt("Ingrese su nombre:", font, 24);
     textoPrompt.setPosition(100, 100);
     textoPrompt.setFillColor(sf::Color::White);
 
-    std::string nombreJugador;
+    string nombreJugador;
     sf::Text nombreText("", font, 24);
     nombreText.setPosition(100, 150);
     nombreText.setFillColor(sf::Color::White);
@@ -97,14 +111,13 @@ void llegadaisla(sf::Clock clock)
     sf::RenderWindow window(sf::VideoMode(800, 600), "Inicia Juego");
 
 
-    NombreJugador jugador;
 
     window.setFramerateLimit(60);
 
     reloj rel;
     rel.setReloj(clock);
 
-    grabarRegitroRanking(jugador);
+
 
 
 
@@ -147,7 +160,7 @@ void llegadaisla(sf::Clock clock)
 
 
     // Agregar las barreras a un vector de objetos colisionables
-    std::vector<Colisionable*> colisionables = { &casa, &bar, &Flor,&valla,&casa2,&bar2,&Flor2,&bar3,&bar4,&casa3,&casa4,&Flor3 };
+    vector<Colisionable*> colisionables = { &casa, &bar, &Flor,&valla,&casa2,&bar2,&Flor2,&bar3,&bar4,&casa3,&casa4,&Flor3 };
 
     sf::Clock collisionCooldown;
     float cooldownTime = 1;  // Cooldown de 2 segundos
@@ -368,7 +381,7 @@ void startGame(sf::Clock clock)
 
 
         // Vector de colisionables
-        std::vector<Colisionable*> colisionables = {&arbol,&arbol2,&arbol3,&arbol4,&arbol5,&arbol6,&arbol7,&arbol8,&arbol9,&arbol10,&arbol11,&arbol12,&arbol13,&arbol14,&arbol15,&arbol16,&arbol17};
+        vector<Colisionable*> colisionables = {&arbol,&arbol2,&arbol3,&arbol4,&arbol5,&arbol6,&arbol7,&arbol8,&arbol9,&arbol10,&arbol11,&arbol12,&arbol13,&arbol14,&arbol15,&arbol16,&arbol17};
 
 
         // Actualizar el personaje
@@ -477,7 +490,7 @@ void batallacueva(sf::Clock clock)  // Crear una ventana
     // Establecer el límite de FPS
     window.setFramerateLimit(60);
 
-    inventory inventario(100);
+
      bool b_ataqueJugador=false;
 
     //crear monstruo jugador
@@ -522,7 +535,7 @@ void batallacueva(sf::Clock clock)  // Crear una ventana
     sf::SoundBuffer bufferAtaque;
     if (!bufferAtaque.loadFromFile("Sonidos/pew.wav"))
     {
-        std::cout << "Error al cargar mamahuevo.wav" << std::endl;
+        cout << "Error al cargar mamahuevo.wav" <<endl;
     }
     sf::Sound sonidoAtaque;
     sonidoAtaque.setBuffer(bufferAtaque);
@@ -530,7 +543,7 @@ void batallacueva(sf::Clock clock)  // Crear una ventana
   sf::SoundBuffer bufferDefensa;
     if (!bufferDefensa.loadFromFile("Sonidos/bueeeee.wav"))
     {
-        std::cout << "Error al cargar bueeeee.wav" << std::endl;
+        cout << "Error al cargar bueeeee.wav" << endl;
     }
     sf::Sound sonidoDefensa;
     sonidoDefensa.setBuffer(bufferDefensa);
@@ -538,7 +551,7 @@ void batallacueva(sf::Clock clock)  // Crear una ventana
     sf::SoundBuffer bufferPelea;
     if (!bufferPelea.loadFromFile("Sonidos/dificil.wav"))
     {
-        std::cout << "Error al cargar dificil.wav" << std::endl;
+        cout << "Error al cargar dificil.wav" << endl;
     }
     sf::Sound sonidoPelea;
     sonidoPelea.setBuffer(bufferPelea);
@@ -546,7 +559,7 @@ void batallacueva(sf::Clock clock)  // Crear una ventana
           sf::SoundBuffer bufferVictoria;
     if (!bufferVictoria.loadFromFile("Sonidos/bokita.wav"))
     {
-        std::cout << "Error al cargar bokita.wav" << std::endl;
+        cout << "Error al cargar bokita.wav" << endl;
     }
     sf::Sound sonidoVictoria;
     sonidoVictoria.setBuffer(bufferVictoria);

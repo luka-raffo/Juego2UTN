@@ -11,10 +11,6 @@ Escenario::Escenario()
     //Asignacion de la textura del Personaje
     _sprite.setTexture(_texture);
 
-    //reescalar ell fondo (porque es muy grande, igual hay q cambiarlo)
-
-    // _sprite.setScale(0.50, 0.50);
-
 
     _sprite.setPosition(0, 0);
 

@@ -2,8 +2,7 @@
 #define PERSONAJE_H
 #include <SFML/Graphics.hpp>
 #include "Colisionable.h"
-#include "inventory.h"
-#include <fstream>  // Para leer y escribir archivos
+
 
 class Personaje: public sf::Drawable, public Colisionable
 {

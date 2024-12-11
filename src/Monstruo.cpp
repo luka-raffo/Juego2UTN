@@ -1,7 +1,6 @@
 #include "Monstruo.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "inventory.h"
 #include "Funciones.h"
 #include "AnimacionAtaque.h"
 
@@ -173,7 +172,7 @@ Hornerot::Hornerot(float vida, float danio, float defensa, string texturaArchivo
 {
     if (!cargarTextura(texturaArchivo))
     {
-        throw std::runtime_error("Error al cargar la textura del hornerot");
+        cout<<"Error al cargar la textura del hornerot"<<endl;
     }
 }
 
@@ -208,7 +207,7 @@ Peluchin::Peluchin(float vida, float danio, float defensa, string texturaArchivo
 {
     if (!cargarTextura(texturaArchivo))
     {
-        throw std::runtime_error("Error al cargar la textura del Peluchin");
+        cout<<"Error al cargar la textura del Peluchin"<<endl;
     }
 }
 
@@ -244,7 +243,7 @@ balleton::balleton(float vida, float danio, float defensa, string texturaArchivo
 {
     if (!cargarTextura(texturaArchivo))
     {
-        throw std::runtime_error("Error al cargar la textura del balleton");
+        cout<<"Error al cargar la textura del balleton"<<endl;
     }
 }
 
@@ -281,7 +280,7 @@ Velom::Velom(float vida, float danio, float defensa,string texturaArchivo) : Mon
 
 if (!cargarTextura(texturaArchivo))
     {
-        throw std::runtime_error("Error al cargar la textura del monstruo");
+        cout<<"Error al cargar la textura del monstruo"<<endl;
     }
 }
 
@@ -318,7 +317,7 @@ Tukin::Tukin(float vida, float danio, float defensa, string texturaArchivo) : Mo
 {
     if (!cargarTextura(texturaArchivo))
     {
-        throw std::runtime_error("Error al cargar la textura del tukin");
+        cout<<"Error al cargar la textura del tukin"<<endl;
     }
 }
 
@@ -352,7 +351,7 @@ Lechuza::Lechuza(float vida, float danio, float defensa, string texturaArchivo) 
 {
     if (!cargarTextura(texturaArchivo))
     {
-        throw std::runtime_error("Error al cargar la textura de la fucking lechuza");
+        cout<<"Error al cargar la textura de la fucking lechuza"<<endl;
     }
 }
 
@@ -386,7 +385,7 @@ Bufalont::Bufalont(float vida, float danio, float defensa, string texturaArchivo
 {
     if (!cargarTextura(texturaArchivo))
     {
-        throw std::runtime_error("Error al cargar la textura del bufalont");
+        cout<<"Error al cargar la textura del bufalont"<<endl;
     }
 }
 
@@ -420,7 +419,7 @@ Lobizon::Lobizon(float vida, float danio, float defensa,string texturaArchivo) :
 {
     if (!cargarTextura(texturaArchivo))
     {
-        throw std::runtime_error("Error al cargar la textura del lobizon");
+        cout<<"Error al cargar la textura del lobizon"<<endl;
     }
 }
 void Lobizon::draw(sf::RenderTarget& target, sf::RenderStates states) const

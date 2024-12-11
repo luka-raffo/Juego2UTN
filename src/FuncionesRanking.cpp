@@ -20,7 +20,7 @@ void EscenarioPelea::configurarSonidos() {
         !bufferVictoria.loadFromFile("Sonidos/bokita.wav") ||
         !bufferDerrota.loadFromFile("Sonidos/estoy-cansado-jefe.wav") ||
         !bufferExp.loadFromFile("Sonidos/orb.wav")) {
-        cerr << "Error al cargar los sonidos" << endl;
+        cout << "Error al cargar los sonidos" << endl;
     }
 
     sonidoAtaque.setBuffer(bufferAtaque);
@@ -36,7 +36,7 @@ void EscenarioPelea::configurarSonidos() {
 
 void EscenarioPelea::configurarTexto() {
     if (!font.loadFromFile("include/Pokemon.ttf")) {
-        cerr << "Error al cargar la fuente" << endl;
+        cout << "Error al cargar la fuente" << endl;
     }
     menuTexto.setString("1) Atacar  2) Defender");
     menuTexto.setFont(font);
@@ -276,27 +276,27 @@ void Batallacaverna::manejarEventos() {
 void Batallacaverna::logicaTurnoJugador(sf::Event& event) {
 
     if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Num1) {
-        std::cout << "Atacas al enemigo!" << std::endl;
+        cout << "Atacas al enemigo!" << endl;
         _sonidoAtaque.play();
         _ataque.startAnimation();
 
         if (_enemigo.getDefensa() > _monstruoJugador.getDanioMonstruoActual()) {
-            std::cout << "El enemigo ha bloqueado tu ataque!" << std::endl;
+            cout << "El enemigo ha bloqueado tu ataque!" << endl;
             cout << "La vida del enemigo es: "<< _enemigo.getVida() << endl;
             _enemigo.setDefensa(_enemigo.getDefensa() - _monstruoJugador.getDanioMonstruoActual());
         } else {
-            std::cout << "Tu monstruo ha hecho " << _monstruoJugador.getDanioMonstruoActual() << " de daño." << std::endl;
+            cout << "Tu monstruo ha hecho " << _monstruoJugador.getDanioMonstruoActual() << " de daño." << endl;
             _enemigo.setVida(_enemigo.getVida() + _enemigo.getDefensa() - _monstruoJugador.getDanioMonstruoActual());
             _enemigo.setDefensa(0);
         }
         _turnoJugador = false;
     } else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Num2) {
-        std::cout << "Te defiendes!" << std::endl;
+        cout << "Te defiendes!" << endl;
          cout << "La vida del enemigo es: "<< _enemigo.getVida() << endl;
         _sonidoDefensa.play();
         _defensa.startAnimation();
         _monstruoJugador.setDefensaMonstruoActual(rand() % 100 + 1);
-        std::cout << "Defensa de tu monstruo aumentó a: " << _monstruoJugador.getDefensaMonstruoActual() << std::endl;
+        cout << "Defensa de tu monstruo aumentó a: " << _monstruoJugador.getDefensaMonstruoActual() << endl;
         _turnoJugador = false;
     }
      if (_monstruoJugador.getVidaMonstruoActual() <= 0) {
@@ -306,26 +306,26 @@ void Batallacaverna::logicaTurnoJugador(sf::Event& event) {
 }
 
 void Batallacaverna::logicaTurnoEnemigo() {
-    std::cout << "El enemigo ataca!" << std::endl;
+    cout << "El enemigo ataca!" << endl;
 
     int probabilidadCura = rand() % 100;
     if (probabilidadCura < 20) {
         float curacion = 60.0f;
         _enemigo.setVida(_enemigo.getVida() + curacion);
-        std::cout << "El enemigo se ha curado " << curacion << " puntos de vida." << std::endl;
+        cout << "El enemigo se ha curado " << curacion << " puntos de vida." << endl;
          cout << "La vida del enemigo es: "<< _enemigo.getVida() << endl;
     } else {
         if (_monstruoJugador.getDefensaMonstruoActual() > _enemigo.getDanio()) {
-            std::cout << "El ataque fue bloqueado con éxito!" << std::endl;
+           cout << "El ataque fue bloqueado con éxito!" << endl;
              cout << "La vida del enemigo es: "<< _enemigo.getVida() << endl;
             _monstruoJugador.setDefensaMonstruoActual(_monstruoJugador.getDefensaMonstruoActual() - _enemigo.getDanio());
             _ataque.startAnimation();
         } else {
-            std::cout << "El enemigo ha hecho: " << _enemigo.getDanio() << std::endl;
+            cout << "El enemigo ha hecho: " << _enemigo.getDanio() << endl;
 
             _monstruoJugador.setVidaMonstruoActual(_monstruoJugador.getVidaMonstruoActual() +
                                                    _monstruoJugador.getDefensaMonstruoActual() - _enemigo.getDanio());
-            std::cout << "La vida de tu monstruo es: " << _monstruoJugador.getVidaMonstruoActual() << std::endl;
+            cout << "La vida de tu monstruo es: " << _monstruoJugador.getVidaMonstruoActual() << endl;
             _monstruoJugador.setDefensaMonstruoActual(0);
         }
     }

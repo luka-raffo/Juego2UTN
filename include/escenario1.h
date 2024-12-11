@@ -27,9 +27,9 @@ public:
     _sprite.setTexture(_texture);
 }
 
- void inicializar(const std::string& rutaTextura) {
+ void inicializar(const string& rutaTextura) {
     if (!_texture.loadFromFile(rutaTextura)) {
-        std::cerr << "Error cargando la textura desde " << rutaTextura << std::endl;
+        cout << "Error cargando la textura desde " << rutaTextura << endl;
     }
     _sprite.setTexture(_texture);
 }
@@ -47,7 +47,7 @@ public:
 
     void cargarTextura() override {
         if (!_texture.loadFromFile("sprites/background/Lienzo3.JPG")) {
-            std::cerr << "Error cargando la textura de EscenarioLlegada" << std::endl;
+            cout << "Error cargando la textura de EscenarioLlegada" << endl;
         }
     }
 };

@@ -9,21 +9,6 @@
 using namespace std;
 
 
-class inventory
-{
-    private:
-    vector<Velom> veloms;
-    int maxSize=100;
 
-public:
-
-    inventory(int size): maxSize(size){}
-    bool agregarItem( Velom& velom);
-    bool eliminarItem(const Velom& velom);
-    void mostrarInventario() const;
-
-
-
-};
 
 #endif // INVENTORY_H

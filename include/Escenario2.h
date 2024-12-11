@@ -15,7 +15,7 @@ public:
 
     void cargarTextura() override {
         if (!_texture.loadFromFile("Tileset/nuevo.JPG")) {
-            cerr << "Error cargando la textura de Escenario: Tileset/nuevo.JPG" << endl;
+            cout << "Error cargando la textura de Escenario: Tileset/nuevo.JPG" << endl;
         }
     }
 };
@@ -30,7 +30,7 @@ public:
 
     void cargarTextura() override {
         if (!_texture.loadFromFile("Battle Backgrounds/With Textboxes/BattleBackground.png")) {
-            cerr << "Error cargando la textura de BattleBackground" << endl;
+            cout << "Error cargando la textura de BattleBackground" << endl;
         }
     }
 

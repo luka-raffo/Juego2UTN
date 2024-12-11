@@ -2,7 +2,7 @@
 
 Personaje::Personaje()
 {
-    inventory inventario(100);
+
 
     //Asignacion para la textura
     _texture.loadFromFile("Characters/character 4.png");
@@ -156,26 +156,17 @@ void Personaje::update(){
     return _sprite.getGlobalBounds();
     }
 void Personaje::guardarPosicion() {
-    std::ofstream archivo("posicion.txt");
-    if (archivo.is_open()) {
-        sf::Vector2f posicion = this->getPosition();
-        archivo << posicion.x << " " << posicion.y;
-        archivo.close();
 
-    } else {
-        std::cerr << "Error al guardar la posición: no se pudo abrir el archivo." << std::endl;
-    }
+
+        sf::Vector2f posicion = this->getPosition();
+
+
+
 }
 
 void Personaje::cargarPosicion() {
-    std::ifstream archivo("posicion.txt");
-    if (archivo.is_open()) {
-        float x, y;
-        archivo >> x >> y;
-        this->setPosition(x, y);
-        archivo.close();
-    } else {
+
         // Si el archivo no existe, puedes asignar una posición inicial por defecto
         this->setPosition(400, 590); // o cualquier otra posición inicial
-    }
+
 }

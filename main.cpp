@@ -42,7 +42,7 @@ int main() {
 
     sf::Clock clock;
 
-    NombreJugador ingresarNombre;
+
 
 
 
@@ -85,7 +85,7 @@ int main() {
                     int selected = menu.GetPressedItem();
                     if (selected == 0) {
                         std::cout << "Nuevo Juego seleccionado" << std::endl;
-                        ingresarNombre.IngresarNombre();
+                        NombreJugador ingresarNombre;
                         window.close(); // Cierra el menú para comenzar el juego
                         llegadaisla(clock);  // Llama a la función que inicia el juego
                     } else if (selected == 1) {

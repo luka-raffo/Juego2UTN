@@ -1,376 +1,10 @@
 #include "FuncionStartgame.h"
-#include "inventory.h"
 #include "Personaje.h"
 #include <cstdlib>  // Para rand() y srand()
 #include <ctime>    // Para time()
 #include "AnimacionAtaque.h"
 #include "Juego.h"
 #include <SFML/Window/Event.hpp>
-/*
-Combate::Combate(Monstruo& enemigo, Juego& monstruoJugador, sf::RenderWindow& ventana, sf::Text& menuTexto)
-    : enemigo(enemigo), monstruoJugador(monstruoJugador), ventana(ventana), menuTexto(menuTexto),
-      sonidoAtaque(), sonidoDefensa(), sonidoVictoria(), sonidoDerrota(), sonidoPelea(), sonidoExp(),
-      turnoJugador(true), peleaActiva(true) {}
-
-
-void Combate::reproducirSonido(Sonido& sonido) {
-    sonido.reproducir();
-}
-
-void Combate::iniciar() {
-    while (ventana.isOpen() && peleaActiva) {
-        sf::Event event;
-        while (ventana.pollEvent(event)) {
-            if (event.type == sf::Event::Closed) {
-                ventana.close();
-            }
-            if (turnoJugador) {
-                turnoDelJugador(event);
-            } else {
-                turnoDelEnemigo();
-            }
-            verificarEstado();
-        }
-    }
-}
-
-void Combate::turnoDelJugador(sf::Event& event) {
-    if (turnoJugador) {
-        if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Num1) { // Atacar
-            std::cout << "Atacas al enemigo!" << std::endl;
-
-            reproducirSonido(sonidoAtaque); // Polimorfismo
-
-            if (enemigo.getDefensa() > monstruoJugador.getDanioMonstruoActual()) {
-                std::cout << "El enemigo ha bloqueado tu ataque!" << std::endl;
-                enemigo.setDefensa(enemigo.getDefensa() - monstruoJugador.getDanioMonstruoActual());
-            } else {
-                float danio = monstruoJugador.getDanioMonstruoActual() - enemigo.getDefensa();
-                enemigo.setVida(enemigo.getVida() - danio);
-                enemigo.setDefensa(0);
-                std::cout << "Has hecho " << danio << " de daño. Vida del enemigo: " << enemigo.getVida() << std::endl;
-            }
-
-            turnoJugador = false;
-        } else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Num2) { // Defender
-            std::cout << "Te defiendes!" << std::endl;
-
-            monstruoJugador.setDefensaMonstruoActual(rand() % 100 + 1);
-            std::cout << "Defensa de tu monstruo aumentó a " << monstruoJugador.getDefensaMonstruoActual() << std::endl;
-
-            reproducirSonido(sonidoDefensa); // Polimorfismo
-
-            turnoJugador = false;
-        }
-    }
-
-    if (monstruoJugador.getVidaMonstruoActual() <= 0) {
-        monstruoJugador.pasarAlSiguienteMonstruo();
-    }
-}
-
-
-void Combate::turnoDelEnemigo() {
-    // Turno del enemigo
-    cout << "El enemigo ataca!" << endl;
-    int probabilidadCura = rand() % 100;
-    if (probabilidadCura < 20) {
-        float curacion = 40.0f;
-        enemigo.setVida(enemigo.getVida() + curacion);
-        cout << "El enemigo se ha curado " << curacion << " puntos de vida." << endl;
-    } else {
-        if (monstruoJugador.getDefensaMonstruoActual() > enemigo.getDanio()) {
-            cout << "El ataque fue bloqueado con éxito!" << endl;
-            monstruoJugador.setDefensaMonstruoActual(monstruoJugador.getDefensaMonstruoActual() - enemigo.getDanio());
-        } else {
-            float danio = enemigo.getDanio() - monstruoJugador.getDefensaMonstruoActual();
-            monstruoJugador.setVidaMonstruoActual(monstruoJugador.getVidaMonstruoActual() - danio);
-            monstruoJugador.setDefensaMonstruoActual(0);
-            cout << "El enemigo ha hecho " << danio << " de daño. Vida de tu monstruo: " << monstruoJugador.getVidaMonstruoActual() << endl;
-        }
-    }
-    turnoJugador = true;
-}
-
-void Combate::verificarEstado() {
-    if (enemigo.getVida() <= 0) {
-        menuTexto.setString("Eres el vencedor");
-        menuTexto.setCharacterSize(60);
-        menuTexto.setFillColor(sf::Color::Black);
-        menuTexto.setPosition(150, 170);
-        sonidoExp.reproducir();
-        sonidoVictoria.reproducir();
-
-        sf::Clock clock;
-        while (clock.getElapsedTime().asSeconds() < 3.0f) {
-            ventana.clear();  // Cambiado de window a ventana
-            ventana.draw(menuTexto);  // Cambiado de window a ventana
-            ventana.display();  // Cambiado de window a ventana
-        }
-        ventana.close();  // Cambiado de window a ventana
-
-        int expGanada = 30;
-        monstruoJugador.ganarExperienciaMonstruoActual(expGanada);
-        cout << "Ganaste " << expGanada << " puntos de experiencia!" << endl;
-        peleaActiva = false;
-    }
-}
-
-
-
-CombateConAnimaciones::CombateConAnimaciones(Monstruo& enemigo, Juego& monstruoJugador, sf::RenderWindow& ventana, sf::Text& menuTexto) : Combate(enemigo, monstruoJugador, ventana, menuTexto) {}
-
-void CombateConAnimaciones::iniciar() {
-    Combate::iniciar();
-}
-
-void CombateConAnimaciones::turnoDelJugador(sf::Event& event) {
-    if (event.type == sf::Event::KeyPressed) {
-        if (event.key.code == sf::Keyboard::Num1) { // Atacar
-            std::cout << "Atacas al enemigo!" << std::endl;
-            animacionAtaqueJugador.startAnimation();
-            reproducirSonido(sonidoAtaque);
-
-            if (enemigo.getDefensa() > monstruoJugador.getDanioMonstruoActual()) {
-                cout << "El enemigo ha bloqueado tu ataque!" << endl;
-                enemigo.setDefensa(enemigo.getDefensa() - monstruoJugador.getDanioMonstruoActual());
-            } else {
-                float danio = monstruoJugador.getDanioMonstruoActual() - enemigo.getDefensa();
-                enemigo.setVida(enemigo.getVida() - danio);
-                enemigo.setDefensa(0);
-                cout << "Has hecho " << danio << " de daño. Vida del enemigo: " << enemigo.getVida() << endl;
-            }
-
-            turnoJugador = false;
-        }
-
-            // Lógica de daño al enemigo
-        } else if (event.key.code == sf::Keyboard::Num2) { // Defender
-            std::cout << "Te defiendes!" << std::endl;
-            animacionDefensa.startAnimation();
-            reproducirSonido(sonidoDefensa);
-                    monstruoJugador.setDefensaMonstruoActual( rand() % 100 + 1);
-                    cout<<"defensa mi monstruo aumento = "<<monstruoJugador.getDefensaMonstruoActual()<<endl;
-                    sonidoDefensa.reproducir(); // Reproducir sonido de ataque
-
-
-                    turnoJugador=false;
-
-
-
-            // Lógica de defensa del jugador
-
-        turnoJugador = false;
-    }
-}
-
-void CombateConAnimaciones::turnoDelEnemigo() {
-    std::cout << "El enemigo ataca!" << std::endl;
-    animacionAtaqueEnemigo.startAnimation();
-    reproducirSonido(sonidoPelea);
- // Turno del enemigo
-
-    int probabilidadCura = rand() % 100;
-    if (probabilidadCura < 20) {
-        float curacion = 40.0f;
-        enemigo.setVida(enemigo.getVida() + curacion);
-        cout << "El enemigo se ha curado " << curacion << " puntos de vida." << endl;
-    } else {
-        if (monstruoJugador.getDefensaMonstruoActual() > enemigo.getDanio()) {
-            cout << "El ataque fue bloqueado con éxito!" << endl;
-            monstruoJugador.setDefensaMonstruoActual(monstruoJugador.getDefensaMonstruoActual() - enemigo.getDanio());
-        } else {
-            float danio = enemigo.getDanio() - monstruoJugador.getDefensaMonstruoActual();
-            monstruoJugador.setVidaMonstruoActual(monstruoJugador.getVidaMonstruoActual() - danio);
-            monstruoJugador.setDefensaMonstruoActual(0);
-            cout << "El enemigo ha hecho " << danio << " de daño. Vida de tu monstruo: " << monstruoJugador.getVidaMonstruoActual() << endl;
-        }
-    }
-    // Lógica del ataque del enemigo
-    turnoJugador = true;
-}
-
-void CombateConAnimaciones::verificarEstado() {
-    if (enemigo.getVida() <= 0) {
-        std::cout << "Eres el vencedor!" << std::endl;
-        reproducirSonido(sonidoVictoria);
-        peleaActiva = false;
-    }
-
-    if (monstruoJugador.getVidaMonstruoActual() <= 0) {
-        monstruoJugador.pasarAlSiguienteMonstruo();
-    }
-}
-
-*/
-
-/*
-void manejarCombate(Monstruo& enemigo, Juego& monstruoJugador, sf::Text& menuTexto, sf::RenderWindow& window) {
-    srand(static_cast<unsigned>(time(0)));
-
-
-     AnimacionAtaque ataque;
-    ataque.setRutaPNG("Animations/zoonami_enemy_aqua_jet_animation.PNG");
-
-    AnimacionAtaque ataque2;
-    ataque.setRutaPNG("Animations/zoonami_player_vice_grip_animation.PNG");
-
-    AnimacionDefensa Defensa;
-
-
-    // Variables de pelea
-    bool turnoJugador = true;  // Variable para alternar los turnos
-
-    bool peleaActiva = true;
-
-
-
-    //PROBANDO cosas del CARTEL DE VICTORIA
-    sf::Clock WinCooldown;
-
-
-    // Crear buffer para el sonido de ataque
-    sf::SoundBuffer bufferAtaque;
-    if (!bufferAtaque.loadFromFile("Sonidos/pew.wav"))
-    {
-        std::cout << "Error al cargar pew.wav" << std::endl;
-    }
-    sf::Sound sonidoAtaque;
-    sonidoAtaque.setBuffer(bufferAtaque);
-    ///////////////////////////////////
-    /////////////////////////////////////////
-  sf::SoundBuffer bufferDefensa;
-    if (!bufferDefensa.loadFromFile("Sonidos/bueeeee.wav"))
-    {
-        std::cout << "Error al cargar paaraaaaa.wav" << std::endl;
-    }
-    sf::Sound sonidoDefensa;
-    sonidoDefensa.setBuffer(bufferDefensa);
-    /////////////////////////////////////
-    sf::SoundBuffer bufferPelea;
-    if (!bufferPelea.loadFromFile("Sonidos/omg-esto-va-a-ser-epico-papus.wav"))
-    {
-        std::cout << "Error al cargar omg-esto-va-a-ser-epico-papus.wav" << std::endl;
-    }
-    sf::Sound sonidoPelea;
-    sonidoPelea.setBuffer(bufferPelea);
-///////////////////////////////////////////
-  sf::SoundBuffer bufferDerrota;
-    if (!bufferDerrota.loadFromFile("Sonidos/estoy-cansado-jefe.wav"))
-    {
-        std::cout << "Error al cargar estoy-cansado-jefe.wav" << std::endl;
-    }
-    sf::Sound sonidoDerrota;
-    sonidoDerrota.setBuffer(bufferDerrota);
-    //////////////////////////////////////
-      sf::SoundBuffer bufferVictoria;
-    if (!bufferVictoria.loadFromFile("Sonidos/bokita.wav"))
-    {
-        std::cout << "Error al cargar bokita.wav" << std::endl;
-    }
-    sf::Sound sonidoVictoria;
-    sonidoVictoria.setBuffer(bufferVictoria);
-    ///////////////////////////////////
-      sf::SoundBuffer bufferExp;
-    if (!bufferExp.loadFromFile("Sonidos/orb.wav"))
-    {
-        std::cout << "Error al cargar orb.wav" << std::endl;
-    }
-    sf::Sound sonidoExp;
-    sonidoExp.setBuffer(bufferExp);
-
-      while (window.isOpen() && peleaActiva)
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-
-            // Salir del escenario al presionar ESC
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
-            {
-                window.close();
-            }
-
-
-    if (turnoJugador) {
-        if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Num1) {  // Atacar
-            cout << "Atacas al enemigo!" << endl;
-            ataque.startAnimation();
-            sonidoAtaque.play();
-
-            if (enemigo.getDefensa() > monstruoJugador.getDanioMonstruoActual()) {
-                cout << "El enemigo ha bloqueado tu ataque!" << endl;
-                enemigo.setDefensa(enemigo.getDefensa() - monstruoJugador.getDanioMonstruoActual());
-            } else {
-                float danio = monstruoJugador.getDanioMonstruoActual() - enemigo.getDefensa();
-                enemigo.setVida(enemigo.getVida() - danio);
-                enemigo.setDefensa(0);
-                cout << "Has hecho " << danio << " de daño. Vida del enemigo: " << enemigo.getVida() << endl;
-            }
-
-            turnoJugador = false;
-        } else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Num2) {  // Defender
-            cout << "Te defiendes!" << endl;
-            monstruoJugador.setDefensaMonstruoActual(rand() % 100 + 1);
-            sonidoDefensa.play();
-            Defensa.startAnimation();
-            turnoJugador = false;
-        }
-    } else {
-        // Turno del enemigo
-        cout << "El enemigo ataca!" << endl;
-        int probabilidadCura = rand() % 100;
-        if (probabilidadCura < 20) {
-            float curacion = 40.0f;
-            enemigo.setVida(enemigo.getVida() + curacion);
-            cout << "El enemigo se ha curado " << curacion << " puntos de vida." << endl;
-        } else {
-            if (monstruoJugador.getDefensaMonstruoActual() > enemigo.getDanio()) {
-                cout << "El ataque fue bloqueado con éxito!" << endl;
-                monstruoJugador.setDefensaMonstruoActual(monstruoJugador.getDefensaMonstruoActual() - enemigo.getDanio());
-            } else {
-                float danio = enemigo.getDanio() - monstruoJugador.getDefensaMonstruoActual();
-                monstruoJugador.setVidaMonstruoActual(monstruoJugador.getVidaMonstruoActual() - danio);
-                monstruoJugador.setDefensaMonstruoActual(0);
-                cout << "El enemigo ha hecho " << danio << " de daño. Vida de tu monstruo: " << monstruoJugador.getVidaMonstruoActual() << endl;
-            }
-        }
-        turnoJugador = true;
-    }
-
-    if (enemigo.getVida() <= 0) {
-        menuTexto.setString("Eres el vencedor");
-        menuTexto.setCharacterSize(60);
-        menuTexto.setFillColor(sf::Color::Black);
-        menuTexto.setPosition(150, 170);
-        sonidoExp.play();
-        sonidoVictoria.play();
-
-        sf::Clock clock;
-        while (clock.getElapsedTime().asSeconds() < 3.0f) {
-            window.clear();
-
-            window.draw(menuTexto);
-            window.display();
-        }
-        window.close();
-
-        int expGanada = 30;
-        monstruoJugador.ganarExperienciaMonstruoActual(expGanada);
-        cout << "Ganaste " << expGanada << " puntos de experiencia!" << endl;
-        peleaActiva = false;
-    }
-
-    if (monstruoJugador.getVidaMonstruoActual() <= 0) {
-        monstruoJugador.pasarAlSiguienteMonstruo();
-    }
-}
-}
-}
-}
-*/
 
 void escenarioPelea()
 {
@@ -430,7 +64,7 @@ void escenarioPelea()
     sf::SoundBuffer bufferAtaque;
     if (!bufferAtaque.loadFromFile("Sonidos/pew.wav"))
     {
-        std::cout << "Error al cargar pew.wav" << std::endl;
+        cout << "Error al cargar pew.wav" << endl;
     }
     sf::Sound sonidoAtaque;
     sonidoAtaque.setBuffer(bufferAtaque);
@@ -439,7 +73,7 @@ void escenarioPelea()
   sf::SoundBuffer bufferDefensa;
     if (!bufferDefensa.loadFromFile("Sonidos/bueeeee.wav"))
     {
-        std::cout << "Error al cargar paaraaaaa.wav" << std::endl;
+        cout << "Error al cargar paaraaaaa.wav" <<endl;
     }
     sf::Sound sonidoDefensa;
     sonidoDefensa.setBuffer(bufferDefensa);
@@ -447,7 +81,7 @@ void escenarioPelea()
     sf::SoundBuffer bufferPelea;
     if (!bufferPelea.loadFromFile("Sonidos/omg-esto-va-a-ser-epico-papus.wav"))
     {
-        std::cout << "Error al cargar omg-esto-va-a-ser-epico-papus.wav" << std::endl;
+       cout << "Error al cargar omg-esto-va-a-ser-epico-papus.wav" << endl;
     }
     sf::Sound sonidoPelea;
     sonidoPelea.setBuffer(bufferPelea);
@@ -455,7 +89,7 @@ void escenarioPelea()
   sf::SoundBuffer bufferDerrota;
     if (!bufferDerrota.loadFromFile("Sonidos/estoy-cansado-jefe.wav"))
     {
-        std::cout << "Error al cargar estoy-cansado-jefe.wav" << std::endl;
+        cout << "Error al cargar estoy-cansado-jefe.wav" << endl;
     }
     sf::Sound sonidoDerrota;
     sonidoDerrota.setBuffer(bufferDerrota);
@@ -463,7 +97,7 @@ void escenarioPelea()
       sf::SoundBuffer bufferVictoria;
     if (!bufferVictoria.loadFromFile("Sonidos/bokita.wav"))
     {
-        std::cout << "Error al cargar bokita.wav" << std::endl;
+        cout << "Error al cargar bokita.wav" << endl;
     }
     sf::Sound sonidoVictoria;
     sonidoVictoria.setBuffer(bufferVictoria);
@@ -471,7 +105,7 @@ void escenarioPelea()
       sf::SoundBuffer bufferExp;
     if (!bufferExp.loadFromFile("Sonidos/orb.wav"))
     {
-        std::cout << "Error al cargar orb.wav" << std::endl;
+        cout << "Error al cargar orb.wav" << endl;
     }
     sf::Sound sonidoExp;
     sonidoExp.setBuffer(bufferExp);

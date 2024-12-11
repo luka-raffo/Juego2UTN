@@ -17,7 +17,7 @@ class NombreJugador
         NombreJugador();
         virtual ~NombreJugador();
 
-        std::string IngresarNombre();
+        string IngresarNombre();
 
     protected:
 

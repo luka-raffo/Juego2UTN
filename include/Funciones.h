@@ -4,10 +4,6 @@
 #include <SFML/Audio.hpp>
 #include <Personaje.h>
 #include <iostream>
-#include "menu.h"
-#include <ctime>
-#include <fstream>  // Para leer y escribir archivos
-#include <stdlib.h>
 #include "escenario1.h"
 #include "Monstruo.h"
 #include "Escenario2.h"
