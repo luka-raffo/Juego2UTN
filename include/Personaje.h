@@ -1,11 +1,13 @@
 #ifndef PERSONAJE_H
 #define PERSONAJE_H
 #include <SFML/Graphics.hpp>
+#include "Colisionable.h"
 
 
-class Personaje: public sf::Drawable
+class Personaje: public sf::Drawable, public Colisionable
 {
-    float _velocity=3;
+    float _velocity=4;
+
 
     sf::Sprite _sprite;
     sf::Texture _texture;
@@ -31,7 +33,16 @@ public:
     Personaje();
     void update();
     void draw(sf::RenderTarget& target, sf::RenderStates states)const override;
+    sf::FloatRect getBounds() const override;
 
+    void setPosition(float x, float y) {
+        _sprite.setPosition(x, y);
+    }
+    sf::Vector2f getPosition() const {
+    return _sprite.getPosition();}
+
+   void guardarPosicion();  // Guarda la posición actual en un archivo
+    void cargarPosicion();   // Carga la posición desde un archivo
 
 };
 

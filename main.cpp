@@ -1,54 +1,65 @@
+#include "reloj.h"
 #include <SFML/Graphics.hpp>
-#include <Personaje.h>
+#include "Personaje.h"
 #include <iostream>
 #include "menu.h"
 #include <ctime>
-#include <stdlib.h>
+#include <SFML/Audio.hpp>
+#include <chrono>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include "escenario1.h"
+#include "Funciones.H"
+#include "escenario2.h"
+#include "escenario3.h"
+
+#include "NombreJugador.h"
+
 using namespace std;
-void startGame() {
-    // Crear una ventana
-    sf::RenderWindow window(sf::VideoMode(800, 600), "WACHIN ROJO",sf::Style::Fullscreen);
 
-    // Establecer el límite de FPS
-    window.setFramerateLimit(60);
 
-    // Crear un personaje
-    Personaje rojo;
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+#include <iostream>
+#include <string>
+#include "pedirNombre.h"  // Asegúrate de incluir este archivo correctamente
+#include "Menu.h"         // Asegúrate de incluir la implementación de la clase Menu
+// Función para solicitar el nombre del jugador
 
-    // GameLoop
-    while (window.isOpen()) {
-        sf::Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
 
-        // Actualizar el personaje
-        rojo.update();
 
-        // Dibujar todo
-        window.clear();
-        window.draw(rojo);
-        sf::Sprite Fondo;
-        sf::Texture tex;
-        tex.loadFromFile("include/Fondo.jpeg");
-        Fondo.setPosition(400,0);
-        Fondo.setTexture(tex);
-        window.draw(Fondo);
-        window.display();
-    }
-}
 
-int main()
-{
-    srand ((unsigned)time(0));
-      // Crear una ventana
+
+
+
+
+int main() {
+
+    // Crear la ventana principal para el menú solo después de cerrar la ventana de ingreso de nombre
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "Menu de Pokemon");
+
+
+    sf::Clock clock;
+
+
+
+
+
+    // Música de fondo
+    sf::Music music;
+    if (!music.openFromFile("musica.wav")) {
+        cout << "Error al cargar el archivo de música" << std::endl;
+        return -1;
+    }
+    music.setLoop(true);
+    music.setVolume(3);
+    music.play();
 
     // Cargar imagen de fondo
     sf::Texture backgroundTexture;
-    if (!backgroundTexture.loadFromFile("include/file.jpg")) {
-        std::cerr << "Error al cargar la imagen de fondo!" << std::endl;
+    if (!backgroundTexture.loadFromFile("include/PantallaTitulo.jpg")) {
+        cout << "Error al cargar la imagen de fondo!" << std::endl;
         return -1;
     }
     sf::Sprite background(backgroundTexture);
@@ -56,6 +67,7 @@ int main()
     // Crear el menú
     Menu menu(window.getSize().x, window.getSize().y);
 
+    // Bucle principal del menú
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -73,13 +85,12 @@ int main()
                     int selected = menu.GetPressedItem();
                     if (selected == 0) {
                         std::cout << "Nuevo Juego seleccionado" << std::endl;
-                        // Lógica para iniciar un nuevo juego
-                        window.close();  // Cierra el menú para comenzar el juego
-                       startGame();     // Llama a la función que inicia el juego
+                        NombreJugador ingresarNombre;
+                        window.close(); // Cierra el menú para comenzar el juego
+                        llegadaisla(clock);  // Llama a la función que inicia el juego
                     } else if (selected == 1) {
-                        std::cout << "Creditos Juego seleccionado" << std::endl;
+                        std::cout << "Mostrar Ranking" << std::endl;
 
-                        // Lógica para cargar el juego
                     } else if (selected == 2) {
                         window.close();
                     }
@@ -97,10 +108,11 @@ int main()
                     int selected = menu.GetPressedItem();
                     if (selected == 0) {
                         std::cout << "Nuevo Juego seleccionado con ratón" << std::endl;
-                        // Lógica para iniciar un nuevo juego
+                        window.close();
+
                     } else if (selected == 1) {
-                        std::cout << "Creditos Juego seleccionado con ratón" << std::endl;
-                        // Lógica para cargar el juego
+                        std::cout << "Mostrar Ranking con ratón" << std::endl;
+
                     } else if (selected == 2) {
                         window.close();
                     }
@@ -112,13 +124,22 @@ int main()
         window.clear();
         window.draw(background);
         menu.draw(window);
+
+        // Mostrar un título o imagen
         sf::Sprite titulo;
         sf::Texture titulo_text;
-        titulo_text.loadFromFile("include/Titulo.jpeg");
-        titulo.setTexture(titulo_text);
-        titulo.setPosition(700,100);
-        window.draw(titulo);
-        window.display();
+        if (titulo_text.loadFromFile("include/campusmon.png")) {
+            titulo.setTexture(titulo_text);
+            titulo.setPosition(600, 50);
+            titulo.setScale(1.5,1.5);
+            window.draw(titulo);
+        }
 
+        window.display();
     }
-return 0;}
+
+    return 0;
+}
+
+
+
